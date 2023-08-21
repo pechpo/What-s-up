@@ -1,8 +1,0 @@
-# ninja log v5
-0	42	1692592130237851617	23_wechat_autogen/timestamp	db9332b70f2797d3
-0	42	1692592130237851617	23_wechat_autogen/mocs_compilation.cpp	db9332b70f2797d3
-0	42	1692592130237851617	/Users/foreverlasting/CLionProjects/23-wechat/cmake-build-debug/23_wechat_autogen/timestamp	db9332b70f2797d3
-0	42	1692592130237851617	/Users/foreverlasting/CLionProjects/23-wechat/cmake-build-debug/23_wechat_autogen/mocs_compilation.cpp	db9332b70f2797d3
-42	62	1692592130262794749	CMakeFiles/23_wechat.dir/23_wechat_autogen/mocs_compilation.cpp.o	bbcf41424db7357
-42	553	1692592130750705920	CMakeFiles/23_wechat.dir/main.cpp.o	e685f8204d4b1e48
-554	685	1692592130884056043	23_wechat	ee98fc188066a495
