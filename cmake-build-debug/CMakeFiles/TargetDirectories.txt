@@ -1,0 +1,5 @@
+/Users/foreverlasting/CLionProjects/23-wechat/cmake-build-debug/CMakeFiles/23_wechat.dir
+/Users/foreverlasting/CLionProjects/23-wechat/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/foreverlasting/CLionProjects/23-wechat/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/foreverlasting/CLionProjects/23-wechat/cmake-build-debug/CMakeFiles/23_wechat_autogen_timestamp_deps.dir
+/Users/foreverlasting/CLionProjects/23-wechat/cmake-build-debug/CMakeFiles/23_wechat_autogen.dir
