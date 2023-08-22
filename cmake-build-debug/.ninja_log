@@ -1,8 +1,0 @@
-# ninja log v5
-1	50	1692686070876467387	test_autogen/timestamp	b50c3228a8832227
-1	50	1692686070876467387	test_autogen/mocs_compilation.cpp	b50c3228a8832227
-1	50	1692686070876467387	/home/zixin/CLionProjects/test/cmake-build-debug/test_autogen/timestamp	b50c3228a8832227
-1	50	1692686070876467387	/home/zixin/CLionProjects/test/cmake-build-debug/test_autogen/mocs_compilation.cpp	b50c3228a8832227
-50	114	1692686070944473597	CMakeFiles/test.dir/test_autogen/mocs_compilation.cpp.o	a14e44d70e238eb
-114	2340	1692686073168676587	CMakeFiles/test.dir/main.cpp.o	2c310dadf9badb3a
-2340	2956	1692686073780732419	test	7a7f334e64032d2b
