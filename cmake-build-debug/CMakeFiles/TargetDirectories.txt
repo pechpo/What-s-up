@@ -1,5 +1,0 @@
-/home/zixin/CLionProjects/test/cmake-build-debug/CMakeFiles/test.dir
-/home/zixin/CLionProjects/test/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/zixin/CLionProjects/test/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/zixin/CLionProjects/test/cmake-build-debug/CMakeFiles/test_autogen_timestamp_deps.dir
-/home/zixin/CLionProjects/test/cmake-build-debug/CMakeFiles/test_autogen.dir
