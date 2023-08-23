@@ -28,4 +28,34 @@
 
 - QT文档：[Qt Overviews | Qt 6.5](https://doc.qt.io/qt-6/overviews-main.html)
 
+- 代码规范请参考[C++ 风格指南 - 内容目录 — Google 开源项目风格指南 (zh-google-styleguide.readthedocs.io)](https://zh-google-styleguide.readthedocs.io/en/latest/google-cpp-styleguide/contents/)。
+
+  由于该规范很长，不需要全部看完，只需**在不确定时参考文档**。
+
+  一个例子：
+
+  ```c++
+  // .h 文件
+  namespace mynamespace {
+  
+  // 所有声明都置于命名空间中
+  // 注意不要使用缩进
+  class MyClass {
+      public:
+      ...
+      void Foo();
+  };
+  
+  } // namespace mynamespace
+  // .cc 文件（.cpp文件）
+  namespace mynamespace {
+  
+  // 函数定义都置于命名空间中
+  void MyClass::Foo() {
+      ...
+  }
+  
+  } // namespace mynamespace
+  ```
+
 - What's up取名来自著名即时通信软件Whatsapp，并不是wechat，谢谢。
