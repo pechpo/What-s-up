@@ -24,6 +24,8 @@
 
   具体细节请见：[一种适合小团队的Git协作流程 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/383067606)
 
+- 开发环境：build_essential, cmake, QT 6.5.2
+
+- QT文档：[Qt Overviews | Qt 6.5](https://doc.qt.io/qt-6/overviews-main.html)
+
 - What's up取名来自著名即时通信软件Whatsapp，并不是wechat，谢谢。
-
-
