@@ -24,9 +24,13 @@
 
   具体细节请见：[一种适合小团队的Git协作流程 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/383067606)
 
-- 开发环境：build_essential, cmake, QT 6.5.2
+- 开发环境：build_essential, cmake, QT 6.5.2, SQLite。
+
+  qt5以上自带SQLite驱动，因此不需安装SQLite驱动。
 
 - QT文档：[Qt Overviews | Qt 6.5](https://doc.qt.io/qt-6/overviews-main.html)
+
+  SQLite文档：[SQLite Documentation](https://www.sqlite.org/docs.html)
 
 - 代码规范请参考[C++ 风格指南 - 内容目录 — Google 开源项目风格指南 (zh-google-styleguide.readthedocs.io)](https://zh-google-styleguide.readthedocs.io/en/latest/google-cpp-styleguide/contents/)。
 
@@ -57,5 +61,21 @@
   
   } // namespace mynamespace
   ```
+
+- 老师提到了一些编程规范，请遵守：
+
+  1. 传入数组时，**必须**判断数组长度是否超出缓冲区长度。
+  2. 注意不要产生野指针。
+  3. 使用双等号比较（如3==4）时，**必须**把右值写在左侧（如a==3应写成3==a）。
+  4. 命名对象、变量等需要采用清晰明了的名字（英文单词组合），使得能够通过名字就推断出其功能。
+  5. 写代码时请加入详细的代码注释。
+
+- 测试文档：需要写的比较细，能够排查出各种问题。
+
+  事先应当写好测试文档，并在测试过程中逐步完善测试文档。
+
+- 团队协作：老师提到可以采用一个模块 **一人写代码+一人补充注释与测试** 的方法，可以考虑能力较强的同学写代码和简单注释，能力较弱的另一个同学补充注释与测试。前后端模块都可以采取这种模式。
+
+  同一个模块的同学需要共同完成此模块的文档。
 
 - What's up取名来自著名即时通信软件Whatsapp，并不是wechat，谢谢。
