@@ -11,6 +11,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets LinguistTools)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets LinguistTools)
+find_package(Qt6 COMPONENTS Sql REQUIRED)
 
 set(TS_FILES Login_zh_CN.ts)
 
@@ -27,6 +28,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
         logindialog.h logindialog.cpp logindialog.ui
+        registerdialog.h registerdialog.cpp registerdialog.ui
+        main.h
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET Login APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
@@ -51,6 +54,8 @@ else()
 endif()
 
 target_link_libraries(Login PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(Login PRIVATE Qt6::Sql)
+
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an

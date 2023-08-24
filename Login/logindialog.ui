@@ -74,7 +74,7 @@
   <widget class="QPushButton" name="loginBtn">
    <property name="geometry">
     <rect>
-     <x>230</x>
+     <x>290</x>
      <y>220</y>
      <width>89</width>
      <height>25</height>
@@ -87,7 +87,7 @@
   <widget class="QPushButton" name="exitBtn">
    <property name="geometry">
     <rect>
-     <x>60</x>
+     <x>30</x>
      <y>220</y>
      <width>89</width>
      <height>25</height>
@@ -95,6 +95,22 @@
    </property>
    <property name="text">
     <string>退出</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="registerBtn">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>220</y>
+     <width>89</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string> 注册</string>
+   </property>
+   <property name="autoRepeat">
+    <bool>false</bool>
    </property>
   </widget>
  </widget>
