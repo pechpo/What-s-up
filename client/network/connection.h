@@ -7,9 +7,15 @@ class connection : public QTcpSocket
 {
 public:
     connection();
+    ~connection();
+    void connectServer(const QString &IP = "", quint16 port = 0);
 
 public slots:
     void readMessage();
+
+protected:
+    QString serverIP;
+    quint16 serverPort;
 
 };
 
