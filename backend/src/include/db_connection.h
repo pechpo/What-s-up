@@ -5,17 +5,17 @@
 #ifndef WHAT_S_UP_DB_CONNECTION_H
 #define WHAT_S_UP_DB_CONNECTION_H
 #pragma once
-#include <mongocxx/client.hpp>
-#include <mongocxx/instance.hpp>
+#include <sqlite3.h>
+#include <string>
 
 class DBConnection {
 public:
-    DBConnection();
-    mongocxx::database getDatabase(const std::string& dbName);
+    DBConnection(const std::string& dbPath);
+    ~DBConnection();
+    // Other methods to interact with SQLite database
 
-private:
-    mongocxx::instance instance_; // MongoDB实例
-    mongocxx::client client_;     // MongoDB客户端
+    sqlite3* db;
+    // SQLite数据库实例
 };
 
 #endif //WHAT_S_UP_DB_CONNECTION_H

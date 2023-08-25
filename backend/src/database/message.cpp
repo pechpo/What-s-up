@@ -3,34 +3,53 @@
 //
 // src/database/message.cpp
 #include "message.h"
-#include <bsoncxx/builder/stream/document.hpp>
-#include <bsoncxx/builder/stream/array.hpp>
-#include <mongocxx/exception/exception.hpp>
+#include <iostream>
+#include <sqlite3.h>
 #include <tuple>
 
-
 MessageDB::MessageDB(DBConnection& connection)
-        : messages_(connection.getDatabase("WhatsUpDB").collection("messages")) {
+        : connection_(connection.db) { // 使用SQLite连接
 }
 
+// 保存消息到数据库
 bool MessageDB::saveMessage(const std::string& groupId, const std::string& sender, const std::string& content) {
-    auto doc = bsoncxx::builder::stream::document{} << "groupId" << groupId << "sender" << sender << "content" << content << bsoncxx::builder::stream::finalize;
-    try {
-        messages_.insert_one(doc.view());
-        return true;
-    } catch (mongocxx::exception& e) {
+    std::string sql = "INSERT INTO messages (groupId, sender, content) VALUES (?, ?, ?)";
+    sqlite3_stmt* stmt;
+    // 准备SQL语句
+    if (sqlite3_prepare_v2(connection_, sql.c_str(), -1, &stmt, nullptr) != SQLITE_OK) {
+        return false; // 准备失败
+    }
+    // 绑定参数
+    sqlite3_bind_text(stmt, 1, groupId.c_str(), -1, SQLITE_STATIC);
+    sqlite3_bind_text(stmt, 2, sender.c_str(), -1, SQLITE_STATIC);
+    sqlite3_bind_text(stmt, 3, content.c_str(), -1, SQLITE_STATIC);
+    // 执行SQL语句
+    if (sqlite3_step(stmt) != SQLITE_DONE) {
         return false; // 插入失败
     }
+    // 清理
+    sqlite3_finalize(stmt);
+    return true;
 }
 
+// 获取群组的所有消息
 std::vector<std::tuple<std::string, std::string, std::string>> MessageDB::getMessages(const std::string& groupId) {
-    auto query = bsoncxx::builder::stream::document{} << "groupId" << groupId << bsoncxx::builder::stream::finalize;
-    auto cursor = messages_.find(query.view());
+    std::string sql = "SELECT sender, content FROM messages WHERE groupId = ?";
+    sqlite3_stmt* stmt;
+    // 准备SQL语句
+    if (sqlite3_prepare_v2(connection_, sql.c_str(), -1, &stmt, nullptr) != SQLITE_OK) {
+        return {}; // 准备失败
+    }
+    // 绑定参数
+    sqlite3_bind_text(stmt, 1, groupId.c_str(), -1, SQLITE_STATIC);
+    // 查询结果
     std::vector<std::tuple<std::string, std::string, std::string>> result;
-    for (const auto& doc : cursor) {
-        std::string sender = doc["sender"].get_utf8().value.to_string();
-        std::string content = doc["content"].get_utf8().value.to_string();
+    while (sqlite3_step(stmt) == SQLITE_ROW) {
+        std::string sender = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 0));
+        std::string content = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 1));
         result.emplace_back(groupId, sender, content);
     }
+    // 清理
+    sqlite3_finalize(stmt);
     return result;
 }

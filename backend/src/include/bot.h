@@ -4,19 +4,27 @@
 
 #ifndef WHAT_S_UP_BOT_H
 #define WHAT_S_UP_BOT_H
-// include/bot/bot.h
+
 #pragma once
 
+#include "message.h"
 #include <string>
-#include "include/message.h" // 包括其他头文件
+#include <chrono>
+#include <map>
+#include <functional>
 
 class ChatBot {
+    MessageDB& message_db;
+
 public:
     ChatBot(MessageDB& message_db);
 
-    void processMessage(const Message& message);
+    void processMessage(const std::string& sender, const std::string& receiver, const std::string& content);
 
-    // 其他可能的成员函数声明
+private:
+    void respondToCommand(const std::string& command, const std::string& to_user);
+    void respondToKeywords(const std::string& content, const std::string& to_user);
+    void sendMessage(const std::string& sender, const std::string& receiver, const std::string& content);
 };
 
 #endif //WHAT_S_UP_BOT_H

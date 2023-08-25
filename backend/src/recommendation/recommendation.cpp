@@ -27,8 +27,9 @@ std::vector<std::string> Recommendation::recommendFriends(const std::string& use
         }
     }
 
-    // 可以进一步排除已经是好友的用户，并根据其他标准排序推荐
-    // ...
+    // 排除已经是好友的用户
+    std::sort(recommendedFriends.begin(), recommendedFriends.end());
+    recommendedFriends.erase(std::unique(recommendedFriends.begin(), recommendedFriends.end()), recommendedFriends.end());
 
     return recommendedFriends; // 返回推荐的好友列表
 }

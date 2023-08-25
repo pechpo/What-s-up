@@ -24,3 +24,6 @@ void MediaHandler::endCall(const std::string& from_user, const std::string& to_u
 }
 
 // 可能需要更多的方法来处理通话事件，例如暂停/恢复、静音等...
+
+//如何在即时通讯软件中实现音视频通话这部分完全不会喵
+
