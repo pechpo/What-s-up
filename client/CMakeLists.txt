@@ -30,6 +30,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         director/director.h director/director.cpp
         network/connection.h network/connection.cpp
         ui/loginwindow.h ui/loginwindow.cpp
+        ui/loginwindow.h ui/loginwindow.cpp ui/loginwindow.ui
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET client APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
