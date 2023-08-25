@@ -7,7 +7,9 @@
 
 // 构造函数：连接到SQLite数据库
 DBConnection::DBConnection(const std::string& dbPath) {
+    // 打开数据库
     if (sqlite3_open(dbPath.c_str(), &db)) {
+        // 打开失败
         std::cerr << "无法打开数据库: " << sqlite3_errmsg(db) << std::endl;
         return;
     }
@@ -15,9 +17,9 @@ DBConnection::DBConnection(const std::string& dbPath) {
 
 // 析构函数：关闭数据库连接
 DBConnection::~DBConnection() {
+    // 关闭数据库
     sqlite3_close(db);
 }
 
 // 其他与SQLite数据库交互的方法将在此处实现
-
 

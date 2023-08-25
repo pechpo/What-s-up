@@ -16,6 +16,7 @@ find_package(Qt6 COMPONENTS
         Core
         Gui
         Widgets
+        Network # 添加 Network 组件
         REQUIRED)
 
 add_executable(What_s_up
@@ -46,8 +47,8 @@ target_link_libraries(What_s_up
         Qt::Core
         Qt::Gui
         Qt::Widgets
+        Qt::Network # 链接 Network 库
         sqlite3
-
 )
 
 

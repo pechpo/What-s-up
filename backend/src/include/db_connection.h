@@ -12,7 +12,7 @@ class DBConnection {
 public:
     DBConnection(const std::string& dbPath);
     ~DBConnection();
-    // Other methods to interact with SQLite database
+
 
     sqlite3* db;
     // SQLite数据库实例
