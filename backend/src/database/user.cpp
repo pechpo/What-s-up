@@ -4,59 +4,77 @@
 
 // src/database/user.cpp
 #include "user.h"
-#include <bsoncxx/builder/stream/document.hpp>
-#include <mongocxx/exception/exception.hpp>
-#include <iostream>
-#include <optional>
+#include <sqlite3.h>
+#include <sstream>
 
 UserDB::UserDB(DBConnection& connection)
-        : users_(connection.getDatabase("WhatsUpDB").collection("users")) {
+        : connection_(connection.db) {
 }
 
 bool UserDB::addUser(const std::string& username, const std::string& password) {
-    auto doc = bsoncxx::builder::stream::document{} << "username" << username << "password" << password << bsoncxx::builder::stream::finalize;
-    try {
-        users_.insert_one(doc.view());
-        return true;
-    } catch (mongocxx::exception& e) {
-        return false; // 插入失败
+    std::string sql = "INSERT INTO users (username, password) VALUES (?, ?)";
+    sqlite3_stmt* stmt;
+    if (sqlite3_prepare_v2(connection_, sql.c_str(), -1, &stmt, nullptr) != SQLITE_OK) {
+        return false;
     }
+    sqlite3_bind_text(stmt, 1, username.c_str(), -1, SQLITE_STATIC);
+    sqlite3_bind_text(stmt, 2, password.c_str(), -1, SQLITE_STATIC);
+    if (sqlite3_step(stmt) != SQLITE_DONE) {
+        return false;
+    }
+    sqlite3_finalize(stmt);
+    return true;
 }
 
 bool UserDB::validateUser(const std::string& username, const std::string& password) {
-    auto query = bsoncxx::builder::stream::document{} << "username" << username << "password" << password << bsoncxx::builder::stream::finalize;
-    auto result = users_.find_one(query.view());
-    return result.has_value(); // 检查结果是否包含值
+    std::string sql = "SELECT username FROM users WHERE username = ? AND password = ?";
+    sqlite3_stmt* stmt;
+    if (sqlite3_prepare_v2(connection_, sql.c_str(), -1, &stmt, nullptr) != SQLITE_OK) {
+        return false;
+    }
+    sqlite3_bind_text(stmt, 1, username.c_str(), -1, SQLITE_STATIC);
+    sqlite3_bind_text(stmt, 2, password.c_str(), -1, SQLITE_STATIC);
+    if (sqlite3_step(stmt) == SQLITE_ROW) {
+        sqlite3_finalize(stmt);
+        return true;
+    }
+    sqlite3_finalize(stmt);
+    return false;
 }
 
 bool UserDB::updateUser(const std::string& username, const std::string& key, const std::string& value) {
-    auto query = bsoncxx::builder::stream::document{} << "username" << username << bsoncxx::builder::stream::finalize;
-    auto update = bsoncxx::builder::stream::document{} << "$set" << bsoncxx::builder::stream::open_document << key << value << bsoncxx::builder::stream::close_document << bsoncxx::builder::stream::finalize;
-    try {
-        users_.update_one(query.view(), update.view());
-        return true;
-    } catch (mongocxx::exception& e) {
-        return false; // 更新失败
+    std::string sql = "UPDATE users SET " + key + " = ? WHERE username = ?";
+    sqlite3_stmt* stmt;
+    if (sqlite3_prepare_v2(connection_, sql.c_str(), -1, &stmt, nullptr) != SQLITE_OK) {
+        return false;
     }
+    sqlite3_bind_text(stmt, 1, value.c_str(), -1, SQLITE_STATIC);
+    sqlite3_bind_text(stmt, 2, username.c_str(), -1, SQLITE_STATIC);
+    if (sqlite3_step(stmt) != SQLITE_DONE) {
+        return false;
+    }
+    sqlite3_finalize(stmt);
+    return true;
 }
 
 std::unordered_map<std::string, std::vector<std::string>> UserDB::getAllUserTags() {
     std::unordered_map<std::string, std::vector<std::string>> userTags;
-    try {
-        auto cursor = users_.find({});
-        for (auto&& doc : cursor) {
-            std::string username = doc["username"].get_utf8().value.to_string();
-            std::vector<std::string> tags;
-            if (doc["tags"]) { // 确保“tags”字段存在
-                auto tagsArray = doc["tags"].get_array().value;
-                for (const auto& tag : tagsArray) {
-                    tags.push_back(tag.get_utf8().value.to_string());
-                }
-                userTags[username] = tags;
-            }
-        }
-    } catch (mongocxx::exception& e) {
-        std::cerr << "Error fetching user tags: " << e.what() << '\n'; // 打印异常信息
+    std::string sql = "SELECT username, tags FROM users";
+    sqlite3_stmt* stmt;
+    if (sqlite3_prepare_v2(connection_, sql.c_str(), -1, &stmt, nullptr) != SQLITE_OK) {
+        return userTags; // Return empty map on failure
     }
+    while (sqlite3_step(stmt) == SQLITE_ROW) {
+        std::string username = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 0));
+        std::string tagsStr = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 1));
+        std::vector<std::string> tags;
+        std::istringstream iss(tagsStr);
+        std::string tag;
+        while (std::getline(iss, tag, ',')) {
+            tags.push_back(tag);
+        }
+        userTags[username] = tags;
+    }
+    sqlite3_finalize(stmt);
     return userTags;
 }

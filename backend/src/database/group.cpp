@@ -3,54 +3,54 @@
 //
 // src/database/group.cpp
 #include "group.h"
-#include <bsoncxx/builder/stream/document.hpp>
-#include <bsoncxx/builder/stream/array.hpp>
-#include <mongocxx/exception/exception.hpp>
+#include <iostream>
+#include <sqlite3.h>
 
 GroupDB::GroupDB(DBConnection& connection)
-        : groups_(connection.getDatabase("WhatsUpDB").collection("groups")) {
+        : connection_(connection.db) {
 }
 
+// 创建群组
 bool GroupDB::createGroup(const std::string& groupId) {
-    auto doc = bsoncxx::builder::stream::document{} << "groupId" << groupId << "members" << bsoncxx::builder::stream::open_array << bsoncxx::builder::stream::close_array << bsoncxx::builder::stream::finalize;
-    try {
-        groups_.insert_one(doc.view());
-        return true;
-    } catch (mongocxx::exception& e) {
-        return false; // 插入失败
+    std::string sql = "INSERT INTO groups (groupId) VALUES (?)";
+    sqlite3_stmt* stmt;
+    // 准备SQL语句
+    if (sqlite3_prepare_v2(connection_, sql.c_str(), -1, &stmt, nullptr) != SQLITE_OK) {
+        std::cerr << "创建群组失败: " << sqlite3_errmsg(connection_) << std::endl;
+        return false;
     }
+    // 绑定参数
+    sqlite3_bind_text(stmt, 1, groupId.c_str(), -1, SQLITE_STATIC);
+    // 执行SQL语句
+    if (sqlite3_step(stmt) != SQLITE_DONE) {
+        std::cerr << "创建群组失败: " << sqlite3_errmsg(connection_) << std::endl;
+        return false;
+    }
+    // 清理
+    sqlite3_finalize(stmt);
+    return true;
 }
 
+// 添加成员到群组
 bool GroupDB::addMember(const std::string& groupId, const std::string& memberId) {
-    auto query = bsoncxx::builder::stream::document{} << "groupId" << groupId << bsoncxx::builder::stream::finalize;
-    auto update = bsoncxx::builder::stream::document{} << "$push" << bsoncxx::builder::stream::open_document << "members" << memberId << bsoncxx::builder::stream::close_document << bsoncxx::builder::stream::finalize;
-    try {
-        groups_.update_one(query.view(), update.view());
-        return true;
-    } catch (mongocxx::exception& e) {
-        return false; // 更新失败
+    std::string sql = "INSERT INTO group_members (groupId, memberId) VALUES (?, ?)";
+    sqlite3_stmt* stmt;
+    // 准备SQL语句
+    if (sqlite3_prepare_v2(connection_, sql.c_str(), -1, &stmt, nullptr) != SQLITE_OK) {
+        std::cerr << "添加成员失败: " << sqlite3_errmsg(connection_) << std::endl;
+        return false;
     }
+    // 绑定参数
+    sqlite3_bind_text(stmt, 1, groupId.c_str(), -1, SQLITE_STATIC);
+    sqlite3_bind_text(stmt, 2, memberId.c_str(), -1, SQLITE_STATIC);
+    // 执行SQL语句
+    if (sqlite3_step(stmt) != SQLITE_DONE) {
+        std::cerr << "添加成员失败: " << sqlite3_errmsg(connection_) << std::endl;
+        return false;
+    }
+    // 清理
+    sqlite3_finalize(stmt);
+    return true;
 }
 
-bool GroupDB::removeMember(const std::string& groupId, const std::string& memberId) {
-    auto query = bsoncxx::builder::stream::document{} << "groupId" << groupId << bsoncxx::builder::stream::finalize;
-    auto update = bsoncxx::builder::stream::document{} << "$pull" << bsoncxx::builder::stream::open_document << "members" << memberId << bsoncxx::builder::stream::close_document << bsoncxx::builder::stream::finalize;
-    try {
-        groups_.update_one(query.view(), update.view());
-        return true;
-    } catch (mongocxx::exception& e) {
-        return false; // 更新失败
-    }
-}
-
-std::vector<std::string> GroupDB::getMembers(const std::string& groupId) {
-    auto query = bsoncxx::builder::stream::document{} << "groupId" << groupId << bsoncxx::builder::stream::finalize;
-    auto result = groups_.find_one(query.view());
-    std::vector<std::string> members;
-    if (result) {
-        for (const auto& member : result->view()["members"].get_array().value) {
-            members.push_back(member.get_utf8().value.to_string());
-        }
-    }
-    return members;
-}
+// 其他与SQLite数据库交互的方法将在此处实现

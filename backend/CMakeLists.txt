@@ -8,8 +8,9 @@ set(CMAKE_AUTOUIC ON)
 
 set(CMAKE_PREFIX_PATH "/home/zixin/Qt/6.5.2/gcc_64")
 
-include_directories("/usr/local/include/mongocxx/v_noabi")
-include_directories("/usr/local/include/bsoncxx/v_noabi")
+
+include_directories("/home/zixin/Qt/6.5.2/Src/qtbase/src/3rdparty/sqlite")
+
 
 find_package(Qt6 COMPONENTS
         Core
@@ -45,7 +46,9 @@ target_link_libraries(What_s_up
         Qt::Core
         Qt::Gui
         Qt::Widgets
+        sqlite3
+
 )
 
-include_directories(${PROJECT_SOURCE_DIR}/src/include)
 
+include_directories(${PROJECT_SOURCE_DIR}/src/include)

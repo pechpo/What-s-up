@@ -3,16 +3,21 @@
 //
 // src/database/db_connection.cpp
 #include "db_connection.h"
-#include <mongocxx/uri.hpp>
-#include <mongocxx/stdx.hpp>
+#include <iostream>
 
-// 连接到MongoDB数据库
-
-DBConnection::DBConnection()
-        : client_{mongocxx::uri{"mongodb+srv://What-s-up:q_e323wJBMrw4_G@cluster0.o7fxkly.mongodb.net/?retryWrites=true&w=majority"}} {
+// 构造函数：连接到SQLite数据库
+DBConnection::DBConnection(const std::string& dbPath) {
+    if (sqlite3_open(dbPath.c_str(), &db)) {
+        std::cerr << "无法打开数据库: " << sqlite3_errmsg(db) << std::endl;
+        return;
+    }
 }
 
-mongocxx::database DBConnection::getDatabase(const std::string& dbName) {
-    return client_.database(dbName);
+// 析构函数：关闭数据库连接
+DBConnection::~DBConnection() {
+    sqlite3_close(db);
 }
+
+// 其他与SQLite数据库交互的方法将在此处实现
+
 
