@@ -10,7 +10,12 @@
 Server::Server(const QString& address, quint16 port, QObject* parent)
         : QObject(parent) {
     connect(&tcpServer_, &QTcpServer::newConnection, this, &Server::acceptConnection);
-    if (tcpServer_.listen(QHostAddress(address), port)) {
+    if (address == "0.0.0.0") {
+        tcpServer_.listen(QHostAddress::Any, port);
+    } else {
+        tcpServer_.listen(QHostAddress(address), port);
+    }
+    if (tcpServer_.isListening()) {
         qDebug() << "Server started on port" << port;
     } else {
         qDebug() << "Failed to start server:" << tcpServer_.errorString();
@@ -18,24 +23,13 @@ Server::Server(const QString& address, quint16 port, QObject* parent)
 }
 
 Server::~Server() {
+    // 服务器停止时，关闭所有连接
     stop();
 }
 
 void Server::start() {
-    //一些可能的操作
-    // 加载配置文件
-    // QString configPath = "path/to/config/file";
-    // loadConfig(configPath);
-
-    // 初始化数据库连接
-    // initDatabaseConnection();
-
-    // 启动其他服务或组件
-    // startOtherServices();
-
     qDebug() << "Server started with additional configurations.";
 }
-
 
 void Server::stop() {
             foreach (Connection* connection, connections_) {

@@ -6,17 +6,12 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
-set(CMAKE_PREFIX_PATH "/home/zixin/Qt/6.5.2/gcc_64")
-
-
-include_directories("/home/zixin/Qt/6.5.2/Src/qtbase/src/3rdparty/sqlite")
-
-
 find_package(Qt6 COMPONENTS
         Core
         Gui
         Widgets
-        Network # 添加 Network 组件
+        Network
+        Sql # 添加 Sql 组件
         REQUIRED)
 
 add_executable(What_s_up
@@ -43,13 +38,14 @@ add_executable(What_s_up
         src/include/group.h
         src/include/clustering.h
         src/include/connection.h)
+
 target_link_libraries(What_s_up
         Qt::Core
         Qt::Gui
         Qt::Widgets
-        Qt::Network # 链接 Network 库
+        Qt::Network
+        Qt::Sql # 链接 Sql 库
         sqlite3
 )
-
 
 include_directories(${PROJECT_SOURCE_DIR}/src/include)
