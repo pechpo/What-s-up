@@ -22,7 +22,7 @@ private slots:
     void on_loginBtn_clicked();
 
 
-    void on_toolButton_clicked();
+    //void on_toolButton_clicked();
 
 private:
     Ui::LoginDialog *ui;

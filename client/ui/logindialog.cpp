@@ -1,7 +1,7 @@
 #include "logindialog.h"
 #include "ui_logindialog.h"
-#include "ui_loginwindow.h"
-#include<QMessageBox>
+//#include "ui_loginwindow.h"
+#include <QMessageBox>
 #include <QApplication>
 #include <QLocale>
 #include <QTranslator>
