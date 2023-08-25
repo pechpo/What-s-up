@@ -11,22 +11,23 @@
 
 class GroupDB {
 public:
-    GroupDB(DBConnection& connection);
+    GroupDB(DBConnection& connection); // 构造函数，接收数据库连接
 
-    // 创建新群组
+    // 在数据库中创建新群组
     bool createGroup(const std::string& groupId);
 
-    // 添加群组成员
+    // 在数据库中添加群组成员
     bool addMember(const std::string& groupId, const std::string& memberId);
 
-    // 删除群组成员
+    // 在数据库中删除群组成员
     bool removeMember(const std::string& groupId, const std::string& memberId);
 
-    // 获取群组成员列表
+    // 从数据库中获取群组成员列表
     std::vector<std::string> getMembers(const std::string& groupId);
 
 private:
-    mongocxx::collection groups_; // 群组集合
+    sqlite3 *connection_; // 数据库连接引用
 };
 
 #endif //WHAT_S_UP_GROUP_H
+
