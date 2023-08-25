@@ -56,9 +56,7 @@ endif()
 target_link_libraries(client PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 target_link_libraries(client PRIVATE Qt6::Network)
 
-include_directories(./director)
-include_directories(./network)
-include_directories(./ui)
+include_directories(./)
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an

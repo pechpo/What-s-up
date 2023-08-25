@@ -16,3 +16,15 @@ Director* Director::getInstance() {
     }
     return self;
 }
+
+Connection* Director::conn = nullptr;
+Connection* Director::getConnection() {
+    if (!conn) {
+        conn = new Connection();
+    }
+    return conn;
+}
+
+void Director::connectServer(const QString &IP, quint16 port) {
+    getConnection()->connectServer(IP, port);
+}

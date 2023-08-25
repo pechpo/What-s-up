@@ -3,15 +3,17 @@
 
 #include <QTcpSocket>
 
-class connection : public QTcpSocket
+class Connection : public QTcpSocket
 {
+    Q_OBJECT
+
 public:
-    connection();
-    ~connection();
+    Connection();
+    ~Connection();
     void connectServer(const QString &IP = "", quint16 port = 0);
 
 public slots:
-    void readMessage();
+    virtual void receiveMessage();
 
 protected:
     QString serverIP;

@@ -1,13 +1,14 @@
 #include "connection.h"
+#include <QDebug>
 
-connection::connection() {
-    connect(this, SIGNAL(readyRead()),this, SLOT(readMessage()));
+Connection::Connection() {
+    connect(this, SIGNAL(readyRead()),this, SLOT(receiveMessage()));
 }
-connection::~connection() {
+Connection::~Connection() {
     disconnectFromHost();
 }
 
-void connection::connectServer(const QString& IP, quint16 port) {
+void Connection::connectServer(const QString& IP, quint16 port) {
     // todo: more detailed validity check
     if (port > 0) {
         serverPort = port;
@@ -16,8 +17,9 @@ void connection::connectServer(const QString& IP, quint16 port) {
         serverIP = IP;
     }
     connectToHost(QHostAddress(serverIP), serverPort);
+    qDebug() << "connection " << serverIP << ":" << serverPort;
 }
 
-void connection::readMessage() {
+void Connection::receiveMessage() {
 
 }
