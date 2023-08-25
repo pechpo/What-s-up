@@ -12,7 +12,6 @@ int main(int argc, char *argv[]) {
     QObject::connect(&server, &QTcpServer::newConnection, [&server]() {
         QTcpSocket *socket = server.nextPendingConnection();
         qDebug() << "Client connected:" << socket->peerAddress().toString();
-        socket->deleteLater();
     });
 
     // 开始侦听端口 10043
