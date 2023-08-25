@@ -2,6 +2,7 @@
 #include <QDebug>
 
 Connection::Connection() {
+    connected = false;
     connect(this, SIGNAL(readyRead()),this, SLOT(receiveMessage()));
 }
 Connection::~Connection() {
@@ -20,6 +21,19 @@ void Connection::connectServer(const QString& IP, quint16 port) {
     qDebug() << "connection " << serverIP << ":" << serverPort;
 }
 
-void Connection::receiveMessage() {
+bool Connection::isConnected() {
+    if (false == connected) {
+        connected = waitForConnected();
+    }
+    return connected;
+}
 
+void Connection::receiveMessage() {
+    // todo
+}
+
+void Connection::sendMessage(const QString &text) {
+    waitForBytesWritten();
+    write(text.toStdString().c_str());
+    qDebug() << "send " << text;
 }

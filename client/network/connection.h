@@ -13,12 +13,14 @@ public:
     void connectServer(const QString &IP = "", quint16 port = 0);
 
 public slots:
-    virtual void receiveMessage();
+    void receiveMessage();
+    void sendMessage(const QString &text); // todo: design a message class
+    bool isConnected();
 
-protected:
+private:
     QString serverIP;
     quint16 serverPort;
-
+    bool connected;
 };
 
 #endif // CONNECTION_H

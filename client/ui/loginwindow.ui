@@ -78,6 +78,29 @@
     <string>Connect</string>
    </property>
   </widget>
+  <widget class="QLineEdit" name="sendInput">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>130</y>
+     <width>211</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="sendButton">
+   <property name="geometry">
+    <rect>
+     <x>219</x>
+     <y>160</y>
+     <width>61</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Send</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

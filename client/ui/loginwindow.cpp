@@ -20,3 +20,10 @@ void LoginWindow::on_connectButton_clicked()
     quint16 serverPort = ui->portInput->text().toInt();
     Director::getInstance()->connectServer(serverIP, serverPort);
 }
+
+void LoginWindow::on_sendButton_clicked()
+{
+    QString text = ui->sendInput->text();
+    Director::getInstance()->sendPureMessage(text);
+}
+

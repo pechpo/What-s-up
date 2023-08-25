@@ -8,11 +8,13 @@
 class Director : public QObject
 {
     Q_OBJECT
+
 public:
     explicit Director(QObject *parent = nullptr);
     ~Director();
     static Director* getInstance();
     void connectServer(const QString& , quint16);
+    void sendPureMessage(const QString&);
 signals:
 
 private:
