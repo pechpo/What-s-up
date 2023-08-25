@@ -62,7 +62,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>10042</string>
+    <string>10043</string>
    </property>
   </widget>
   <widget class="QPushButton" name="connectButton">
@@ -82,7 +82,7 @@
    <property name="geometry">
     <rect>
      <x>70</x>
-     <y>130</y>
+     <y>110</y>
      <width>211</width>
      <height>22</height>
     </rect>
@@ -92,13 +92,23 @@
    <property name="geometry">
     <rect>
      <x>219</x>
-     <y>160</y>
+     <y>140</y>
      <width>61</width>
      <height>22</height>
     </rect>
    </property>
    <property name="text">
     <string>Send</string>
+   </property>
+  </widget>
+  <widget class="QTextEdit" name="receivedText">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>190</y>
+     <width>211</width>
+     <height>51</height>
+    </rect>
    </property>
   </widget>
  </widget>

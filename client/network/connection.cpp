@@ -30,9 +30,12 @@ bool Connection::isConnected() {
 
 void Connection::receiveMessage() {
     // todo
+    QByteArray info = readAll();
+    qDebug() << "received message: " + info;
 }
 
 void Connection::sendMessage(const QString &text) {
+    // called only if isConnected()
     waitForBytesWritten();
     write(text.toStdString().c_str());
     qDebug() << "send " << text;
