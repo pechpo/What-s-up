@@ -1,5 +1,6 @@
 #include "loginwindow.h"
 #include "ui_loginwindow.h"
+#include "director/director.h"
 
 LoginWindow::LoginWindow(QWidget *parent) :
     QWidget(parent),
@@ -12,3 +13,17 @@ LoginWindow::~LoginWindow()
 {
     delete ui;
 }
+
+void LoginWindow::on_connectButton_clicked()
+{
+    QString serverIP = ui->hostInput->text();
+    quint16 serverPort = ui->portInput->text().toInt();
+    Director::getInstance()->connectServer(serverIP, serverPort);
+}
+
+void LoginWindow::on_sendButton_clicked()
+{
+    QString text = ui->sendInput->text();
+    Director::getInstance()->sendPureMessage(text);
+}
+

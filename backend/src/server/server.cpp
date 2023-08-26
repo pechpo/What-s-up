@@ -4,51 +4,44 @@
 // src/server/server.cpp
 
 #include "server.h"
-#include <boost/bind.hpp>
+#include "connection.h"
+#include <QDebug>
 
-Server::Server(boost::asio::io_context& io_context, const std::string& address, unsigned short port)
-        : io_context_(io_context),
-          acceptor_(io_context, boost::asio::ip::tcp::endpoint(boost::asio::ip::address::from_string(address), port)) {
+Server::Server(const QString& address, quint16 port, QObject* parent)
+        : QObject(parent) {
+    connect(&tcpServer_, &QTcpServer::newConnection, this, &Server::acceptConnection);
+    if (address == "0.0.0.0") {
+        tcpServer_.listen(QHostAddress::Any, port);
+    } else {
+        tcpServer_.listen(QHostAddress(address), port);
+    }
+    if (tcpServer_.isListening()) {
+        qDebug() << "Server started on port" << port;
+    } else {
+        qDebug() << "Failed to start server:" << tcpServer_.errorString();
+    }
 }
 
 Server::~Server() {
+    // 服务器停止时，关闭所有连接
     stop();
 }
 
 void Server::start() {
-    accept();
+    qDebug() << "Server started with additional configurations.";
 }
 
 void Server::stop() {
-    acceptor_.close();
-    for (auto connection : connections_) {
-        delete connection;
-    }
-    connections_.clear();
-}
-
-void Server::accept() {
-    Connection* new_connection = new Connection(io_context_);
-    new_connection->set_message_handler(boost::bind(&Server::handle_message, this, new_connection, _1));
-    acceptor_.async_accept(new_connection->socket(),
-                           boost::bind(&Server::handle_accept, this, new_connection, boost::asio::placeholders::error));
-}
-
-void Server::handle_accept(Connection* connection, const boost::system::error_code& error) {
-    if (!error) {
-        connections_.insert(connection);
-        connection->start();
-        accept(); // 继续接受下一个连接
-    } else {
-        delete connection;
-    }
-}
-
-void Server::handle_message(Connection* connection, const std::string& message) {
-    // 处理来自客户端的消息
-    for (auto conn : connections_) {
-        if (conn != connection) {
-            conn->send(message); // 转发消息给其他客户端
+            foreach (Connection* connection, connections_) {
+            delete connection;
         }
-    }
+    connections_.clear();
+    tcpServer_.close();
+    qDebug() << "Server stopped.";
+}
+
+void Server::acceptConnection() {
+    QTcpSocket* socket = tcpServer_.nextPendingConnection();
+    Connection* connection = new Connection(socket, this);
+    connections_.insert(connection);
 }

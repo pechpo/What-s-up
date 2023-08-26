@@ -3,18 +3,24 @@
 
 #include <QObject>
 
+#include "network/connection.h"
+
 class Director : public QObject
 {
     Q_OBJECT
+
 public:
     explicit Director(QObject *parent = nullptr);
-    static Director* getInstance();
     ~Director();
+    static Director* getInstance();
+    void connectServer(const QString& , quint16);
+    void sendPureMessage(const QString&);
 signals:
 
 private:
     static Director* self;
-
+    static Connection* conn;
+    static Connection* getConnection();
 };
 
 #endif // DIRECTOR_H

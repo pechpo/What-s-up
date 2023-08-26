@@ -3,14 +3,24 @@
 
 #include <QTcpSocket>
 
-class connection : public QTcpSocket
+class Connection : public QTcpSocket
 {
+    Q_OBJECT
+
 public:
-    connection();
+    Connection();
+    ~Connection();
+    void connectServer(const QString &IP = "", quint16 port = 0);
 
 public slots:
-    void readMessage();
+    void receiveMessage();
+    void sendMessage(const QString &text); // todo: design a message class
+    bool isConnected();
 
+private:
+    QString serverIP;
+    quint16 serverPort;
+    bool connected;
 };
 
 #endif // CONNECTION_H
