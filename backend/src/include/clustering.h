@@ -6,27 +6,27 @@
 #define WHAT_S_UP_CLUSTERING_H
 #pragma once
 #include <vector>
-#include <string>
 #include <unordered_map>
+#include <QtTypes>
 
 class KMeans {
 public:
-    KMeans(int k); // k是聚类数量
+    KMeans(int k); // k is the number of clusters
 
-    // 运行K-means聚类
-    std::vector<std::vector<std::pair<std::string, std::vector<double>>>> run(const std::unordered_map<std::string, std::vector<std::string>>& users);
+    // Run K-means clustering
+    std::vector<std::vector<std::pair<quint32, std::vector<double>>>> run(const std::unordered_map<quint32, std::vector<int>>& users);
 
 private:
-    int k_; // 聚类数量
+    int k_; // Number of clusters
 
-    // 将用户标签转换为数值向量
-    std::unordered_map<std::string, std::vector<double>> convertToFeatures(const std::unordered_map<std::string, std::vector<std::string>>& users);
+    // Map tags to random real numbers and convert them to feature vectors
+    std::unordered_map<quint32, std::vector<double>> mapTagsToFeatures(const std::unordered_map<quint32, std::vector<int>>& users);
 
-    // 计算两个向量之间的欧几里得距离
+    // Calculate the Euclidean distance between two vectors
     double distance(const std::vector<double>& a, const std::vector<double>& b);
 
-    // 从数据中随机选择K个初始中心
-    std::vector<std::vector<double>> initializeCentroids(const std::unordered_map<std::string, std::vector<double>>& data);
+    // Randomly select K initial centroids from the data
+    std::vector<std::vector<double>> initializeCentroids(const std::unordered_map<quint32, std::vector<double>>& data);
 };
 
 #endif //WHAT_S_UP_CLUSTERING_H

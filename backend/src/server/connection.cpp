@@ -8,10 +8,12 @@
 #include <QDebug>
 
 Connection::Connection(QTcpSocket* socket, QObject* parent)
-        : QTcpSocket(parent), socket_(socket) {
+        : QTcpSocket(parent) {
     setSocketDescriptor(socket->socketDescriptor());
+    socket->setParent(this);  // 设置父对象
     connect(this, &QTcpSocket::readyRead, this, &Connection::receiveMessage);
     qDebug() << "Connection established with:" << this->peerAddress().toString();
+    sendMessage(QJsonObject{{"type", "hello"}, {"message", "Hello, world!"}});
 }
 
 Connection::~Connection() {
@@ -45,6 +47,7 @@ void Connection::receiveMessage() {
         }
         qDebug() << '\n';
         curRemainSize = 0;
+        sendMessage(obj);
     }
 }
 
