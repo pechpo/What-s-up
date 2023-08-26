@@ -1,6 +1,4 @@
 #include "db.h"
-#include <cstdio>
-#include <iostream>
 #include <QSqlQuery>
 
 DB::DB() {
@@ -355,5 +353,4 @@ bool DB::qry_message(const quint32 &ID, const quint32 &group_ID, const QString &
 
     return false;
 }
-
 

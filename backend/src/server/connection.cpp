@@ -8,35 +8,59 @@
 #include <QDebug>
 
 Connection::Connection(QTcpSocket* socket, QObject* parent)
-        : QObject(parent), socket_(socket) {
-    connect(socket_, &QTcpSocket::readyRead, this, &Connection::readMessage);
-    qDebug() << "Connection established with:" << socket_->peerAddress().toString();
+        : QTcpSocket(parent), socket_(socket) {
+    connect(this, &QTcpSocket::readyRead, this, &Connection::receiveMessage); // 注意这里改为 'this'
+    qDebug() << "Connection established with:" << this->peerAddress().toString(); // 注意这里改为 'this'
 }
 
 Connection::~Connection() {
     delete socket_;
 }
 
-void Connection::send(const QString& message) {
-    write_messages_.enqueue(message);
-    writeMessage();
+void Connection::receiveMessage() {
+    while (bytesAvailable() > 0) { // may read more than one message
+        QDataStream in(this);
+        in.setVersion(QDataStream::Qt_6_5);
+        if (0 == curRemainSize) {
+            if (bytesAvailable() >= sizeof(quint32)) {
+                in >> curRemainSize;
+            }
+            else {
+                return ;
+            }
+        }
+        if (bytesAvailable() < curRemainSize) {
+            return ; // wait to read full message
+        }
+        // read a JSON
+        QByteArray jsonBytes;
+        in >> jsonBytes;
+        QJsonParseError err;
+        QJsonDocument doc = QJsonDocument::fromJson(jsonBytes, &err);
+        // *todo: deal with err
+        if (!doc.isObject()) {
+            // *todo: not object
+        }
+        QJsonObject obj = doc.object();
+        for (const auto &x: obj) {
+            qDebug() << x;
+        }
+        qDebug() << '\n';
+        curRemainSize = 0;
+    }
 }
 
-void Connection::readMessage() {
-    QDataStream in(socket_);
-    in.setVersion(QDataStream::Qt_6_0);
-    QString message;
-    in >> message;
-    emit messageReceived(message);
-}
-
-void Connection::writeMessage() {
-    if (write_messages_.isEmpty() || !socket_->isOpen())
-        return;
-
-    QString message = write_messages_.dequeue();
-    QDataStream out(socket_);
-    out.setVersion(QDataStream::Qt_6_0);
-    out << message;
-    socket_->flush();
+void Connection::sendMessage(const QJsonObject &obj) {
+    // called only if isConnected()
+    waitForBytesWritten();
+    QJsonDocument doc;
+    doc.setObject(obj);
+    QByteArray outMsg;
+    QDataStream out(&outMsg, QIODevice::WriteOnly);
+    out.setVersion(QDataStream::Qt_6_5);
+    out << quint32(0) << doc.toJson();
+    // quint32(0) is for size
+    out.device()->seek(0);
+    out << quint32(outMsg.size() - sizeof(quint32));
+    write(outMsg);
 }

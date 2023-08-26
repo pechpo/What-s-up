@@ -9,26 +9,30 @@
 #include <QObject>
 #include <QString>
 #include <QQueue>
+#include <QByteArray>
+#include <QDataStream>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QJsonValue>
+#include <QJsonParseError>
 
-class Connection : public QObject {
+class Connection : public QTcpSocket {
 Q_OBJECT
 
 public:
     explicit Connection(QTcpSocket* socket, QObject* parent = nullptr);
     ~Connection();
 
-    void send(const QString& message); // 发送消息
-
 signals:
-    void messageReceived(const QString& message); // 消息接收信号
-
-private slots:
-    void readMessage(); // 读取消息
-    void writeMessage(); // 异步写入消息
+    void sendMessage(const QJsonObject &obj); // 异步写入消息
+    void receiveMessage();
 
 private:
     QTcpSocket* socket_; // TCP 套接字
     QQueue<QString> write_messages_; // 待发送的消息队列
+
+    int curRemainSize = 0;
 };
 
 #endif // WHAT_S_UP_CONNECTION_H

@@ -39,3 +39,12 @@ void User::setAvatarName(const QString &new_ava) {
 void User::setEmail(const QString &new_ema) {
     this->ema = new_ema;
 }
+
+User::User() {
+    this->ID = 0;
+    this->name = "";
+    this->pwd = "";
+    this->ava = "";
+    this->ema = "";
+}
+

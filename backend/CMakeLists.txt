@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.26)
-project(backend_new)
+project(backend)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_AUTOMOC ON)
@@ -15,7 +15,7 @@ find_package(Qt6 COMPONENTS
         REQUIRED)
 
 
-add_executable(backend_new
+add_executable(backend
         src/include/db.h
         src/include/group.h
         src/include/message.h
@@ -34,13 +34,13 @@ add_executable(backend_new
         src/server/server.cpp
         src/utils/encryption.cpp
         src/main.cpp
-        src/user.cpp
-        src/message.cpp
-        src/group.cpp
-        src/Database/db.cpp
+        src/database/user.cpp
+        src/database/message.cpp
+        src/database/group.cpp
+        src/database/db.cpp
 )
 
-target_link_libraries(backend_new
+target_link_libraries(backend
         Qt::Core
         Qt::Gui
         Qt::Widgets
