@@ -9,11 +9,16 @@ LoginWindow::LoginWindow(QWidget *parent) :
     this->setWindowFlags(Qt::FramelessWindowHint | Qt::Dialog);
     this->setAttribute(Qt::WA_TranslucentBackground);      //把初始的 dialog 窗口设置为透明的
     ui->setupUi(this);
+    connect(Director::getInstance(), &Director::receiveTestString, this, &LoginWindow::on_receiveTestString);
 }
 
 LoginWindow::~LoginWindow()
 {
     delete ui;
+}
+
+void LoginWindow::on_receiveTestString(const QString &text) {
+    ui->receivedText->insertPlainText("recv: " + text + "\n");
 }
 
 void LoginWindow::on_connectButton_clicked()
