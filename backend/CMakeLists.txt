@@ -33,6 +33,9 @@ add_executable(backend_new
         src/server/server.cpp
         src/utils/encryption.cpp
         src/main.cpp
+        src/user.cpp
+        src/message.cpp
+        src/group.cpp
         src/Database/db.cpp
 )
 
