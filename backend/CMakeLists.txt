@@ -14,6 +14,7 @@ find_package(Qt6 COMPONENTS
         Sql # 添加 Sql 组件
         REQUIRED)
 
+
 add_executable(backend_new
         src/include/db.h
         src/include/group.h
