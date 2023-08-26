@@ -31,15 +31,15 @@ background-color: white;</string>
    </property>
    <property name="styleSheet">
     <string notr="true">border-radius: 30px;
-background-color: rgb(227, 232, 238);</string>
+background-color: rgb(223, 243, 232);</string>
    </property>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>90</x>
+      <x>100</x>
       <y>20</y>
-      <width>221</width>
-      <height>41</height>
+      <width>211</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="font">
@@ -48,8 +48,8 @@ background-color: rgb(227, 232, 238);</string>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(153, 193, 241);
-border-radius:15px</string>
+     <string notr="true">border-radius:15px;
+background-color: rgb(197, 238, 241);</string>
     </property>
     <property name="text">
      <string>登录</string>
@@ -74,27 +74,10 @@ border-radius:15px</string>
      <string>记住密码</string>
     </property>
    </widget>
-   <widget class="QSlider" name="verticalSlider">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>20</y>
-      <width>16</width>
-      <height>191</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: rgb(53, 132, 228);
-background-color: rgb(255, 255, 255);</string>
-    </property>
-    <property name="orientation">
-     <enum>Qt::Vertical</enum>
-    </property>
-   </widget>
    <widget class="QPushButton" name="loginBtn">
     <property name="geometry">
      <rect>
-      <x>280</x>
+      <x>230</x>
       <y>220</y>
       <width>89</width>
       <height>25</height>
@@ -108,27 +91,10 @@ border-radius:10px;</string>
      <string>登录</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="exitBtn">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>220</y>
-      <width>89</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">border-radius: 10px;
-background-color:rgb(237, 102, 102);</string>
-    </property>
-    <property name="text">
-     <string>退出</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="regBtn">
     <property name="geometry">
      <rect>
-      <x>160</x>
+      <x>70</x>
       <y>220</y>
       <width>89</width>
       <height>25</height>
@@ -199,6 +165,9 @@ border-radius: 10px;</string>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(255, 255, 255);</string>
     </property>
+    <property name="inputMethodHints">
+     <set>Qt::ImhNone</set>
+    </property>
     <property name="echoMode">
      <enum>QLineEdit::Normal</enum>
     </property>
@@ -206,38 +175,45 @@ border-radius: 10px;</string>
      <string>请输入用户名</string>
     </property>
    </widget>
-   <widget class="QToolButton" name="ipButton">
+   <widget class="QToolButton" name="closeButton">
     <property name="geometry">
      <rect>
-      <x>340</x>
-      <y>30</y>
+      <x>360</x>
+      <y>10</y>
       <width>26</width>
       <height>24</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background:transparent;
+width: 0;
+height: 0;
+image: url(:/images/image/no.png);</string>
+    </property>
     <property name="text">
-     <string>...</string>
+     <string/>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="minimizeButton">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>0</y>
+      <width>40</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>20</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>-</string>
     </property>
    </widget>
   </widget>
  </widget>
  <resources/>
- <connections>
-  <connection>
-   <sender>exitBtn</sender>
-   <signal>clicked()</signal>
-   <receiver>LoginDialog</receiver>
-   <slot>close()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>134</x>
-     <y>212</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>199</x>
-     <y>149</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>
