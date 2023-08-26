@@ -1,10 +1,12 @@
 #include "logindialog.h"
 #include "ui_logindialog.h"
-//#include "ui_loginwindow.h"
+#include "loginwindow.h"
 #include <QMessageBox>
 #include <QApplication>
 #include <QLocale>
 #include <QTranslator>
+
+
 
 LoginDialog::LoginDialog(QWidget *parent) :
     QDialog(parent),
@@ -48,3 +50,11 @@ void LoginDialog::on_minimizeButton_clicked()
     showMinimized();
 }
 
+
+
+
+void LoginDialog::on_ConnectionButton_clicked()
+{
+    w = new LoginWindow;
+    w->show();
+}

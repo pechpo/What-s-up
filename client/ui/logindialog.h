@@ -2,6 +2,7 @@
 #define LOGINDIALOG_H
 
 #include <QDialog>
+#include "loginwindow.h"
 
 namespace Ui {
 class LoginDialog;
@@ -27,8 +28,11 @@ private slots:
 
     void on_minimizeButton_clicked();
 
+    void on_ConnectionButton_clicked();
+
 private:
     Ui::LoginDialog *ui;
+    LoginWindow *w;
 };
 
 #endif // LOGINDIALOG_H
