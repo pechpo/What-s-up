@@ -35,6 +35,8 @@ private:
     QQueue<QString> write_messages_; // 待发送的消息队列
 
     int curRemainSize = 0;
+
+    void handleReceivedMessage(const QString &message);
 };
 
 #endif // WHAT_S_UP_CONNECTION_H
