@@ -30,6 +30,9 @@ Connection* Director::getConnection() {
 
 void Director::act(const QJsonObject &obj) {
     qDebug() << "recv: " << obj;
+    if (obj.contains("text")) {
+        emit receiveTestString(obj.value("text").toString());
+    }
 }
 
 void Director::connectServer(const QString &IP, quint16 port) {
@@ -38,6 +41,7 @@ void Director::connectServer(const QString &IP, quint16 port) {
 
 void Director::sendPureMessage(const QString &text) {
     Connection *conn = getConnection();
+    //emit receiveTestString("send: " + text);
     if (conn->isConnected()) {
         // do not send plain text
         QJsonObject obj;

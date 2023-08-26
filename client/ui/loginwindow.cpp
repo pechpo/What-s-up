@@ -7,11 +7,16 @@ LoginWindow::LoginWindow(QWidget *parent) :
     ui(new Ui::LoginWindow)
 {
     ui->setupUi(this);
+    connect(Director::getInstance(), &Director::receiveTestString, this, &LoginWindow::on_receiveTestString);
 }
 
 LoginWindow::~LoginWindow()
 {
     delete ui;
+}
+
+void LoginWindow::on_receiveTestString(const QString &text) {
+    ui->receivedText->insertPlainText("recv: " + text + "\n");
 }
 
 void LoginWindow::on_connectButton_clicked()

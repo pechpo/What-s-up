@@ -16,10 +16,11 @@ public:
     static Director* getInstance();
     void act(const QJsonObject&); // deal with received JSON message
     void connectServer(const QString& , quint16);
-    void sendPureMessage(const QString&);
+    void sendPureMessage(const QString&); // debug
 
 signals:
     // todo
+    void receiveTestString(const QString&);
 
 private:
     static Director* self;
