@@ -12,14 +12,23 @@
 
 KMeans::KMeans(int k) : k_(k) {}
 
+double KMeans::get(const int &label) {
+    if (mapping.count(label)) {
+        std::default_random_engine generator;
+        std::uniform_real_distribution<double> distribution(0.0, 1.0);
+        mapping[label] = distribution(generator);
+    }
+    return mapping[label];
+}
+
 std::unordered_map<quint32, std::vector<double>> KMeans::mapTagsToFeatures(const std::unordered_map<quint32, std::vector<int>>& users) {
     std::unordered_map<quint32, std::vector<double>> features;
-    std::default_random_engine generator;
-    std::uniform_real_distribution<double> distribution(0.0, 1.0);
     for (const auto& [userId, tags] : users) {
         std::vector<double> mapped_tags;
+        int id = 0;
         for (const auto& tag : tags) {
-            mapped_tags.push_back(tag == 1 ? distribution(generator) : 0.0);
+            mapped_tags.push_back(tag == 1 ? get(id) : 0.0);
+            id++;
         }
         features[userId] = mapped_tags;
     }

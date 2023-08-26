@@ -25,8 +25,12 @@ private:
     // Calculate the Euclidean distance between two vectors
     double distance(const std::vector<double>& a, const std::vector<double>& b);
 
+    double get(const int &label);
+
     // Randomly select K initial centroids from the data
     std::vector<std::vector<double>> initializeCentroids(const std::unordered_map<quint32, std::vector<double>>& data);
+
+    std::unordered_map<int, double> mapping;
 };
 
 #endif //WHAT_S_UP_CLUSTERING_H
