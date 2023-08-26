@@ -28,6 +28,8 @@ Server::~Server() {
 }
 
 void Server::start() {
+    // 服务器启动时，可以添加一些额外的配置
+
     qDebug() << "Server started with additional configurations.";
 }
 
