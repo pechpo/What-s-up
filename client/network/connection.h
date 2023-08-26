@@ -14,13 +14,14 @@ public:
 
 public slots:
     void receiveMessage();
-    void sendMessage(const QString &text); // todo: design a message class
+    void sendMessage(const QJsonObject&); // use JSON
     bool isConnected();
 
 private:
     QString serverIP;
     quint16 serverPort;
     bool connected;
+    quint32 curRemainSize;
 };
 
 #endif // CONNECTION_H
