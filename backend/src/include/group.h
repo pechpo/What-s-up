@@ -1,33 +1,37 @@
 //
-// Created by zixin on 23-8-23.
+// Created by zixin on 23-8-25.
 //
 
-#ifndef WHAT_S_UP_GROUP_H
-#define WHAT_S_UP_GROUP_H
-#pragma once
-#include "db_connection.h"
-#include <string>
-#include <vector>
+#ifndef DATABASE_GROUP_H
+#define DATABASE_GROUP_H
 
-class GroupDB {
+#include "QString"
+
+class Group {
 public:
-    GroupDB(DBConnection& connection); // 构造函数，接收数据库连接
+    Group();
 
-    // 在数据库中创建新群组
-    bool createGroup(const std::string& groupId);
+    Group(const quint32 &new_ID, const QString &new_name, const QString &new_ava);
 
-    // 在数据库中添加群组成员
-    bool addMember(const std::string& groupId, const std::string& memberId);
+    ~Group();
 
-    // 在数据库中删除群组成员
-    bool removeMember(const std::string& groupId, const std::string& memberId);
+    quint32 getID() const;
 
-    // 从数据库中获取群组成员列表
-    std::vector<std::string> getMembers(const std::string& groupId);
+    QString getName() const;
 
-private:
-    sqlite3 *connection_; // 数据库连接引用
+    QString getAvatarName() const;
+
+    void setID(const quint32 &new_ID);
+
+    void setName(const QString &new_name);
+
+    void setAvatarName(const QString &new_ava);
+
+    quint32 ID;
+
+    QString name;
+
+    QString ava;
 };
 
-#endif //WHAT_S_UP_GROUP_H
-
+#endif //DATABASE_GROUP_H

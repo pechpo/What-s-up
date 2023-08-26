@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.26)
-project(What_s_up)
+project(backend_new)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_AUTOMOC ON)
@@ -14,32 +14,29 @@ find_package(Qt6 COMPONENTS
         Sql # 添加 Sql 组件
         REQUIRED)
 
-add_executable(What_s_up
-        src/main.cpp
-        src/server/server.cpp
-        src/server/connection.cpp
-        src/database/db_connection.cpp
-        src/database/user.cpp
-        src/database/group.cpp
-        src/database/message.cpp
+add_executable(backend_new
+        src/include/db.h
+        src/include/group.h
+        src/include/message.h
+        src/include/user.h
+        src/bot/bot.cpp
+        src/include/clustering.h
+        src/include/connection.h
+        src/include/encryption.h
+        src/include/media.h
+        src/include/recommendation.h
+        src/include/server.h
+        src/media/media.cpp
         src/recommendation/clustering.cpp
         src/recommendation/recommendation.cpp
-        src/bot/bot.cpp
-        src/media/media.cpp
+        src/server/connection.cpp
+        src/server/server.cpp
         src/utils/encryption.cpp
-        src/include/server.h
-        src/include/user.h
-        src/include/recommendation.h
-        src/include/bot.h
-        src/include/media.h
-        src/include/encryption.h
-        src/include/message.h
-        src/include/db_connection.h
-        src/include/group.h
-        src/include/clustering.h
-        src/include/connection.h)
+        src/main.cpp
+        src/Database/db.cpp
+)
 
-target_link_libraries(What_s_up
+target_link_libraries(backend_new
         Qt::Core
         Qt::Gui
         Qt::Widgets
