@@ -17,7 +17,9 @@ public:
     void act(const QJsonObject&); // deal with received JSON message
     void connectServer(const QString& , quint16);
     void sendPureMessage(const QString&);
+
 signals:
+    // todo
 
 private:
     static Director* self;

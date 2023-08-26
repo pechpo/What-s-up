@@ -31,7 +31,7 @@ void Connection::connectServer(const QString& IP, quint16 port) {
 
 bool Connection::isConnected() {
     if (false == connected) {
-        connected = waitForConnected();
+        connected = waitForConnected(1000);
     }
     return connected;
 }
@@ -79,4 +79,6 @@ void Connection::sendMessage(const QJsonObject &obj) {
     out.device()->seek(0);
     out << quint32(outMsg.size() - sizeof(quint32));
     write(outMsg);
+    // is flush() necessary?
+    // flush();
 }
