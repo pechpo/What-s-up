@@ -24,9 +24,11 @@ public:
     explicit Connection(QTcpSocket* socket, QObject* parent = nullptr);
     ~Connection();
 
-signals:
+    void receiveMessage(); // 读取消息
     void sendMessage(const QJsonObject &obj); // 异步写入消息
-    void receiveMessage();
+
+signals:
+    void messageReceived(const QString& message); // 消息接收信号
 
 private:
     QTcpSocket* socket_; // TCP 套接字
