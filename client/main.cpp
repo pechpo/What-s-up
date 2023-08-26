@@ -1,4 +1,5 @@
 #include "ui/loginwindow.h"
+#include "ui/logindialog.h"
 
 #include <QApplication>
 #include <QLocale>
@@ -18,6 +19,8 @@ int main(int argc, char *argv[])
         }
     }
     LoginWindow w;
+    LoginDialog d;
     w.show();
+    d.show();
     return a.exec();
 }
