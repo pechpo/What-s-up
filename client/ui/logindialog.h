@@ -21,8 +21,11 @@ private slots:
 
     void on_loginBtn_clicked();
 
+    void on_closeButton_clicked();
 
-    //void on_toolButton_clicked();
+    void on_closeButton_triggered(QAction *arg1);
+
+    void on_minimizeButton_clicked();
 
 private:
     Ui::LoginDialog *ui;

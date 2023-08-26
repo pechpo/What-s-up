@@ -12,13 +12,6 @@ LoginDialog::LoginDialog(QWidget *parent) :
 {
     this->setWindowFlags(Qt::FramelessWindowHint | Qt::Dialog);
     this->setAttribute(Qt::WA_TranslucentBackground);      //把初始的 dialog 窗口设置为透明的
-    QString style = R"(
-    QDialog {
-        border-radius: 60px;
-        background-color: white;
-    }
-    )";
-    this->setStyleSheet(style);
     ui->setupUi(this);
 
 }
@@ -38,5 +31,20 @@ void LoginDialog::on_loginBtn_clicked()
 
 
 
+void LoginDialog::on_closeButton_clicked()
+{
+    close();
+}
 
+
+void LoginDialog::on_closeButton_triggered(QAction *arg1)
+{
+    close();
+}
+
+
+void LoginDialog::on_minimizeButton_clicked()
+{
+    showMinimized();
+}
 

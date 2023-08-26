@@ -20,6 +20,10 @@ private slots:
 
     void on_sendButton_clicked();
 
+    void on_closeButton_clicked();
+
+    void on_minimizeButton_clicked();
+
 private:
     Ui::LoginWindow *ui;
 };
