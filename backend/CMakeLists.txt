@@ -11,7 +11,7 @@ find_package(Qt6 COMPONENTS
         Gui
         Widgets
         Network
-        Sql # 添加 Sql 组件
+        Sql
         REQUIRED)
 
 
@@ -39,7 +39,10 @@ add_executable(backend
         src/database/group.cpp
         src/database/db.cpp
         src/include/handle.h
-        src/server/handle.cpp
+        src/handle/handle.cpp
+        src/handle/handle_user.cpp
+        src/handle/handle_group.cpp
+        src/handle/handle_message.cpp
 )
 
 target_link_libraries(backend
@@ -47,7 +50,7 @@ target_link_libraries(backend
         Qt::Gui
         Qt::Widgets
         Qt::Network
-        Qt::Sql # 链接 Sql 库
+        Qt::Sql
         sqlite3
 )
 

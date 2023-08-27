@@ -23,9 +23,6 @@ public:
 
     void run();
 
-    void sendActivityBasedMessages();
-
-
 private:
     void respondToCommand(const QString& command, const QString& to_user);
     void respondToKeywords(const QString& content, const QString& to_user);

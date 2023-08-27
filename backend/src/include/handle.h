@@ -13,6 +13,10 @@ public:
 
     void ins_usr(const QJsonObject &json);
 
+    void ck_login(const QJsonObject &json);
+
+    void qry_usr(const QJsonObject &json);
+
     void upd_usr_name(const QJsonObject &json);
 
     void upd_usr_password(const QJsonObject &json);
@@ -38,8 +42,6 @@ public:
     void ins_message(const QJsonObject &json);
 
     void qry_pri(const QJsonObject &json);
-
-    void qry_usr(const QJsonObject &json);
 
     void qry_friend(const QJsonObject &json);
 

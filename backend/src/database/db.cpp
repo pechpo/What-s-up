@@ -33,6 +33,37 @@ bool DB::ins_usr(const User &user) {
     query.exec();
 }
 
+bool DB::ck_login(const quint32 &ID, const QString &pwd) {
+    QSqlQuery query;
+    query.prepare("SELECT * FROM UserInfo WHERE ID = :ID AND Pwd = :Pwd");
+    query.bindValue(":ID", QVariant(ID));
+    query.bindValue(":Pwd", QVariant(pwd));
+    query.exec();
+
+    if (query.next()) {
+        return true;
+    }
+
+    return false;
+}
+
+User DB::qry_usr(const quint32 &ID) {
+    QSqlQuery query;
+    query.prepare("SELECT * FROM UserInfo WHERE ID = :ID");
+    query.bindValue(":ID", QVariant(ID));
+    query.exec();
+
+    if (query.next()) {
+        User user;
+        user.setID(query.value(0).toUInt());
+        user.setName(query.value(1).toString());
+        user.setPwd(query.value(2).toString());
+        user.setAvatarName(query.value(3).toString());
+        user.setEmail(query.value(4).toString());
+        return user;
+    }
+}
+
 bool DB::upd_usr_name(const quint32 &ID, const QString &name) {
     QSqlQuery query;
     query.prepare("UPDATE UserInfo SET Username = :Username WHERE ID = :ID");
@@ -209,21 +240,6 @@ bool DB::qry_pri(const quint32 &ID, const quint32 &group_ID) {
 
     if (query.next()) {
         return query.value(0).toBool();
-    }
-
-    return false;
-}
-
-bool DB::qry_usr(const quint32 &ID) {
-    QSqlQuery query;
-
-    // 查询用户 ID 是否存在
-    query.prepare("SELECT * FROM UserInfo WHERE ID = :ID");
-    query.bindValue(":ID", QVariant(ID));
-    query.exec();
-
-    if (query.next()) {
-        return true;
     }
 
     return false;

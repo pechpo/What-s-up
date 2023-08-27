@@ -18,6 +18,10 @@ public :
 
     bool ins_usr(const User& user);//新增用户
 
+    bool ck_login(const quint32 &ID, const QString &pwd);//检查登录
+
+    User qry_usr(const quint32 &ID);//查询用户
+
     bool upd_usr_name(const quint32 &ID, const QString &name);//修改用户名
 
     bool upd_usr_password(const quint32 &ID, const QString &pwd);//修改用户密码
@@ -43,8 +47,6 @@ public :
     bool ins_message(const Message &message);//插入消息
 
     bool qry_pri(const quint32 &ID, const quint32 &group_ID);//查询是否为群主
-
-    bool qry_usr(const quint32 &ID);//查询用户是否存在
 
     bool qry_friend(const quint32 &ID1, const quint32 &ID2);//查询是否为好友
 
