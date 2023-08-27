@@ -1,5 +1,7 @@
 #include "ui/loginwindow.h"
 #include "ui/logindialog.h"
+#include "ui/mainwindow.h"
+#include "ui/chatwindow.h"
 
 #include <QApplication>
 #include <QLocale>
@@ -18,7 +20,9 @@ int main(int argc, char *argv[])
             break;
         }
     }
+    ChatWindow cw;
     LoginDialog d;
     d.show();
+    cw.show();
     return a.exec();
 }
