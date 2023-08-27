@@ -25,6 +25,21 @@ Director::Director(QObject *parent)
     recvEmitter.insert("a_newChat", &Director::a_newChat);
 }
 
+void Director::act(const QJsonObject &obj) {
+    qDebug() << "recv: " << obj;
+    // emit receiveTestString(obj.value("text").toString());
+    if (!obj.contains("type")) {
+        // todo
+        return ;
+    }
+    QString index = obj.value("type").toString();
+    if (!recvEmitter.contains(index)) {
+        return ;
+    }
+    Emitter e = recvEmitter.value(index);
+    emit (this->*e)(obj);
+}
+
 Director::~Director() {
 
 }
@@ -45,23 +60,20 @@ Connection* Director::getConnection() {
     return conn;
 }
 
-void Director::act(const QJsonObject &obj) {
-    qDebug() << "recv: " << obj;
-    // emit receiveTestString(obj.value("text").toString());
-    if (!obj.contains("type")) {
-        // todo
-        return ;
-    }
-    QString index = obj.value("type").toString();
-    if (!recvEmitter.contains(index)) {
-        return ;
-    }
-    Emitter e = recvEmitter.value(index);
-    emit (this->*e)(obj);
-}
-
 void Director::connectServer(const QString &IP, quint16 port) {
     getConnection()->connectServer(IP, port);
+}
+
+bool Director::isConnected() {
+    return getConnection()->isConnected();
+}
+
+void Director::sendJson(const QJsonObject &obj) {
+    Connection *conn = getConnection();
+    if (conn->isConnected()) {
+        qDebug() << "send: " << obj;
+        conn->sendMessage(obj);
+    }
 }
 
 void Director::sendPureMessage(const QString &text) {
