@@ -38,6 +38,8 @@ add_executable(backend
         src/database/message.cpp
         src/database/group.cpp
         src/database/db.cpp
+        src/include/handle.h
+        src/server/handle.cpp
 )
 
 target_link_libraries(backend

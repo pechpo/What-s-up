@@ -62,7 +62,11 @@ public :
 
     bool qry_message(const quint32 &ID, const quint32 &group_ID, const QString &time, const QString &content, const quint32 &sender_ID);//查询消息是否存在
 
+    static DB * get_instance();
 
+private:
+
+    static DB * db;
 
     QSqlDatabase database;
 };

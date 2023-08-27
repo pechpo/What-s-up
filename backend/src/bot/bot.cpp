@@ -7,19 +7,21 @@
 #include "message.h"
 #include <map>
 
-void ChatBot::processMessage(const std::string& sender, const std::string& receiver, const std::string& content) {
-    if (content.find("/bot") == 0) {
-        std::string command = content.substr(4);
+void ChatBot::processMessage(const QString& sender, const QString& receiver, const QString& content) {
+    if (!content.contains("/bot")) {
+        QString command = content.mid(4);
         respondToCommand(command, sender);
     } else {
         respondToKeywords(content, sender);
     }
 }
 
-void ChatBot::respondToCommand(const std::string& command, const std::string& to_user) {
-    std::map<std::string, std::function<std::string()>> responses = {
+void ChatBot::respondToCommand(const QString& command, const QString& to_user) {
+    std::map<QString, std::function<QString()>> responses = {
             {"hello", []() { return "Hello, how can I help you?"; }},
             {"time",  []() { return "I'm sorry, I don't know the current time."; }},
+            {"help",  []() { return "I'm sorry, I can't help you."; }},
+            {"bye",   []() { return "Goodbye!"; }},
     };
 
     auto it = responses.find(command);
@@ -30,19 +32,19 @@ void ChatBot::respondToCommand(const std::string& command, const std::string& to
     }
 }
 
-void ChatBot::respondToKeywords(const std::string& content, const std::string& to_user) {
-    std::map<std::string, std::string> keywordResponses = {
+void ChatBot::respondToKeywords(const QString& content, const QString& to_user) {
+    std::map<QString, QString> keywordResponses = {
             {"weather", "I'm sorry, I can't provide the current weather."},
             {"joke", "Why don't scientists trust atoms? Because they make up everything!"},
     };
 
     for (const auto& [keyword, response] : keywordResponses) {
-        if (content.find(keyword) != std::string::npos) {
+        if (content.contains(keyword)) {
             sendMessage("bot", to_user, response);
             break;
         }
     }
 }
 
-void ChatBot::sendMessage(const std::string& sender, const std::string& receiver, const std::string& content) {
+void ChatBot::sendMessage(const QString& sender, const QString& receiver, const QString& content) {
 }

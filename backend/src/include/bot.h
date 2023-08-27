@@ -17,7 +17,7 @@
 
 class ChatBot {
 public:
-    ChatBot(const std::string& username, const std::string& password, const std::string& dbPath);
+    ChatBot(const QString& username, const QString& password, const QString& dbPath);
 
     ~ChatBot();
 
@@ -27,10 +27,10 @@ public:
 
 
 private:
-    void respondToCommand(const std::string& command, const std::string& to_user);
-    void respondToKeywords(const std::string& content, const std::string& to_user);
-    void sendMessage(const std::string& sender, const std::string& receiver, const std::string& content);
-    void processMessage(const std::string& sender, const std::string& receiver, const std::string& content);
+    void respondToCommand(const QString& command, const QString& to_user);
+    void respondToKeywords(const QString& content, const QString& to_user);
+    void sendMessage(const QString& sender, const QString& receiver, const QString& content);
+    void processMessage(const QString& sender, const QString& receiver, const QString& content);
 };
 
 #endif //WHAT_S_UP_BOT_H

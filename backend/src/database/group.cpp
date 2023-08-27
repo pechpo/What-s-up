@@ -23,3 +23,17 @@ void Group::setName(const QString &new_name) {
 void Group::setAvatarName(const QString &new_ava) {
     this->ava = new_ava;
 }
+
+Group::Group() {
+    this->ID = 0;
+    this->name = "";
+    this->ava = "";
+}
+
+Group::Group(const quint32 &new_ID, const QString &new_name, const QString &new_ava) {
+    this->ID = new_ID;
+    this->name = new_name;
+    this->ava = new_ava;
+}
+
+Group::~Group() = default;
