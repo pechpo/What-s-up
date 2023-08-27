@@ -1,8 +1,7 @@
 #include "connection.h"
 #include "director/director.h"
-#include <QJsonDocument>
-#include <QJsonObject>
 #include <QDataStream>
+#include <QJsonDocument>
 #include <QJsonParseError>
 
 #include <QDebug>
