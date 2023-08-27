@@ -1,8 +1,7 @@
 #include "connection.h"
 #include "director/director.h"
-#include <QJsonDocument>
-#include <QJsonObject>
 #include <QDataStream>
+#include <QJsonDocument>
 #include <QJsonParseError>
 
 #include <QDebug>
@@ -35,6 +34,8 @@ bool Connection::isConnected() {
     }
     return connected;
 }
+
+// todo: 不确定这种读取方式是否合适
 
 void Connection::receiveMessage() {
     while (bytesAvailable() > 0) { // may read more than one message

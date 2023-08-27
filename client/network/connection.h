@@ -2,6 +2,7 @@
 #define CONNECTION_H
 
 #include <QTcpSocket>
+#include <QJsonObject>
 
 class Connection : public QTcpSocket
 {
