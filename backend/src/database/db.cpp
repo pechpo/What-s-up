@@ -1,6 +1,8 @@
 #include "db.h"
 #include <QSqlQuery>
 
+DB* DB::db = nullptr;
+
 DB::DB() {
     database = QSqlDatabase::addDatabase("QSQLITE");
     database.setDatabaseName("./data.db");
@@ -31,7 +33,38 @@ bool DB::ins_usr(const User &user) {
     query.exec();
 }
 
-bool upd_usr_name(const quint32 &ID, const QString &name) {
+bool DB::ck_login(const quint32 &ID, const QString &pwd) {
+    QSqlQuery query;
+    query.prepare("SELECT * FROM UserInfo WHERE ID = :ID AND Pwd = :Pwd");
+    query.bindValue(":ID", QVariant(ID));
+    query.bindValue(":Pwd", QVariant(pwd));
+    query.exec();
+
+    if (query.next()) {
+        return true;
+    }
+
+    return false;
+}
+
+User DB::qry_usr(const quint32 &ID) {
+    QSqlQuery query;
+    query.prepare("SELECT * FROM UserInfo WHERE ID = :ID");
+    query.bindValue(":ID", QVariant(ID));
+    query.exec();
+
+    if (query.next()) {
+        User user;
+        user.setID(query.value(0).toUInt());
+        user.setName(query.value(1).toString());
+        user.setPwd(query.value(2).toString());
+        user.setAvatarName(query.value(3).toString());
+        user.setEmail(query.value(4).toString());
+        return user;
+    }
+}
+
+bool DB::upd_usr_name(const quint32 &ID, const QString &name) {
     QSqlQuery query;
     query.prepare("UPDATE UserInfo SET Username = :Username WHERE ID = :ID");
     query.bindValue(":ID", QVariant(ID));
@@ -39,7 +72,7 @@ bool upd_usr_name(const quint32 &ID, const QString &name) {
     query.exec();
 }
 
-bool upd_usr_password(const quint32 &ID, const QString &pwd) {
+bool DB::upd_usr_password(const quint32 &ID, const QString &pwd) {
     QSqlQuery query;
     query.prepare("UPDATE UserInfo SET Pwd = :Pwd WHERE ID = :ID");
     query.bindValue(":ID", QVariant(ID));
@@ -47,7 +80,7 @@ bool upd_usr_password(const quint32 &ID, const QString &pwd) {
     query.exec();
 }
 
-bool upd_usr_avatar(const quint32 &ID, const QString &ava) {
+bool DB::upd_usr_avatar(const quint32 &ID, const QString &ava) {
     QSqlQuery query;
     query.prepare("UPDATE UserInfo SET Avatar = :Avatar WHERE ID = :ID");
     query.bindValue(":ID", QVariant(ID));
@@ -55,7 +88,7 @@ bool upd_usr_avatar(const quint32 &ID, const QString &ava) {
     query.exec();
 }
 
-bool upd_usr_email(const quint32 &ID, const QString &ema) {
+bool DB::upd_usr_email(const quint32 &ID, const QString &ema) {
     QSqlQuery query;
     query.prepare("UPDATE UserInfo SET Email = :Email WHERE ID = :ID");
     query.bindValue(":ID", QVariant(ID));
@@ -63,14 +96,14 @@ bool upd_usr_email(const quint32 &ID, const QString &ema) {
     query.exec();
 }
 
-bool del_usr(const quint32 &ID) {
+bool DB::del_usr(const quint32 &ID) {
     QSqlQuery query;
     query.prepare("DELETE FROM UserInfo WHERE ID = :ID");
     query.bindValue(":ID", QVariant(ID));
     query.exec();
 }
 
-bool add_friend(const quint32 &ID1, const quint32 &ID2) {
+bool DB::add_friend(const quint32 &ID1, const quint32 &ID2) {
     if (ID1 == ID2) {
 //        qDebug << "Can not add self!\n";
         return false;
@@ -100,7 +133,7 @@ bool add_friend(const quint32 &ID1, const quint32 &ID2) {
     query.exec();
 }
 
-bool del_friend(const quint32 &ID1, const quint32 &ID2) {
+bool DB::del_friend(const quint32 &ID1, const quint32 &ID2) {
     if (ID1 == ID2) {
 //        qDebug << "Can not del self!\n";
         return false;
@@ -207,21 +240,6 @@ bool DB::qry_pri(const quint32 &ID, const quint32 &group_ID) {
 
     if (query.next()) {
         return query.value(0).toBool();
-    }
-
-    return false;
-}
-
-bool DB::qry_usr(const quint32 &ID) {
-    QSqlQuery query;
-
-    // 查询用户 ID 是否存在
-    query.prepare("SELECT * FROM UserInfo WHERE ID = :ID");
-    query.bindValue(":ID", QVariant(ID));
-    query.exec();
-
-    if (query.next()) {
-        return true;
     }
 
     return false;
@@ -354,3 +372,9 @@ bool DB::qry_message(const quint32 &ID, const quint32 &group_ID, const QString &
     return false;
 }
 
+DB * DB::get_instance() {
+    if (db != nullptr) {
+        db = new DB;
+    }
+    return db;
+}

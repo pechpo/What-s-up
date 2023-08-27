@@ -48,3 +48,13 @@ User::User() {
     this->ema = "";
 }
 
+User::User(const quint32 &new_ID, const QString &new_name, const QString &new_pwd, const QString &new_ava,
+           const QString &new_ema) {
+    this->ID = new_ID;
+    this->name = new_name;
+    this->pwd = new_pwd;
+    this->ava = new_ava;
+    this->ema = new_ema;
+}
+
+User::~User() = default;

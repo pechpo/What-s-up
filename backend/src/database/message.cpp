@@ -39,3 +39,22 @@ void Message::setContent(const QString &new_content) {
 void Message::setTime(const QString &new_time) {
     this->time = new_time;
 }
+
+Message::Message() {
+    this->ID = 0;
+    this->sender_ID = 0;
+    this->receiver_ID = 0;
+    this->content = "";
+    this->time = "";
+}
+
+Message::Message(const quint32 &new_ID, const quint32 &new_sender_ID, const quint32 &new_receiver_ID,
+                 const QString &new_content, const QString &new_time) {
+    this->ID = new_ID;
+    this->sender_ID = new_sender_ID;
+    this->receiver_ID = new_receiver_ID;
+    this->content = new_content;
+    this->time = new_time;
+}
+
+Message::~Message() = default;
