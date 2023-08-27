@@ -32,6 +32,10 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ui/loginwindow.h ui/loginwindow.cpp ui/loginwindow.ui
         ui/logindialog.h ui/logindialog.cpp ui/logindialog.ui
         ui/UI-images.qrc
+        ui/mainwindow.h ui/mainwindow.cpp ui/mainwindow.ui
+
+
+
 
 
     )

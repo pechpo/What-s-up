@@ -3,5 +3,6 @@
         <file>image/close.png</file>
         <file>image/no.png</file>
         <file>image/settings.png</file>
+        <file>image/chatList.png</file>
     </qresource>
 </RCC>

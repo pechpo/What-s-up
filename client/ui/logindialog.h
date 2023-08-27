@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include "loginwindow.h"
+#include "mainwindow.h"
 
 namespace Ui {
 class LoginDialog;
@@ -32,7 +33,8 @@ private slots:
 
 private:
     Ui::LoginDialog *ui;
-    LoginWindow *w;
+    LoginWindow *lw;
+    mainWindow *mw;
 };
 
 #endif // LOGINDIALOG_H
