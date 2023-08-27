@@ -18,6 +18,8 @@ public:
     static Director* getInstance();
     void act(const QJsonObject&); // deal with received JSON message
     void connectServer(const QString& , quint16);
+    bool isConnected();
+    void sendJson(const QJsonObject&);
     void sendPureMessage(const QString&); // debug
 
 signals:
