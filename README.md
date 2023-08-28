@@ -24,7 +24,7 @@
 
   具体细节请见：[一种适合小团队的Git协作流程 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/383067606)
 
-- 开发环境：build_essential, cmake, QT 6.5.2, SQLite。
+- 开发环境：build_essential, cmake, QT 6.5.2, SQLite，linuxdeployqt（部署）。
 
   qt5以上自带SQLite驱动，因此不需安装SQLite驱动。
 

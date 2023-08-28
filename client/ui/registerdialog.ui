@@ -226,6 +226,15 @@ image: url(:/images/image/no.png);</string>
    </widget>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>usrLineEdit</tabstop>
+  <tabstop>pwdLineEdit</tabstop>
+  <tabstop>confirmPwdLineEdit</tabstop>
+  <tabstop>confirmBtn</tabstop>
+  <tabstop>minimizeButton</tabstop>
+  <tabstop>closeButton</tabstop>
+  <tabstop>regBtn</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

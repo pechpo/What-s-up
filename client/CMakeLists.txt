@@ -40,7 +40,6 @@ qt_add_executable(client
 
 
 
-
 )
 
 
