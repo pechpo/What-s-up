@@ -11,9 +11,13 @@ ChatWindow::ChatWindow(QWidget *parent) :
     ui->setupUi(this);
     ui->MsgEdit->setReadOnly(true);
     chatId = 0;
+    waiting = 0;
 
     connect(Director::getInstance(), &Director::r_chatHistory, this, &ChatWindow::slot_r_chatHistory);
     connect(Director::getInstance(), &Director::a_newMessage, this, &ChatWindow::slot_a_newMessage);
+    connect(Director::getInstance(), &Director::r_send, this, &ChatWindow::slot_r_send);
+
+    switchChat(1);
 }
 
 ChatWindow::~ChatWindow()
@@ -120,4 +124,25 @@ void ChatWindow::updateText() {
 
 void ChatWindow::appendText(const QString &text) {
     ui->MsgEdit->insertPlainText(text + "\n");
+}
+
+void ChatWindow::on_sendButton_clicked()
+{
+    if (0 == waiting) {
+        QJsonObject content;
+        content.insert("isPicture", false);
+        content.insert("content", ui->inputEdit->toPlainText());
+        QJsonObject msg;
+        msg.insert("type", "e_send");
+        msg.insert("chatId", QJsonValue(chatId));
+        msg.insert("message", content);
+        if (Director::getInstance()->sendJson(msg)) {
+            waiting++;
+        }
+    }
+}
+
+void ChatWindow::slot_r_send(const QJsonObject &obj) {
+    waiting--;
+    ui->inputEdit->setPlainText("");
 }

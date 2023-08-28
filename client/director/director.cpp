@@ -24,6 +24,8 @@ Director::Director(QObject *parent)
     recvEmitter.insert("a_newMessage", &Director::a_newMessage);
     recvEmitter.insert("a_newFriendRequest", &Director::a_newFriendRequest);
     recvEmitter.insert("a_newChat", &Director::a_newChat);
+
+    mainUI = nullptr;
 }
 
 void Director::act(const QJsonObject &obj) {
@@ -45,7 +47,9 @@ void Director::act(const QJsonObject &obj) {
 }
 
 Director::~Director() {
-
+    delete mainUI;
+    delete conn;
+    delete self;
 }
 
 Director* Director::self = nullptr;
@@ -100,5 +104,15 @@ void Director::sendPureMessage(const QString &text) {
         obj.insert("text", text);
         qDebug() << "send: " << obj;
         conn->sendMessage(obj);
+    }
+}
+
+void Director::toMainWindow() {
+    if (nullptr == mainUI) {
+        mainUI = new mainWindow();
+        mainUI->show();
+    }
+    else {
+
     }
 }

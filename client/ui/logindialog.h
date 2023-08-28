@@ -4,7 +4,6 @@
 #include <QDialog>
 #include <QJsonObject>
 #include "loginwindow.h"
-#include "mainwindow.h"
 #include "registerdialog.h"
 
 namespace Ui {
@@ -41,7 +40,6 @@ private slots:
 private:
     Ui::LoginDialog *ui;
     LoginWindow *lw;
-    mainWindow *mw;
     RegisterDialog *rd;
     quint32 waiting;
 };

@@ -23,9 +23,14 @@ public:
 public slots:
     void slot_r_chatHistory(const QJsonObject&);
     void slot_a_newMessage(const QJsonObject&);
+    void slot_r_send(const QJsonObject&);
+
+private slots:
+    void on_sendButton_clicked();
 
 private:
     Ui::ChatWindow *ui;
+    quint32 waiting;
 
     bool isThisChat(const QJsonObject&);
 
