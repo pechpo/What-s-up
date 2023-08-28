@@ -29,11 +29,11 @@ LoginDialog::~LoginDialog()
 
 void LoginDialog::on_loginBtn_clicked()
 {
-    if (waiting == 0) {
-        QJsonObject msg;
-        msg.insert("type", "q_login");
+    if (0 == waiting) {
         qint64 id = ui->usrLineEdit->text().toInt();
         QString pwd = Director::getInstance()->Hash(ui->pwdLineEdit->text());
+        QJsonObject msg;
+        msg.insert("type", "q_login");
         msg.insert("id", QJsonValue(id));
         msg.insert("password", QJsonValue(pwd));
         if (Director::getInstance()->sendJson(msg))

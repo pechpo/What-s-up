@@ -43,7 +43,7 @@ private:
     LoginWindow *lw;
     mainWindow *mw;
     RegisterDialog *rd;
-    quint64 waiting;
+    quint32 waiting;
 };
 
 #endif // LOGINDIALOG_H

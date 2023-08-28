@@ -23,13 +23,13 @@ int main(int argc, char *argv[])
         }
     }
     //ChatWindow cw;
-    mainWindow mw;
-    ProfileBar pb;
+    //mainWindow mw;
+    //ProfileBar pb;
     LoginDialog d;
     SearchNewFriend snf;
     d.show();
-    mw.show();
-    pb.show();
+    //mw.show();
+    //pb.show();
     snf.show();
     //cw.show();
     return a.exec();

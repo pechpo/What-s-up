@@ -27,7 +27,7 @@ private slots:
 
 private:
     Ui::RegisterDialog *ui;
-    quint64 waiting;
+    quint32 waiting;
 };
 
 #endif // REGISTERDIALOG_H

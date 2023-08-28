@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QWidget" name="widget" native="true">
+  <widget class="QWidget" name="avatar" native="true">
    <property name="geometry">
     <rect>
      <x>0</x>
@@ -26,7 +26,7 @@
     <string notr="true">border-image: url(:/images/image/imagetest.png);</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label">
+  <widget class="QLabel" name="username">
    <property name="geometry">
     <rect>
      <x>60</x>

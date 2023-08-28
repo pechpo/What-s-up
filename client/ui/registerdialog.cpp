@@ -19,7 +19,7 @@ RegisterDialog::~RegisterDialog()
 }
 
 void RegisterDialog::on_confirmBtn_clicked() {
-    if (waiting == 0) {
+    if (0 == waiting) {
         if (ui->confirmPwdLineEdit->text() != ui->pwdLineEdit->text()) {
             // todo
             return ;
