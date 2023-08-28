@@ -14,6 +14,7 @@ class ChatWindow : public QWidget
 public:
     explicit ChatWindow(QWidget *parent = nullptr);
     ~ChatWindow();
+    void appendText(const QString&);
 
 private:
     Ui::ChatWindow *ui;

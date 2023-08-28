@@ -12,3 +12,7 @@ ChatWindow::~ChatWindow()
 {
     delete ui;
 }
+
+void ChatWindow::appendText(const QString &text) {
+    ui->MsgEdit->insertPlainText(text + "\n");
+}
