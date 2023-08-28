@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>480</width>
+    <width>680</width>
     <height>640</height>
    </rect>
   </property>
@@ -21,7 +21,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>481</width>
+     <width>711</width>
      <height>641</height>
     </rect>
    </property>
@@ -31,7 +31,7 @@
    <widget class="QToolButton" name="minimizeButton">
     <property name="geometry">
      <rect>
-      <x>400</x>
+      <x>600</x>
       <y>0</y>
       <width>40</width>
       <height>40</height>
@@ -44,7 +44,7 @@
    <widget class="QToolButton" name="closeButton">
     <property name="geometry">
      <rect>
-      <x>440</x>
+      <x>640</x>
       <y>0</y>
       <width>40</width>
       <height>40</height>
@@ -63,7 +63,7 @@
    <widget class="QToolButton" name="settingButton">
     <property name="geometry">
      <rect>
-      <x>360</x>
+      <x>560</x>
       <y>0</y>
       <width>41</width>
       <height>41</height>
