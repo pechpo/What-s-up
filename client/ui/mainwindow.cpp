@@ -8,6 +8,9 @@ mainWindow::mainWindow(QWidget *parent) :
     this->setWindowFlags(Qt::FramelessWindowHint | Qt::Widget);
     this->setAttribute(Qt::WA_TranslucentBackground);      //把初始的 dialog 窗口设置为透明的
     ui->setupUi(this);
+
+    snf = nullptr;
+
     cw = new ChatWindow(this);
     cw->move(250, 50);
     cw->show();
@@ -17,6 +20,7 @@ mainWindow::mainWindow(QWidget *parent) :
 
 mainWindow::~mainWindow()
 {
+    delete snf;
     delete ui;
 }
 
@@ -34,7 +38,13 @@ void mainWindow::on_minimizeButton_clicked()
 
 void mainWindow::on_addnewfriendButton_clicked()
 {
-    snf = new SearchNewFriend();
-    snf->show();
+    if (nullptr == snf) {
+        snf = new SearchNewFriend();
+        snf->show();
+    }
+    else {
+        snf->close();
+        snf->show();
+    }
 }
 

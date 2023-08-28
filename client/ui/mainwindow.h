@@ -28,6 +28,8 @@ private:
     Ui::mainWindow *ui;
     ChatWindow *cw;
     SearchNewFriend *snf;
+
+
 };
 
 #endif // MAINWINDOW_H

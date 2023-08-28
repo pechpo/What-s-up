@@ -16,6 +16,8 @@ LoginDialog::LoginDialog(QWidget *parent) :
     this->setAttribute(Qt::WA_TranslucentBackground);      //把初始的 dialog 窗口设置为透明的
     ui->setupUi(this);
 
+    lw = nullptr;
+    rd = nullptr;
     waiting = 0;
 
     connect(Director::getInstance(), &Director::r_login, this, &LoginDialog::slot_r_login);
@@ -23,6 +25,8 @@ LoginDialog::LoginDialog(QWidget *parent) :
 
 LoginDialog::~LoginDialog()
 {
+    delete lw;
+    delete rd;
     delete ui;
 }
 
@@ -80,13 +84,25 @@ void LoginDialog::on_minimizeButton_clicked()
 
 void LoginDialog::on_ConnectionButton_clicked()
 {
-    lw = new LoginWindow;
-    lw->show();
+    if (nullptr == lw) {
+        lw = new LoginWindow;
+        lw->show();
+    }
+    else {
+        lw->close();
+        lw->show();
+    }
 }
 
 void LoginDialog::on_regBtn_clicked()
 {
-    rd = new RegisterDialog();
-    rd->show();
+    if (nullptr == rd) {
+        rd = new RegisterDialog();
+        rd->show();
+    }
+    else {
+        rd->close();
+        rd->show();
+    }
 }
 
