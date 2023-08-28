@@ -37,6 +37,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ui/profilebar.h ui/profilebar.cpp ui/profilebar.ui
         ui/registerdialog.h ui/registerdialog.cpp ui/registerdialog.ui
         ui/searchnewfriend.h ui/searchnewfriend.cpp ui/searchnewfriend.ui
+        ui/grouplist.h ui/grouplist.cpp ui/grouplist.ui
 
 
 

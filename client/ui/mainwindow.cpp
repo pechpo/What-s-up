@@ -31,3 +31,10 @@ void mainWindow::on_minimizeButton_clicked()
     showMinimized();
 }
 
+
+void mainWindow::on_addnewfriendButton_clicked()
+{
+    snf = new SearchNewFriend();
+    snf->show();
+}
+

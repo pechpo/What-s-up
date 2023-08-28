@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "chatwindow.h"
+#include "searchnewfriend.h"
 
 namespace Ui {
 class mainWindow;
@@ -21,9 +22,12 @@ private slots:
 
     void on_minimizeButton_clicked();
 
+    void on_addnewfriendButton_clicked();
+
 private:
     Ui::mainWindow *ui;
     ChatWindow *cw;
+    SearchNewFriend *snf;
 };
 
 #endif // MAINWINDOW_H
