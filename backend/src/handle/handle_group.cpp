@@ -32,7 +32,7 @@ QJsonObject Handle::q_chatHistory(const QJsonObject &obj) {
         chatHistory.append(message);
     }
     response["chatHistory"] = chatHistory;
-
+    return response;
     // Send the response back to client
 }
 
@@ -57,7 +57,7 @@ QJsonObject Handle::q_list_usersInChat(const QJsonObject &obj) {
         users.append(user);
     }
     response["users"] = users;
-
+    return response;
     // Send the response back to client
 }
 
@@ -75,6 +75,7 @@ QJsonObject Handle::e_createChat(const QJsonObject &obj) {
     if(!flag){
         response["error"] = "Create failed";
     }
+    return response;
     // Send the response back to client
 }
 
@@ -91,6 +92,7 @@ QJsonObject Handle::e_joinChat(const QJsonObject &obj) {
     if(!flag){
         response["error"] = "Join failed";
     }
+    return response;
     // Send the response back to client
 }
 
@@ -112,6 +114,6 @@ QJsonObject Handle::q_list_filesInChat(const QJsonObject &obj) {
         files.append(file);
     }
     response["files"] = files;
-
+    return response;
     // Send the response back to client
 }

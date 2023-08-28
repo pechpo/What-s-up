@@ -52,6 +52,8 @@ public :
 
     QList<Message> q_list_filesInChat(const quint32 &chat_ID);
 
+    bool check(const int &id, const int &group);
+
     static DB * get_instance();
 
 private:

@@ -6,6 +6,7 @@
 
 #include <QJsonObject>
 #include "handle.h"
+#include "db.h"
 
 Handle* Handle::hd = nullptr;
 
@@ -28,6 +29,10 @@ Handle::Handle() {
     handlemap["q_list_filesInChat"] = [this](auto && PH1) { return q_list_filesInChat(std::forward<decltype(PH1)>(PH1)); };
 }
 
+Handle::~Handle() {
+    delete hd;
+}
+
 QJsonObject Handle::handle(const QJsonObject &json) {
     return handlemap[json["type"].toString()](json);
 }
@@ -37,4 +42,9 @@ Handle * Handle::get_instance() {
         hd = new Handle;
     }
     return hd;
+}
+
+bool Handle::check(const int &id, const int &group) {
+    DB *db = DB::get_instance();
+    return db->check(id, group);
 }

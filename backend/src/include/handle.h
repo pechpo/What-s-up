@@ -11,6 +11,8 @@ class Handle : public QObject{
 public:
     Handle();
 
+    ~Handle();
+
     QJsonObject handle(const QJsonObject &json);
 
     QJsonObject e_register(const QJsonObject &json);
@@ -50,6 +52,8 @@ public:
     QJsonObject q_list_filesInChat(const QJsonObject &json);
 
     std::map<QString, std::function<QJsonObject(const QJsonObject &)>> handlemap;
+
+    bool check(const int &id, const int &group);
 
     static Handle * get_instance();
 

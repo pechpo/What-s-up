@@ -22,6 +22,7 @@ QJsonObject Handle::e_register(const QJsonObject &obj) {
     QJsonObject response;
     response["type"] = "r_register";
     response["success"] = flag;  // set to false if insertion fails
+    return response;
     // Send the response back to client
 }
 
@@ -35,6 +36,7 @@ QJsonObject Handle::q_login(const QJsonObject &obj) {
     QJsonObject response;
     response["type"] = "r_login";
     response["success"] = flag;  // set to false if query fails
+    return response;
     // Send the response back to client
 }
 
@@ -51,6 +53,7 @@ QJsonObject Handle::q_myInfo(const QJsonObject &obj) {
     response["password"] = flag.getPwd();
     response["email"] = flag.getEmail();
     response["avatar"] = flag.getAvatarName();
+    return response;
     // Send the response back to client
 }
 
@@ -67,6 +70,7 @@ QJsonObject Handle::q_userInfo(const QJsonObject &json) {
     response["password"] = flag.getPwd();
     response["email"] = flag.getEmail();
     response["avatar"] = flag.getAvatarName();
+    return response;
     // Send the response back to client
 }
 
@@ -86,6 +90,7 @@ QJsonObject Handle::e_editInfo(const QJsonObject &obj) {
     if(!flag){
         response["error"] = "Edit failed";
     }
+    return response;
     // Send the response back to client
 }
 
@@ -106,7 +111,7 @@ QJsonObject Handle::q_list_myChats(const QJsonObject &obj) {
         chats.append(chat);
     }
     response["chats"] = chats;
-
+    return response;
     // Send the response back to client
 }
 
@@ -122,6 +127,7 @@ QJsonObject Handle::e_addFriend(const QJsonObject &obj) {
     if(!flag){
         response["error"] = "Add failed";
     }
+    return response;
     // Send the response back to client
 }
 
@@ -144,7 +150,7 @@ QJsonObject Handle::q_list_friendRequests(const QJsonObject &obj) {
         users.append(user);
     }
     response["users"] = users;
-
+    return response;
     // Send the response back to client
 }
 
@@ -167,7 +173,7 @@ QJsonObject Handle::q_list_myFriends(const QJsonObject &obj) {
         users.append(user);
     }
     response["users"] = users;
-
+    return response;
     // Send the response back to client
 }
 
@@ -183,5 +189,6 @@ QJsonObject Handle::e_acceptFriend(const QJsonObject &obj) {
     if(!flag){
         response["error"] = "Accept failed";
     }
+    return response;
     // Send the response back to client
 }

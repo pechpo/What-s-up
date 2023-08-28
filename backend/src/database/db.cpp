@@ -1,6 +1,11 @@
 #include "db.h"
 #include <QSqlQuery>
 
+//user id, name, password, avatar, email
+//message id, chat_id, sender_id, content, time
+//chat id, name, avatar
+
+
 DB* DB::db = nullptr;
 
 DB::DB() {
@@ -20,6 +25,7 @@ DB::~DB() {
     if (database.isOpen()) {
         database.close();
     }
+    delete db;
 }
 
 bool DB::e_register(const User &user) {
@@ -86,31 +92,23 @@ User DB::q_userInfo(const quint32 &ID) {
         user.setEmail(query.value(4).toString());
         return user;
     }
-    return User();
+    return {};
 }
 
 bool DB::e_createChat(const quint32 &ID, const QString &name, const QString &avatarName) {
     QSqlQuery query(database);
-    query.prepare("INSERT INTO chat (name, avatar) VALUES (?, ?)");
+    query.prepare("INSERT INTO chat (id, name, avatar) VALUES (?, ?, ?)");
+    query.addBindValue(2);
     query.addBindValue(name);
     query.addBindValue(avatarName);
     if (!query.exec()) {
         return false;
     }
-    query.prepare("SELECT id FROM chat WHERE name = ? AND avatar = ?");
-    query.addBindValue(name);
-    query.addBindValue(avatarName);
-    if (!query.exec()) {
-        return false;
-    }
-    if (query.next()) {
-        quint32 chatId = query.value(0).toUInt();
-        query.prepare("INSERT INTO user_chat (user_id, chat_id) VALUES (?, ?)");
-        query.addBindValue(ID);
-        query.addBindValue(chatId);
-        return query.exec();
-    }
-    return false;
+    query.clear();
+    query.prepare("INSERT INTO user_chat (user_id, chat_id) VALUES (?, ?)");
+    query.addBindValue(ID);
+    query.addBindValue(1);
+    return query.exec();
 }
 
 bool DB::e_joinChat(const quint32 &ID, const quint32 &chat_ID) {
@@ -210,7 +208,8 @@ bool DB::e_acceptFriend(const quint32 &ID) {
 
 bool DB::e_send(const Message &message) {
     QSqlQuery query(database);
-    query.prepare("INSERT INTO message (chat_id, sender_id, content, time) VALUES (?, ?, ?, ?)");
+    query.prepare("INSERT INTO message (id, chat_id, sender_id, content, time) VALUES (?, ?, ?, ?, ?)");
+    query.addBindValue(message.getID());
     query.addBindValue(message.getReceiverID());
     query.addBindValue(message.getSenderID());
     query.addBindValue(message.getContent());
@@ -254,6 +253,16 @@ QList<Message> DB::q_list_filesInChat(const quint32 &chat_ID) {
         messages.append(message);
     }
     return messages;
+}
+
+bool DB::check(const int &id, const int &group) {
+    QSqlQuery query(database);
+    query.prepare("SELECT * FROM user_chat WHERE user_id = ? AND chat_id = ?");
+    query.addBindValue(id);
+    query.addBindValue(group);
+    query.exec();
+    if (query.next())return true;
+    return false;
 }
 
 DB * DB::get_instance() {
