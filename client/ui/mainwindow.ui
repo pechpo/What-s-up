@@ -88,7 +88,7 @@
     <property name="styleSheet">
      <string notr="true">background-color: rgb(255, 255, 255);</string>
     </property>
-    <widget class="QToolButton" name="chatlistButton">
+    <widget class="QToolButton" name="grouplistButton">
      <property name="geometry">
       <rect>
        <x>0</x>

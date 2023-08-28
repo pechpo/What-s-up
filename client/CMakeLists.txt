@@ -38,6 +38,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ui/registerdialog.h ui/registerdialog.cpp ui/registerdialog.ui
         ui/searchnewfriend.h ui/searchnewfriend.cpp ui/searchnewfriend.ui
         ui/grouplist.h ui/grouplist.cpp ui/grouplist.ui
+        ui/addnewfriend.h ui/addnewfriend.cpp ui/addnewfriend.ui
+        ui/startchat.h ui/startchat.cpp ui/startchat.ui
 
 
 

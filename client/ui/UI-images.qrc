@@ -6,5 +6,8 @@
         <file>image/chatList.png</file>
         <file>image/imagetest.png</file>
         <file>image/AddNewFriend.png</file>
+        <file>image/accept.png</file>
+        <file>image/refuse.png</file>
+        <file>image/startChat.png</file>
     </qresource>
 </RCC>
