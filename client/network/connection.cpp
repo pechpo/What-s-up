@@ -24,8 +24,11 @@ void Connection::connectServer(const QString& IP, quint16 port) {
         serverIP = IP;
     }
     connectToHost(QHostAddress(serverIP), serverPort);
-    waitForConnected();
+    bool res = waitForConnected();
     qDebug() << "connection " << serverIP << ":" << serverPort;
+    if (false == res) {
+        qDebug() << "failed.";
+    }
 }
 
 bool Connection::isConnected() {

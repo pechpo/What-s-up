@@ -11,8 +11,8 @@ mainWindow::mainWindow(QWidget *parent) :
     cw = new ChatWindow(this);
     cw->move(250, 50);
     cw->show();
-    for (quint16 i = 0; i < 50; i++)
-        cw->appendText("Hello, world" + QString::number(i));
+    //for (quint16 i = 0; i < 50; i++)
+    //    cw->appendText("Hello, world" + QString::number(i));
 }
 
 mainWindow::~mainWindow()

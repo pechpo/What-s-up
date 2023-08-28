@@ -20,9 +20,12 @@ public:
 
 public slots:
     void slot_r_userInfo(const QJsonObject&);
+    void slot_r_addFriend(const QJsonObject&);
 
 private slots:
     void on_SearchButton_clicked();
+
+    void on_confirmButton_clicked();
 
 private:
     Ui::SearchNewFriend *ui;

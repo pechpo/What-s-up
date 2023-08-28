@@ -17,6 +17,7 @@ SearchNewFriend::SearchNewFriend(QWidget *parent) :
     waiting = 0;
 
     connect(Director::getInstance(), &Director::r_userInfo, this, &SearchNewFriend::slot_r_userInfo);
+    connect(Director::getInstance(), &Director::r_addFriend, this, &SearchNewFriend::slot_r_addFriend);
 }
 
 SearchNewFriend::~SearchNewFriend()
@@ -46,5 +47,23 @@ void SearchNewFriend::slot_r_userInfo(const QJsonObject &obj) {
     }
     userId = obj.value("id").toInt();
     bar->setName(obj.value("username").toString());
+}
+
+
+void SearchNewFriend::on_confirmButton_clicked()
+{
+    if (0 == waiting) {
+        qint64 id = ui->searchLineEdit->text().toInt();
+        QJsonObject msg;
+        msg.insert("type", "e_addFriend");
+        msg.insert("id", QJsonValue(id));
+        if (Director::getInstance()->sendJson(msg))
+            waiting++;
+    }
+}
+
+void SearchNewFriend::slot_r_addFriend(const QJsonObject &obj) {
+    waiting--;
+    close();
 }
 
