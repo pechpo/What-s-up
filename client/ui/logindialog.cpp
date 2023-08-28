@@ -16,6 +16,7 @@ LoginDialog::LoginDialog(QWidget *parent) :
     this->setAttribute(Qt::WA_TranslucentBackground);      //把初始的 dialog 窗口设置为透明的
     ui->setupUi(this);
 
+    mw = nullptr;
     lw = nullptr;
     rd = nullptr;
     waiting = 0;
@@ -27,6 +28,7 @@ LoginDialog::~LoginDialog()
 {
     delete lw;
     delete rd;
+    delete mw;
     delete ui;
 }
 
