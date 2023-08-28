@@ -2,8 +2,11 @@
 
 #include <QApplication>
 #include "server.h"
+#include "db.h"
 
 int main(int argc, char *argv[]) {
+//    DB::get_instance()->e_createChat(1, "", "test");
+
     QApplication app(argc, argv);
 
     // 设置服务器监听的 IP 地址和端口

@@ -1,6 +1,11 @@
 #include "db.h"
 #include <QSqlQuery>
 
+//user id, name, password, avatar, email
+//message id, chat_id, sender_id, content, time
+//chat id, name, avatar
+
+
 DB* DB::db = nullptr;
 
 DB::DB() {
@@ -20,39 +25,47 @@ DB::~DB() {
     if (database.isOpen()) {
         database.close();
     }
+    delete db;
 }
 
-bool DB::ins_usr(const User &user) {
-    QSqlQuery query;
-    query.prepare("insert into UserInfo values(:ID, :Username, :Pwd, :Avatar, :Email)");
-    query.bindValue(":Id", user.getID());
-    query.bindValue(":Username", user.getName());
-    query.bindValue(":pwd", user.getPwd());
-    query.bindValue(":avatar", user.getAvatarName());
-    query.bindValue(":email", user.getEmail());
-    query.exec();
+bool DB::e_register(const User &user) {
+    QSqlQuery query(database);
+    query.prepare("INSERT INTO user (id, name, password, avatar, email) VALUES (?, ?, ?, ?, ?)");
+    query.addBindValue(user.getID());
+    query.addBindValue(user.getName());
+    query.addBindValue(user.getPwd());
+    query.addBindValue(user.getAvatarName());
+    query.addBindValue(user.getEmail());
+    return query.exec();
 }
 
-bool DB::ck_login(const quint32 &ID, const QString &pwd) {
-    QSqlQuery query;
-    query.prepare("SELECT * FROM UserInfo WHERE ID = :ID AND Pwd = :Pwd");
-    query.bindValue(":ID", QVariant(ID));
-    query.bindValue(":Pwd", QVariant(pwd));
+bool DB::q_login(const quint32 &ID, const QString &password) {
+    QSqlQuery query(database);
+    query.prepare("SELECT password FROM user WHERE id = ?");
+    query.addBindValue(ID);
     query.exec();
-
     if (query.next()) {
-        return true;
+        return query.value(0).toString() == password;
     }
-
     return false;
 }
 
-User DB::qry_usr(const quint32 &ID) {
-    QSqlQuery query;
-    query.prepare("SELECT * FROM UserInfo WHERE ID = :ID");
-    query.bindValue(":ID", QVariant(ID));
-    query.exec();
+bool DB::e_editInfo(const User &user) {
+    QSqlQuery query(database);
+    query.prepare("UPDATE user SET name = ?, password = ?, avatar = ?, email = ? WHERE id = ?");
+    query.addBindValue(user.getName());
+    query.addBindValue(user.getPwd());
+    query.addBindValue(user.getAvatarName());
+    query.addBindValue(user.getEmail());
+    query.addBindValue(user.getID());
+    return query.exec();
+}
 
+User DB::q_myInfo(const quint32 &ID) {
+    QSqlQuery query(database);
+    query.prepare("SELECT * FROM user WHERE id = ?");
+    query.addBindValue(ID);
+    query.exec();
     if (query.next()) {
         User user;
         user.setID(query.value(0).toUInt());
@@ -62,313 +75,193 @@ User DB::qry_usr(const quint32 &ID) {
         user.setEmail(query.value(4).toString());
         return user;
     }
+    return User();
 }
 
-bool DB::upd_usr_name(const quint32 &ID, const QString &name) {
-    QSqlQuery query;
-    query.prepare("UPDATE UserInfo SET Username = :Username WHERE ID = :ID");
-    query.bindValue(":ID", QVariant(ID));
-    query.bindValue(":Username", QVariant(name));
+User DB::q_userInfo(const quint32 &ID) {
+    QSqlQuery query(database);
+    query.prepare("SELECT * FROM user WHERE id = ?");
+    query.addBindValue(ID);
     query.exec();
+    if (query.next()) {
+        User user;
+        user.setID(query.value(0).toUInt());
+        user.setName(query.value(1).toString());
+        user.setPwd(query.value(2).toString());
+        user.setAvatarName(query.value(3).toString());
+        user.setEmail(query.value(4).toString());
+        return user;
+    }
+    return {};
 }
 
-bool DB::upd_usr_password(const quint32 &ID, const QString &pwd) {
-    QSqlQuery query;
-    query.prepare("UPDATE UserInfo SET Pwd = :Pwd WHERE ID = :ID");
-    query.bindValue(":ID", QVariant(ID));
-    query.bindValue(":Pwd", QVariant(pwd));
-    query.exec();
-}
-
-bool DB::upd_usr_avatar(const quint32 &ID, const QString &ava) {
-    QSqlQuery query;
-    query.prepare("UPDATE UserInfo SET Avatar = :Avatar WHERE ID = :ID");
-    query.bindValue(":ID", QVariant(ID));
-    query.bindValue(":Avatar", QVariant(ava));
-    query.exec();
-}
-
-bool DB::upd_usr_email(const quint32 &ID, const QString &ema) {
-    QSqlQuery query;
-    query.prepare("UPDATE UserInfo SET Email = :Email WHERE ID = :ID");
-    query.bindValue(":ID", QVariant(ID));
-    query.bindValue(":Email", QVariant(ema));
-    query.exec();
-}
-
-bool DB::del_usr(const quint32 &ID) {
-    QSqlQuery query;
-    query.prepare("DELETE FROM UserInfo WHERE ID = :ID");
-    query.bindValue(":ID", QVariant(ID));
-    query.exec();
-}
-
-bool DB::add_friend(const quint32 &ID1, const quint32 &ID2) {
-    if (ID1 == ID2) {
-//        qDebug << "Can not add self!\n";
+bool DB::e_createChat(const quint32 &ID, const QString &name, const QString &avatarName) {
+    QSqlQuery query(database);
+    query.prepare("INSERT INTO chat (id, name, avatar) VALUES (?, ?, ?)");
+    query.addBindValue(2);
+    query.addBindValue(name);
+    query.addBindValue(avatarName);
+    if (!query.exec()) {
         return false;
     }
-    QSqlQuery query;
-
-    query.prepare("select * from Friendship WHERE ID1 = :ID1, ID2 = :ID2");
-    query.bindValue(":ID1", QVariant(ID1));
-    query.bindValue(":ID2", QVariant(ID2));
-    query.exec();
-
-    if (query.next()) {
-//        qDebug << "Being friends before!\n";
-        return false;
-    }
-
     query.clear();
-    query.prepare("insert into Friendship values(:ID1,:ID2)");
-    query.bindValue(":ID1", QVariant(ID1));
-    query.bindValue(":ID2", QVariant(ID2));
-    query.exec();
-
-    query.clear();
-    query.prepare("insert into Friendship values(:ID1,:ID2)");
-    query.bindValue(":ID1", QVariant(ID2));
-    query.bindValue(":ID2", QVariant(ID1));
-    query.exec();
+    query.prepare("INSERT INTO user_chat (user_id, chat_id) VALUES (?, ?)");
+    query.addBindValue(ID);
+    query.addBindValue(1);
+    return query.exec();
 }
 
-bool DB::del_friend(const quint32 &ID1, const quint32 &ID2) {
-    if (ID1 == ID2) {
-//        qDebug << "Can not del self!\n";
-        return false;
+bool DB::e_joinChat(const quint32 &ID, const quint32 &chat_ID) {
+    QSqlQuery query(database);
+    query.prepare("INSERT INTO user_chat (user_id, chat_id) VALUES (?, ?)");
+    query.addBindValue(ID);
+    query.addBindValue(chat_ID);
+    return query.exec();
+}
+
+bool DB::e_quitChat(const quint32 &ID, const quint32 &chat_ID) {
+    QSqlQuery query(database);
+    query.prepare("DELETE FROM user_chat WHERE user_id = ? AND chat_id = ?");
+    query.addBindValue(ID);
+    query.addBindValue(chat_ID);
+    return query.exec();
+}
+
+bool DB::e_delChat(const quint32 &ID, const quint32 &chat_ID) {
+    QSqlQuery query(database);
+    query.prepare("DELETE FROM chat WHERE id = ?");
+    query.addBindValue(chat_ID);
+    return query.exec();
+}
+
+QList<Group> DB::q_list_myChats(const quint32 &ID) {
+    QSqlQuery query(database);
+    query.prepare("SELECT chat_id FROM user_chat WHERE user_id = ?");
+    query.addBindValue(ID);
+    query.exec();
+    QList<Group> chats;
+    while (query.next()) {
+        Group chat;
+        chat.setID(query.value(0).toUInt());
+        chats.append(chat);
     }
-    QSqlQuery query;
+    return chats;
+}
 
-    query.prepare("select * from Friendship WHERE ID1 = :ID1, ID2 = :ID2");
-    query.bindValue(":ID1", QVariant(ID1));
-    query.bindValue(":ID2", QVariant(ID2));
+QList<User> DB::q_list_usersInChat(const quint32 &chat_ID) {
+    QSqlQuery query(database);
+    query.prepare("SELECT user_id FROM user_chat WHERE chat_id = ?");
+    query.addBindValue(chat_ID);
     query.exec();
-
-    if (!query.next()) {
-//        qDebug << "Not being friends before!\n";
-        return false;
+    QList<User> users;
+    while (query.next()) {
+        User user;
+        user.setID(query.value(0).toUInt());
+        users.append(user);
     }
-
-    query.clear();
-    query.prepare("delete from Friendship where ID1 =:ID1 and ID2 =:ID2");
-    query.bindValue(":ID1", QVariant(ID1));
-    query.bindValue(":ID2", QVariant(ID2));
-    query.exec();
-
-    query.clear();
-    query.prepare("delete from Friendship where ID1 =:ID1 and ID2 =:ID2");
-    query.bindValue(":ID1", QVariant(ID2));
-    query.bindValue(":ID2", QVariant(ID1));
-    query.exec();
+    return users;
 }
 
-
-bool DB::create_group(const Group &group) {
-    QSqlQuery query;
-
-    // 创建一个以 group_ID 为名的表，记录组成员信息
-    query.prepare("CREATE TABLE GroupMembers_" + QString::number(group.getID()) + " (ID INTEGER, is_leader INTEGER)");
-    query.exec();
-
-    // 创建一个以 group_ID 为名的表，记录组内消息
-    query.prepare("CREATE TABLE GroupMessages_" + QString::number(group.getID()) + " (ID INTEGER, message TEXT)");
-    query.exec();
-
-    return true;
+bool DB::e_addFriend(const quint32 &ID) {
+    QSqlQuery query(database);
+    query.prepare("INSERT INTO friend_request (user_id, friend_id) VALUES (?, ?)");
+    query.addBindValue(ID);
+    query.addBindValue(ID);
+    return query.exec();
 }
 
-bool DB::add_group_member(const quint32 &group_ID, const quint32 &ID) {
-    QSqlQuery query;
-
-    // 插入 ID 和 is_leader 到组成员表
-    query.prepare("INSERT INTO GroupMembers_" + QString::number(group_ID) + " VALUES (:ID, :is_leader)");
-    query.bindValue(":ID", QVariant(ID));
-    query.bindValue(":is_leader", QVariant(0));
+QList<User> DB::q_list_friendRequests(const quint32 &ID) {
+    QSqlQuery query(database);
+    query.prepare("SELECT friend_id FROM friend_request WHERE user_id = ?");
+    query.addBindValue(ID);
     query.exec();
-
-    return true;
-}
-
-bool DB::del_group_member(const quint32 &group_ID, const quint32 &ID) {
-    QSqlQuery query;
-
-    // 从组成员表中删除指定 ID 的人
-    query.prepare("DELETE FROM GroupMembers_" + QString::number(group_ID) + " WHERE ID = :ID");
-    query.bindValue(":ID", QVariant(ID));
-    query.exec();
-
-    return true;
-}
-
-bool DB::del_group(const quint32 &group_ID, const quint32 &ID) {
-    QSqlQuery query;
-
-    // 删除组成员表和组消息表
-    query.prepare("DROP TABLE GroupMembers_" + QString::number(group_ID));
-    query.exec();
-
-    query.clear();
-    query.prepare("DROP TABLE GroupMessages_" + QString::number(group_ID));
-    query.exec();
-
-    return true;
-}
-
-bool DB::ins_message(const Message &message) {
-    QSqlQuery query;
-
-    // 插入消息到表
-    query.prepare("INSERT INTO Messages (ID, sender_ID, receiver_ID, content, time) VALUES (:ID, :sender_ID, :receiver_ID, :content, :time)");
-    query.bindValue(":ID", message.getID());
-    query.bindValue(":sender_ID", message.getSenderID());
-    query.bindValue(":receiver_ID", message.getReceiverID());
-    query.bindValue(":content", message.getContent());
-    query.bindValue(":time", message.getTime());
-    query.exec();
-
-    return true;
-}
-
-bool DB::qry_pri(const quint32 &ID, const quint32 &group_ID) {
-    QSqlQuery query;
-
-    // 查询 ID 在 group_ID 中的权限
-    query.prepare("SELECT is_leader FROM GroupMembers_" + QString::number(group_ID) + " WHERE ID = :ID");
-    query.bindValue(":ID", QVariant(ID));
-    query.exec();
-
-    if (query.next()) {
-        return query.value(0).toBool();
+    QList<User> users;
+    while (query.next()) {
+        User user;
+        user.setID(query.value(0).toUInt());
+        users.append(user);
     }
-
-    return false;
+    return users;
 }
 
-bool DB::qry_friend(const quint32 &ID1, const quint32 &ID2) {
-    QSqlQuery query;
-
-    // 查询 ID1 和 ID2 是否为好友
-    query.prepare("SELECT * FROM Friendship WHERE ID1 = :ID1 AND ID2 = :ID2");
-    query.bindValue(":ID1", QVariant(ID1));
-    query.bindValue(":ID2", QVariant(ID2));
+QList<User> DB::q_list_myFriends(const quint32 &ID) {
+    QSqlQuery query(database);
+    query.prepare("SELECT friend_id FROM friend WHERE user_id = ?");
+    query.addBindValue(ID);
     query.exec();
-
-    if (query.next()) {
-        return true;
+    QList<User> users;
+    while (query.next()) {
+        User user;
+        user.setID(query.value(0).toUInt());
+        users.append(user);
     }
-
-    return false;
+    return users;
 }
 
-bool DB::qry_group(const quint32 &group_ID) {
-    QSqlQuery query;
-
-    // 查询 group_ID 是否存在
-    query.prepare("SELECT * FROM GroupInfo WHERE ID = :ID");
-    query.bindValue(":ID", QVariant(group_ID));
-    query.exec();
-
-    if (query.next()) {
-        return true;
-    }
-
-    return false;
+bool DB::e_acceptFriend(const quint32 &ID) {
+    QSqlQuery query(database);
+    query.prepare("INSERT INTO friend (user_id, friend_id) VALUES (?, ?)");
+    query.addBindValue(ID);
+    query.addBindValue(ID);
+    return query.exec();
 }
 
-bool DB::qry_group_member(const quint32 &group_ID, const quint32 &ID) {
-    QSqlQuery query;
-
-    // 查询 ID 是否为 group_ID 的成员
-    query.prepare("SELECT * FROM GroupMembers_" + QString::number(group_ID) + " WHERE ID = :ID");
-    query.bindValue(":ID", QVariant(ID));
-    query.exec();
-
-    if (query.next()) {
-        return true;
-    }
-
-    return false;
+bool DB::e_send(const Message &message) {
+    QSqlQuery query(database);
+    query.prepare("INSERT INTO message (id, chat_id, sender_id, content, time) VALUES (?, ?, ?, ?, ?)");
+    query.addBindValue(message.getID());
+    query.addBindValue(message.getReceiverID());
+    query.addBindValue(message.getSenderID());
+    query.addBindValue(message.getContent());
+    query.addBindValue(message.getTime());
+    return query.exec();
 }
 
-bool DB::qry_message(const quint32 &ID) {
-    QSqlQuery query;
-
-    // 查询消息 ID 是否存在
-    query.prepare("SELECT * FROM Messages WHERE ID = :ID");
-    query.bindValue(":ID", QVariant(ID));
+QList<Message> DB::q_chatHistory(const quint32 &chat_ID, const quint32 &time, const quint32 &count) {
+    QSqlQuery query(database);
+    query.prepare("SELECT * FROM message WHERE chat_id = ? AND time < ? ORDER BY time DESC LIMIT ?");
+    query.addBindValue(chat_ID);
+    query.addBindValue(time);
+    query.addBindValue(count);
     query.exec();
-
-    if (query.next()) {
-        return true;
+    QList<Message> messages;
+    while (query.next()) {
+        Message message;
+        message.setID(query.value(0).toUInt());
+        message.setReceiverID(query.value(1).toUInt());
+        message.setSenderID(query.value(2).toUInt());
+        message.setContent(query.value(3).toString());
+        message.setTime(query.value(4).toString());
+        messages.append(message);
     }
-
-    return false;
+    return messages;
 }
 
-bool DB::qry_message(const quint32 &ID, const quint32 &group_ID) {
-    QSqlQuery query;
-
-    // 查询消息 ID 和 group_ID 是否存在
-    query.prepare("SELECT * FROM GroupMessages_" + QString::number(group_ID) + " WHERE ID = :ID");
-    query.bindValue(":ID", QVariant(ID));
+QList<Message> DB::q_list_filesInChat(const quint32 &chat_ID) {
+    QSqlQuery query(database);
+    query.prepare("SELECT * FROM message WHERE chat_id = ? AND content IS NULL");
+    query.addBindValue(chat_ID);
     query.exec();
-
-    if (query.next()) {
-        return true;
+    QList<Message> messages;
+    while (query.next()) {
+        Message message;
+        message.setID(query.value(0).toUInt());
+        message.setReceiverID(query.value(1).toUInt());
+        message.setSenderID(query.value(2).toUInt());
+        message.setContent(query.value(3).toString());
+        message.setTime(query.value(4).toString());
+        messages.append(message);
     }
-
-    return false;
+    return messages;
 }
 
-bool DB::qry_message(const quint32 &ID, const quint32 &group_ID, const QString &time) {
-    QSqlQuery query;
-
-    // 查询消息 ID 和 group_ID 和 time 是否存在
-    query.prepare("SELECT * FROM GroupMessages_" + QString::number(group_ID) + " WHERE ID = :ID AND time = :time");
-    query.bindValue(":ID", QVariant(ID));
-    query.bindValue(":time", QVariant(time));
+bool DB::check(const int &id, const int &group) {
+    QSqlQuery query(database);
+    query.prepare("SELECT * FROM user_chat WHERE user_id = ? AND chat_id = ?");
+    query.addBindValue(id);
+    query.addBindValue(group);
     query.exec();
-
-    if (query.next()) {
-        return true;
-    }
-
-    return false;
-}
-
-bool DB::qry_message(const quint32 &ID, const quint32 &group_ID, const QString &time, const QString &content) {
-    QSqlQuery query;
-
-    // 查询消息 ID 和 group_ID 和 time 和 content 是否存在
-    query.prepare("SELECT * FROM GroupMessages_" + QString::number(group_ID) + " WHERE ID = :ID AND time = :time AND content = :content");
-    query.bindValue(":ID", QVariant(ID));
-    query.bindValue(":time", QVariant(time));
-    query.bindValue(":content", QVariant(content));
-    query.exec();
-
-    if (query.next()) {
-        return true;
-    }
-
-    return false;
-}
-
-bool DB::qry_message(const quint32 &ID, const quint32 &group_ID, const QString &time, const QString &content, const quint32 &sender_ID) {
-    QSqlQuery query;
-
-    // 查询消息 ID 和 group_ID 和 time 和 content 和 sender_ID 是否存在
-    query.prepare("SELECT * FROM GroupMessages_" + QString::number(group_ID) + " WHERE ID = :ID AND time = :time AND content = :content AND sender_ID = :sender_ID");
-    query.bindValue(":ID", QVariant(ID));
-    query.bindValue(":time", QVariant(time));
-    query.bindValue(":content", QVariant(content));
-    query.bindValue(":sender_ID", QVariant(sender_ID));
-    query.exec();
-
-    if (query.next()) {
-        return true;
-    }
-
+    if (query.next())return true;
     return false;
 }
 

@@ -37,6 +37,8 @@ private:
     int curRemainSize = 0;
 
     void handleReceivedMessage(const QString &message);
+
+    int id = 0;
 };
 
 #endif // WHAT_S_UP_CONNECTION_H

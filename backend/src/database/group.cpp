@@ -1,5 +1,7 @@
 #include "group.h"
 
+int Group::group_id = 0;
+
 quint32 Group::getID() const {
     return ID;
 }

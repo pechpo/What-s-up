@@ -7,7 +7,9 @@
 #include "connection.h"
 #include <QDebug>
 
-Server::Server(const QString& address, quint16 port, QObject* parent)
+Server *Server::sv = nullptr;
+
+Server::Server(const QString &address, quint16 port, QObject *parent)
         : QObject(parent) {
     connect(&tcpServer_, &QTcpServer::newConnection, this, &Server::acceptConnection);
     if (address == "0.0.0.0") {
@@ -24,17 +26,18 @@ Server::Server(const QString& address, quint16 port, QObject* parent)
 
 Server::~Server() {
     // 服务器停止时，关闭所有连接
+    delete sv;
     stop();
 }
 
 void Server::start() {
     // 服务器启动时，可以添加一些额外的配置
-
+    sv = this;
     qDebug() << "Server started with additional configurations.";
 }
 
 void Server::stop() {
-            foreach (Connection* connection, connections_) {
+            foreach (Connection *connection, connections_) {
             delete connection;
         }
     connections_.clear();
@@ -43,7 +46,12 @@ void Server::stop() {
 }
 
 void Server::acceptConnection() {
-    QTcpSocket* socket = tcpServer_.nextPendingConnection();
-    Connection* connection = new Connection(socket, this);
+    QTcpSocket *socket = tcpServer_.nextPendingConnection();
+    Connection *connection = new Connection(socket, this);
     connections_.insert(connection);
+}
+
+
+Server *Server::get_instance() {
+    return sv;
 }
