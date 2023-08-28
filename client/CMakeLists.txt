@@ -34,6 +34,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ui/UI-images.qrc
         ui/mainwindow.h ui/mainwindow.cpp ui/mainwindow.ui
         ui/chatwindow.h ui/chatwindow.cpp ui/chatwindow.ui
+        ui/profilebar.h ui/profilebar.cpp ui/profilebar.ui
 
 
 
