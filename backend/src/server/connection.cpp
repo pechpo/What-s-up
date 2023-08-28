@@ -14,7 +14,7 @@ Connection::Connection(QTcpSocket* socket, QObject* parent)
     socket->setParent(this);  // 设置父对象
     connect(this, &QTcpSocket::readyRead, this, &Connection::receiveMessage);
     qDebug() << "Connection established with:" << this->peerAddress().toString();
-    sendMessage(QJsonObject{{"type", "hello"}, {"message", "Hello, world!"}});
+    sendMessage(QJsonObject({{"type", "q_login"}}));
 }
 
 Connection::~Connection() {
@@ -40,9 +40,12 @@ void Connection::receiveMessage() {
         QJsonParseError err;
         QJsonDocument doc = QJsonDocument::fromJson(jsonBytes, &err);
         if (!doc.isObject()) {
-            // Handle the error
+            qDebug() << "Received invalid JSON object. Error:" << err.errorString();
+            return;
         }
         QJsonObject obj = doc.object();
+        qDebug() << "Received message from client:" << obj;
+        qDebug() << obj;
         Handle *hd = Handle::get_instance();
         auto x = hd->handle(obj);
         curRemainSize = 0;
@@ -51,6 +54,7 @@ void Connection::receiveMessage() {
 }
 
 void Connection::sendMessage(const QJsonObject &obj) {
+    qDebug() << "Sending message to client:" << obj;  // Debug message added
     waitForBytesWritten();
     QJsonDocument doc;
     doc.setObject(obj);
@@ -61,4 +65,5 @@ void Connection::sendMessage(const QJsonObject &obj) {
     out.device()->seek(0);
     out << quint32(outMsg.size() - sizeof(quint32));
     write(outMsg);
+    qDebug() << "Message sent.";
 }

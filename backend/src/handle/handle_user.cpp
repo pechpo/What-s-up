@@ -5,47 +5,47 @@
 // src/handle/handle_user.cpp
 
 #include <QJsonObject>
+#include <QJsonArray>
 #include "handle.h"
 #include "db.h"
 
-QJsonObject Handle::ins_usr(const QJsonObject &obj) {
+QJsonObject Handle::e_register(const QJsonObject &obj) {
     // Extract the necessary fields from obj
     quint32 id = obj["id"].toInt();
-    QString username = obj["username"].toString();
+    QString name = obj["name"].toString();
     QString password = obj["password"].toString();
-    QString email = obj["email"].toString();
     QString avatar = obj["avatar"].toString();
+    QString email = obj["email"].toString();
     DB *db = DB::get_instance();
-    auto flag = db->ins_usr(User(id, username, password, email, avatar));
+    auto flag = db->e_register(User(id, name, password, avatar, email));
 
     QJsonObject response;
     response["type"] = "r_register";
-    response["success"] = flag;
-    return response;
+    response["success"] = flag;  // set to false if insertion fails
+    // Send the response back to client
 }
 
-QJsonObject Handle::ck_login(const QJsonObject &obj) {
+QJsonObject Handle::q_login(const QJsonObject &obj) {
     // Extract the necessary fields from obj
     quint32 id = obj["id"].toInt();
     QString password = obj["password"].toString();
     DB *db = DB::get_instance();
-    auto flag = db->ck_login(id, password);
+    auto flag = db->q_login(id, password);
 
     QJsonObject response;
     response["type"] = "r_login";
-    response["success"] = flag;  // set to false if login fails
+    response["success"] = flag;  // set to false if query fails
     // Send the response back to client
 }
 
-QJsonObject Handle::qry_usr(const QJsonObject &obj) {
+QJsonObject Handle::q_myInfo(const QJsonObject &obj) {
     // Extract the necessary fields from obj
     quint32 id = obj["id"].toInt();
     DB *db = DB::get_instance();
-    auto flag = db->qry_usr(id);
+    auto flag = db->q_myInfo(id);
 
     QJsonObject response;
     response["type"] = "r_myInfo";
-    response["success"] = true;  // set to false if query fails
     response["id"] = QJsonValue((int) flag.getID());
     response["username"] = flag.getName();
     response["password"] = flag.getPwd();
@@ -54,66 +54,134 @@ QJsonObject Handle::qry_usr(const QJsonObject &obj) {
     // Send the response back to client
 }
 
-QJsonObject Handle::upd_usr_name(const QJsonObject &obj) {
+QJsonObject Handle::q_userInfo(const QJsonObject &json) {
     // Extract the necessary fields from obj
-    quint32 id = obj["id"].toInt();
-    QString username = obj["username"].toString();
+    quint32 id = json["id"].toInt();
     DB *db = DB::get_instance();
-    auto flag = db->upd_usr_name(id, username);
+    auto flag = db->q_userInfo(id);
 
     QJsonObject response;
-    response["type"] = "r_upd_usr_name";
-    response["success"] = flag;  // set to false if update fails
+    response["type"] = "r_userInfo";
+    response["id"] = QJsonValue((int) flag.getID());
+    response["username"] = flag.getName();
+    response["password"] = flag.getPwd();
+    response["email"] = flag.getEmail();
+    response["avatar"] = flag.getAvatarName();
     // Send the response back to client
 }
 
-QJsonObject Handle::upd_usr_password(const QJsonObject &obj) {
+QJsonObject Handle::e_editInfo(const QJsonObject &obj) {
     // Extract the necessary fields from obj
     quint32 id = obj["id"].toInt();
+    QString name = obj["name"].toString();
     QString password = obj["password"].toString();
-    DB *db = DB::get_instance();
-    auto flag = db->upd_usr_password(id, password);
-
-    QJsonObject response;
-    response["type"] = "r_upd_usr_password";
-    response["success"] = flag;  // set to false if update fails
-    // Send the response back to client
-}
-
-QJsonObject Handle::upd_usr_avatar(const QJsonObject &obj) {
-    // Extract the necessary fields from obj
-    quint32 id = obj["id"].toInt();
     QString avatar = obj["avatar"].toString();
-    DB *db = DB::get_instance();
-    auto flag = db->upd_usr_avatar(id, avatar);
-
-    QJsonObject response;
-    response["type"] = "r_upd_usr_avatar";
-    response["success"] = flag;  // set to false if update fails
-    // Send the response back to client
-}
-
-QJsonObject Handle::upd_usr_email(const QJsonObject &obj) {
-    // Extract the necessary fields from obj
-    quint32 id = obj["id"].toInt();
     QString email = obj["email"].toString();
     DB *db = DB::get_instance();
-    auto flag = db->upd_usr_email(id, email);
+    auto flag = db->e_editInfo(User(id, name, password, avatar, email));
 
     QJsonObject response;
-    response["type"] = "r_upd_usr_email";
-    response["success"] = flag;  // set to false if update fails
+    response["type"] = "r_editInfo";
+    response["success"] = flag;  // set to false if insertion fails
+    if(!flag){
+        response["error"] = "Edit failed";
+    }
     // Send the response back to client
 }
 
-QJsonObject Handle::del_usr(const QJsonObject &obj) {
+QJsonObject Handle::q_list_myChats(const QJsonObject &obj) {
     // Extract the necessary fields from obj
     quint32 id = obj["id"].toInt();
     DB *db = DB::get_instance();
-    auto flag = db->del_usr(id);
+    auto flag = db->q_list_myChats(id);
 
     QJsonObject response;
-    response["type"] = "r_del_usr";
-    response["success"] = flag;  // set to false if deletion fails
+    response["type"] = "r_list_myChats";
+    QJsonArray chats;
+    for (const auto &x: flag) {
+        QJsonObject chat;
+        chat["chatId"] = (int)x.getID();
+        chat["name"] = x.getName();
+        chat["avatar"] = x.getAvatarName();
+        chats.append(chat);
+    }
+    response["chats"] = chats;
+
+    // Send the response back to client
+}
+
+QJsonObject Handle::e_addFriend(const QJsonObject &obj) {
+    // Extract the necessary fields from obj
+    quint32 id = obj["id"].toInt();
+    DB *db = DB::get_instance();
+    auto flag = db->e_addFriend(id);
+
+    QJsonObject response;
+    response["type"] = "r_addFriend";
+    response["success"] = flag;  // set to false if insertion fails
+    if(!flag){
+        response["error"] = "Add failed";
+    }
+    // Send the response back to client
+}
+
+QJsonObject Handle::q_list_friendRequests(const QJsonObject &obj) {
+    // Extract the necessary fields from obj
+    quint32 id = obj["id"].toInt();
+    DB *db = DB::get_instance();
+    auto flag = db->q_list_friendRequests(id);
+
+    QJsonObject response;
+    response["type"] = "r_list_friendRequests";
+    QJsonArray users;
+    for (const auto &x: flag) {
+        QJsonObject user;
+        user["id"] = (int)x.getID();
+        user["username"] = x.getName();
+        user["password"] = x.getPwd();
+        user["email"] = x.getEmail();
+        user["avatar"] = x.getAvatarName();
+        users.append(user);
+    }
+    response["users"] = users;
+
+    // Send the response back to client
+}
+
+QJsonObject Handle::q_list_myFriends(const QJsonObject &obj) {
+    // Extract the necessary fields from obj
+    quint32 id = obj["id"].toInt();
+    DB *db = DB::get_instance();
+    auto flag = db->q_list_myFriends(id);
+
+    QJsonObject response;
+    response["type"] = "r_list_myFriends";
+    QJsonArray users;
+    for (const auto &x: flag) {
+        QJsonObject user;
+        user["id"] = (int)x.getID();
+        user["username"] = x.getName();
+        user["password"] = x.getPwd();
+        user["email"] = x.getEmail();
+        user["avatar"] = x.getAvatarName();
+        users.append(user);
+    }
+    response["users"] = users;
+
+    // Send the response back to client
+}
+
+QJsonObject Handle::e_acceptFriend(const QJsonObject &obj) {
+    // Extract the necessary fields from obj
+    quint32 id = obj["id"].toInt();
+    DB *db = DB::get_instance();
+    auto flag = db->e_acceptFriend(id);
+
+    QJsonObject response;
+    response["type"] = "r_acceptFriend";
+    response["success"] = flag;  // set to false if insertion fails
+    if(!flag){
+        response["error"] = "Accept failed";
+    }
     // Send the response back to client
 }

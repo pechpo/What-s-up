@@ -16,53 +16,41 @@ public :
 
     ~DB();
 
-    bool ins_usr(const User& user);//新增用户
+    bool e_register(const User &user);
 
-    bool ck_login(const quint32 &ID, const QString &pwd);//检查登录
+    bool q_login(const quint32 &ID, const QString &password);
 
-    User qry_usr(const quint32 &ID);//查询用户
+    bool e_editInfo(const User &user);
 
-    bool upd_usr_name(const quint32 &ID, const QString &name);//修改用户名
+    User q_myInfo(const quint32 &ID);
 
-    bool upd_usr_password(const quint32 &ID, const QString &pwd);//修改用户密码
+    User q_userInfo(const quint32 &ID);
 
-    bool upd_usr_avatar(const quint32 &ID, const QString &ava);//修改用户头像
+    bool e_send(const Message &message);
 
-    bool upd_usr_email(const quint32 &ID, const QString &ema);//修改用户邮箱
+    QList<Message> q_chatHistory(const quint32 &chat_ID, const quint32 &time, const quint32 &count);
 
-    bool del_usr(const quint32 &ID);//删除用户
+    QList<Group> q_list_myChats(const quint32 &ID);
 
-    bool add_friend(const quint32 &ID1, const quint32 &ID2);//添加好友
+    QList<User> q_list_usersInChat(const quint32 &chat_ID);
 
-    bool del_friend(const quint32 &ID1, const quint32 &ID2);//删除好友
+    bool e_addFriend(const quint32 &ID);
 
-    bool create_group(const Group &gruop);//创建群组
+    QList<User> q_list_friendRequests(const quint32 &ID);
 
-    bool add_group_member(const quint32 &group_ID, const quint32 &ID);//添加群成员
+    QList<User> q_list_myFriends(const quint32 &ID);
 
-    bool del_group_member(const quint32 &group_ID, const quint32 &ID);//踢除人出群组
-    //群主解散群聊和自己退出群聊有区别，非管理员只能把自己踢除群聊，管理员可以解散群聊
-    bool del_group(const quint32 &group_ID, const quint32 &ID);//解散群组
+    bool e_acceptFriend(const quint32 &ID);
 
-    bool ins_message(const Message &message);//插入消息
+    bool e_createChat(const quint32 &ID, const QString &name, const QString &avatar);
 
-    bool qry_pri(const quint32 &ID, const quint32 &group_ID);//查询是否为群主
+    bool e_joinChat(const quint32 &ID, const quint32 &chat_ID);
 
-    bool qry_friend(const quint32 &ID1, const quint32 &ID2);//查询是否为好友
+    bool e_quitChat(const quint32 &ID, const quint32 &chat_ID);
 
-    bool qry_group(const quint32 &group_ID);//查询群组是否存在
+    bool e_delChat(const quint32 &ID, const quint32 &chat_ID);
 
-    bool qry_group_member(const quint32 &group_ID, const quint32 &ID);//查询是否为群成员
-
-    bool qry_message(const quint32 &ID);//查询消息是否存在
-
-    bool qry_message(const quint32 &ID, const quint32 &group_ID);//查询消息是否存在
-
-    bool qry_message(const quint32 &ID, const quint32 &group_ID, const QString &time);//查询消息是否存在
-
-    bool qry_message(const quint32 &ID, const quint32 &group_ID, const QString &time, const QString &content);//查询消息是否存在
-
-    bool qry_message(const quint32 &ID, const quint32 &group_ID, const QString &time, const QString &content, const quint32 &sender_ID);//查询消息是否存在
+    QList<Message> q_list_filesInChat(const quint32 &chat_ID);
 
     static DB * get_instance();
 

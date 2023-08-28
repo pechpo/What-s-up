@@ -20,7 +20,19 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ef533f2d-2b4d-4d58-ad16-579cff76de6c" name="更改" comment="" />
+    <list default="true" id="ef533f2d-2b4d-4d58-ad16-579cff76de6c" name="更改" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/QtSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/QtSettings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/database/db.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/db.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handle/handle.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/handle/handle.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handle/handle_group.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/handle/handle_group.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handle/handle_message.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/handle/handle_message.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handle/handle_user.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/handle/handle_user.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/include/connection.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/include/connection.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/include/db.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/include/db.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/include/handle.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/include/handle.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/connection.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/connection.cpp" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -30,6 +42,9 @@
     <option name="formatViaClangd" value="false" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="ProjectApplicationVersion">
     <option name="ide" value="CLion" />
     <option name="majorVersion" value="2023" />
@@ -52,7 +67,8 @@
     "WebServerToolWindowFactoryState": "false",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "last_opened_file_path": "/home/zixin",
+    "git-widget-placeholder": "dev",
+    "last_opened_file_path": "/Users/foreverlasting/git/What-s-up/backend",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -67,9 +83,9 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration name="backend" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="backend" TARGET_NAME="backend" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="backend" RUN_TARGET_NAME="backend">
@@ -96,6 +112,7 @@
       <workItem from="1693122829814" duration="4950000" />
       <workItem from="1693128263611" duration="726000" />
       <workItem from="1693129234028" duration="7599000" />
+      <workItem from="1693215075142" duration="12000" />
     </task>
     <servers />
   </component>
