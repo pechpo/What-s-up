@@ -30,7 +30,6 @@ LoginDialog::~LoginDialog()
     delete ui;
 }
 
-
 void LoginDialog::on_loginBtn_clicked()
 {
     if (0 == waiting) {
@@ -84,7 +83,7 @@ void LoginDialog::on_minimizeButton_clicked()
 void LoginDialog::on_ConnectionButton_clicked()
 {
     if (nullptr == lw) {
-        lw = new LoginWindow(this);
+        lw = new LoginWindow();
         lw->show();
     }
     else {

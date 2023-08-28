@@ -1,5 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "director/director.h"
+#include <QJsonValue>
 
 mainWindow::mainWindow(QWidget *parent) :
     QWidget(parent),
@@ -10,12 +12,14 @@ mainWindow::mainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     snf = nullptr;
+    this->setState(Friend);
+
+    connect(Director::getInstance(), &Director::r_list_myFriends, this, &mainWindow::slot_r_list_myFriends);
+    connect(Director::getInstance(), &Director::r_list_friendRequests, this, &mainWindow::slot_r_list_friendRequests);
 
     cw = new ChatWindow(this);
     cw->move(250, 50);
     cw->show();
-    //for (quint16 i = 0; i < 50; i++)
-    //    cw->appendText("Hello, world" + QString::number(i));
 }
 
 mainWindow::~mainWindow()
@@ -48,3 +52,28 @@ void mainWindow::on_addnewfriendButton_clicked()
     }
 }
 
+void mainWindow::setState(enum mainWindow::State tarState) {
+    curState = tarState;
+    if (curState == Friend) {
+        QJsonObject msg1;
+        msg1.insert("type", "q_list_myFriends");
+        Director::getInstance()->sendJson(msg1);
+        QJsonObject msg2;
+        msg2.insert("type", "q_list_friendRequests");
+        Director::getInstance()->sendJson(msg2);
+    }
+    else if (curState == Chat) {
+
+    }
+    else {
+
+    }
+}
+
+void mainWindow::slot_r_list_myFriends(const QJsonObject &obj) {
+
+}
+
+void mainWindow::slot_r_list_friendRequests(const QJsonObject &obj) {
+
+}

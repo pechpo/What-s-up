@@ -18,6 +18,9 @@ public slots:
     void sendMessage(const QJsonObject&); // use JSON
     bool isConnected();
 
+private slots:
+    void disconnectFlag();
+
 private:
     QString serverIP;
     quint16 serverPort;

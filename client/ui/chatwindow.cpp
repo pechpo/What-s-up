@@ -130,7 +130,7 @@ void ChatWindow::on_sendButton_clicked()
 {
     if (0 == waiting) {
         QJsonObject content;
-        content.insert("isPicture", false);
+        //content.insert("isPicture", false);
         content.insert("content", ui->inputEdit->toPlainText());
         QJsonObject msg;
         msg.insert("type", "e_send");
@@ -144,5 +144,11 @@ void ChatWindow::on_sendButton_clicked()
 
 void ChatWindow::slot_r_send(const QJsonObject &obj) {
     waiting--;
-    ui->inputEdit->setPlainText("");
+    if (!obj.value("success").isBool()) {
+        return ;
+    }
+    if (true == obj.value("success").toBool()) {
+        ui->inputEdit->setPlainText("");
+        return ;
+    }
 }

@@ -4,6 +4,7 @@
 #include "ui/chatwindow.h"
 #include "ui/profilebar.h"
 #include "ui/searchnewfriend.h"
+#include "director/director.h"
 
 #include <QApplication>
 #include <QLocale>
@@ -22,6 +23,7 @@ int main(int argc, char *argv[])
             break;
         }
     }
+    //Director::getInstance()->toMainWindow();
     //ChatWindow cw;
     //mainWindow mw;
     //ProfileBar pb;
