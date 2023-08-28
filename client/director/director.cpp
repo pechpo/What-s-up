@@ -82,8 +82,6 @@ void Director::sendPureMessage(const QString &text) {
     if (conn->isConnected()) {
         // do not send plain text
         QJsonObject obj;
-        obj.insert("text", text);
-        qDebug() << "send: " << obj;
         conn->sendMessage(obj);
     }
 }

@@ -7,6 +7,8 @@
 #include <QJsonObject>
 #include "handle.h"
 
+Handle* Handle::hd = nullptr;
+
 Handle::Handle() {
     handlemap["e_register"] = [this](auto &&PH1) { ins_usr(std::forward<decltype(PH1)>(PH1)); };
     handlemap["e_login"] = [this](auto &&PH1) { ck_login(std::forward<decltype(PH1)>(PH1)); };
@@ -28,4 +30,15 @@ Handle::Handle() {
     handlemap["qry_group"] = [this](auto &&PH1) { qry_group(std::forward<decltype(PH1)>(PH1)); };
     handlemap["qry_group_member"] = [this](auto &&PH1) { qry_group_member(std::forward<decltype(PH1)>(PH1)); };
     handlemap["qry_message"] = [this](auto &&PH1) { qry_message(std::forward<decltype(PH1)>(PH1)); };
+}
+
+void Handle::handle(const QJsonObject &json) {
+    handlemap[json["type"].toString()](json);
+}
+
+Handle * Handle::get_instance() {
+    if (hd == nullptr) {
+        hd = new Handle;
+    }
+    return hd;
 }

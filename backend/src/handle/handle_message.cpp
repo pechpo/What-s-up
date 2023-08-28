@@ -8,7 +8,7 @@
 #include "handle.h"
 #include "db.h"
 
-void Handle::ins_message(const QJsonObject &obj) {
+QJsonObject Handle::ins_message(const QJsonObject &obj) {
     // Extract the necessary fields from obj
     quint32 id = obj["id"].toInt();
     quint32 group_id = obj["group_id"].toInt();
@@ -24,7 +24,7 @@ void Handle::ins_message(const QJsonObject &obj) {
     // Send the response back to client
 }
 
-void Handle::qry_message(const QJsonObject &obj) {
+QJsonObject Handle::qry_message(const QJsonObject &obj) {
     // Extract the necessary fields from obj
     quint32 id = obj["id"].toInt();
     quint32 group_id = obj["group_id"].toInt();

@@ -6,6 +6,7 @@
 #include "connection.h"
 #include <QDataStream>
 #include <QDebug>
+#include "handle.h"
 
 Connection::Connection(QTcpSocket* socket, QObject* parent)
         : QTcpSocket(parent) {
@@ -42,12 +43,10 @@ void Connection::receiveMessage() {
             // Handle the error
         }
         QJsonObject obj = doc.object();
-        for (const auto &x: obj) {
-            qDebug() << x;
-        }
-        qDebug() << '\n';
+        Handle *hd = Handle::get_instance();
+        auto x = hd->handle(obj);
         curRemainSize = 0;
-        sendMessage(obj);
+        sendMessage(x);
     }
 }
 
