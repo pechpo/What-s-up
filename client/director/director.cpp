@@ -26,6 +26,7 @@ Director::Director(QObject *parent)
     recvEmitter.insert("a_newChat", &Director::a_newChat);
 
     mainUI = nullptr;
+    logged = false;
 }
 
 void Director::act(const QJsonObject &obj) {
@@ -41,6 +42,11 @@ void Director::act(const QJsonObject &obj) {
             emit receiveTestString(obj.value("message").toString());
         }
         return ;
+    }
+    if ("r_login" == index) {
+        if (true == obj.value("success").toBool()) {
+            logged = true;
+        }
     }
     Emitter e = recvEmitter.value(index);
     emit (this->*e)(obj);
@@ -108,6 +114,9 @@ void Director::sendPureMessage(const QString &text) {
 }
 
 void Director::toMainWindow() {
+    if (!logged) {
+        return;
+    }
     if (nullptr == mainUI) {
         mainUI = new mainWindow();
         mainUI->show();

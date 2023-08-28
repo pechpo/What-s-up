@@ -69,7 +69,11 @@ void ChatWindow::slot_a_newMessage(const QJsonObject &obj) {
     if (!isThisChat(obj)) {
         return ;
     }
-    Message cur = jsonToMessage(obj);
+    if (!obj.value("message").isObject()) {
+        return ;
+    }
+    QJsonObject msg = obj.value("message").toObject();
+    Message cur = jsonToMessage(msg);
     history.append(cur);
     appendText(messageToString(cur));
 }
@@ -84,10 +88,10 @@ ChatWindow::Message ChatWindow::jsonToMessage(const QJsonObject &obj) {
         setIncompleteMessage(cur);
         return cur;
     }
-    if (!obj.value("senderName").isString()) {
+    /*if (!obj.value("senderName").isString()) {
         setIncompleteMessage(cur);
         return cur;
-    }
+    }*/
     if (!obj.value("content").isString()) {
         setIncompleteMessage(cur);
         return cur;
@@ -99,7 +103,8 @@ ChatWindow::Message ChatWindow::jsonToMessage(const QJsonObject &obj) {
     else {
         cur.isSystem = false;
         cur.senderId = obj.value("senderId").toInt();
-        cur.senderName = obj.value("senderName").toString();
+        //cur.senderName = obj.value("senderName").toString();
+        cur.senderName = "Carol" + QString::number(cur.senderId);
     }
     cur.content = obj.value("content").toString();
     return cur;
@@ -130,7 +135,7 @@ void ChatWindow::on_sendButton_clicked()
 {
     if (0 == waiting) {
         QJsonObject content;
-        content.insert("isPicture", false);
+        //content.insert("isPicture", false);
         content.insert("content", ui->inputEdit->toPlainText());
         QJsonObject msg;
         msg.insert("type", "e_send");
@@ -144,5 +149,11 @@ void ChatWindow::on_sendButton_clicked()
 
 void ChatWindow::slot_r_send(const QJsonObject &obj) {
     waiting--;
-    ui->inputEdit->setPlainText("");
+    if (!obj.value("success").isBool()) {
+        return ;
+    }
+    if (true == obj.value("success").toBool()) {
+        ui->inputEdit->setPlainText("");
+        return ;
+    }
 }

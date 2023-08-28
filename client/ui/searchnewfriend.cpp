@@ -22,6 +22,7 @@ SearchNewFriend::SearchNewFriend(QWidget *parent) :
 
 SearchNewFriend::~SearchNewFriend()
 {
+    delete bar;
     delete ui;
 }
 

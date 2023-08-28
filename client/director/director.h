@@ -53,6 +53,7 @@ private:
     static Connection* getConnection();
     QHash<QString, Emitter> recvEmitter;
     mainWindow *mainUI;
+    bool logged;
 };
 
 #endif // DIRECTOR_H
