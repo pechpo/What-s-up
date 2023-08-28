@@ -113,8 +113,11 @@
        <height>61</height>
       </rect>
      </property>
+     <property name="styleSheet">
+      <string notr="true">border-image: url(:/images/image/AddNewFriend.png);</string>
+     </property>
      <property name="text">
-      <string>+</string>
+      <string/>
      </property>
     </widget>
    </widget>
