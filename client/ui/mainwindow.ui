@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>680</width>
+    <width>876</width>
     <height>640</height>
    </rect>
   </property>
@@ -21,7 +21,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>711</width>
+     <width>881</width>
      <height>641</height>
     </rect>
    </property>
@@ -31,7 +31,7 @@
    <widget class="QToolButton" name="minimizeButton">
     <property name="geometry">
      <rect>
-      <x>600</x>
+      <x>800</x>
       <y>0</y>
       <width>40</width>
       <height>40</height>
@@ -44,7 +44,7 @@
    <widget class="QToolButton" name="closeButton">
     <property name="geometry">
      <rect>
-      <x>640</x>
+      <x>840</x>
       <y>0</y>
       <width>40</width>
       <height>40</height>
@@ -63,7 +63,7 @@
    <widget class="QToolButton" name="settingButton">
     <property name="geometry">
      <rect>
-      <x>560</x>
+      <x>760</x>
       <y>0</y>
       <width>41</width>
       <height>41</height>
@@ -80,9 +80,9 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>40</y>
-      <width>141</width>
-      <height>601</height>
+      <y>50</y>
+      <width>221</width>
+      <height>591</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -92,9 +92,9 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>560</y>
-       <width>41</width>
-       <height>41</height>
+       <y>540</y>
+       <width>51</width>
+       <height>51</height>
       </rect>
      </property>
      <property name="styleSheet">
@@ -104,6 +104,19 @@
       <string/>
      </property>
     </widget>
+   </widget>
+   <widget class="Line" name="line">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>40</y>
+      <width>881</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
    </widget>
   </widget>
  </widget>

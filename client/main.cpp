@@ -3,6 +3,7 @@
 #include "ui/mainwindow.h"
 #include "ui/chatwindow.h"
 #include "ui/profilebar.h"
+#include "ui/searchnewfriend.h"
 
 #include <QApplication>
 #include <QLocale>
@@ -22,10 +23,14 @@ int main(int argc, char *argv[])
         }
     }
     //ChatWindow cw;
+    mainWindow mw;
     ProfileBar pb;
     LoginDialog d;
+    SearchNewFriend snf;
     d.show();
+    mw.show();
     pb.show();
+    snf.show();
     //cw.show();
     return a.exec();
 }
