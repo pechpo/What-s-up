@@ -119,7 +119,7 @@ bool DB::add_friend(const quint32 &ID1, const quint32 &ID2) {
 //        qDebug << "Being friends before!\n";
         return false;
     }
-    
+
     query.clear();
     query.prepare("insert into Friendship values(:ID1,:ID2)");
     query.bindValue(":ID1", QVariant(ID1));
@@ -149,7 +149,7 @@ bool DB::del_friend(const quint32 &ID1, const quint32 &ID2) {
 //        qDebug << "Not being friends before!\n";
         return false;
     }
-    
+
     query.clear();
     query.prepare("delete from Friendship where ID1 =:ID1 and ID2 =:ID2");
     query.bindValue(":ID1", QVariant(ID1));

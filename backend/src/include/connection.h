@@ -40,4 +40,3 @@ private:
 };
 
 #endif // WHAT_S_UP_CONNECTION_H
-

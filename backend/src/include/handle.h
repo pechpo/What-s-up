@@ -53,7 +53,7 @@ public:
 
     QJsonObject handle(const QJsonObject &json);
 
-    std::map<QString, std::function<void(const QJsonObject &)>> handlemap;
+    std::map<QString, std::function<QJsonObject(const QJsonObject &)>> handlemap;
 
     static Handle * get_instance();
 
