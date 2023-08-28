@@ -24,7 +24,7 @@ public:
     void sendPureMessage(const QString&); // debug
 
 signals:
-    // void receiveTestString(const QString&);
+    void receiveTestString(const QString&);
     void r_register(const QJsonObject&);
     void r_login(const QJsonObject&);
     void r_myInfo(const QJsonObject&);

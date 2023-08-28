@@ -7,7 +7,7 @@ ChatWindow::ChatWindow(QWidget *parent) :
     ui(new Ui::ChatWindow)
 {
     ui->setupUi(this);
-
+    ui->MsgEdit->setReadOnly(true);
     chatId = 0;
 
     connect(Director::getInstance(), &Director::r_chatHistory, this, &ChatWindow::slot_r_chatHistory);
@@ -28,7 +28,11 @@ bool ChatWindow::isThisChat(const QJsonObject &obj) {
 }
 
 void ChatWindow::switchChat(qint64 id) {
+    if (id == chatId) {
+        return ;
+    }
     chatId = id;
+    ui->MsgEdit->setText("");
     QJsonObject msg;
     msg.insert("type", "q_chatHistory");
     msg.insert("chatId", QJsonValue(chatId));
@@ -40,7 +44,7 @@ void ChatWindow::slot_r_chatHistory(const QJsonObject &obj) {
     if (!isThisChat(obj)) {
         return ;
     }
-    // insert to proper place in history
+    //aaif (this.)
     updateText();
 }
 
