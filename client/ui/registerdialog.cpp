@@ -19,20 +19,20 @@ RegisterDialog::~RegisterDialog()
 }
 
 void RegisterDialog::on_confirmBtn_clicked() {
-    if (waiting == 0) {
+    if (0 == waiting) {
         if (ui->confirmPwdLineEdit->text() != ui->pwdLineEdit->text()) {
             // todo
             return ;
         }
         QJsonObject msg;
-        msg.insert("type", "e_register");
         qint64 id = ui->usrLineEdit->text().toInt();
         QString pwd = Director::getInstance()->Hash(ui->pwdLineEdit->text());
+        msg.insert("type", "e_register");
         msg.insert("id", QJsonValue(id));
         msg.insert("password", QJsonValue(pwd));
-        msg.insert("username", QJsonValue("Alice"));
-        msg.insert("email", QJsonValue("Alice@bit.edu.cn"));
-        msg.insert("avatar", QJsonValue("114514"));
+        msg.insert("username", QJsonValue("Bob" + QString::number(id)));
+        msg.insert("email", QJsonValue(QString::number(id) + "@bit.edu.cn"));
+        msg.insert("avatar", QJsonValue("hereIsAvatar" + QString::number(id)));
         if (Director::getInstance()->sendJson(msg))
             waiting++;
     }
@@ -44,6 +44,10 @@ void RegisterDialog::slot_r_register(const QJsonObject &msg) {
         return ;
     }
     if (true == msg.value("success").toBool()) {
+        QJsonObject msg;
+        msg.insert("type", "e_joinChat");
+        msg.insert("chatId", 1);
+        Director::getInstance()->sendJson(msg);
         accept();
         close();
     }

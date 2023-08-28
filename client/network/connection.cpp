@@ -10,6 +10,7 @@ Connection::Connection() {
     connected = false;
     curRemainSize = 0;
     connect(this, SIGNAL(readyRead()),this, SLOT(receiveMessage()));
+    connect(this, SIGNAL(disconnected()),this, SLOT(disconnectFlag()));
 }
 Connection::~Connection() {
     disconnectFromHost();
@@ -24,8 +25,11 @@ void Connection::connectServer(const QString& IP, quint16 port) {
         serverIP = IP;
     }
     connectToHost(QHostAddress(serverIP), serverPort);
-    waitForConnected();
+    bool res = waitForConnected(1000);
     qDebug() << "connection " << serverIP << ":" << serverPort;
+    if (false == res) {
+        qDebug() << "failed.";
+    }
 }
 
 bool Connection::isConnected() {
@@ -33,6 +37,10 @@ bool Connection::isConnected() {
         connected = waitForConnected(1000);
     }
     return connected;
+}
+
+void Connection::disconnectFlag() {
+    connected = false;
 }
 
 // todo: 不确定这种读取方式是否合适

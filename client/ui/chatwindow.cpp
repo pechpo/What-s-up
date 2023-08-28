@@ -2,16 +2,22 @@
 #include "ui_chatwindow.h"
 #include "director/director.h"
 
+#include <QJsonArray>
+
 ChatWindow::ChatWindow(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ChatWindow)
 {
     ui->setupUi(this);
-
+    ui->MsgEdit->setReadOnly(true);
     chatId = 0;
+    waiting = 0;
 
     connect(Director::getInstance(), &Director::r_chatHistory, this, &ChatWindow::slot_r_chatHistory);
     connect(Director::getInstance(), &Director::a_newMessage, this, &ChatWindow::slot_a_newMessage);
+    connect(Director::getInstance(), &Director::r_send, this, &ChatWindow::slot_r_send);
+
+    switchChat(1);
 }
 
 ChatWindow::~ChatWindow()
@@ -28,7 +34,11 @@ bool ChatWindow::isThisChat(const QJsonObject &obj) {
 }
 
 void ChatWindow::switchChat(qint64 id) {
+    if (id == chatId) {
+        return ;
+    }
     chatId = id;
+    ui->MsgEdit->setText("");
     QJsonObject msg;
     msg.insert("type", "q_chatHistory");
     msg.insert("chatId", QJsonValue(chatId));
@@ -40,7 +50,18 @@ void ChatWindow::slot_r_chatHistory(const QJsonObject &obj) {
     if (!isThisChat(obj)) {
         return ;
     }
-    // insert to proper place in history
+    if (!obj.value("chatHistory").isArray()) {
+        return ;
+    }
+    // todo: insert chatHistory message to proper place
+    // current: reset
+    QJsonArray recvHistory = obj.value("chatHistory").toArray();
+    quint32 recvSize = recvHistory.size();
+    history.clear();
+    history.resize(recvSize);
+    for (int i = 0; i < recvSize; i++) {
+        history[i] = jsonToMessage(recvHistory.at(i).toObject());
+    }
     updateText();
 }
 
@@ -48,13 +69,91 @@ void ChatWindow::slot_a_newMessage(const QJsonObject &obj) {
     if (!isThisChat(obj)) {
         return ;
     }
-    // insert to history
+    if (!obj.value("message").isObject()) {
+        return ;
+    }
+    QJsonObject msg = obj.value("message").toObject();
+    Message cur = jsonToMessage(msg);
+    history.append(cur);
+    appendText(messageToString(cur));
+}
+
+ChatWindow::Message ChatWindow::jsonToMessage(const QJsonObject &obj) {
+    Message cur;
+    auto setIncompleteMessage = [] (Message &cur) -> void {
+        cur.isSystem = true;
+        cur.content = "Incomplete Message.";
+    };
+    if (!obj.value("senderId").isDouble()) {
+        setIncompleteMessage(cur);
+        return cur;
+    }
+    /*if (!obj.value("senderName").isString()) {
+        setIncompleteMessage(cur);
+        return cur;
+    }*/
+    if (!obj.value("content").isString()) {
+        setIncompleteMessage(cur);
+        return cur;
+    }
+    //
+    if (obj.value("isSystem").isString()) {
+        cur.isSystem = true;
+    }
+    else {
+        cur.isSystem = false;
+        cur.senderId = obj.value("senderId").toInt();
+        //cur.senderName = obj.value("senderName").toString();
+        cur.senderName = "Carol" + QString::number(cur.senderId);
+    }
+    cur.content = obj.value("content").toString();
+    return cur;
+}
+
+QString ChatWindow::messageToString(const Message &cur) {
+    QString one;
+    one.append(cur.senderName);
+    one.append(" (" + QString::number(cur.senderId) + ")\n");
+    one.append(cur.content + "\n");
+    return one;
 }
 
 void ChatWindow::updateText() {
     // QVector<Message> history -> lineEdit->text()
+    QString all;
+    for (quint32 i = 0; i < history.size(); i++) {
+        all.append(messageToString(history[i]));
+    }
+    ui->MsgEdit->setPlainText(all);
 }
 
 void ChatWindow::appendText(const QString &text) {
     ui->MsgEdit->insertPlainText(text + "\n");
+}
+
+void ChatWindow::on_sendButton_clicked()
+{
+    if (0 == waiting) {
+        QJsonObject content;
+        //content.insert("isPicture", false);
+        content.insert("content", ui->inputEdit->toPlainText());
+        QJsonObject msg;
+        msg.insert("type", "e_send");
+        msg.insert("chatId", QJsonValue(chatId));
+        msg.insert("message", content);
+        if (Director::getInstance()->sendJson(msg)) {
+            waiting++;
+        }
+    }
+}
+
+void ChatWindow::slot_r_send(const QJsonObject &obj) {
+    waiting--;
+    if (!obj.value("success").isBool()) {
+        return ;
+    }
+    if (true == obj.value("success").toBool()) {
+        ui->inputEdit->setPlainText("");
+        return ;
+    }
 }
