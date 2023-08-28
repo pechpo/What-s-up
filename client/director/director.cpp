@@ -83,8 +83,10 @@ bool Director::isConnected() {
 }
 
 QString Director::Hash(const QString &o) {
+    QString f = o;
+    f.append("h?^1~gf;:/vfz");
     QByteArray str;
-    str = QCryptographicHash::hash(o.toUtf8(), QCryptographicHash::Md5);
+    str = QCryptographicHash::hash(f.toUtf8(), QCryptographicHash::Md5);
     QString res(str.toHex());
     return res;
 }
