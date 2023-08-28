@@ -11,6 +11,10 @@ RegisterDialog::RegisterDialog(QWidget *parent) :
     waiting = 0;
 
     connect(Director::getInstance(), &Director::r_register, this, &RegisterDialog::slot_r_register);
+
+    ui->closeButton->setVisible(false);
+    ui->minimizeButton->setVisible(false);
+
 }
 
 RegisterDialog::~RegisterDialog()
