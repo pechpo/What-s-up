@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QJsonObject>
+#include <QMouseEvent>
 #include "loginwindow.h"
 #include "registerdialog.h"
 
@@ -17,6 +18,7 @@ class LoginDialog : public QDialog
 public:
     explicit LoginDialog(QWidget *parent = nullptr);
     ~LoginDialog();
+
 
 signals:
 

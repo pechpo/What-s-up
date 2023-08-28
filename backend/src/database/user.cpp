@@ -1,5 +1,7 @@
 #include "user.h"
 
+int User::user_id = 0;
+
 quint32 User::getID() const {
     return ID;
 }

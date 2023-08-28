@@ -51,7 +51,6 @@ target_link_libraries(backend
         Qt::Widgets
         Qt::Network
         Qt::Sql
-        sqlite3
 )
 
 include_directories(${PROJECT_SOURCE_DIR}/src/include)
