@@ -6,11 +6,15 @@ LoginWindow::LoginWindow(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::LoginWindow)
 {
-    this->setWindowFlags(Qt::FramelessWindowHint | Qt::Dialog);
-    this->setAttribute(Qt::WA_TranslucentBackground);      //把初始的 dialog 窗口设置为透明的
+//    this->setWindowFlags(Qt::FramelessWindowHint | Qt::Dialog);
+//    this->setAttribute(Qt::WA_TranslucentBackground);      //把初始的 dialog 窗口设置为透明的
     this->setAttribute(Qt::WA_QuitOnClose, false);
     ui->setupUi(this);
     connect(Director::getInstance(), &Director::receiveTestString, this, &LoginWindow::on_receiveTestString);
+
+    ui->closeButton->setVisible(false);
+    ui->minimizeButton->setVisible(false);
+
 }
 
 LoginWindow::~LoginWindow()

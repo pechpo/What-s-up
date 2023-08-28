@@ -12,9 +12,13 @@ LoginDialog::LoginDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::LoginDialog)
 {
-    this->setWindowFlags(Qt::FramelessWindowHint | Qt::Dialog);
-    this->setAttribute(Qt::WA_TranslucentBackground);      //把初始的 dialog 窗口设置为透明的
+//    this->setWindowFlags(Qt::FramelessWindowHint | Qt::Dialog);
+//    this->setAttribute(Qt::WA_TranslucentBackground);      //把初始的 dialog 窗口设置为透明的
+    this->installEventFilter(this);
     ui->setupUi(this);
+
+    ui->closeButton->setVisible(false);
+    ui->minimizeButton->setVisible(false);
 
     lw = nullptr;
     rd = nullptr;

@@ -8,8 +8,8 @@ mainWindow::mainWindow(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::mainWindow)
 {
-    this->setWindowFlags(Qt::FramelessWindowHint | Qt::Widget);
-    this->setAttribute(Qt::WA_TranslucentBackground);      //把初始的 dialog 窗口设置为透明的
+//    this->setWindowFlags(Qt::FramelessWindowHint | Qt::Widget);
+//    this->setAttribute(Qt::WA_TranslucentBackground);      //把初始的 dialog 窗口设置为透明的
     ui->setupUi(this);
 
     snf = nullptr;
@@ -22,6 +22,16 @@ mainWindow::mainWindow(QWidget *parent) :
     cw = new ChatWindow(this);
     cw->move(250, 50);
     cw->show();
+<<<<<<< HEAD
+
+    ui->closeButton->setVisible(false);
+    ui->minimizeButton->setVisible(false);
+
+
+    //for (quint16 i = 0; i < 50; i++)
+    //    cw->appendText("Hello, world" + QString::number(i));
+=======
+>>>>>>> f2fad2ed3f43a73d64dcb8ffc0f37102e8c6b5f9
 }
 
 mainWindow::~mainWindow()
