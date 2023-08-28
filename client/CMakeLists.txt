@@ -22,60 +22,33 @@ set(PROJECT_SOURCES
         ${TS_FILES}
 )
 
-if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    qt_add_executable(client
-        MANUAL_FINALIZATION
-        ${PROJECT_SOURCES}
-        director/director.h director/director.cpp
-        network/connection.h network/connection.cpp
-        ui/loginwindow.h ui/loginwindow.cpp
-        ui/loginwindow.h ui/loginwindow.cpp ui/loginwindow.ui
-        ui/logindialog.h ui/logindialog.cpp ui/logindialog.ui
-        ui/UI-images.qrc
-        ui/mainwindow.h ui/mainwindow.cpp ui/mainwindow.ui
-        ui/chatwindow.h ui/chatwindow.cpp ui/chatwindow.ui
-        ui/profilebar.h ui/profilebar.cpp ui/profilebar.ui
-        ui/registerdialog.h ui/registerdialog.cpp ui/registerdialog.ui
+qt_add_executable(client
+    MANUAL_FINALIZATION
+    ${PROJECT_SOURCES}
+    director/director.h director/director.cpp
+    network/connection.h network/connection.cpp
+    ui/loginwindow.h ui/loginwindow.cpp
+    ui/loginwindow.h ui/loginwindow.cpp ui/loginwindow.ui
+    ui/logindialog.h ui/logindialog.cpp ui/logindialog.ui
+    ui/UI-images.qrc
+    ui/mainwindow.h ui/mainwindow.cpp ui/mainwindow.ui
+    ui/chatwindow.h ui/chatwindow.cpp ui/chatwindow.ui
+    ui/profilebar.h ui/profilebar.cpp ui/profilebar.ui
+    ui/registerdialog.h ui/registerdialog.cpp ui/registerdialog.ui
 
 
 
 
 
 
-    )
-# Define target properties for Android with Qt 6 as:
-#    set_property(TARGET client APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
-#                 ${CMAKE_CURRENT_SOURCE_DIR}/android)
-# For more information, see https://doc.qt.io/qt-6/qt-add-executable.html#target-creation
+)
 
-    qt_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
-else()
-    if(ANDROID)
-        add_library(client SHARED
-            ${PROJECT_SOURCES}
-        )
-# Define properties for Android with Qt 5 after find_package() calls as:
-#    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
-    else()
-        add_executable(client
-            ${PROJECT_SOURCES}
-        )
-    endif()
-
-    qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
-endif()
 
 target_link_libraries(client PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 target_link_libraries(client PRIVATE Qt6::Network)
 
 include_directories(./)
 
-# Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
-# If you are developing for iOS or macOS you should consider setting an
-# explicit, fixed bundle identifier manually though.
-if(${QT_VERSION} VERSION_LESS 6.1.0)
-  set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.client)
-endif()
 set_target_properties(client PROPERTIES
     ${BUNDLE_ID_OPTION}
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
