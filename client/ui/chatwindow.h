@@ -21,8 +21,8 @@ public:
     void appendText(const QString&);
 
 public slots:
-    void on_r_chatHistory(const QJsonObject&);
-    void on_a_newMessage(const QJsonObject&);
+    void slot_r_chatHistory(const QJsonObject&);
+    void slot_a_newMessage(const QJsonObject&);
 
 private:
     Ui::ChatWindow *ui;

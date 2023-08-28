@@ -18,7 +18,7 @@ LoginDialog::LoginDialog(QWidget *parent) :
 
     waiting = 0;
 
-    connect(Director::getInstance(), &Director::r_login, this, &LoginDialog::on_r_login);
+    connect(Director::getInstance(), &Director::r_login, this, &LoginDialog::slot_r_login);
 }
 
 LoginDialog::~LoginDialog()
@@ -33,8 +33,7 @@ void LoginDialog::on_loginBtn_clicked()
         QJsonObject msg;
         msg.insert("type", "q_login");
         qint64 id = ui->usrLineEdit->text().toInt();
-        QString pwd = ui->pwdLineEdit->text();
-        // todo: md5
+        QString pwd = Director::getInstance()->Hash(ui->pwdLineEdit->text());
         msg.insert("id", QJsonValue(id));
         msg.insert("password", QJsonValue(pwd));
         if (Director::getInstance()->sendJson(msg))
@@ -42,7 +41,7 @@ void LoginDialog::on_loginBtn_clicked()
     }
 }
 
-void LoginDialog::on_r_login(const QJsonObject &msg) {
+void LoginDialog::slot_r_login(const QJsonObject &msg) {
     waiting--;
     if (!msg.value("success").isBool()) {
         return ;

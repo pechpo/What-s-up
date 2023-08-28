@@ -51,7 +51,7 @@ background-color: rgb(197, 238, 241);</string>
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QPushButton" name="loginBtn">
+   <widget class="QPushButton" name="confirmBtn">
     <property name="geometry">
      <rect>
       <x>230</x>

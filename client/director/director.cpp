@@ -1,5 +1,6 @@
 #include "director.h"
 
+#include <QCryptographicHash>
 #include <QDebug>
 
 Director::Director(QObject *parent)
@@ -66,6 +67,13 @@ void Director::connectServer(const QString &IP, quint16 port) {
 
 bool Director::isConnected() {
     return getConnection()->isConnected();
+}
+
+QString Director::Hash(const QString &o) {
+    QByteArray str;
+    str = QCryptographicHash::hash(o.toUtf8(), QCryptographicHash::Md5);
+    QString res(str.toHex());
+    return res;
 }
 
 bool Director::sendJson(const QJsonObject &obj) {

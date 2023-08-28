@@ -10,9 +10,9 @@ ChatWindow::ChatWindow(QWidget *parent) :
 
     chatId = 0;
 
-    connect(Director::getInstance(), &Director::r_chatHistory, this, &ChatWindow::on_r_chatHistory);
-    connect(Director::getInstance(), &Director::a_newMessage, this, &ChatWindow::on_a_newMessage);
-    }
+    connect(Director::getInstance(), &Director::r_chatHistory, this, &ChatWindow::slot_r_chatHistory);
+    connect(Director::getInstance(), &Director::a_newMessage, this, &ChatWindow::slot_a_newMessage);
+}
 
 ChatWindow::~ChatWindow()
 {
@@ -36,21 +36,22 @@ void ChatWindow::switchChat(qint64 id) {
     Director::getInstance()->sendJson(msg);
 }
 
-void ChatWindow::on_r_chatHistory(const QJsonObject &obj) {
+void ChatWindow::slot_r_chatHistory(const QJsonObject &obj) {
     if (!isThisChat(obj)) {
         return ;
     }
     // insert to proper place in history
+    updateText();
 }
 
-void ChatWindow::on_a_newMessage(const QJsonObject &obj) {
+void ChatWindow::slot_a_newMessage(const QJsonObject &obj) {
     if (!isThisChat(obj)) {
         return ;
     }
-
+    // insert to history
 }
 
-void updateText() {
+void ChatWindow::updateText() {
     // QVector<Message> history -> lineEdit->text()
 }
 

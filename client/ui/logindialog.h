@@ -22,7 +22,7 @@ public:
 signals:
 
 public slots:
-    void on_r_login(const QJsonObject&);
+    void slot_r_login(const QJsonObject&);
 
 private slots:
 
