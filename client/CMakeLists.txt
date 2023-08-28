@@ -35,6 +35,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ui/mainwindow.h ui/mainwindow.cpp ui/mainwindow.ui
         ui/chatwindow.h ui/chatwindow.cpp ui/chatwindow.ui
         ui/profilebar.h ui/profilebar.cpp ui/profilebar.ui
+        ui/registerdialog.h ui/registerdialog.cpp ui/registerdialog.ui
 
 
 

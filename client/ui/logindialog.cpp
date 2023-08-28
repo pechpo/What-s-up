@@ -84,3 +84,10 @@ void LoginDialog::on_ConnectionButton_clicked()
     lw = new LoginWindow;
     lw->show();
 }
+
+void LoginDialog::on_regBtn_clicked()
+{
+    rd = new RegisterDialog();
+    rd->show();
+}
+
