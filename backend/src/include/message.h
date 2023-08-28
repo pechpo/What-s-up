@@ -1,37 +1,50 @@
 //
-// Created by zixin on 23-8-23.
+// Created by zixin on 23-8-25.
 //
 
-#ifndef WHAT_S_UP_MESSAGE_H
-#define WHAT_S_UP_MESSAGE_H
+#ifndef DATABASE_MESSAGE_H
+#define DATABASE_MESSAGE_H
 
-#pragma once
-#include "db_connection.h"
-#include <string>
-#include <vector>
-#include <tuple>
-#include <chrono>
+#include "QString"
 
-struct Message {
-    std::string sender;
-    std::string receiver;
-    std::string content;
-    std::chrono::system_clock::time_point timestamp;
-};
-
-class MessageDB {
+class Message {
 public:
-    MessageDB(DBConnection& connection); // 构造函数，接收数据库连接
+    Message();
 
-    // 保存新消息到数据库
-    bool saveMessage(const std::string& groupId, const std::string& sender, const std::string& content);
+    Message(const quint32 &new_ID, const quint32 &new_sender_ID, const quint32 &new_receiver_ID, const QString &new_content,
+            const QString &new_time);
 
-    // 从数据库获取历史消息
-    std::vector<std::tuple<std::string, std::string, std::string>> getMessages(const std::string& groupId);
+    ~Message();
 
-private:
-    sqlite3 *connection_; // 数据库连接引用
+    quint32 getID() const;
+
+    quint32 getSenderID() const;
+
+    quint32 getReceiverID() const;
+
+    QString getContent() const;
+
+    QString getTime() const;
+
+    void setID(const quint32 &new_ID);
+
+    void setSenderID(const quint32 &new_sender_ID);
+
+    void setReceiverID(const quint32 &new_receiver_ID);
+
+    void setContent(const QString &new_content);
+
+    void setTime(const QString &new_time);
+
+    quint32 ID;
+
+    quint32 sender_ID;
+
+    quint32 receiver_ID;
+
+    QString content;
+
+    QString time;
 };
 
-#endif //WHAT_S_UP_MESSAGE_H
-
+#endif //DATABASE_MESSAGE_H

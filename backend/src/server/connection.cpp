@@ -4,82 +4,61 @@
 // src/server/connection.cpp
 
 #include "connection.h"
-#include <boost/bind.hpp>
-#include <cstring>
+#include <QDataStream>
+#include <QDebug>
+#include "handle.h"
 
-Connection::Connection(boost::asio::io_context& io_context)
-        : socket_(io_context), body_length_(0) {
+Connection::Connection(QTcpSocket* socket, QObject* parent)
+        : QTcpSocket(parent) {
+    setSocketDescriptor(socket->socketDescriptor());
+    socket->setParent(this);  // 设置父对象
+    connect(this, &QTcpSocket::readyRead, this, &Connection::receiveMessage);
+    qDebug() << "Connection established with:" << this->peerAddress().toString();
+    sendMessage(QJsonObject{{"type", "hello"}, {"message", "Hello, world!"}});
 }
 
 Connection::~Connection() {
-    stop();
+    delete socket_;
 }
 
-void Connection::start() {
-    readHeader();
-}
-
-void Connection::stop() {
-    socket_.close();
-}
-
-void Connection::send(const std::string& message) {
-    bool write_in_progress = !write_messages_.empty();
-    write_messages_.push(message);
-    if (!write_in_progress) {
-        write();
-    }
-}
-
-void Connection::set_message_handler(std::function<void(const std::string&)> handler) {
-    message_handler_ = handler;
-}
-
-boost::asio::ip::tcp::socket& Connection::socket() {
-    return socket_;
-}
-
-void Connection::readHeader() {
-    boost::asio::async_read(socket_,
-                            boost::asio::buffer(read_data_, header_length),
-                            boost::bind(&Connection::readBody, this));
-}
-
-void Connection::readBody() {
-    body_length_ = std::atoi(read_data_);
-    boost::asio::async_read(socket_,
-                            boost::asio::buffer(read_data_ + header_length, body_length_),
-                            boost::bind(&Connection::handle_read, this, boost::asio::placeholders::error));
-}
-
-void Connection::write() {
-    std::string message = write_messages_.front();
-    write_messages_.pop();
-    std::sprintf(write_data_, "%4d", message.size());
-    std::memcpy(write_data_ + header_length, message.c_str(), message.size());
-    boost::asio::async_write(socket_,
-                             boost::asio::buffer(write_data_, header_length + message.size()),
-                             boost::bind(&Connection::handle_write, this, boost::asio::placeholders::error));
-}
-
-void Connection::handle_read(const boost::system::error_code& error) {
-    if (!error) {
-        std::string message(read_data_ + header_length, body_length_);
-        if (message_handler_) {
-            message_handler_(message); // 调用回调处理消息
+void Connection::receiveMessage() {
+    while (bytesAvailable() > 0) {
+        QDataStream in(this);
+        in.setVersion(QDataStream::Qt_6_5);
+        if (0 == curRemainSize) {
+            if (bytesAvailable() >= sizeof(quint32)) {
+                in >> curRemainSize;
+            } else {
+                return;
+            }
         }
-        readHeader(); // 继续读取下一个消息
-    } else {
-        stop();
+        if (bytesAvailable() < curRemainSize) {
+            return; // wait to read full message
+        }
+        QByteArray jsonBytes;
+        in >> jsonBytes;
+        QJsonParseError err;
+        QJsonDocument doc = QJsonDocument::fromJson(jsonBytes, &err);
+        if (!doc.isObject()) {
+            // Handle the error
+        }
+        QJsonObject obj = doc.object();
+        Handle *hd = Handle::get_instance();
+        auto x = hd->handle(obj);
+        curRemainSize = 0;
+        sendMessage(x);
     }
 }
 
-void Connection::handle_write(const boost::system::error_code& error) {
-    if (!error) {
-        if (!write_messages_.empty()) {
-            write(); // 继续发送下一个消息
-        }
-    } else {
-        stop();
-    }
+void Connection::sendMessage(const QJsonObject &obj) {
+    waitForBytesWritten();
+    QJsonDocument doc;
+    doc.setObject(obj);
+    QByteArray outMsg;
+    QDataStream out(&outMsg, QIODevice::WriteOnly);
+    out.setVersion(QDataStream::Qt_6_5);
+    out << quint32(0) << doc.toJson();
+    out.device()->seek(0);
+    out << quint32(outMsg.size() - sizeof(quint32));
+    write(outMsg);
 }

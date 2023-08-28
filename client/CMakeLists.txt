@@ -12,7 +12,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets LinguistTools)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets LinguistTools)
 find_package(Qt6 COMPONENTS Network REQUIRED)
-
 set(TS_FILES client_zh_CN.ts)
 
 set(PROJECT_SOURCES
@@ -31,6 +30,18 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         network/connection.h network/connection.cpp
         ui/loginwindow.h ui/loginwindow.cpp
         ui/loginwindow.h ui/loginwindow.cpp ui/loginwindow.ui
+        ui/logindialog.h ui/logindialog.cpp ui/logindialog.ui
+        ui/UI-images.qrc
+        ui/mainwindow.h ui/mainwindow.cpp ui/mainwindow.ui
+        ui/chatwindow.h ui/chatwindow.cpp ui/chatwindow.ui
+        ui/profilebar.h ui/profilebar.cpp ui/profilebar.ui
+        ui/registerdialog.h ui/registerdialog.cpp ui/registerdialog.ui
+
+
+
+
+
+
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET client APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
@@ -55,7 +66,9 @@ else()
 endif()
 
 target_link_libraries(client PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
-target_link_libraries(client PRIVATE Qt${QT_VERSION_MAJOR}::Network)
+target_link_libraries(client PRIVATE Qt6::Network)
+
+include_directories(./)
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an

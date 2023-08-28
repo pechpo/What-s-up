@@ -2,19 +2,54 @@
 #define DIRECTOR_H
 
 #include <QObject>
+#include <QJsonObject>
+#include <QMap>
+
+#include "network/connection.h"
 
 class Director : public QObject
 {
     Q_OBJECT
+
 public:
+    typedef void(Director::*Emitter)(const QJsonObject&);
     explicit Director(QObject *parent = nullptr);
-    static Director* getInstance();
     ~Director();
+    static Director* getInstance();
+    void act(const QJsonObject&); // deal with received JSON message
+    void connectServer(const QString& , quint16);
+    bool isConnected();
+    QString Hash(const QString&);
+    bool sendJson(const QJsonObject&);
+    void sendPureMessage(const QString&); // debug
+
 signals:
+    // void receiveTestString(const QString&);
+    void r_register(const QJsonObject&);
+    void r_login(const QJsonObject&);
+    void r_myInfo(const QJsonObject&);
+    void r_userInfo(const QJsonObject&);
+    void r_editInfo(const QJsonObject&);
+    void r_list_myChats(const QJsonObject&);
+    void r_chatHistory(const QJsonObject&);
+    void r_send(const QJsonObject&);
+    void r_list_usersInChat(const QJsonObject&);
+    void r_addFriend(const QJsonObject&);
+    void r_list_friendRequests(const QJsonObject&);
+    void r_list_myFriends(const QJsonObject&);
+    void r_acceptFriend(const QJsonObject&);
+    void r_createChat(const QJsonObject&);
+    void r_joinChat(const QJsonObject&);
+    void r_list_filesInChat(const QJsonObject&);
+    void a_newMessage(const QJsonObject&);
+    void a_newFriendRequest(const QJsonObject&);
+    void a_newChat(const QJsonObject&);
 
 private:
     static Director* self;
-
+    static Connection* conn;
+    static Connection* getConnection();
+    QHash<QString, Emitter> recvEmitter;
 };
 
 #endif // DIRECTOR_H

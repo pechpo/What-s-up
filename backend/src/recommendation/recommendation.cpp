@@ -1,35 +1,78 @@
 //
 // Created by zixin on 23-8-23.
 //
+
 // src/recommendation/recommendation.cpp
+
 #include "recommendation.h"
 #include "clustering.h"
-#include <algorithm>
+#include <unordered_map>
+#include <vector>
 
-Recommendation::Recommendation(UserDB& user_db) : user_db_(user_db) {
+Recommendation::Recommendation() {
+
 }
 
-std::vector<std::string> Recommendation::recommendFriends(const std::string& username) {
-    // 获取所有用户的标签
-    std::unordered_map<std::string, std::vector<std::string>> users = user_db_.getAllUserTags();
-
-    // 执行聚类
-    KMeans kmeans(5); // 例如分为5个聚类
+std::vector<quint32> Recommendation::recommendFriends(const quint32& userId) {
+    std::unordered_map<quint32, std::vector<int>> users;  // Replace with actual data
+    KMeans kmeans(5);  // Assuming 5 clusters
     auto clusters = kmeans.run(users);
 
-    // 找到与当前用户在同一聚类中的其他用户
-    std::vector<std::string> recommendedFriends;
+    // Logic to recommend friends based on clustering result
+    std::vector<quint32> recommended_friends;
     for (const auto& cluster : clusters) {
-        for (const auto& [user, _] : cluster) {
-            if (user != username) {
-                recommendedFriends.push_back(user);
+        for (const auto& [uid, _] : cluster) {
+            if (uid == userId) {
+                for (const auto& [other_uid, _] : cluster) {
+                    if (other_uid != userId) {
+                        recommended_friends.push_back(other_uid);
+                    }
+                }
+                break;
             }
         }
     }
 
-    // 排除已经是好友的用户
-    std::sort(recommendedFriends.begin(), recommendedFriends.end());
-    recommendedFriends.erase(std::unique(recommendedFriends.begin(), recommendedFriends.end()), recommendedFriends.end());
+    return recommended_friends;
+}
 
-    return recommendedFriends; // 返回推荐的好友列表
+std::vector<quint32> Recommendation::recommendGroups(const quint32& userId) {
+    std::unordered_map<quint32, std::vector<int>> groups;  // Replace with actual data
+    KMeans kmeans(5);  // Assuming 5 clusters
+    auto clusters = kmeans.run(groups);
+
+    // Logic to recommend groups based on clustering result
+    std::vector<quint32> recommended_groups;
+    for (const auto& cluster : clusters) {
+        for (const auto& [gid, _] : cluster) {
+            recommended_groups.push_back(gid);
+        }
+    }
+
+    return recommended_groups;
+}
+
+std::vector<quint32> Recommendation::getFriends(const quint32& userId) {
+    // Fetch the friend list of the user from the database (placeholder logic)
+    return {1, 2, 3};  // Example friend IDs
+}
+
+std::vector<quint32> Recommendation::getGroups(const quint32& userId) {
+    // Fetch the group list of the user from the database (placeholder logic)
+    return {101, 102, 103};  // Example group IDs
+}
+
+std::vector<int> Recommendation::getTags(const quint32& userId) {
+    // Fetch the tags of the user from the database (placeholder logic)
+    return {0, 1, 0, 1};  // Example tags
+}
+
+std::vector<int> Recommendation::getFriendsTags(const quint32& userId) {
+    // Fetch the tags of the friends of the user from the database (placeholder logic)
+    return {1, 0, 1, 0};  // Example tags
+}
+
+std::vector<int> Recommendation::getGroupsTags(const quint32& userId) {
+    // Fetch the tags of the groups of the user from the database (placeholder logic)
+    return {1, 1, 0, 0};  // Example tags
 }

@@ -2,15 +2,27 @@
 #define CONNECTION_H
 
 #include <QTcpSocket>
+#include <QJsonObject>
 
-class connection : public QTcpSocket
+class Connection : public QTcpSocket
 {
+    Q_OBJECT
+
 public:
-    connection();
+    Connection();
+    ~Connection();
+    void connectServer(const QString &IP = "", quint16 port = 0);
 
 public slots:
-    void readMessage();
+    void receiveMessage();
+    void sendMessage(const QJsonObject&); // use JSON
+    bool isConnected();
 
+private:
+    QString serverIP;
+    quint16 serverPort;
+    bool connected;
+    quint32 curRemainSize;
 };
 
 #endif // CONNECTION_H

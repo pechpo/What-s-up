@@ -1,34 +1,48 @@
 //
-// Created by zixin on 23-8-23.
+// Created by zixin on 23-8-25.
 //
 
-#ifndef WHAT_S_UP_USER_H
-#define WHAT_S_UP_USER_H
-#pragma once
-#include "db_connection.h"
-#include <string>
-#include <unordered_map>
-#include <vector>
+#ifndef DATABASE_USER_H
+#define DATABASE_USER_H
 
-class UserDB {
+#include "QString"
+class User {
 public:
-    UserDB(DBConnection& connection); // 构造函数，接收数据库连接
+    User();
 
-    // 添加新用户到数据库
-    bool addUser(const std::string& username, const std::string& password);
+    User(const quint32 &new_ID, const QString &new_name, const QString &new_pwd, const QString &new_ava, const QString &new_ema);
 
-    // 验证数据库中的用户凭证
-    bool validateUser(const std::string& username, const std::string& password);
+    ~User();
 
-    // 在数据库中更新用户信息
-    bool updateUser(const std::string& username, const std::string& key, const std::string& value);
+    quint32 getID() const;
 
-    // 从数据库获取所有用户的标签（例如兴趣或爱好）
-    std::unordered_map<std::string, std::vector<std::string>> getAllUserTags();
+    QString getName() const;
 
-private:
-    sqlite3 *connection_; // 数据库连接引用
+    QString getPwd() const;
+
+    QString getAvatarName() const;
+
+    QString getEmail() const;
+
+    void setID(const quint32 &new_ID);
+
+    void setName(const QString &new_name);
+
+    void setPwd(const QString &new_pwd);
+
+    void setAvatarName(const QString &new_ava);
+
+    void setEmail(const QString &new_ema);
+
+    quint32 ID;
+
+    QString name;
+
+    QString pwd;
+
+    QString ava;
+
+    QString ema;
 };
 
-#endif //WHAT_S_UP_USER_H
-
+#endif //DATABASE_USER_H
