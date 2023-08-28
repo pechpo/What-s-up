@@ -8,7 +8,7 @@
 #include "handle.h"
 #include "db.h"
 
-void Handle::qry_friend(const QJsonObject &obj) {
+QJsonObject Handle::qry_friend(const QJsonObject &obj) {
     // Extract the necessary fields from obj
     quint32 id1 = obj["id1"].toInt();
     quint32 id2 = obj["id2"].toInt();
@@ -21,7 +21,7 @@ void Handle::qry_friend(const QJsonObject &obj) {
     // Send the response back to client
 }
 
-void Handle::add_friend(const QJsonObject &obj) {
+QJsonObject Handle::add_friend(const QJsonObject &obj) {
     // Extract the necessary fields from obj
     quint32 id1 = obj["id1"].toInt();
     quint32 id2 = obj["id2"].toInt();
@@ -34,7 +34,7 @@ void Handle::add_friend(const QJsonObject &obj) {
     // Send the response back to client
 }
 
-void Handle::del_friend(const QJsonObject &obj) {
+QJsonObject Handle::del_friend(const QJsonObject &obj) {
     // Extract the necessary fields from obj
     quint32 id1 = obj["id1"].toInt();
     quint32 id2 = obj["id2"].toInt();
@@ -47,7 +47,7 @@ void Handle::del_friend(const QJsonObject &obj) {
     // Send the response back to client
 }
 
-void Handle::create_group(const QJsonObject &obj) {
+QJsonObject Handle::create_group(const QJsonObject &obj) {
     // Extract the necessary fields from obj
     quint32 id = obj["id"].toInt();
     QString name = obj["name"].toString();
@@ -61,7 +61,7 @@ void Handle::create_group(const QJsonObject &obj) {
     // Send the response back to client
 }
 
-void Handle::add_group_member(const QJsonObject &obj) {
+QJsonObject Handle::add_group_member(const QJsonObject &obj) {
     // Extract the necessary fields from obj
     quint32 group_id = obj["group_id"].toInt();
     quint32 id = obj["id"].toInt();
@@ -74,7 +74,7 @@ void Handle::add_group_member(const QJsonObject &obj) {
     // Send the response back to client
 }
 
-void Handle::del_group_member(const QJsonObject &obj) {
+QJsonObject Handle::del_group_member(const QJsonObject &obj) {
     // Extract the necessary fields from obj
     quint32 group_id = obj["group_id"].toInt();
     quint32 id = obj["id"].toInt();
@@ -87,7 +87,7 @@ void Handle::del_group_member(const QJsonObject &obj) {
     // Send the response back to client
 }
 
-void Handle::del_group(const QJsonObject &obj) {
+QJsonObject Handle::del_group(const QJsonObject &obj) {
     // Extract the necessary fields from obj
     quint32 group_id = obj["group_id"].toInt();
     quint32 id = obj["id"].toInt();
@@ -100,7 +100,7 @@ void Handle::del_group(const QJsonObject &obj) {
     // Send the response back to client
 }
 
-void Handle::qry_pri(const QJsonObject &obj) {
+QJsonObject Handle::qry_pri(const QJsonObject &obj) {
     // Extract the necessary fields from obj
     quint32 id = obj["id"].toInt();
     quint32 group_id = obj["group_id"].toInt();
@@ -113,7 +113,7 @@ void Handle::qry_pri(const QJsonObject &obj) {
     // Send the response back to client
 }
 
-void Handle::qry_group(const QJsonObject &obj) {
+QJsonObject Handle::qry_group(const QJsonObject &obj) {
     // Extract the necessary fields from obj
     quint32 group_id = obj["group_id"].toInt();
     DB *db = DB::get_instance();
@@ -125,7 +125,7 @@ void Handle::qry_group(const QJsonObject &obj) {
     // Send the response back to client
 }
 
-void Handle::qry_group_member(const QJsonObject &obj) {
+QJsonObject Handle::qry_group_member(const QJsonObject &obj) {
     // Extract the necessary fields from obj
     quint32 group_id = obj["group_id"].toInt();
     quint32 id = obj["id"].toInt();

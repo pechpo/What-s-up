@@ -72,4 +72,4 @@ private:
 
     QSqlDatabase database;
 };
-#endif // MAINWINDOW_H
+#endif // DB_H

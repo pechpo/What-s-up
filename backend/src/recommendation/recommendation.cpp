@@ -1,6 +1,7 @@
 //
 // Created by zixin on 23-8-23.
 //
+
 // src/recommendation/recommendation.cpp
 
 #include "recommendation.h"
@@ -8,7 +9,9 @@
 #include <unordered_map>
 #include <vector>
 
-Recommendation::Recommendation() {}
+Recommendation::Recommendation() {
+
+}
 
 std::vector<quint32> Recommendation::recommendFriends(const quint32& userId) {
     std::unordered_map<quint32, std::vector<int>> users;  // Replace with actual data
