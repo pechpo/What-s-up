@@ -230,6 +230,16 @@ image: url(:/images/image/no.png);</string>
    </widget>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>ConnectionButton</tabstop>
+  <tabstop>usrLineEdit</tabstop>
+  <tabstop>pwdLineEdit</tabstop>
+  <tabstop>loginBtn</tabstop>
+  <tabstop>regBtn</tabstop>
+  <tabstop>checkBox</tabstop>
+  <tabstop>minimizeButton</tabstop>
+  <tabstop>closeButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
