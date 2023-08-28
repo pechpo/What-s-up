@@ -2,6 +2,7 @@
 #define LOGINDIALOG_H
 
 #include <QDialog>
+#include <QJsonObject>
 #include "loginwindow.h"
 #include "mainwindow.h"
 
@@ -19,6 +20,9 @@ public:
 
 signals:
 
+public slots:
+    void on_r_login(const QJsonObject&);
+
 private slots:
 
     void on_loginBtn_clicked();
@@ -35,6 +39,7 @@ private:
     Ui::LoginDialog *ui;
     LoginWindow *lw;
     mainWindow *mw;
+    quint64 waiting;
 };
 
 #endif // LOGINDIALOG_H

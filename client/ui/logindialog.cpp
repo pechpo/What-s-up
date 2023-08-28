@@ -1,11 +1,11 @@
 #include "logindialog.h"
 #include "ui_logindialog.h"
 #include "loginwindow.h"
+#include "director/director.h"
 #include <QMessageBox>
 #include <QApplication>
 #include <QLocale>
 #include <QTranslator>
-
 
 
 LoginDialog::LoginDialog(QWidget *parent) :
@@ -16,6 +16,9 @@ LoginDialog::LoginDialog(QWidget *parent) :
     this->setAttribute(Qt::WA_TranslucentBackground);      //把初始的 dialog 窗口设置为透明的
     ui->setupUi(this);
 
+    waiting = 0;
+
+    connect(Director::getInstance(), &Director::r_login, this, &LoginDialog::on_r_login);
 }
 
 LoginDialog::~LoginDialog()
@@ -26,14 +29,35 @@ LoginDialog::~LoginDialog()
 
 void LoginDialog::on_loginBtn_clicked()
 {
-    QMessageBox::information(NULL, tr("Note"), tr("Login success!"));//此处需要添加一个检查函数，来检验输入的用户名与密码是否正确，同时还缺少一个提示密码错误的信息。
-    mw = new mainWindow();
-    mw->show();
-    accept();
+    if (waiting == 0) {
+        QJsonObject msg;
+        msg.insert("type", "q_login");
+        qint64 id = ui->usrLineEdit->text().toInt();
+        QString pwd = ui->pwdLineEdit->text();
+        // todo: md5
+        msg.insert("id", QJsonValue(id));
+        msg.insert("password", QJsonValue(pwd));
+        if (Director::getInstance()->sendJson(msg))
+            waiting++;
+    }
 }
 
-
-
+void LoginDialog::on_r_login(const QJsonObject &msg) {
+    waiting--;
+    if (!msg.value("success").isBool()) {
+        return ;
+    }
+    if (true == msg.value("success").toBool()) {
+        mw = new mainWindow();
+        mw->show();
+        accept();
+    }
+    else {
+        if (msg.value("error").isString()) {
+            qDebug() << msg.value("error").toString();
+        }
+    }
+}
 
 void LoginDialog::on_closeButton_clicked()
 {

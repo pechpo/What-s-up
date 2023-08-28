@@ -68,11 +68,15 @@ bool Director::isConnected() {
     return getConnection()->isConnected();
 }
 
-void Director::sendJson(const QJsonObject &obj) {
+bool Director::sendJson(const QJsonObject &obj) {
     Connection *conn = getConnection();
     if (conn->isConnected()) {
         qDebug() << "send: " << obj;
         conn->sendMessage(obj);
+        return true;
+    }
+    else {
+        return false;
     }
 }
 
