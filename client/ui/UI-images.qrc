@@ -4,5 +4,6 @@
         <file>image/no.png</file>
         <file>image/settings.png</file>
         <file>image/chatList.png</file>
+        <file>image/imagetest.png</file>
     </qresource>
 </RCC>

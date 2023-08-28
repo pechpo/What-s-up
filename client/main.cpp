@@ -2,6 +2,7 @@
 #include "ui/logindialog.h"
 #include "ui/mainwindow.h"
 #include "ui/chatwindow.h"
+#include "ui/profilebar.h"
 
 #include <QApplication>
 #include <QLocale>
@@ -21,8 +22,10 @@ int main(int argc, char *argv[])
         }
     }
     //ChatWindow cw;
+    ProfileBar pb;
     LoginDialog d;
     d.show();
+    pb.show();
     //cw.show();
     return a.exec();
 }
