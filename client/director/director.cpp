@@ -24,6 +24,9 @@ Director::Director(QObject *parent)
     recvEmitter.insert("a_newMessage", &Director::a_newMessage);
     recvEmitter.insert("a_newFriendRequest", &Director::a_newFriendRequest);
     recvEmitter.insert("a_newChat", &Director::a_newChat);
+
+    mainUI = nullptr;
+    logged = false;
 }
 
 void Director::act(const QJsonObject &obj) {
@@ -35,14 +38,24 @@ void Director::act(const QJsonObject &obj) {
     }
     QString index = obj.value("type").toString();
     if (!recvEmitter.contains(index)) {
+        if ("hello" == index) {
+            emit receiveTestString(obj.value("message").toString());
+        }
         return ;
+    }
+    if ("r_login" == index) {
+        if (true == obj.value("success").toBool()) {
+            logged = true;
+        }
     }
     Emitter e = recvEmitter.value(index);
     emit (this->*e)(obj);
 }
 
 Director::~Director() {
-
+    delete mainUI;
+    delete conn;
+    delete self;
 }
 
 Director* Director::self = nullptr;
@@ -97,5 +110,18 @@ void Director::sendPureMessage(const QString &text) {
         obj.insert("text", text);
         qDebug() << "send: " << obj;
         conn->sendMessage(obj);
+    }
+}
+
+void Director::toMainWindow() {
+    if (!logged) {
+        return;
+    }
+    if (nullptr == mainUI) {
+        mainUI = new mainWindow();
+        mainUI->show();
+    }
+    else {
+
     }
 }

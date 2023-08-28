@@ -6,6 +6,7 @@
 #include <QMap>
 
 #include "network/connection.h"
+#include "ui/mainwindow.h"
 
 class Director : public QObject
 {
@@ -22,9 +23,10 @@ public:
     QString Hash(const QString&);
     bool sendJson(const QJsonObject&);
     void sendPureMessage(const QString&); // debug
+    void toMainWindow();
 
 signals:
-    // void receiveTestString(const QString&);
+    void receiveTestString(const QString&);
     void r_register(const QJsonObject&);
     void r_login(const QJsonObject&);
     void r_myInfo(const QJsonObject&);
@@ -50,6 +52,8 @@ private:
     static Connection* conn;
     static Connection* getConnection();
     QHash<QString, Emitter> recvEmitter;
+    mainWindow *mainUI;
+    bool logged;
 };
 
 #endif // DIRECTOR_H

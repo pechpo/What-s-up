@@ -16,6 +16,8 @@ LoginDialog::LoginDialog(QWidget *parent) :
     this->setAttribute(Qt::WA_TranslucentBackground);      //把初始的 dialog 窗口设置为透明的
     ui->setupUi(this);
 
+    lw = nullptr;
+    rd = nullptr;
     waiting = 0;
 
     connect(Director::getInstance(), &Director::r_login, this, &LoginDialog::slot_r_login);
@@ -23,17 +25,18 @@ LoginDialog::LoginDialog(QWidget *parent) :
 
 LoginDialog::~LoginDialog()
 {
+    delete lw;
+    delete rd;
     delete ui;
 }
 
-
 void LoginDialog::on_loginBtn_clicked()
 {
-    if (waiting == 0) {
-        QJsonObject msg;
-        msg.insert("type", "q_login");
+    if (0 == waiting) {
         qint64 id = ui->usrLineEdit->text().toInt();
         QString pwd = Director::getInstance()->Hash(ui->pwdLineEdit->text());
+        QJsonObject msg;
+        msg.insert("type", "q_login");
         msg.insert("id", QJsonValue(id));
         msg.insert("password", QJsonValue(pwd));
         if (Director::getInstance()->sendJson(msg))
@@ -47,8 +50,7 @@ void LoginDialog::slot_r_login(const QJsonObject &msg) {
         return ;
     }
     if (true == msg.value("success").toBool()) {
-        mw = new mainWindow();
-        mw->show();
+        Director::getInstance()->toMainWindow();
         accept();
     }
     else {
@@ -80,13 +82,25 @@ void LoginDialog::on_minimizeButton_clicked()
 
 void LoginDialog::on_ConnectionButton_clicked()
 {
-    lw = new LoginWindow;
-    lw->show();
+    if (nullptr == lw) {
+        lw = new LoginWindow();
+        lw->show();
+    }
+    else {
+        lw->close();
+        lw->show();
+    }
 }
 
 void LoginDialog::on_regBtn_clicked()
 {
-    rd = new RegisterDialog();
-    rd->show();
+    if (nullptr == rd) {
+        rd = new RegisterDialog();
+        rd->show();
+    }
+    else {
+        rd->close();
+        rd->show();
+    }
 }
 
