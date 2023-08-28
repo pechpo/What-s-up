@@ -14,6 +14,7 @@ class ProfileBar : public QWidget
 public:
     explicit ProfileBar(QWidget *parent = nullptr);
     ~ProfileBar();
+    void setName(const QString&);
 
 private:
     Ui::ProfileBar *ui;

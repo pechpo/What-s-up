@@ -12,3 +12,7 @@ ProfileBar::~ProfileBar()
 {
     delete ui;
 }
+
+void ProfileBar::setName(const QString &name) {
+    ui->username->setText(name);
+}

@@ -18,7 +18,7 @@ LoginWindow::~LoginWindow()
 }
 
 void LoginWindow::on_receiveTestString(const QString &text) {
-    ui->receivedText->insertPlainText("recv: " + text + "\n");
+    ui->receivedText->insertPlainText(text + "\n");
 }
 
 void LoginWindow::on_connectButton_clicked()

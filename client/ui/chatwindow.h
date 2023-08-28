@@ -30,12 +30,15 @@ private:
     bool isThisChat(const QJsonObject&);
 
     qint64 chatId;
-    class Message {
+    struct Message {
+        bool isSystem;
         qint64 senderId;
         QString senderName;
         QString content;
     };
     QVector<Message> history;
+    Message jsonToMessage(const QJsonObject&);
+    QString messageToString(const Message&);
     void updateText();
 };
 
