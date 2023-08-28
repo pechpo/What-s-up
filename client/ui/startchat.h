@@ -17,11 +17,15 @@ public:
     ~StartChat();
     void setName(const QString&);
     void setId(quint32 newId);
+    void setAvatar(const QString&);
+
+private slots:
+    void on_chatButton_clicked();
 
 private:
     Ui::StartChat *ui;
     ProfileBar *bar;
-    quint32 id;
+    qint64 id;
 };
 
 #endif // STARTCHAT_H

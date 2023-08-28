@@ -19,6 +19,10 @@ class mainWindow : public QWidget
 public:
     explicit mainWindow(QWidget *parent = nullptr);
     ~mainWindow();
+    enum State {
+        Friend, Chat
+    } curState;
+    void setState(State);
 
 public slots:
     void slot_r_list_myFriends(const QJsonObject&);
@@ -35,12 +39,10 @@ private:
     Ui::mainWindow *ui;
     ChatWindow *cw;
     SearchNewFriend *snf;
-    enum State {
-        Friend, Chat
-    } curState;
-    void setState(State);
     QVector<AddNewFriend*> friendRequests;
     QVector<StartChat*> friends;
+    quint32 waiting;
+    void waitingIsZero();
 };
 
 #endif // MAINWINDOW_H

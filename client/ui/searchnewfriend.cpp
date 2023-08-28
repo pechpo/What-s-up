@@ -41,6 +41,7 @@ void SearchNewFriend::on_SearchButton_clicked()
 void SearchNewFriend::slot_r_userInfo(const QJsonObject &obj) {
     waiting--;
     if (!obj.value("id").isDouble()) {
+        qDebug() << "not double!";
         return ;
     }
     if (!obj.value("username").isString()) {

@@ -125,3 +125,7 @@ void Director::toMainWindow() {
 
     }
 }
+
+void Director::refreshMainWindow() {
+    mainUI->setState(mainWindow::Friend);
+}

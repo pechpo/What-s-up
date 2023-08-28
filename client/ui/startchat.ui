@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QToolButton" name="startChatButton">
+  <widget class="QToolButton" name="chatButton">
    <property name="geometry">
     <rect>
      <x>170</x>
