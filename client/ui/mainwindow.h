@@ -39,8 +39,8 @@ private:
         Friend, Chat
     } curState;
     void setState(State);
-    QVector<AddNewFriend> friendRequests;
-    QVector<StartChat> friends;
+    QVector<AddNewFriend*> friendRequests;
+    QVector<StartChat*> friends;
 };
 
 #endif // MAINWINDOW_H

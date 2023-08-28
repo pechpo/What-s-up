@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "director/director.h"
 #include <QJsonValue>
+#include <QJsonArray>
 
 mainWindow::mainWindow(QWidget *parent) :
     QWidget(parent),
@@ -24,6 +25,12 @@ mainWindow::mainWindow(QWidget *parent) :
 
 mainWindow::~mainWindow()
 {
+    for (quint32 i = 0; i < friends.size(); i++) {
+        delete friends[i];
+    }
+    for (quint32 i = 0; i < friendRequests.size(); i++) {
+        delete friendRequests[i];
+    }
     delete snf;
     delete ui;
 }
@@ -71,9 +78,35 @@ void mainWindow::setState(enum mainWindow::State tarState) {
 }
 
 void mainWindow::slot_r_list_myFriends(const QJsonObject &obj) {
+    if (false == obj.value("users").isArray()) {
+        return ;
+    }
+    for (quint32 i = 0; i < friends.size(); i++) {
+        delete friends[i];
+    }
+    friends.clear();
+    QJsonArray users = obj.value("users").toArray();
+    quint32 siz = users.size();
+    friends.resize(siz);
+    for (quint32 i = 0; i < siz; i++) {
+        friends[i] = new StartChat(this);
 
+    }
 }
 
 void mainWindow::slot_r_list_friendRequests(const QJsonObject &obj) {
+    if (false == obj.value("users").isArray()) {
+        return ;
+    }
+    for (quint32 i = 0; i < friendRequests.size(); i++) {
+        delete friendRequests[i];
+    }
+    friendRequests.clear();
+    QJsonArray users = obj.value("users").toArray();
+    quint32 siz = users.size();
+    friendRequests.resize(siz);
+    for (quint32 i = 0; i < siz; i++) {
+        friendRequests[i] = new AddNewFriend(this);
 
+    }
 }

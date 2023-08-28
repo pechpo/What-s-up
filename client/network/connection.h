@@ -14,11 +14,11 @@ public:
     void connectServer(const QString &IP = "", quint16 port = 0);
 
 public slots:
-    void receiveMessage();
     void sendMessage(const QJsonObject&); // use JSON
     bool isConnected();
 
 private slots:
+    void receiveMessage();
     void disconnectFlag();
 
 private:
