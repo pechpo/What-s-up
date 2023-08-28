@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QWidget>
+#include "chatwindow.h"
 
 namespace Ui {
 class mainWindow;
@@ -22,6 +23,7 @@ private slots:
 
 private:
     Ui::mainWindow *ui;
+    ChatWindow *cw;
 };
 
 #endif // MAINWINDOW_H
