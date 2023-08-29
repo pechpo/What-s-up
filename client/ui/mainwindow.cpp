@@ -17,7 +17,7 @@ mainWindow::mainWindow(QWidget *parent) :
     newChatDialog = nullptr;
     settings = nullptr;
     waiting = 0;
-    this->setState(Friend);
+    this->setState(Director::Friend);
 
     connect(Director::getInstance(), &Director::r_list_myFriends, this, &mainWindow::slot_r_list_myFriends);
     connect(Director::getInstance(), &Director::r_list_friendRequests, this, &mainWindow::slot_r_list_friendRequests);
@@ -87,15 +87,15 @@ void mainWindow::on_addnewfriendButton_clicked()
 {
     if (nullptr == snf) {
         snf = new SearchNewFriend();
-        snf->show();
     }
     else {
+        snf->clear();
         snf->close();
-        snf->show();
     }
+    snf->show();
 }
 
-void mainWindow::setState(enum mainWindow::State tarState) {
+void mainWindow::setState(enum Director::State tarState) {
     curState = tarState;
     for (quint32 i = 0; i < friendRequests.size(); i++) {
         AddNewFriend *p = friendRequests[i];
@@ -109,7 +109,7 @@ void mainWindow::setState(enum mainWindow::State tarState) {
         StartChat *p = chats[i];
         p->close();
     }
-    if (curState == Friend) {
+    if (Director::Friend == curState) {
         ui->viewLabel->setText("Friend List");
         QJsonObject msg1;
         msg1.insert("type", "q_list_myFriends");
@@ -122,7 +122,7 @@ void mainWindow::setState(enum mainWindow::State tarState) {
             waiting++;
         }
     }
-    else if (curState == Chat) {
+    else if (Director::Chat == curState) {
         ui->viewLabel->setText("Chat List");
         QJsonObject msg;
         msg.insert("type", "q_list_myChats");
@@ -140,7 +140,7 @@ void mainWindow::waitingIsZero() {
     //layout->setSpacing(5);
     const quint32 gap = 5;
     quint32 height = gap;
-    if (Friend == curState) {
+    if (Director::Friend == curState) {
         for (quint32 i = 0; i < friendRequests.size(); i++) {
             AddNewFriend *p = friendRequests[i];
             //layout->addWidget(p);
@@ -156,7 +156,7 @@ void mainWindow::waitingIsZero() {
             p->show();
         }
     }
-    else if (Chat == curState) {
+    else if (Director::Chat == curState) {
         for (quint32 i = 0; i < chats.size(); i++) {
             StartChat *p = chats[i];
             //layout->addWidget(p);
@@ -227,11 +227,11 @@ void mainWindow::slot_r_list_friendRequests(const QJsonObject &obj) {
 }
 
 void mainWindow::slot_a_newFriendRequest(const QJsonObject &obj) {
-    setState(Friend);
+    setState(Director::Friend);
 }
 
 void mainWindow::slot_a_newChat(const QJsonObject &obj) {
-    setState(Chat);
+    setState(Director::Chat);
 }
 
 void mainWindow::slot_r_list_myChats(const QJsonObject &obj) {
@@ -284,11 +284,11 @@ void mainWindow::on_toolButton_clicked()
 
 void mainWindow::on_grouplistButton_clicked()
 {
-    if (Friend == curState) {
-        setState(Chat);
+    if (Director::Friend == curState) {
+        setState(Director::Chat);
     }
-    else if (Chat == curState) {
-        setState(Friend);
+    else if (Director::Chat == curState) {
+        setState(Director::Friend);
     }
     else {
 

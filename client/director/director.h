@@ -6,13 +6,16 @@
 #include <QMap>
 
 #include "network/connection.h"
-#include "ui/mainwindow.h"
 
+class mainWindow;
 class Director : public QObject
 {
     Q_OBJECT
 
 public:
+    enum State {
+        Friend, Chat
+    };
     typedef void(Director::*Emitter)(const QJsonObject&);
     explicit Director(QObject *parent = nullptr);
     ~Director();
@@ -24,7 +27,7 @@ public:
     bool sendJson(const QJsonObject&);
     void sendPureMessage(const QString&); // debug
     void toMainWindow();
-    void refreshMainWindow();
+    void refreshMainWindow(enum Director::State);
     void enterChat(qint64 id);
 
 signals:
@@ -49,6 +52,7 @@ signals:
     void r_chatInfo(const QJsonObject&);
     void r_editChatInfo(const QJsonObject&);
     void r_downloadFile(const QJsonObject&);
+    void r_talk(const QJsonObject&);
     void a_newMessage(const QJsonObject&);
     void a_newFriendRequest(const QJsonObject&);
     void a_newChat(const QJsonObject&);

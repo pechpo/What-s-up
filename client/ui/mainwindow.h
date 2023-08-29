@@ -9,6 +9,7 @@
 #include "startchat.h"
 #include "createchat.h"
 #include "settings.h"
+#include "director/director.h"
 
 namespace Ui {
 class mainWindow;
@@ -21,10 +22,7 @@ class mainWindow : public QWidget
 public:
     explicit mainWindow(QWidget *parent = nullptr);
     ~mainWindow();
-    enum State {
-        Friend, Chat
-    } curState;
-    void setState(State);
+    void setState(enum Director::State);
     ChatWindow* getChatWindow();
 
 public slots:
@@ -57,6 +55,7 @@ private:
     QVector<StartChat*> friends;
     QVector<StartChat*> chats;
     quint32 waiting;
+    Director::State curState;
     void waitingIsZero();
 };
 

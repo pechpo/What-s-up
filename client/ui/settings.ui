@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(233, 228, 230);</string>
+  </property>
   <widget class="QLabel" name="idLabel">
    <property name="geometry">
     <rect>
@@ -135,6 +138,9 @@
      <width>60</width>
      <height>20</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(4, 137, 152);</string>
    </property>
    <property name="text">
     <string>修改</string>

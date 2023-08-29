@@ -10,5 +10,10 @@
         <file>image/CreatGroup.png</file>
         <file>image/CreateGroupChat.png</file>
         <file>image/fileButton.png</file>
+        <file>image/upload.png</file>
+        <file>image/background2.png</file>
+        <file>image/background3.png</file>
+        <file>image/background1.png</file>
+        <file>image/Logo.png</file>
     </qresource>
 </RCC>

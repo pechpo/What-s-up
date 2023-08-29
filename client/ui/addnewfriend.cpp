@@ -62,6 +62,6 @@ void AddNewFriend::on_declineButton_clicked()
 
 void AddNewFriend::slot_r_acceptFriend(const QJsonObject &obj) {
     if (true == obj.value("success").toBool()) {
-        Director::getInstance()->refreshMainWindow();
+        Director::getInstance()->refreshMainWindow(Director::Friend);
     }
 }

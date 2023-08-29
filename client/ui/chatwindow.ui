@@ -14,19 +14,20 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(219, 237, 247);</string>
+   <string notr="true">background-color: rgb(246, 245, 245)</string>
   </property>
   <widget class="QTextEdit" name="MsgEdit">
    <property name="geometry">
     <rect>
      <x>10</x>
      <y>40</y>
-     <width>481</width>
-     <height>321</height>
+     <width>480</width>
+     <height>320</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: rgb(255, 255, 255);</string>
+    <string notr="true">background-color: rgb(255, 255, 255);
+background-image: url(:/images/image/Logo.png);</string>
    </property>
   </widget>
   <widget class="QTextEdit" name="inputEdit">
@@ -51,6 +52,9 @@
      <height>31</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(59, 180, 193);</string>
+   </property>
    <property name="text">
     <string>发送</string>
    </property>
@@ -73,7 +77,7 @@
     <rect>
      <x>20</x>
      <y>375</y>
-     <width>50</width>
+     <width>41</width>
      <height>40</height>
     </rect>
    </property>
@@ -97,7 +101,7 @@
     <string>Download File</string>
    </property>
   </widget>
-  <widget class="QToolButton" name="toolButton">
+  <widget class="QToolButton" name="settingsButton">
    <property name="geometry">
     <rect>
      <x>450</x>
