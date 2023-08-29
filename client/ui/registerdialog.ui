@@ -18,8 +18,8 @@
     <rect>
      <x>40</x>
      <y>30</y>
-     <width>401</width>
-     <height>271</height>
+     <width>400</width>
+     <height>321</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -31,8 +31,8 @@ background-color: rgb(223, 243, 232);</string>
      <rect>
       <x>100</x>
       <y>20</y>
-      <width>211</width>
-      <height>31</height>
+      <width>200</width>
+      <height>30</height>
      </rect>
     </property>
     <property name="font">
@@ -55,8 +55,8 @@ background-color: rgb(197, 238, 241);</string>
     <property name="geometry">
      <rect>
       <x>230</x>
-      <y>220</y>
-      <width>89</width>
+      <y>270</y>
+      <width>90</width>
       <height>25</height>
      </rect>
     </property>
@@ -68,28 +68,11 @@ border-radius:10px;</string>
      <string>注册</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="regBtn">
-    <property name="geometry">
-     <rect>
-      <x>70</x>
-      <y>220</y>
-      <width>89</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(246, 245, 244);
-border-radius: 10px;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
       <x>50</x>
-      <y>120</y>
+      <y>170</y>
       <width>71</width>
       <height>21</height>
      </rect>
@@ -115,7 +98,7 @@ border-radius: 10px;</string>
     <property name="geometry">
      <rect>
       <x>140</x>
-      <y>120</y>
+      <y>170</y>
       <width>191</width>
       <height>25</height>
      </rect>
@@ -127,7 +110,7 @@ border-radius: 10px;</string>
      <enum>QLineEdit::Password</enum>
     </property>
     <property name="placeholderText">
-     <string>请输入密码</string>
+     <string>请输入您想要的密码</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="usrLineEdit">
@@ -145,11 +128,14 @@ border-radius: 10px;</string>
     <property name="inputMethodHints">
      <set>Qt::ImhNone</set>
     </property>
+    <property name="text">
+     <string/>
+    </property>
     <property name="echoMode">
      <enum>QLineEdit::Normal</enum>
     </property>
     <property name="placeholderText">
-     <string>请输入用户名</string>
+     <string>请输入您想要的数字ID</string>
     </property>
    </widget>
    <widget class="QToolButton" name="closeButton">
@@ -193,7 +179,7 @@ image: url(:/images/image/no.png);</string>
     <property name="geometry">
      <rect>
       <x>140</x>
-      <y>170</y>
+      <y>220</y>
       <width>191</width>
       <height>25</height>
      </rect>
@@ -215,7 +201,7 @@ image: url(:/images/image/no.png);</string>
     <property name="geometry">
      <rect>
       <x>50</x>
-      <y>170</y>
+      <y>220</y>
       <width>71</width>
       <height>21</height>
      </rect>
@@ -224,16 +210,54 @@ image: url(:/images/image/no.png);</string>
      <string>确认密码</string>
     </property>
    </widget>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>120</y>
+      <width>71</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>用户名</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="nameLineEdit">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>120</y>
+      <width>191</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="inputMethodHints">
+     <set>Qt::ImhNone</set>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="echoMode">
+     <enum>QLineEdit::Normal</enum>
+    </property>
+    <property name="placeholderText">
+     <string>请输入您想要的用户名</string>
+    </property>
+   </widget>
   </widget>
  </widget>
  <tabstops>
   <tabstop>usrLineEdit</tabstop>
+  <tabstop>nameLineEdit</tabstop>
   <tabstop>pwdLineEdit</tabstop>
   <tabstop>confirmPwdLineEdit</tabstop>
   <tabstop>confirmBtn</tabstop>
-  <tabstop>minimizeButton</tabstop>
   <tabstop>closeButton</tabstop>
-  <tabstop>regBtn</tabstop>
+  <tabstop>minimizeButton</tabstop>
  </tabstops>
  <resources/>
  <connections/>

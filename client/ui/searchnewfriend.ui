@@ -6,19 +6,22 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>296</width>
-    <height>332</height>
+    <width>300</width>
+    <height>263</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(246, 245, 245);</string>
   </property>
   <widget class="QLineEdit" name="searchLineEdit">
    <property name="geometry">
     <rect>
      <x>20</x>
      <y>10</y>
-     <width>261</width>
+     <width>260</width>
      <height>25</height>
     </rect>
    </property>
@@ -26,9 +29,9 @@
   <widget class="QPushButton" name="confirmButton">
    <property name="geometry">
     <rect>
-     <x>190</x>
-     <y>290</y>
-     <width>89</width>
+     <x>180</x>
+     <y>220</y>
+     <width>90</width>
      <height>25</height>
     </rect>
    </property>
@@ -39,14 +42,27 @@
   <widget class="QPushButton" name="SearchButton">
    <property name="geometry">
     <rect>
-     <x>190</x>
+     <x>180</x>
      <y>50</y>
-     <width>89</width>
+     <width>90</width>
      <height>25</height>
     </rect>
    </property>
    <property name="text">
-    <string>搜索</string>
+    <string>搜索好友</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="switchButton">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>50</y>
+     <width>91</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>切换搜索模式</string>
    </property>
   </widget>
  </widget>

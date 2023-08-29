@@ -7,6 +7,9 @@
 #include "searchnewfriend.h"
 #include "addnewfriend.h"
 #include "startchat.h"
+#include "createchat.h"
+#include "settings.h"
+#include "director/director.h"
 
 namespace Ui {
 class mainWindow;
@@ -19,14 +22,15 @@ class mainWindow : public QWidget
 public:
     explicit mainWindow(QWidget *parent = nullptr);
     ~mainWindow();
-    enum State {
-        Friend, Chat
-    } curState;
-    void setState(State);
+    void setState(enum Director::State);
+    ChatWindow* getChatWindow();
 
 public slots:
     void slot_r_list_myFriends(const QJsonObject&);
     void slot_r_list_friendRequests(const QJsonObject&);
+    void slot_a_newFriendRequest(const QJsonObject&);
+    void slot_r_list_myChats(const QJsonObject&);
+    void slot_a_newChat(const QJsonObject&);
 
 private slots:
     void on_closeButton_clicked();
@@ -35,13 +39,23 @@ private slots:
 
     void on_addnewfriendButton_clicked();
 
+    void on_toolButton_clicked();
+
+    void on_grouplistButton_clicked();
+
+    void on_settingButton_clicked();
+
 private:
     Ui::mainWindow *ui;
     ChatWindow *cw;
     SearchNewFriend *snf;
+    CreateChat *newChatDialog;
+    Settings *settings;
     QVector<AddNewFriend*> friendRequests;
     QVector<StartChat*> friends;
+    QVector<StartChat*> chats;
     quint32 waiting;
+    Director::State curState;
     void waitingIsZero();
 };
 

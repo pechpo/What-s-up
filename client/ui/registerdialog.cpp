@@ -28,13 +28,17 @@ void RegisterDialog::on_confirmBtn_clicked() {
             // todo
             return ;
         }
+        if (ui->pwdLineEdit->text().length() < 4) {
+            // todo
+            return ;
+        }
         QJsonObject msg;
         qint64 id = ui->usrLineEdit->text().toInt();
         QString pwd = Director::getInstance()->Hash(ui->pwdLineEdit->text());
         msg.insert("type", "e_register");
         msg.insert("id", QJsonValue(id));
         msg.insert("password", QJsonValue(pwd));
-        msg.insert("username", QJsonValue("Bob" + QString::number(id)));
+        msg.insert("username", QJsonValue(ui->nameLineEdit->text()));
         msg.insert("email", QJsonValue(QString::number(id) + "@bit.edu.cn"));
         msg.insert("avatar", QJsonValue("hereIsAvatar" + QString::number(id)));
         if (Director::getInstance()->sendJson(msg))

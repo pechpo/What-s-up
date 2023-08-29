@@ -17,21 +17,19 @@
    <string>Dialog</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">border-radius: 50px;
-background-color: white;</string>
+   <string notr="true">background-color: white;</string>
   </property>
   <widget class="QWidget" name="widget" native="true">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>401</width>
-     <height>271</height>
+     <width>400</width>
+     <height>270</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">border-radius: 30px;
-background-color: rgb(223, 243, 232);</string>
+    <string notr="true">background-color: rgb(246, 245, 245);</string>
    </property>
    <widget class="QLabel" name="label">
     <property name="geometry">
@@ -49,7 +47,7 @@ background-color: rgb(223, 243, 232);</string>
     </property>
     <property name="styleSheet">
      <string notr="true">border-radius:15px;
-background-color: rgb(197, 238, 241);</string>
+background-color: rgb(245, 245, 245);</string>
     </property>
     <property name="text">
      <string>登录</string>
@@ -63,8 +61,8 @@ background-color: rgb(197, 238, 241);</string>
      <rect>
       <x>220</x>
       <y>180</y>
-      <width>92</width>
-      <height>23</height>
+      <width>90</width>
+      <height>20</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -79,13 +77,13 @@ background-color: rgb(197, 238, 241);</string>
      <rect>
       <x>230</x>
       <y>220</y>
-      <width>89</width>
+      <width>90</width>
       <height>25</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(87, 227, 137);
-border-radius:10px;</string>
+     <string notr="true">border-radius:10px;
+background-color: rgb(59, 180, 193);</string>
     </property>
     <property name="text">
      <string>登录</string>
@@ -96,12 +94,13 @@ border-radius:10px;</string>
      <rect>
       <x>70</x>
       <y>220</y>
-      <width>89</width>
+      <width>90</width>
       <height>25</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(246, 245, 244);
+     <string notr="true">;
+background-color: rgb(222, 221, 218);
 border-radius: 10px;</string>
     </property>
     <property name="text">
@@ -172,7 +171,7 @@ border-radius: 10px;</string>
      <enum>QLineEdit::Normal</enum>
     </property>
     <property name="placeholderText">
-     <string>请输入用户名</string>
+     <string>请输入用户ID</string>
     </property>
    </widget>
    <widget class="QToolButton" name="closeButton">
@@ -180,15 +179,13 @@ border-radius: 10px;</string>
      <rect>
       <x>360</x>
       <y>10</y>
-      <width>26</width>
+      <width>0</width>
       <height>24</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background:transparent;
-width: 0;
-height: 0;
-image: url(:/images/image/no.png);</string>
+     <string notr="true">width: 0;
+height: 0;</string>
     </property>
     <property name="text">
      <string/>
@@ -222,7 +219,7 @@ image: url(:/images/image/no.png);</string>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">image: url(:/images/image/settings.png);</string>
+     <string notr="true">border-image: url(:/images/image/settings.png);</string>
     </property>
     <property name="text">
      <string/>

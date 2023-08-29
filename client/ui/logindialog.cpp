@@ -30,6 +30,8 @@ LoginDialog::LoginDialog(QWidget *parent) :
 
 LoginDialog::~LoginDialog()
 {
+    lw->close();
+    rd->close();
     delete lw;
     delete rd;
     delete ui;

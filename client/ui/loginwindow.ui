@@ -24,21 +24,20 @@
     <rect>
      <x>-1</x>
      <y>-1</y>
-     <width>361</width>
-     <height>301</height>
+     <width>360</width>
+     <height>300</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">border-radius: 30px;
-background-color: rgb(227, 232, 238);</string>
+    <string notr="true">background-color: rgb(233, 228, 230);</string>
    </property>
    <widget class="QLabel" name="hostLabel">
     <property name="geometry">
      <rect>
       <x>60</x>
       <y>40</y>
-      <width>31</width>
-      <height>21</height>
+      <width>30</width>
+      <height>20</height>
      </rect>
     </property>
     <property name="text">
@@ -50,8 +49,8 @@ background-color: rgb(227, 232, 238);</string>
      <rect>
       <x>260</x>
       <y>40</y>
-      <width>51</width>
-      <height>22</height>
+      <width>50</width>
+      <height>20</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -82,8 +81,8 @@ background-color: rgb(227, 232, 238);</string>
      <rect>
       <x>220</x>
       <y>40</y>
-      <width>31</width>
-      <height>21</height>
+      <width>30</width>
+      <height>20</height>
      </rect>
     </property>
     <property name="text">
@@ -137,8 +136,8 @@ background-color: rgb(227, 232, 238);</string>
      <rect>
       <x>100</x>
       <y>40</y>
-      <width>91</width>
-      <height>22</height>
+      <width>90</width>
+      <height>20</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -171,15 +170,13 @@ background-color: rgb(227, 232, 238);</string>
      <rect>
       <x>320</x>
       <y>10</y>
-      <width>26</width>
-      <height>24</height>
+      <width>0</width>
+      <height>0</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background:transparent;
-width: 0;
-height: 0;
-image: url(:/images/image/no.png);</string>
+     <string notr="true">width: 0;
+height: 0;</string>
     </property>
     <property name="text">
      <string/>
@@ -187,6 +184,16 @@ image: url(:/images/image/no.png);</string>
    </widget>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>hostInput</tabstop>
+  <tabstop>connectButton</tabstop>
+  <tabstop>portInput</tabstop>
+  <tabstop>sendInput</tabstop>
+  <tabstop>sendButton</tabstop>
+  <tabstop>minimizeButton</tabstop>
+  <tabstop>closeButton</tabstop>
+  <tabstop>receivedText</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

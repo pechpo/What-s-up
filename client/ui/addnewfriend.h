@@ -19,6 +19,9 @@ public:
     void setName(const QString&);
     void setAvatar(const QString&);
 
+public slots:
+    void slot_r_acceptFriend(const QJsonObject&);
+
 private slots:
     void on_acceptButton_clicked();
 

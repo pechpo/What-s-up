@@ -5,9 +5,10 @@
 #include <QJsonArray>
 #include <QJsonValue>
 
-StartChat::StartChat(QWidget *parent) :
+StartChat::StartChat(QWidget *parent, bool isRealPerson) :
     QWidget(parent),
-    ui(new Ui::StartChat)
+    ui(new Ui::StartChat),
+    isPerson(isRealPerson)
 {
     ui->setupUi(this);
     bar = new ProfileBar(this);
@@ -15,6 +16,8 @@ StartChat::StartChat(QWidget *parent) :
     bar->show();
     bar->stackUnder(this);
     ui->chatButton->raise();
+
+    connect(Director::getInstance(), &Director::r_talk, this, &StartChat::slot_r_talk);
 }
 
 StartChat::~StartChat()
@@ -28,7 +31,13 @@ void StartChat::setId(quint32 newId) {
 }
 
 void StartChat::setName(const QString &name) {
-    bar->setName(name);
+    // 枣树
+    if (isPerson) {
+        bar->setName(name);
+    }
+    else {
+        bar->setName(name);
+    }
 }
 
 void StartChat::setAvatar(const QString &avatar) {
@@ -37,13 +46,27 @@ void StartChat::setAvatar(const QString &avatar) {
 
 void StartChat::on_chatButton_clicked()
 {
-    QJsonObject msg;
-    QJsonArray arr;
-    msg.insert("type", "e_createChat");
-    arr.push_back(QJsonValue(id));
-    msg.insert("users", arr);
-    if (Director::getInstance()->sendJson(msg)) {
-        Director::getInstance()->refreshMainWindow();
+    if (isPerson) {
+        qDebug() << "si liao";
+        QJsonObject msg;
+        msg.insert("type", "q_talk");
+        msg.insert("id", QJsonValue(id));
+        Director::getInstance()->sendJson(msg);
     }
+    else {
+        Director::getInstance()->enterChat(id);
+    }
+}
+
+void StartChat::slot_r_talk(const QJsonObject &obj) {
+    Director::getInstance()->enterChat(obj.value("chatId").toInt());
+}
+
+qint64 StartChat::getId() {
+    return id;
+}
+
+QString StartChat::getName() {
+    return bar->getName();
 }
 

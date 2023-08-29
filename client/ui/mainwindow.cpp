@@ -14,11 +14,16 @@ mainWindow::mainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     snf = nullptr;
+    newChatDialog = nullptr;
+    settings = nullptr;
     waiting = 0;
-    this->setState(Friend);
+    this->setState(Director::Friend);
 
     connect(Director::getInstance(), &Director::r_list_myFriends, this, &mainWindow::slot_r_list_myFriends);
     connect(Director::getInstance(), &Director::r_list_friendRequests, this, &mainWindow::slot_r_list_friendRequests);
+    connect(Director::getInstance(), &Director::a_newFriendRequest, this, &mainWindow::slot_a_newFriendRequest);
+    connect(Director::getInstance(), &Director::r_list_myChats, this, &mainWindow::slot_r_list_myChats);
+    connect(Director::getInstance(), &Director::a_newChat, this, &mainWindow::slot_a_newChat);
 
     cw = new ChatWindow(this);
     cw->move(250, 50);
@@ -62,6 +67,10 @@ mainWindow::~mainWindow()
     delete ui;
 }
 
+ChatWindow* mainWindow::getChatWindow() {
+    return cw;
+}
+
 void mainWindow::on_closeButton_clicked()
 {
     close();
@@ -78,17 +87,30 @@ void mainWindow::on_addnewfriendButton_clicked()
 {
     if (nullptr == snf) {
         snf = new SearchNewFriend();
-        snf->show();
     }
     else {
+        snf->clear();
         snf->close();
-        snf->show();
     }
+    snf->show();
 }
 
-void mainWindow::setState(enum mainWindow::State tarState) {
+void mainWindow::setState(enum Director::State tarState) {
     curState = tarState;
-    if (curState == Friend) {
+    for (quint32 i = 0; i < friendRequests.size(); i++) {
+        AddNewFriend *p = friendRequests[i];
+        p->close();
+    }
+    for (quint32 i = 0; i < friends.size(); i++) {
+        StartChat *p = friends[i];
+        p->close();
+    }
+    for (quint32 i = 0; i < chats.size(); i++) {
+        StartChat *p = chats[i];
+        p->close();
+    }
+    if (Director::Friend == curState) {
+        ui->viewLabel->setText("Friend List");
         QJsonObject msg1;
         msg1.insert("type", "q_list_myFriends");
         if (Director::getInstance()->sendJson(msg1)) {
@@ -100,8 +122,13 @@ void mainWindow::setState(enum mainWindow::State tarState) {
             waiting++;
         }
     }
-    else if (curState == Chat) {
-
+    else if (Director::Chat == curState) {
+        ui->viewLabel->setText("Chat List");
+        QJsonObject msg;
+        msg.insert("type", "q_list_myChats");
+        if (Director::getInstance()->sendJson(msg)) {
+            waiting++;
+        }
     }
     else {
 
@@ -113,19 +140,30 @@ void mainWindow::waitingIsZero() {
     //layout->setSpacing(5);
     const quint32 gap = 5;
     quint32 height = gap;
-    for (quint32 i = 0; i < friendRequests.size(); i++) {
-        AddNewFriend *p = friendRequests[i];
-        //layout->addWidget(p);
-        p->move(gap, height);
-        height += p->height() + gap;
-        p->show();
+    if (Director::Friend == curState) {
+        for (quint32 i = 0; i < friendRequests.size(); i++) {
+            AddNewFriend *p = friendRequests[i];
+            //layout->addWidget(p);
+            p->move(gap, height);
+            height += p->height() + gap;
+            p->show();
+        }
+        for (quint32 i = 0; i < friends.size(); i++) {
+            StartChat *p = friends[i];
+            //layout->addWidget(p);
+            p->move(gap, height);
+            height += p->height() + gap;
+            p->show();
+        }
     }
-    for (quint32 i = 0; i < friends.size(); i++) {
-        StartChat *p = friends[i];
-        //layout->addWidget(p);
-        p->move(gap, height);
-        height += p->height() + gap;
-        p->show();
+    else if (Director::Chat == curState) {
+        for (quint32 i = 0; i < chats.size(); i++) {
+            StartChat *p = chats[i];
+            //layout->addWidget(p);
+            p->move(gap, height);
+            height += p->height() + gap;
+            p->show();
+        }
     }
     ui->scrollAreaWidgetContents->adjustSize();
     //qDebug() << ui->scrollAreaWidgetContents->height();
@@ -187,3 +225,88 @@ void mainWindow::slot_r_list_friendRequests(const QJsonObject &obj) {
         waitingIsZero();
     }
 }
+
+void mainWindow::slot_a_newFriendRequest(const QJsonObject &obj) {
+    setState(Director::Friend);
+}
+
+void mainWindow::slot_a_newChat(const QJsonObject &obj) {
+    setState(Director::Chat);
+}
+
+void mainWindow::slot_r_list_myChats(const QJsonObject &obj) {
+    if (false == obj.value("chats").isArray()) {
+        return ;
+    }
+    for (quint32 i = 0; i < chats.size(); i++) {
+        chats[i]->close();
+        delete chats[i];
+    }
+    chats.clear();
+    QJsonArray users = obj.value("chats").toArray();
+    quint32 siz = users.size();
+    chats.resize(siz);
+    for (quint32 i = 0; i < siz; i++) {
+        if (!users[i].isObject()) {
+            continue ;
+        }
+        QJsonObject user = users[i].toObject();
+        chats[i] = new StartChat(ui->scrollAreaWidgetContents, false);
+        chats[i]->setId(user.value("chatId").toInt());
+        chats[i]->setName(user.value("name").toString());
+        chats[i]->setAvatar(user.value("avatar").toString());
+    }
+    waiting--;
+    if (0 == waiting) {
+        waitingIsZero();
+    }
+}
+
+void mainWindow::on_toolButton_clicked()
+{
+    if (nullptr == newChatDialog) {
+        //qDebug() << "aaaa";
+        newChatDialog = new CreateChat(this);
+    }
+    else {
+        //qDebug() << "bbbb";
+        newChatDialog->close();
+        newChatDialog->clear();
+    }
+    for (quint32 i = 0; i < friends.size(); i++) {
+        StartChat *p = friends[i];
+        newChatDialog->addChoice(p->getId(), p->getName());
+    }
+    newChatDialog->update();
+    newChatDialog->show();
+}
+
+
+void mainWindow::on_grouplistButton_clicked()
+{
+    if (Director::Friend == curState) {
+        setState(Director::Chat);
+    }
+    else if (Director::Chat == curState) {
+        setState(Director::Friend);
+    }
+    else {
+
+    }
+}
+
+
+void mainWindow::on_settingButton_clicked()
+{
+    if (nullptr == settings) {
+        settings = new Settings(this);
+    }
+    else {
+        settings->close();
+    }
+    settings->show();
+    QJsonObject msg;
+    msg.insert("type", "q_myInfo");
+    Director::getInstance()->sendJson(msg);
+}
+

@@ -16,6 +16,7 @@ public:
     ~ProfileBar();
     void setName(const QString&);
     void setAvatar(const QString&);
+    QString getName();
 
 private:
     Ui::ProfileBar *ui;
