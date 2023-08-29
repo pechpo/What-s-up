@@ -66,6 +66,7 @@ QJsonObject Handle::e_createChat(const int &ID, const QJsonObject &obj) {
     QJsonObject users = obj["users"].toObject();
     DB *db = DB::get_instance();
     int chat_id = db->new_group_id();
+    db->e_createChat(chat_id, obj["name"].toString(), obj["avatar"].toString());
     QSet<int> S;
     for (const auto &x: users) {
         db->e_joinChat(x.toInt(), chat_id);

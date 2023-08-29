@@ -142,16 +142,9 @@ User DB::q_userInfo(const quint32 &ID) {
 bool DB::e_createChat(const quint32 &ID, const QString &name, const QString &avatarName) {
     QSqlQuery query(database);
     query.prepare("INSERT INTO chat (id, name, avatar) VALUES (?, ?, ?)");
-    query.addBindValue(new_group_id());
+    query.addBindValue(ID);
     query.addBindValue(name);
     query.addBindValue(avatarName);
-    if (!query.exec()) {
-        return false;
-    }
-    query.clear();
-    query.prepare("INSERT INTO user_chat (user_id, chat_id) VALUES (?, ?)");
-    query.addBindValue(ID);
-    query.addBindValue(group_id);
     return query.exec();
 }
 
