@@ -22,7 +22,6 @@ mainWindow::mainWindow(QWidget *parent) :
     cw = new ChatWindow(this);
     cw->move(250, 50);
     cw->show();
-<<<<<<< HEAD
 
     ui->closeButton->setVisible(false);
     ui->minimizeButton->setVisible(false);
@@ -30,8 +29,6 @@ mainWindow::mainWindow(QWidget *parent) :
 
     //for (quint16 i = 0; i < 50; i++)
     //    cw->appendText("Hello, world" + QString::number(i));
-=======
->>>>>>> f2fad2ed3f43a73d64dcb8ffc0f37102e8c6b5f9
 }
 
 mainWindow::~mainWindow()
