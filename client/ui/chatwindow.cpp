@@ -12,6 +12,7 @@ ChatWindow::ChatWindow(QWidget *parent) :
     ui->MsgEdit->setReadOnly(true);
     chatId = 0;
     waiting = 0;
+    settingsDialog = nullptr;
 
     connect(Director::getInstance(), &Director::r_chatHistory, this, &ChatWindow::slot_r_chatHistory);
     connect(Director::getInstance(), &Director::a_newMessage, this, &ChatWindow::slot_a_newMessage);
@@ -162,3 +163,15 @@ void ChatWindow::slot_r_send(const QJsonObject &obj) {
         return ;
     }
 }
+
+void ChatWindow::on_settingsButton_clicked()
+{
+    if (nullptr == settingsDialog) {
+        settingsDialog = new ChatSettings(this);
+    }
+    else {
+        settingsDialog->close();
+    }
+    settingsDialog->show();
+}
+

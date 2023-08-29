@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QVector>
 #include <QJsonObject>
+#include "chatsettings.h"
 
 namespace Ui {
 class ChatWindow;
@@ -28,8 +29,12 @@ public slots:
 private slots:
     void on_sendButton_clicked();
 
+    void on_settingsButton_clicked();
+
 private:
     Ui::ChatWindow *ui;
+    ChatSettings *settingsDialog;
+
     quint32 waiting;
 
     bool isThisChat(const QJsonObject&);
