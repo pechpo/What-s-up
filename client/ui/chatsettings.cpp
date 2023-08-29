@@ -9,7 +9,7 @@ ChatSettings::ChatSettings(QWidget *parent, qint64 id) :
     ui(new Ui::ChatSettings)
 {
     ui->setupUi(this);
-    ui->idLabel->setText(QString::number(chatId));
+    ui->idLabel->setText(QString::number(chatId) + "号聊天");
     connect(Director::getInstance(), &Director::r_chatInfo, this, &ChatSettings::slot_r_chatInfo);
     connect(Director::getInstance(), &Director::r_editChatInfo, this, &ChatSettings::slot_r_editChatInfo);
 }
@@ -72,6 +72,6 @@ void ChatSettings::slot_r_editChatInfo(const QJsonObject &obj) {
         msg.insert("type", "q_chatInfo");
         msg.insert("chatId", QJsonValue(chatId));
         Director::getInstance()->sendJson(msg);
-        Director::getInstance()->refreshMainWindow(mainWindow::Chat);
+        Director::getInstance()->refreshMainWindow(Director::Chat);
     }
 }

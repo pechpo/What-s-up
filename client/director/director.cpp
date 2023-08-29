@@ -1,4 +1,5 @@
 #include "director.h"
+#include "ui/mainwindow.h"
 
 #include <QCryptographicHash>
 #include <QDebug>
@@ -128,15 +129,15 @@ void Director::toMainWindow() {
         mainUI->show();
     }
     else {
-        refreshMainWindow(mainWindow::Friend);
+        refreshMainWindow(Director::Friend);
     }
 }
 
-void Director::refreshMainWindow(enum mainWindow::State x) {
+void Director::refreshMainWindow(enum Director::State x) {
     mainUI->setState(x);
 }
 
 void Director::enterChat(qint64 id) {
     mainUI->getChatWindow()->switchChat(id);
-    refreshMainWindow(mainWindow::Chat);
+    refreshMainWindow(Director::Chat);
 }
