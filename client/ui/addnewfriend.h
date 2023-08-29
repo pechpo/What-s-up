@@ -15,13 +15,19 @@ class AddNewFriend : public QWidget
 public:
     explicit AddNewFriend(QWidget *parent = nullptr);
     ~AddNewFriend();
-    void setName(const QString&);
     void setId(quint32 newId);
+    void setName(const QString&);
+    void setAvatar(const QString&);
+
+private slots:
+    void on_acceptButton_clicked();
+
+    void on_declineButton_clicked();
 
 private:
     Ui::AddNewFriend *ui;
     ProfileBar *bar;
-    quint32 id;
+    qint64 id;
 };
 
 #endif // ADDNEWFRIEND_H

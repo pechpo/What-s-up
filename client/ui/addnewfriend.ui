@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QToolButton" name="acceptButton">
+  <widget class="QToolButton" name="declineButton">
    <property name="geometry">
     <rect>
      <x>140</x>
@@ -28,8 +28,14 @@
    <property name="text">
     <string/>
    </property>
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="autoRaise">
+    <bool>true</bool>
+   </property>
   </widget>
-  <widget class="QToolButton" name="toolButton_2">
+  <widget class="QToolButton" name="acceptButton">
    <property name="geometry">
     <rect>
      <x>170</x>
@@ -43,6 +49,12 @@
    </property>
    <property name="text">
     <string/>
+   </property>
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="autoRaise">
+    <bool>true</bool>
    </property>
   </widget>
  </widget>
