@@ -1,5 +1,6 @@
 #include "db.h"
 #include <QSqlQuery>
+#include <curl/curl.h>
 
 //user id, name, password, avatar, email
 //message id, chat_id, sender_id, content, time, sender_name, is_file, file_name
@@ -359,6 +360,35 @@ bool DB::check(const int &id, const int &group) {
     query.exec();
     if (query.next())return true;
     return false;
+}
+
+bool DB::uploadFileToFTP(const QString &filename) {
+    CURL *curl;
+    CURLcode res;
+    curl_global_init(CURL_GLOBAL_DEFAULT);
+    curl = curl_easy_init();
+
+    if(curl) {
+        std::string url = "ftp://192.168.66.128:21";
+        url += filename.toStdString();
+        curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+        curl_easy_setopt(curl, CURLOPT_USERNAME, "usr");
+        curl_easy_setopt(curl, CURLOPT_PASSWORD, "123");
+
+        // 更多的设置和错误处理...
+
+        res = curl_easy_perform(curl);
+
+        if(res != CURLE_OK) {
+            fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
+            return false;
+        }
+
+        curl_easy_cleanup(curl);
+    }
+
+    curl_global_cleanup();
+    return true;
 }
 
 DB *DB::get_instance() {

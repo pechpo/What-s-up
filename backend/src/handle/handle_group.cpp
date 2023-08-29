@@ -64,10 +64,12 @@ QJsonObject Handle::q_list_usersInChat(const int &ID, const QJsonObject &obj) {
 QJsonObject Handle::e_createChat(const int &ID, const QJsonObject &obj) {
     // Extract the necessary fields from obj
     QJsonArray users = obj["users"].toArray();
+    QString name = obj["name"].toString();
+    QString avatar = obj["avatar"].toString();
     users.append(ID);
     DB *db = DB::get_instance();
     int chat_id = db->new_group_id();
-    db->e_createChat(chat_id, "111", obj["avatar"].toString());
+    db->e_createChat(chat_id, "111", avatar);
     QSet<int> S;
     for (const auto &x: users) {
         db->e_joinChat(x.toInt(), chat_id);

@@ -27,6 +27,7 @@ QJsonObject Handle::e_send(const int &ID, const QJsonObject &obj) {
     QJsonObject Message;
     Message["msgId"] = message_id;
     Message["senderId"] = ID;
+    Message["senderName"] = db->getName(ID);
     Message["content"] = obj["message"].toObject()["content"];
     QJsonObject S;
     S["type"] = "a_newMessage";
