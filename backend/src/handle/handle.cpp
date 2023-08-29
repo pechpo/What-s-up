@@ -33,7 +33,7 @@ Handle::~Handle() {
     delete hd;
 }
 
-QJsonObject Handle::handle(const QJsonObject &json) {
+QJsonObject Handle::handle(const QJsonObject &json) {  //after receiving json from client, execute the corresponding function and return a new json about the information
     return handlemap[json["type"].toString()](json);
 }
 
