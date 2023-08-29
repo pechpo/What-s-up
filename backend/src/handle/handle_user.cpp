@@ -90,13 +90,12 @@ QJsonObject Handle::q_userInfo(const int &ID, const QJsonObject &obj) {
 
 QJsonObject Handle::e_editInfo(const int &ID, const QJsonObject &obj) {
     // Extract the necessary fields from obj
-    quint32 id = obj["id"].toInt();
     QString name = obj["name"].toString();
     QString password = obj["password"].toString();
     QString avatar = obj["avatar"].toString();
     QString email = obj["email"].toString();
     DB *db = DB::get_instance();
-    auto user = User(id, name, password, avatar, email);
+    auto user = User(ID, name, password, avatar, email);
 
     db->e_edit_name(user);
     db->e_edit_password(user);

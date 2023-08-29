@@ -124,9 +124,9 @@ QJsonObject Handle::q_list_filesInChat(const int &ID, const QJsonObject &obj) {
     for (const auto &x: flag) {
         QJsonObject file;
         file["fileId"] = (int) x.getID();
-        file["name"] = x.getTime();
+        file["name"] = x.getFileName();
         file["senderId"] = (int) x.getSenderID();
-        file["receiverId"] = (int) x.getReceiverID();
+        file["senderName"] = x.getSenderName();
         files.append(file);
     }
     response["files"] = files;

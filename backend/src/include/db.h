@@ -69,6 +69,8 @@ public :
     int new_message_id();
 
     bool uploadFileToFTP(const QString &filename);
+
+    QString q_downloadFile(const int &ID, const QString &filename);
 private:
 
     static DB * db;

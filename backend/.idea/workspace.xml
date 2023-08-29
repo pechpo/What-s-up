@@ -22,11 +22,15 @@
   <component name="ChangeListManager">
     <list default="true" id="ef533f2d-2b4d-4d58-ad16-579cff76de6c" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/database/data.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/data.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/database/db.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/db.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handle/handle.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/handle/handle.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/handle/handle_group.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/handle/handle_group.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/handle/handle_message.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/handle/handle_message.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handle/handle_user.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/handle/handle_user.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/include/db.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/include/db.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/include/handle.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/include/handle.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/connection.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/connection.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,9 +82,9 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration name="backend" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="backend" TARGET_NAME="backend" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="backend" RUN_TARGET_NAME="backend">
@@ -114,7 +118,8 @@
       <workItem from="1693233745982" duration="9638000" />
       <workItem from="1693279616968" duration="1458000" />
       <workItem from="1693283575366" duration="9019000" />
-      <workItem from="1693294807261" duration="1778000" />
+      <workItem from="1693294807261" duration="5404000" />
+      <workItem from="1693300468298" duration="1000" />
     </task>
     <servers />
   </component>

@@ -15,6 +15,7 @@ Connection::Connection(QTcpSocket* socket, QObject* parent)
     socket->setParent(this);  // 设置父对象
     connect(this, &QTcpSocket::readyRead, this, &Connection::receiveMessage);
     qDebug() << "Connection established with:" << this->peerAddress().toString();
+    sendMessage(QJsonObject({{"type", "hello"}}));
 }
 
 Connection::~Connection() {

@@ -45,18 +45,17 @@ QJsonObject Handle::e_send(const int &ID, const QJsonObject &obj) {
     // Send the response back to client
 }
 
-QJsonObject Handle::e_send_file(const int &ID, const QJsonObject &obj) {
+QJsonObject Handle::e_updateFile(const int &ID, const QJsonObject &obj) {
     // Extract the necessary fields from obj
     quint32 chatId = obj["chatId"].toInt();
-    auto message = obj["message"].toObject();
-    QString content = message["content"].toString();
-    QString name = message["name"].toString();
+    QString content = obj["content"].toString();
+    QString name = obj["fileName"].toString();
     DB *db = DB::get_instance();
     int message_id = db->new_message_id();
     auto flag = db->e_send(Message(message_id, ID, chatId, content, "111", db->getName(ID), true, name));
 
     QJsonObject response;
-    response["type"] = "r_send";
+    response["type"] = "r_updateFile";
     response["success"] = flag;  // set to false if insertion fails
     if (!flag) {
         response["error"] = "Send failed";
@@ -65,7 +64,7 @@ QJsonObject Handle::e_send_file(const int &ID, const QJsonObject &obj) {
     QJsonObject Message;
     Message["msgId"] = message_id;
     Message["senderId"] = ID;
-    Message["content"] = obj["message"].toObject()["content"];
+    Message["content"] = obj["fileName"];
     QJsonObject S;
     S["type"] = "a_newMessage";
     S["chatId"] = (int) chatId;
@@ -78,4 +77,18 @@ QJsonObject Handle::e_send_file(const int &ID, const QJsonObject &obj) {
     }
     return response;
     // Send the response back to client
+}
+
+QJsonObject Handle::q_downloadFile(const int &ID, const QJsonObject &obj) {
+    quint32 chatId = obj["chatId"].toInt();
+    QString name = obj["fileName"].toString();
+    DB *db = DB::get_instance();
+    auto flag = db->q_downloadFile(chatId, name);
+
+    QJsonObject response;
+    response["type"] = "r_downloadFile";
+    response["chatId"] = (int) chatId;  // set to false if insertion fails
+    response["fileName"] = name;
+    response["content"] = flag;
+    return response;
 }

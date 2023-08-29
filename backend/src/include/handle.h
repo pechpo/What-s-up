@@ -48,7 +48,9 @@ public:
 
     QJsonObject q_list_filesInChat(const int &id, const QJsonObject &json);
 
-    QJsonObject e_send_file(const int &id, const QJsonObject &json);
+    QJsonObject e_updateFile(const int &id, const QJsonObject &json);
+
+    QJsonObject q_downloadFile(const int &id, const QJsonObject &json);
 
     std::map<QString, std::function<QJsonObject(const int &id, const QJsonObject &)>> handlemap;
 

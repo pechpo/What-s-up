@@ -391,6 +391,16 @@ bool DB::uploadFileToFTP(const QString &filename) {
     return true;
 }
 
+QString DB::q_downloadFile(const int &ID, const QString &fileName) {
+    QSqlQuery query(database);
+    query.prepare("SELECT * FROM message WHERE chat_id = ? AND fileName = ?");
+    query.addBindValue(ID);
+    query.addBindValue(fileName);
+    query.exec();
+    if (query.next())return query.value(3).toString();
+    return "";
+}
+
 DB *DB::get_instance() {
     if (db == nullptr) {
         db = new DB;
