@@ -16,6 +16,8 @@ ChatWindow::ChatWindow(QWidget *parent) :
     ui->MsgEdit->setReadOnly(true);
     chatId = 0;
     waiting = 0;
+    dl = nullptr;
+    settingsDialog = nullptr;
 
     connect(Director::getInstance(), &Director::r_chatHistory, this, &ChatWindow::slot_r_chatHistory);
     connect(Director::getInstance(), &Director::a_newMessage, this, &ChatWindow::slot_a_newMessage);
@@ -95,10 +97,10 @@ ChatWindow::Message ChatWindow::jsonToMessage(const QJsonObject &obj) {
         setIncompleteMessage(cur);
         return cur;
     }
-    /*if (!obj.value("senderName").isString()) {
+    if (!obj.value("senderName").isString()) {
         setIncompleteMessage(cur);
         return cur;
-    }*/
+    }
     if (!obj.value("content").isString()) {
         setIncompleteMessage(cur);
         return cur;
@@ -110,8 +112,8 @@ ChatWindow::Message ChatWindow::jsonToMessage(const QJsonObject &obj) {
     else {
         cur.isSystem = false;
         cur.senderId = obj.value("senderId").toInt();
-        //cur.senderName = obj.value("senderName").toString();
-        cur.senderName = "Carol" + QString::number(cur.senderId);
+        cur.senderName = obj.value("senderName").toString();
+        //cur.senderName = "Carol" + QString::number(cur.senderId);
     }
     cur.content = obj.value("content").toString();
     return cur;
@@ -179,7 +181,8 @@ void ChatWindow::on_fileButton_clicked() {
             return;
         }
         QByteArray content = file.readAll();
-        QString content_str = QString::fromUtf8(content.toHex());  //redundent
+        file.close();
+        QString content_str = QString::fromUtf8(content.toBase64());  //redundent
         QFileInfo fileInfo(str);
         QJsonObject msg;
         msg.insert("type", "e_updateFile");
@@ -204,9 +207,26 @@ void ChatWindow::slot_r_updateFile(const QJsonObject &obj) {
 
 void ChatWindow::on_pushButton_clicked()
 {
-    if (0 == waiting) {
+    if (nullptr == dl){
         dl = new fileDownload();
-        dl->set(chatId, waiting);
+        dl->set(chatId, &waiting, true);
+    } else {
+        if (true == dl->isVisible())
+            dl->close();
+        else{
+            dl->set(chatId, &waiting, false);
+        }
     }
+}
+
+void ChatWindow::on_settingsButton_clicked()
+{
+    if (nullptr == settingsDialog) {
+        settingsDialog = new ChatSettings(this);
+    }
+    else {
+        settingsDialog->close();
+    }
+    settingsDialog->show();
 }
 

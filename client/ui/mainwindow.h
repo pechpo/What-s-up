@@ -8,6 +8,7 @@
 #include "addnewfriend.h"
 #include "startchat.h"
 #include "createchat.h"
+#include "settings.h"
 
 namespace Ui {
 class mainWindow;
@@ -44,11 +45,14 @@ private slots:
 
     void on_grouplistButton_clicked();
 
+    void on_settingButton_clicked();
+
 private:
     Ui::mainWindow *ui;
     ChatWindow *cw;
     SearchNewFriend *snf;
     CreateChat *newChatDialog;
+    Settings *settings;
     QVector<AddNewFriend*> friendRequests;
     QVector<StartChat*> friends;
     QVector<StartChat*> chats;

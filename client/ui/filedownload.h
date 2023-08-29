@@ -13,15 +13,20 @@ class fileDownload : public QWidget
 
 public:
     explicit fileDownload(QWidget *parent = nullptr);
-    void set(qint64 chatId, quint32 &waiting);
+    void set(qint64 chatId, quint32 *waiting, bool init);
     ~fileDownload();
 
 public slots:
     void slot_r_list_filesInChat(const QJsonObject &obj);
+    void slot_r_downloadFile(const QJsonObject &obj);
+
+private slots:
+    void on_Download_clicked();
 
 private:
     Ui::fileDownload *ui;
-
+    qint64 chatId;
+    quint32 *waiting;
 };
 
 #endif // FILEDOWNLOAD_H

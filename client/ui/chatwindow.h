@@ -5,6 +5,7 @@
 #include <QVector>
 #include <QJsonObject>
 #include "filedownload.h"
+#include "chatsettings.h"
 
 namespace Ui {
 class ChatWindow;
@@ -34,9 +35,13 @@ private slots:
 
     void on_pushButton_clicked();
 
+    void on_settingsButton_clicked();
+
 private:
     Ui::ChatWindow *ui;
     fileDownload *dl;
+    ChatSettings *settingsDialog;
+
     quint32 waiting;
 
     bool isThisChat(const QJsonObject&);

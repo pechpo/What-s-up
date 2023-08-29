@@ -15,6 +15,7 @@ mainWindow::mainWindow(QWidget *parent) :
 
     snf = nullptr;
     newChatDialog = nullptr;
+    settings = nullptr;
     waiting = 0;
     this->setState(Friend);
 
@@ -96,6 +97,18 @@ void mainWindow::on_addnewfriendButton_clicked()
 
 void mainWindow::setState(enum mainWindow::State tarState) {
     curState = tarState;
+    for (quint32 i = 0; i < friendRequests.size(); i++) {
+        AddNewFriend *p = friendRequests[i];
+        p->close();
+    }
+    for (quint32 i = 0; i < friends.size(); i++) {
+        StartChat *p = friends[i];
+        p->close();
+    }
+    for (quint32 i = 0; i < chats.size(); i++) {
+        StartChat *p = chats[i];
+        p->close();
+    }
     if (curState == Friend) {
         ui->viewLabel->setText("Friend List");
         QJsonObject msg1;
@@ -280,5 +293,20 @@ void mainWindow::on_grouplistButton_clicked()
     else {
 
     }
+}
+
+
+void mainWindow::on_settingButton_clicked()
+{
+    if (nullptr == settings) {
+        settings = new Settings(this);
+    }
+    else {
+        settings->close();
+    }
+    settings->show();
+    QJsonObject msg;
+    msg.insert("type", "q_myInfo");
+    Director::getInstance()->sendJson(msg);
 }
 

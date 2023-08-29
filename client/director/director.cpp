@@ -22,6 +22,7 @@ Director::Director(QObject *parent)
     recvEmitter.insert("r_joinChat", &Director::r_joinChat);
     recvEmitter.insert("r_list_filesInChat", &Director::r_list_filesInChat);
     recvEmitter.insert("r_updateFile", &Director::r_updateFile);
+    recvEmitter.insert("r_downloadFile", &Director::r_downloadFile);
     recvEmitter.insert("a_newMessage", &Director::a_newMessage);
     recvEmitter.insert("a_newFriendRequest", &Director::a_newFriendRequest);
     recvEmitter.insert("a_newChat", &Director::a_newChat);
@@ -40,7 +41,8 @@ void Director::act(const QJsonObject &obj) {  //after receiving the json package
     QString index = obj.value("type").toString();
     if (!recvEmitter.contains(index)) {
         if ("hello" == index) {
-            emit receiveTestString(obj.value("message").toString());
+            //emit receiveTestString(obj.value("message").toString());
+            emit receiveTestString("");
         }
         return ;
     }

@@ -46,6 +46,9 @@ signals:
     void r_joinChat(const QJsonObject&);
     void r_list_filesInChat(const QJsonObject&);
     void r_updateFile(const QJsonObject&);
+    void r_chatInfo(const QJsonObject&);
+    void r_editChatInfo(const QJsonObject&);
+    void r_downloadFile(const QJsonObject&);
     void a_newMessage(const QJsonObject&);
     void a_newFriendRequest(const QJsonObject&);
     void a_newChat(const QJsonObject&);

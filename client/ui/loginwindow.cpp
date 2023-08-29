@@ -23,7 +23,8 @@ LoginWindow::~LoginWindow()
 }
 
 void LoginWindow::on_receiveTestString(const QString &text) {
-    ui->receivedText->insertPlainText(text + "\n");
+    close();
+    // ui->receivedText->insertPlainText(text + "\n");
 }
 
 void LoginWindow::on_connectButton_clicked()  //connect to a certain server

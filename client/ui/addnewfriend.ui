@@ -16,10 +16,10 @@
   <widget class="QToolButton" name="declineButton">
    <property name="geometry">
     <rect>
-     <x>140</x>
-     <y>30</y>
-     <width>20</width>
-     <height>20</height>
+     <x>125</x>
+     <y>20</y>
+     <width>30</width>
+     <height>30</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -38,10 +38,10 @@
   <widget class="QToolButton" name="acceptButton">
    <property name="geometry">
     <rect>
-     <x>170</x>
-     <y>30</y>
-     <width>20</width>
-     <height>20</height>
+     <x>160</x>
+     <y>20</y>
+     <width>30</width>
+     <height>30</height>
     </rect>
    </property>
    <property name="styleSheet">
