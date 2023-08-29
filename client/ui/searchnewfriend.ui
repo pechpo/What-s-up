@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(246, 245, 245);</string>
+  </property>
   <widget class="QLineEdit" name="searchLineEdit">
    <property name="geometry">
     <rect>

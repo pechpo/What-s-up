@@ -29,7 +29,7 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: rgb(227, 232, 238);</string>
+    <string notr="true">background-color: rgb(233, 228, 230);</string>
    </property>
    <widget class="QLabel" name="hostLabel">
     <property name="geometry">
