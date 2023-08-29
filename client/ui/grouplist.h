@@ -2,6 +2,7 @@
 #define GROUPLIST_H
 
 #include <QWidget>
+#include <QAbstractScrollArea>
 
 namespace Ui {
 class GroupList;
