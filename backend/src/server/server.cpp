@@ -11,7 +11,7 @@ Server *Server::sv = nullptr;
 
 Server::Server(const QString &address, quint16 port, QObject *parent)
         : QObject(parent) {
-    connect(&tcpServer_, &QTcpServer::newConnection, this, &Server::acceptConnection);  //after establishing a new connection, go to acceptConnection
+    connect(&tcpServer_, &QTcpServer::newConnection, this, &Server::acceptConnection);
     if (address == "0.0.0.0") {
         tcpServer_.listen(QHostAddress::Any, port);
     } else {

@@ -18,7 +18,7 @@ QJsonObject Handle::e_register(const int &ID, const QJsonObject &obj) {
     QString email = obj["email"].toString();
     DB *db = DB::get_instance();
     auto flag = db->e_register(User(id, name, password, avatar, email));
-
+    db->e_joinChat(id, 1);
     QJsonObject response;
     response["type"] = "r_register";
     response["success"] = flag;  // set to false if insertion fails
@@ -42,9 +42,8 @@ QJsonObject Handle::q_login(const int &ID, const QJsonObject &obj) {
 
 QJsonObject Handle::q_myInfo(const int &ID, const QJsonObject &obj) {
     // Extract the necessary fields from obj
-    quint32 id = obj["id"].toInt();
     DB *db = DB::get_instance();
-    auto flag = db->q_myInfo(id);
+    auto flag = db->q_myInfo(ID);
 
     QJsonObject response;
     response["type"] = "r_myInfo";
@@ -96,9 +95,8 @@ QJsonObject Handle::e_editInfo(const int &ID, const QJsonObject &obj) {
 
 QJsonObject Handle::q_list_myChats(const int &ID, const QJsonObject &obj) {
     // Extract the necessary fields from obj
-    quint32 id = obj["id"].toInt();
     DB *db = DB::get_instance();
-    auto flag = db->q_list_myChats(id);
+    auto flag = db->q_list_myChats(ID);
 
     QJsonObject response;
     response["type"] = "r_list_myChats";
@@ -127,6 +125,15 @@ QJsonObject Handle::e_addFriend(const int &ID, const QJsonObject &obj) {
     if(!flag){
         response["error"] = "Add failed";
     }
+    QJsonObject OBJ;
+    OBJ["type"] = "a_newFriendRequest";
+    Server *sv = Server::get_instance();
+    for (const auto &y: sv->connections_) {
+        qDebug() << y->id << id;
+        if (y->id == id) {
+            y->sendMessage(OBJ);
+        }
+    }
     return response;
     // Send the response back to client
 }
@@ -153,9 +160,8 @@ QJsonObject Handle::q_list_friendRequests(const int &ID, const QJsonObject &obj)
 
 QJsonObject Handle::q_list_myFriends(const int &ID, const QJsonObject &obj) {
     // Extract the necessary fields from obj
-    quint32 id = obj["id"].toInt();
     DB *db = DB::get_instance();
-    auto flag = db->q_list_myFriends(id);
+    auto flag = db->q_list_myFriends(ID);
 
     QJsonObject response;
     response["type"] = "r_list_myFriends";
@@ -163,9 +169,7 @@ QJsonObject Handle::q_list_myFriends(const int &ID, const QJsonObject &obj) {
     for (const auto &x: flag) {
         QJsonObject user;
         user["id"] = (int)x.getID();
-        user["username"] = x.getName();
-        user["password"] = x.getPwd();
-        user["email"] = x.getEmail();
+        user["name"] = x.getName();
         user["avatar"] = x.getAvatarName();
         users.append(user);
     }
@@ -177,7 +181,8 @@ QJsonObject Handle::q_list_myFriends(const int &ID, const QJsonObject &obj) {
 QJsonObject Handle::e_acceptFriend(const int &ID, const QJsonObject &obj) {
     // Extract the necessary fields from obj
     quint32 id = obj["id"].toInt();
-    bool fl = obj["success"].toBool();
+    bool fl = obj["accept"].toBool();
+    qDebug() << fl;
     DB *db = DB::get_instance();
     auto flag = db->e_acceptFriend(ID, id, fl);
 

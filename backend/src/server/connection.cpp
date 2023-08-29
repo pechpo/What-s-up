@@ -55,25 +55,6 @@ void Connection::receiveMessage() {
         qDebug() << x;
         curRemainSize = 0;
         sendMessage(x);
-        if (obj["type"] == "e_send") {
-            obj["type"] = "a_newMessage";
-            QJsonObject message;
-            message["msgId"] = 1;
-            message["senderId"] = id;
-            message["content"] = obj["message"].toObject()["content"];
-            QJsonObject S;
-            S["type"] = "a_newMessage";
-            S["chatId"] = 1;
-            S["message"] = message;
-            Server *sv = Server::get_instance();
-            qDebug() << S;
-            for (const auto &y: sv->connections_) {
-                qDebug() << y->id;
-                if (hd->check(y->id, 1)) {
-                    y->sendMessage(S);
-                }
-            }
-        }
     }
 }
 

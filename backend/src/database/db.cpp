@@ -12,7 +12,7 @@ DB *DB::db = nullptr;
 
 int DB::user_id = 0;
 
-int DB::group_id = 0;
+int DB::group_id = 1;
 
 int DB::message_id = 0;
 
@@ -161,7 +161,14 @@ QList<Group> DB::q_list_myChats(const quint32 &ID) {
     QList<Group> chats;
     while (query.next()) {
         Group chat;
-        chat.setID(query.value(0).toUInt());
+        QSqlQuery Query(database);
+        Query.prepare("SELECT * FROM chat WHERE id = ?");
+        Query.addBindValue(query.value(0).toUInt());
+        Query.exec();
+        if (!Query.next())return {};
+        chat.setID(Query.value(0).toUInt());
+        chat.setName(Query.value(1).toString());
+        chat.setAvatarName(Query.value(3).toString());
         chats.append(chat);
     }
     return chats;
@@ -175,7 +182,14 @@ QList<User> DB::q_list_usersInChat(const quint32 &chat_ID) {
     QList<User> users;
     while (query.next()) {
         User user;
-        user.setID(query.value(0).toUInt());
+        QSqlQuery Query(database);
+        Query.prepare("SELECT * FROM user WHERE id = ?");
+        Query.addBindValue(query.value(0).toUInt());
+        Query.exec();
+        if (!Query.next())return {};
+        user.setID(Query.value(0).toUInt());
+        user.setName(Query.value(1).toString());
+        user.setAvatarName(Query.value(3).toString());
         users.append(user);
     }
     return users;
@@ -218,7 +232,14 @@ QList<User> DB::q_list_myFriends(const quint32 &ID) {
     QList<User> users;
     while (query.next()) {
         User user;
-        user.setID(query.value(0).toUInt());
+        QSqlQuery Query(database);
+        Query.prepare("SELECT * FROM user WHERE id = ?");
+        Query.addBindValue(query.value(0).toUInt());
+        Query.exec();
+        if (!Query.next())return {};
+        user.setID(Query.value(0).toUInt());
+        user.setName(Query.value(1).toString());
+        user.setAvatarName(Query.value(3).toString());
         users.append(user);
     }
     return users;

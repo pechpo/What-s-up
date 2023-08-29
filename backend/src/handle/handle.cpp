@@ -65,7 +65,6 @@ Handle::~Handle() {
     delete hd;
 }
 
-//after receiving json from client, execute the corresponding function and return a new json about the information
 QJsonObject Handle::handle(const int &id, const QJsonObject &json) {
     return handlemap[json["type"].toString()](id, json);
 }

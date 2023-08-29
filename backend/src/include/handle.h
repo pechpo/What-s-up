@@ -6,6 +6,7 @@
 #define BACKEND_HANDLE_H
 
 #include <QObject>
+#include "server.h"
 
 class Handle : public QObject{
 public:
