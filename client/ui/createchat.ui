@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>222</width>
+    <width>300</width>
     <height>344</height>
    </rect>
   </property>
@@ -16,22 +16,25 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>20</x>
+     <x>25</x>
      <y>10</y>
-     <width>181</width>
+     <width>250</width>
      <height>31</height>
     </rect>
    </property>
    <property name="text">
     <string>Select friends &amp; create a chat</string>
    </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
   </widget>
   <widget class="QScrollArea" name="scrollArea">
    <property name="geometry">
     <rect>
-     <x>20</x>
+     <x>50</x>
      <y>40</y>
-     <width>181</width>
+     <width>200</width>
      <height>251</height>
     </rect>
    </property>
@@ -43,7 +46,7 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>179</width>
+      <width>198</width>
       <height>249</height>
      </rect>
     </property>
@@ -52,7 +55,7 @@
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>70</x>
+     <x>110</x>
      <y>300</y>
      <width>80</width>
      <height>22</height>
