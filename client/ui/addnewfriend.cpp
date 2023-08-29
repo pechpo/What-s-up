@@ -15,6 +15,9 @@ AddNewFriend::AddNewFriend(QWidget *parent) :
     bar->stackUnder(this);
     ui->acceptButton->raise();
     ui->declineButton->raise();
+
+    connect(Director::getInstance(), &Director::r_acceptFriend, this, &AddNewFriend::slot_r_acceptFriend);
+
 }
 
 AddNewFriend::~AddNewFriend()
@@ -42,7 +45,7 @@ void AddNewFriend::on_acceptButton_clicked()
     msg.insert("id", QJsonValue(id));
     msg.insert("accept", true);
     if (Director::getInstance()->sendJson(msg)) {
-        Director::getInstance()->refreshMainWindow();
+
     }
 }
 
@@ -53,7 +56,12 @@ void AddNewFriend::on_declineButton_clicked()
     msg.insert("id", QJsonValue(id));
     msg.insert("accept", false);
     if (Director::getInstance()->sendJson(msg)) {
-        Director::getInstance()->refreshMainWindow();
+
     }
 }
 
+void AddNewFriend::slot_r_acceptFriend(const QJsonObject &obj) {
+    if (true == obj.value("success").toBool()) {
+        Director::getInstance()->refreshMainWindow();
+    }
+}

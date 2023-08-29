@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
     mainWindow mw;
     CreateChat cc;
     //ProfileBar pb;
-    LoginDialog d;
+    LoginDialog d;  //login dialog window
     d.show();
     mw.show();
     cc.show();

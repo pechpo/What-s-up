@@ -172,7 +172,7 @@ border-radius: 10px;</string>
      <enum>QLineEdit::Normal</enum>
     </property>
     <property name="placeholderText">
-     <string>请输入用户名</string>
+     <string>请输入用户ID</string>
     </property>
    </widget>
    <widget class="QToolButton" name="closeButton">

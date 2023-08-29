@@ -1,14 +1,21 @@
 // src/main.cpp
 
+#include <QApplication>
 #include "server.h"
-#include <boost/asio.hpp>
+#include "db.h"
 
-int main() {
-    boost::asio::io_context io_context;
-    Server server(io_context, "127.0.0.1", 8080);
+int main(int argc, char *argv[]) {
+//    DB::get_instance()->e_createChat(1, "", "test");
+
+    QApplication app(argc, argv);
+
+    // 设置服务器监听的 IP 地址和端口
+    QString address = "0.0.0.0";
+    quint16 port = 10043;
+
+    // 创建并启动服务器
+    Server server(address, port);
     server.start();
-    io_context.run();
-    return 0;
+
+    return QApplication::exec();
 }
-
-
