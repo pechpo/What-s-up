@@ -26,7 +26,6 @@ int main(int argc, char *argv[])
     }
     //Director::getInstance()->toMainWindow();
     //ChatWindow cw;
-<<<<<<< HEAD
     mainWindow mw;
     CreateChat cc;
     //ProfileBar pb;
@@ -34,13 +33,11 @@ int main(int argc, char *argv[])
     d.show();
     mw.show();
     cc.show();
-=======
     //mainWindow mw;
     //ProfileBar pb;
-    LoginDialog d;
-    d.show();
+//    LoginDialog d;
+//    d.show();
     //mw.show();
->>>>>>> ca9bf9dadf6f661fea8456d072b1a16c8e9313d6
     //pb.show();
     //cw.show();
     return a.exec();
