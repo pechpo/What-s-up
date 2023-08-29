@@ -2,6 +2,7 @@
 #define STARTCHAT_H
 
 #include <QWidget>
+#include <QJsonObject>
 #include "profilebar.h"
 
 namespace Ui {
@@ -20,6 +21,9 @@ public:
     void setAvatar(const QString&);
     qint64 getId();
     QString getName();
+
+public slots:
+    void slot_r_talk(const QJsonObject&);
 
 private slots:
     void on_chatButton_clicked();

@@ -19,7 +19,8 @@ Settings::~Settings()
 
 void Settings::on_pushButton_clicked()
 {
-    if (ui->newPwd->text().length() < 4) {
+    bool modifyPwd = (ui->newPwd->text().length() > 0);
+    if (modifyPwd && ui->newPwd->text().length() < 4) {
         return ;
     }
     QJsonObject msg;
@@ -28,7 +29,9 @@ void Settings::on_pushButton_clicked()
     msg.insert("name", ui->newName->text());
     msg.insert("avatar", ui->newAvatar->text());
     msg.insert("email", ui->newEmail->text());
-    msg.insert("password", Director::getInstance()->Hash(ui->newPwd->text()));
+    if (modifyPwd) {
+        msg.insert("password", Director::getInstance()->Hash(ui->newPwd->text()));
+    }
     Director::getInstance()->sendJson(msg);
 }
 

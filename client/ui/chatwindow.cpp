@@ -39,7 +39,7 @@ void ChatWindow::switchChat(qint64 id) {
         return ;
     }
     chatId = id;
-    ui->idLabel->setText("Chat ID: " + QString::number(id));
+    //ui->idLabel->setText("Chat ID: " + QString::number(id));
     ui->MsgEdit->setText("");
     QJsonObject msg;
     msg.insert("type", "q_chatHistory");
@@ -55,6 +55,7 @@ void ChatWindow::slot_r_chatHistory(const QJsonObject &obj) {
     if (!obj.value("chatHistory").isArray()) {
         return ;
     }
+    ui->idLabel->setText("当前群聊：" + obj.value("name").toString());
     // todo: insert chatHistory message to proper place
     // current: reset
     QJsonArray recvHistory = obj.value("chatHistory").toArray();
@@ -91,24 +92,22 @@ ChatWindow::Message ChatWindow::jsonToMessage(const QJsonObject &obj) {
         setIncompleteMessage(cur);
         return cur;
     }
-    if (!obj.value("senderName").isString()) {
-        setIncompleteMessage(cur);
-        return cur;
-    }
     if (!obj.value("content").isString()) {
         setIncompleteMessage(cur);
         return cur;
     }
     //
-    if (obj.value("isSystem").isString()) {
-        cur.isSystem = true;
+    QString name = "Bot";
+    if (obj.value("senderName").isString()) {
+        name = obj.value("senderName").toString();
     }
     else {
-        cur.isSystem = false;
-        cur.senderId = obj.value("senderId").toInt();
-        cur.senderName = obj.value("senderName").toString();
-        //cur.senderName = "Carol" + QString::number(cur.senderId);
+        cur.isSystem = true;
     }
+    cur.isSystem = false;
+    cur.senderId = obj.value("senderId").toInt();
+    //cur.senderName = "Carol" + QString::number(cur.senderId);
+    cur.senderName = name;
     cur.content = obj.value("content").toString();
     return cur;
 }
@@ -135,6 +134,7 @@ void ChatWindow::updateText() {
 
 void ChatWindow::appendText(const QString &text) {
     ui->MsgEdit->insertPlainText(text + "\n");
+    // outdated. do not use this.
 }
 
 void ChatWindow::on_sendButton_clicked()
@@ -172,7 +172,7 @@ void ChatWindow::on_settingsButton_clicked()
     }
     settingsDialog = new ChatSettings(this, chatId);
     settingsDialog->show();
-    settingsDialog->setAttribute(Qt::WA_DeleteOnClose, true);
+    qDebug() << "successful click";
     QJsonObject msg;
     msg.insert("type", "q_chatInfo");
     msg.insert("chatId", QJsonValue(chatId));

@@ -25,6 +25,7 @@ void ChatSettings::clear() {
         userList[i]->close();
         delete userList[i];
     }
+    userList.clear();
 }
 
 void ChatSettings::on_confirmButton_clicked()
@@ -62,6 +63,7 @@ void ChatSettings::slot_r_chatInfo(const QJsonObject &obj) {
         height += p->height() + gap;
         p->show();
     }
+    //qDebug() << "successful recv";
 }
 
 void ChatSettings::slot_r_editChatInfo(const QJsonObject &obj) {
@@ -70,5 +72,6 @@ void ChatSettings::slot_r_editChatInfo(const QJsonObject &obj) {
         msg.insert("type", "q_chatInfo");
         msg.insert("chatId", QJsonValue(chatId));
         Director::getInstance()->sendJson(msg);
+        Director::getInstance()->refreshMainWindow(mainWindow::Chat);
     }
 }

@@ -16,6 +16,8 @@ StartChat::StartChat(QWidget *parent, bool isRealPerson) :
     bar->show();
     bar->stackUnder(this);
     ui->chatButton->raise();
+
+    connect(Director::getInstance(), &Director::r_talk, this, &StartChat::slot_r_talk);
 }
 
 StartChat::~StartChat()
@@ -47,15 +49,17 @@ void StartChat::on_chatButton_clicked()
     if (isPerson) {
         qDebug() << "si liao";
         QJsonObject msg;
-        QJsonArray arr;
-        arr.push_back(QJsonValue(id));
-        msg.insert("type", "e_createChat");
-        msg.insert("users", arr);
+        msg.insert("type", "q_talk");
+        msg.insert("id", QJsonValue(id));
         Director::getInstance()->sendJson(msg);
     }
     else {
         Director::getInstance()->enterChat(id);
     }
+}
+
+void StartChat::slot_r_talk(const QJsonObject &obj) {
+    Director::getInstance()->enterChat(obj.value("chatId").toInt());
 }
 
 qint64 StartChat::getId() {

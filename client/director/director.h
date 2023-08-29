@@ -24,7 +24,7 @@ public:
     bool sendJson(const QJsonObject&);
     void sendPureMessage(const QString&); // debug
     void toMainWindow();
-    void refreshMainWindow();
+    void refreshMainWindow(enum mainWindow::State);
     void enterChat(qint64 id);
 
 signals:
@@ -47,6 +47,7 @@ signals:
     void r_list_filesInChat(const QJsonObject&);
     void r_chatInfo(const QJsonObject&);
     void r_editChatInfo(const QJsonObject&);
+    void r_talk(const QJsonObject&);
     void a_newMessage(const QJsonObject&);
     void a_newFriendRequest(const QJsonObject&);
     void a_newChat(const QJsonObject&);
