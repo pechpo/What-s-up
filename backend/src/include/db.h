@@ -71,6 +71,15 @@ public :
     bool uploadFileToFTP(const QString &filename);
 
     QString q_downloadFile(const int &ID, const QString &filename);
+
+    bool add_tag(const int &ID,const std::vector<int> &tags);
+
+    std::vector<int> get_tags(const int &ID);
+
+    std::unordered_map<quint32, std::vector<int>> get_all_tags();
+
+    std::vector<quint32> getFriends(const int &ID);
+
 private:
 
     static DB * db;

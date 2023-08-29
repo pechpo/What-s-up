@@ -289,7 +289,8 @@ bool DB::e_acceptFriend(const quint32 &id, const quint32 &ID, const bool &fl) {
 
 bool DB::e_send(const Message &message) {
     QSqlQuery query(database);
-    query.prepare("INSERT INTO message (id, chat_id, sender_id, content, time, sender_name, is_file, file_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    query.prepare(
+            "INSERT INTO message (id, chat_id, sender_id, content, time, sender_name, is_file, file_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
     query.addBindValue(message.getID());
     query.addBindValue(message.getReceiverID());
     query.addBindValue(message.getSenderID());
@@ -368,7 +369,7 @@ bool DB::uploadFileToFTP(const QString &filename) {
     curl_global_init(CURL_GLOBAL_DEFAULT);
     curl = curl_easy_init();
 
-    if(curl) {
+    if (curl) {
         std::string url = "ftp://192.168.66.128:21";
         url += filename.toStdString();
         curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
@@ -379,7 +380,7 @@ bool DB::uploadFileToFTP(const QString &filename) {
 
         res = curl_easy_perform(curl);
 
-        if(res != CURLE_OK) {
+        if (res != CURLE_OK) {
             fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
             return false;
         }
@@ -401,9 +402,63 @@ QString DB::q_downloadFile(const int &ID, const QString &fileName) {
     return "";
 }
 
+bool DB::add_tag(const int &ID, const std::vector<int> &tags) {
+    QSqlQuery query(database);
+    query.prepare(
+            "INSERT INTO user_tags (user_id, tag_0, tag_1, tag_2, tag_3, tag_4, tag_5, tag_6, tag_7, tag_8, tag_9, tag_10, tag_11, tag_12, tag_13, tag_14, tag_15, tag_16, tag_17, tag_18, tag_19, tag_20, tag_21, tag_22, tag_23, tag_24, tag_25, tag_26, tag_27, tag_28, tag_29, tag_30, tag_31, tag_32, tag_33, tag_34, tag_35) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+
+    query.addBindValue(ID);
+    for (int i = 0; i < 36; i++) {
+        query.addBindValue(tags[i]);
+    }
+    return query.exec();
+}
+
+std::vector<int> DB::get_tags(const int &ID) {
+    QSqlQuery query(database);
+    query.prepare("SELECT * FROM user_tags WHERE user_id = ?");
+    query.addBindValue(ID);
+    query.exec();
+    if (query.next()) {
+        std::vector<int> tags;
+        for (int i = 0; i < 36; i++) {
+            tags.push_back(query.value(i + 1).toInt());
+        }
+        return tags;
+    }
+    return {};
+}
+
+std::unordered_map<quint32, std::vector<int>> DB::get_all_tags() {
+    QSqlQuery query(database);
+    query.prepare("SELECT * FROM user_tags");
+    query.exec();
+    std::unordered_map<quint32, std::vector<int>> users;
+    while (query.next()) {
+        std::vector<int> tags;
+        for (int i = 0; i < 36; i++) {
+            tags.push_back(query.value(i + 1).toInt());
+        }
+        users[query.value(0).toInt()] = tags;
+    }
+    return users;
+}
+
+std::vector<quint32> DB::getFriends(const int &ID) {
+    QSqlQuery query(database);
+    query.prepare("SELECT friend_id FROM friend WHERE user_id = ?");
+    query.addBindValue(ID);
+    query.exec();
+    std::vector<quint32> friends;
+    while (query.next()) {
+        friends.push_back(query.value(0).toInt());
+    }
+    return friends;
+}
+
 DB *DB::get_instance() {
     if (db == nullptr) {
-        db = new DB;
+        db = new DB();
     }
     return db;
 }

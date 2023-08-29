@@ -6,25 +6,79 @@
 
 #include "recommendation.h"
 #include "clustering.h"
+#include "db.h"
 #include <unordered_map>
 #include <vector>
+#include <QSqlQuery>
+
+//动漫、漫画、游戏、旅游、音乐、阅读、写作、摄影、美食、哲学、健身、美妆、单身、已婚、学生、职场新人、中年、退休、猫奴、犬奴、（16种mbti）
+
+// Define tag indices for better readability
+const int ANIME = 0;
+const int MANGA = 1;
+const int GAMING = 2;
+const int TRAVEL = 3;
+const int MUSIC = 4;
+const int READING = 5;
+const int WRITING = 6;
+const int PHOTOGRAPHY = 7;
+const int FOOD = 8;
+const int PHILOSOPHY = 9;
+const int FITNESS = 10;
+const int BEAUTY = 11;
+const int SINGLE = 12;
+const int MARRIED = 13;
+const int STUDENT = 14;
+const int NEWCOMER = 15;
+const int MIDDLE_AGE = 16;
+const int RETIRED = 17;
+const int CAT = 18;
+const int DOG = 19;
+const int ENTJ = 20;
+const int ENTP = 21;
+const int ENFJ = 22;
+const int ENFP = 23;
+const int ESFJ = 24;
+const int ESFP = 25;
+const int ESTJ = 26;
+const int ESTP = 27;
+const int INTJ = 28;
+const int INTP = 29;
+const int INFJ = 30;
+const int INFP = 31;
+const int ISFJ = 32;
+const int ISFP = 33;
+const int ISTJ = 34;
+const int ISTP = 35;
+
 
 Recommendation::Recommendation() {
 
 }
 
+std::vector<quint32> Recommendation::getFriends(const quint32& userId) {
+    DB *db = DB::get_instance();
+    return db->getFriends(userId);
+}
+
 std::vector<quint32> Recommendation::recommendFriends(const quint32& userId) {
-    std::unordered_map<quint32, std::vector<int>> users;  // Replace with actual data
+    DB *db = DB::get_instance();
+
+    std::unordered_map<quint32, std::vector<int>> users = db->get_all_tags();
+    // Fetch user tags from the database
+
     KMeans kmeans(5);  // Assuming 5 clusters
     auto clusters = kmeans.run(users);
 
     // Logic to recommend friends based on clustering result
     std::vector<quint32> recommended_friends;
+    std::vector<quint32> existing_friends = getFriends(userId);  // Fetch existing friends to exclude them
+
     for (const auto& cluster : clusters) {
         for (const auto& [uid, _] : cluster) {
             if (uid == userId) {
                 for (const auto& [other_uid, _] : cluster) {
-                    if (other_uid != userId) {
+                    if (other_uid != userId && std::find(existing_friends.begin(), existing_friends.end(), other_uid) == existing_friends.end()) {
                         recommended_friends.push_back(other_uid);
                     }
                 }
@@ -34,45 +88,4 @@ std::vector<quint32> Recommendation::recommendFriends(const quint32& userId) {
     }
 
     return recommended_friends;
-}
-
-std::vector<quint32> Recommendation::recommendGroups(const quint32& userId) {
-    std::unordered_map<quint32, std::vector<int>> groups;  // Replace with actual data
-    KMeans kmeans(5);  // Assuming 5 clusters
-    auto clusters = kmeans.run(groups);
-
-    // Logic to recommend groups based on clustering result
-    std::vector<quint32> recommended_groups;
-    for (const auto& cluster : clusters) {
-        for (const auto& [gid, _] : cluster) {
-            recommended_groups.push_back(gid);
-        }
-    }
-
-    return recommended_groups;
-}
-
-std::vector<quint32> Recommendation::getFriends(const quint32& userId) {
-    // Fetch the friend list of the user from the database (placeholder logic)
-    return {1, 2, 3};  // Example friend IDs
-}
-
-std::vector<quint32> Recommendation::getGroups(const quint32& userId) {
-    // Fetch the group list of the user from the database (placeholder logic)
-    return {101, 102, 103};  // Example group IDs
-}
-
-std::vector<int> Recommendation::getTags(const quint32& userId) {
-    // Fetch the tags of the user from the database (placeholder logic)
-    return {0, 1, 0, 1};  // Example tags
-}
-
-std::vector<int> Recommendation::getFriendsTags(const quint32& userId) {
-    // Fetch the tags of the friends of the user from the database (placeholder logic)
-    return {1, 0, 1, 0};  // Example tags
-}
-
-std::vector<int> Recommendation::getGroupsTags(const quint32& userId) {
-    // Fetch the tags of the groups of the user from the database (placeholder logic)
-    return {1, 1, 0, 0};  // Example tags
 }
