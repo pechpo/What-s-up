@@ -26,7 +26,7 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: rgb(219, 237, 247);</string>
+    <string notr="true">background-color: rgb(233, 228, 230);</string>
    </property>
    <widget class="QToolButton" name="minimizeButton">
     <property name="geometry">
@@ -86,12 +86,12 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(255, 255, 255);</string>
+     <string notr="true">background-color: rgb(233, 228, 230);</string>
     </property>
     <widget class="QToolButton" name="grouplistButton">
      <property name="geometry">
       <rect>
-       <x>15</x>
+       <x>10</x>
        <y>10</y>
        <width>60</width>
        <height>60</height>
@@ -123,7 +123,7 @@
     <widget class="QToolButton" name="toolButton">
      <property name="geometry">
       <rect>
-       <x>135</x>
+       <x>140</x>
        <y>10</y>
        <width>60</width>
        <height>60</height>
