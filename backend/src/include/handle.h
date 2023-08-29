@@ -13,45 +13,45 @@ public:
 
     ~Handle();
 
-    QJsonObject handle(const QJsonObject &json);
+    QJsonObject handle(const int &id, const QJsonObject &json);
 
-    QJsonObject e_register(const QJsonObject &json);
+    QJsonObject e_register(const int &id, const QJsonObject &json);
 
-    QJsonObject q_login(const QJsonObject &json);
+    QJsonObject q_login(const int &id, const QJsonObject &json);
 
-    QJsonObject q_myInfo(const QJsonObject &json);
+    QJsonObject q_myInfo(const int &id, const QJsonObject &json);
 
-    QJsonObject q_userInfo(const QJsonObject &json);
+    QJsonObject q_userInfo(const int &id, const QJsonObject &json);
 
-    QJsonObject e_editInfo(const QJsonObject &json);
+    QJsonObject e_editInfo(const int &id, const QJsonObject &json);
 
-    QJsonObject q_list_myChats(const QJsonObject &json);
+    QJsonObject q_list_myChats(const int &id, const QJsonObject &json);
 
-    QJsonObject q_chatHistory(const QJsonObject &json);
+    QJsonObject q_chatHistory(const int &id, const QJsonObject &json);
 
-    QJsonObject e_send(const QJsonObject &json);
+    QJsonObject e_send(const int &id, const QJsonObject &json);
 
-    QJsonObject q_list_usersInChat(const QJsonObject &json);
+    QJsonObject q_list_usersInChat(const int &id, const QJsonObject &json);
 
-    QJsonObject e_addFriend(const QJsonObject &json);
+    QJsonObject e_addFriend(const int &id, const QJsonObject &json);
 
-    QJsonObject q_list_friendRequests(const QJsonObject &json);
+    QJsonObject q_list_friendRequests(const int &id, const QJsonObject &json);
 
-    QJsonObject a_newFriendRequest(const QJsonObject &json);
+    QJsonObject a_newFriendRequest(const int &id, const QJsonObject &json);
 
-    QJsonObject q_list_myFriends(const QJsonObject &json);
+    QJsonObject q_list_myFriends(const int &id, const QJsonObject &json);
 
-    QJsonObject e_acceptFriend(const QJsonObject &json);
+    QJsonObject e_acceptFriend(const int &id, const QJsonObject &json);
 
-    QJsonObject e_createChat(const QJsonObject &json);
+    QJsonObject e_createChat(const int &id, const QJsonObject &json);
 
-    QJsonObject e_joinChat(const QJsonObject &json);
+    QJsonObject e_joinChat(const int &id, const QJsonObject &json);
 
-    QJsonObject a_newChat(const QJsonObject &json);
+    QJsonObject a_newChat(const int &id, const QJsonObject &json);
 
-    QJsonObject q_list_filesInChat(const QJsonObject &json);
+    QJsonObject q_list_filesInChat(const int &id, const QJsonObject &json);
 
-    std::map<QString, std::function<QJsonObject(const QJsonObject &)>> handlemap;
+    std::map<QString, std::function<QJsonObject(const int &id, const QJsonObject &)>> handlemap;
 
     bool check(const int &id, const int &group);
 

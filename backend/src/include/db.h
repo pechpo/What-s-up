@@ -34,13 +34,13 @@ public :
 
     QList<User> q_list_usersInChat(const quint32 &chat_ID);
 
-    bool e_addFriend(const quint32 &ID);
+    bool e_addFriend(const quint32 &id, const quint32 &ID);
 
     QList<User> q_list_friendRequests(const quint32 &ID);
 
     QList<User> q_list_myFriends(const quint32 &ID);
 
-    bool e_acceptFriend(const quint32 &ID);
+    bool e_acceptFriend(const quint32 &id, const quint32 &ID, const bool &fl);
 
     bool e_createChat(const quint32 &ID, const QString &name, const QString &avatar);
 
@@ -56,10 +56,22 @@ public :
 
     static DB * get_instance();
 
+    int new_group_id();
+
+    int new_message_id();
+
+    int new_user_id();
+
 private:
 
     static DB * db;
 
     QSqlDatabase database;
+
+    static int group_id;
+
+    static int message_id;
+
+    static int user_id;
 };
 #endif // DB_H

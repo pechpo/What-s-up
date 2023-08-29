@@ -43,9 +43,6 @@ public:
     QString ava;
 
     QString ema;
-
-private:
-    static int user_id;
 };
 
 #endif //DATABASE_USER_H

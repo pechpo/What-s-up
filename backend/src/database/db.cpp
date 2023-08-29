@@ -4,9 +4,29 @@
 //user id, name, password, avatar, email
 //message id, chat_id, sender_id, content, time
 //chat id, name, avatar
+//friend_request user_id, friend_id
+//friend user_id, friend_id
 
 
-DB* DB::db = nullptr;
+DB *DB::db = nullptr;
+
+int DB::user_id = 0;
+
+int DB::group_id = 0;
+
+int DB::message_id = 0;
+
+int DB::new_group_id() {
+    return ++group_id;
+}
+
+int DB::new_message_id() {
+    return ++message_id;
+}
+
+int DB::new_user_id() {
+    return ++user_id;
+}
 
 DB::DB() {
     database = QSqlDatabase::addDatabase("QSQLITE");
@@ -15,8 +35,7 @@ DB::DB() {
 
     if (database.open()) {
         qDebug() << "Successfully connect database\n";
-    }
-    else {
+    } else {
         qDebug() << "Fail to connect database\n";
     }
 }
@@ -75,7 +94,7 @@ User DB::q_myInfo(const quint32 &ID) {
         user.setEmail(query.value(4).toString());
         return user;
     }
-    return User();
+    return {};
 }
 
 User DB::q_userInfo(const quint32 &ID) {
@@ -98,7 +117,7 @@ User DB::q_userInfo(const quint32 &ID) {
 bool DB::e_createChat(const quint32 &ID, const QString &name, const QString &avatarName) {
     QSqlQuery query(database);
     query.prepare("INSERT INTO chat (id, name, avatar) VALUES (?, ?, ?)");
-    query.addBindValue(2);
+    query.addBindValue(new_group_id());
     query.addBindValue(name);
     query.addBindValue(avatarName);
     if (!query.exec()) {
@@ -107,7 +126,7 @@ bool DB::e_createChat(const quint32 &ID, const QString &name, const QString &ava
     query.clear();
     query.prepare("INSERT INTO user_chat (user_id, chat_id) VALUES (?, ?)");
     query.addBindValue(ID);
-    query.addBindValue(1);
+    query.addBindValue(group_id);
     return query.exec();
 }
 
@@ -162,23 +181,30 @@ QList<User> DB::q_list_usersInChat(const quint32 &chat_ID) {
     return users;
 }
 
-bool DB::e_addFriend(const quint32 &ID) {
+bool DB::e_addFriend(const quint32 &id, const quint32 &ID) {
     QSqlQuery query(database);
     query.prepare("INSERT INTO friend_request (user_id, friend_id) VALUES (?, ?)");
-    query.addBindValue(ID);
+    query.addBindValue(id);
     query.addBindValue(ID);
     return query.exec();
 }
 
 QList<User> DB::q_list_friendRequests(const quint32 &ID) {
     QSqlQuery query(database);
-    query.prepare("SELECT friend_id FROM friend_request WHERE user_id = ?");
+    query.prepare("SELECT user_id FROM friend_request WHERE friend_id = ?");
     query.addBindValue(ID);
     query.exec();
     QList<User> users;
     while (query.next()) {
         User user;
-        user.setID(query.value(0).toUInt());
+        QSqlQuery Query(database);
+        Query.prepare("SELECT * FROM user WHERE id = ?");
+        Query.addBindValue(query.value(0).toUInt());
+        Query.exec();
+        if (!Query.next())return {};
+        user.setID(Query.value(0).toUInt());
+        user.setName(Query.value(1).toString());
+        user.setAvatarName(Query.value(3).toString());
         users.append(user);
     }
     return users;
@@ -198,11 +224,24 @@ QList<User> DB::q_list_myFriends(const quint32 &ID) {
     return users;
 }
 
-bool DB::e_acceptFriend(const quint32 &ID) {
+bool DB::e_acceptFriend(const quint32 &id, const quint32 &ID, const bool &fl) {
     QSqlQuery query(database);
-    query.prepare("INSERT INTO friend (user_id, friend_id) VALUES (?, ?)");
+    if (fl) {
+        query.prepare("INSERT INTO friend (user_id, friend_id) VALUES (?, ?)");
+        query.addBindValue(id);
+        query.addBindValue(ID);
+        query.exec();
+
+        query.clear();
+        query.prepare("INSERT INTO friend (user_id, friend_id) VALUES (?, ?)");
+        query.addBindValue(ID);
+        query.addBindValue(id);
+        query.exec();
+    }
+    query.clear();
+    query.prepare("DELETE FROM friend_request WHERE user_id = ? AND friend_id = ?");
     query.addBindValue(ID);
-    query.addBindValue(ID);
+    query.addBindValue(id);
     return query.exec();
 }
 
@@ -265,7 +304,7 @@ bool DB::check(const int &id, const int &group) {
     return false;
 }
 
-DB * DB::get_instance() {
+DB *DB::get_instance() {
     if (db == nullptr) {
         db = new DB;
     }

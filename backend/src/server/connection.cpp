@@ -51,7 +51,7 @@ void Connection::receiveMessage() {
         }
         Handle *hd = Handle::get_instance();
         qDebug() << obj;
-        auto x = hd->handle(obj);
+        auto x = hd->handle(id, obj);
         qDebug() << x;
         curRemainSize = 0;
         sendMessage(x);
