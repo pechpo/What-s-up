@@ -97,6 +97,18 @@ void mainWindow::on_addnewfriendButton_clicked()
 
 void mainWindow::setState(enum mainWindow::State tarState) {
     curState = tarState;
+    for (quint32 i = 0; i < friendRequests.size(); i++) {
+        AddNewFriend *p = friendRequests[i];
+        p->close();
+    }
+    for (quint32 i = 0; i < friends.size(); i++) {
+        StartChat *p = friends[i];
+        p->close();
+    }
+    for (quint32 i = 0; i < chats.size(); i++) {
+        StartChat *p = chats[i];
+        p->close();
+    }
     if (curState == Friend) {
         ui->viewLabel->setText("Friend List");
         QJsonObject msg1;

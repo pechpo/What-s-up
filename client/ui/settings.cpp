@@ -19,6 +19,9 @@ Settings::~Settings()
 
 void Settings::on_pushButton_clicked()
 {
+    if (ui->newPwd->text().length() < 4) {
+        return ;
+    }
     QJsonObject msg;
     msg.insert("type", "e_editInfo");
     msg.insert("old_pwd", Director::getInstance()->Hash(ui->currentPwd->text()));

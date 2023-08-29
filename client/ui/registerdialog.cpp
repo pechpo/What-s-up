@@ -28,6 +28,10 @@ void RegisterDialog::on_confirmBtn_clicked() {
             // todo
             return ;
         }
+        if (ui->pwdLineEdit->text().length() < 4) {
+            // todo
+            return ;
+        }
         QJsonObject msg;
         qint64 id = ui->usrLineEdit->text().toInt();
         QString pwd = Director::getInstance()->Hash(ui->pwdLineEdit->text());

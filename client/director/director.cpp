@@ -39,7 +39,8 @@ void Director::act(const QJsonObject &obj) {  //after receiving the json package
     QString index = obj.value("type").toString();
     if (!recvEmitter.contains(index)) {
         if ("hello" == index) {
-            emit receiveTestString(obj.value("message").toString());
+            //emit receiveTestString(obj.value("message").toString());
+            emit receiveTestString("");
         }
         return ;
     }
