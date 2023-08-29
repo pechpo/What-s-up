@@ -130,7 +130,7 @@
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">border-image: url(:/images/image/CreatGroup.png);</string>
+      <string notr="true">border-image: url(:/images/image/CreateGroupChat.png);</string>
      </property>
      <property name="text">
       <string/>
