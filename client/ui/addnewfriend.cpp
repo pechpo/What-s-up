@@ -43,7 +43,6 @@ void AddNewFriend::on_acceptButton_clicked()
     }
 }
 
-
 void AddNewFriend::on_declineButton_clicked()
 {
     QJsonObject msg;

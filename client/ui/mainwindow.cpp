@@ -3,6 +3,7 @@
 #include "director/director.h"
 #include <QJsonValue>
 #include <QJsonArray>
+#include <QVBoxLayout>
 
 mainWindow::mainWindow(QWidget *parent) :
     QWidget(parent),
@@ -25,8 +26,26 @@ mainWindow::mainWindow(QWidget *parent) :
 
     ui->closeButton->setVisible(false);
     ui->minimizeButton->setVisible(false);
+    ui->GroupList->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
 
+    friendRequests.resize(20);
+    for (int i = 0; i < 20; i++) {
+        friendRequests[i] = new AddNewFriend(ui->scrollAreaWidgetContents);
+        friendRequests[i]->setId(i);
+        friendRequests[i]->setName("Alice" + QString::number(i));
+        friendRequests[i]->setAvatar("avatar");
 
+    }
+    friends.resize(2);
+    friends[0] = new StartChat(ui->scrollAreaWidgetContents);
+    friends[0]->setId(12345);
+    friends[0]->setName("Dave");
+    friends[0]->setAvatar("avatar");
+    friends[1] = new StartChat(ui->scrollAreaWidgetContents);
+    friends[1]->setId(54321);
+    friends[1]->setName("Eva");
+    friends[1]->setAvatar("avatar");
+    waitingIsZero();
     //for (quint16 i = 0; i < 50; i++)
     //    cw->appendText("Hello, world" + QString::number(i));
 }
@@ -90,19 +109,26 @@ void mainWindow::setState(enum mainWindow::State tarState) {
 }
 
 void mainWindow::waitingIsZero() {
-    quint32 height = 0;
+    //QVBoxLayout *layout = new QVBoxLayout(ui->scrollAreaWidgetContents);
+    //layout->setSpacing(5);
+    const quint32 gap = 5;
+    quint32 height = gap;
     for (quint32 i = 0; i < friendRequests.size(); i++) {
         AddNewFriend *p = friendRequests[i];
-        p->move(0, height);
-        height += p->height();
+        //layout->addWidget(p);
+        p->move(gap, height);
+        height += p->height() + gap;
         p->show();
     }
     for (quint32 i = 0; i < friends.size(); i++) {
         StartChat *p = friends[i];
-        p->move(0, height);
-        height += p->height();
+        //layout->addWidget(p);
+        p->move(gap, height);
+        height += p->height() + gap;
         p->show();
     }
+    ui->scrollAreaWidgetContents->adjustSize();
+    qDebug() << ui->scrollAreaWidgetContents->height();
 }
 
 void mainWindow::slot_r_list_myFriends(const QJsonObject &obj) {
