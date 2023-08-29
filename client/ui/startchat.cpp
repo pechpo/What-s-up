@@ -13,6 +13,8 @@ StartChat::StartChat(QWidget *parent) :
     bar = new ProfileBar(this);
     bar->move(0, 0);
     bar->show();
+    bar->stackUnder(this);
+    ui->chatButton->raise();
 }
 
 StartChat::~StartChat()

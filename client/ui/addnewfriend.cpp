@@ -12,6 +12,9 @@ AddNewFriend::AddNewFriend(QWidget *parent) :
     bar = new ProfileBar(this);
     bar->move(0, 0);
     bar->show();
+    bar->stackUnder(this);
+    ui->acceptButton->raise();
+    ui->declineButton->raise();
 }
 
 AddNewFriend::~AddNewFriend()

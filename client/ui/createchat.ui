@@ -1,14 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <author/>
- <comment/>
- <exportmacro/>
  <class>CreateChat</class>
- <widget name="CreateChat" class="QWidget">
+ <widget class="QWidget" name="CreateChat">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
+    <width>212</width>
     <height>300</height>
    </rect>
   </property>
@@ -16,6 +14,6 @@
    <string>Form</string>
   </property>
  </widget>
- <pixmapfunction/>
+ <resources/>
  <connections/>
 </ui>

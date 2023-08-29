@@ -28,7 +28,7 @@ mainWindow::mainWindow(QWidget *parent) :
     ui->minimizeButton->setVisible(false);
     ui->GroupList->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
 
-    friendRequests.resize(20);
+    /*friendRequests.resize(20);
     for (int i = 0; i < 20; i++) {
         friendRequests[i] = new AddNewFriend(ui->scrollAreaWidgetContents);
         friendRequests[i]->setId(i);
@@ -45,7 +45,7 @@ mainWindow::mainWindow(QWidget *parent) :
     friends[1]->setId(54321);
     friends[1]->setName("Eva");
     friends[1]->setAvatar("avatar");
-    waitingIsZero();
+    waitingIsZero();*/
     //for (quint16 i = 0; i < 50; i++)
     //    cw->appendText("Hello, world" + QString::number(i));
 }
@@ -128,14 +128,10 @@ void mainWindow::waitingIsZero() {
         p->show();
     }
     ui->scrollAreaWidgetContents->adjustSize();
-    qDebug() << ui->scrollAreaWidgetContents->height();
+    //qDebug() << ui->scrollAreaWidgetContents->height();
 }
 
 void mainWindow::slot_r_list_myFriends(const QJsonObject &obj) {
-    waiting--;
-    if (0 == waiting) {
-        waitingIsZero();
-    }
     if (false == obj.value("users").isArray()) {
         return ;
     }
@@ -157,13 +153,13 @@ void mainWindow::slot_r_list_myFriends(const QJsonObject &obj) {
         friends[i]->setName(user.value("name").toString());
         friends[i]->setAvatar(user.value("avatar").toString());
     }
-}
-
-void mainWindow::slot_r_list_friendRequests(const QJsonObject &obj) {
     waiting--;
     if (0 == waiting) {
         waitingIsZero();
     }
+}
+
+void mainWindow::slot_r_list_friendRequests(const QJsonObject &obj) {
     if (false == obj.value("users").isArray()) {
         return ;
     }
@@ -184,5 +180,10 @@ void mainWindow::slot_r_list_friendRequests(const QJsonObject &obj) {
         friendRequests[i]->setId(user.value("id").toInt());
         friendRequests[i]->setName(user.value("name").toString());
         friendRequests[i]->setAvatar(user.value("avatar").toString());
+        //qDebug() << "add" + user.value("name").toString();
+    }
+    waiting--;
+    if (0 == waiting) {
+        waitingIsZero();
     }
 }
