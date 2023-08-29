@@ -13,7 +13,7 @@ class StartChat : public QWidget
     Q_OBJECT
 
 public:
-    explicit StartChat(QWidget *parent = nullptr);
+    explicit StartChat(QWidget *parent = nullptr, bool isRealPerson = true);
     ~StartChat();
     void setName(const QString&);
     void setId(quint32 newId);
@@ -28,6 +28,7 @@ private:
     Ui::StartChat *ui;
     ProfileBar *bar;
     qint64 id;
+    bool isPerson;
 };
 
 #endif // STARTCHAT_H

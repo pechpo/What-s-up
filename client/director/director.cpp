@@ -131,3 +131,7 @@ void Director::toMainWindow() {
 void Director::refreshMainWindow() {
     mainUI->setState(mainWindow::Friend);
 }
+
+void Director::enterChat(qint64 id) {
+    mainUI->getChatWindow()->switchChat(id);
+}

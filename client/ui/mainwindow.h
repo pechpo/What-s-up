@@ -24,11 +24,14 @@ public:
         Friend, Chat
     } curState;
     void setState(State);
+    ChatWindow* getChatWindow();
 
 public slots:
     void slot_r_list_myFriends(const QJsonObject&);
     void slot_r_list_friendRequests(const QJsonObject&);
     void slot_a_newFriendRequest(const QJsonObject&);
+    void slot_r_list_myChats(const QJsonObject&);
+    void slot_a_newChat(const QJsonObject&);
 
 private slots:
     void on_closeButton_clicked();
@@ -39,6 +42,8 @@ private slots:
 
     void on_toolButton_clicked();
 
+    void on_grouplistButton_clicked();
+
 private:
     Ui::mainWindow *ui;
     ChatWindow *cw;
@@ -46,6 +51,7 @@ private:
     CreateChat *newChatDialog;
     QVector<AddNewFriend*> friendRequests;
     QVector<StartChat*> friends;
+    QVector<StartChat*> chats;
     quint32 waiting;
     void waitingIsZero();
 };

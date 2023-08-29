@@ -5,9 +5,10 @@
 #include <QJsonArray>
 #include <QJsonValue>
 
-StartChat::StartChat(QWidget *parent) :
+StartChat::StartChat(QWidget *parent, bool isRealPerson) :
     QWidget(parent),
-    ui(new Ui::StartChat)
+    ui(new Ui::StartChat),
+    isPerson(isRealPerson)
 {
     ui->setupUi(this);
     bar = new ProfileBar(this);
@@ -28,7 +29,12 @@ void StartChat::setId(quint32 newId) {
 }
 
 void StartChat::setName(const QString &name) {
-    bar->setName(name);
+    if (isPerson) {
+        bar->setName(name);
+    }
+    else {
+        bar->setName("Chat " + name);
+    }
 }
 
 void StartChat::setAvatar(const QString &avatar) {
@@ -37,13 +43,17 @@ void StartChat::setAvatar(const QString &avatar) {
 
 void StartChat::on_chatButton_clicked()
 {
-    QJsonObject msg;
-    QJsonArray arr;
-    msg.insert("type", "e_createChat");
-    arr.push_back(QJsonValue(id));
-    msg.insert("users", arr);
-    if (Director::getInstance()->sendJson(msg)) {
-        Director::getInstance()->refreshMainWindow();
+    if (isPerson) {
+        qDebug() << "si liao";
+        QJsonObject msg;
+        QJsonArray arr;
+        arr.push_back(QJsonValue(id));
+        msg.insert("type", "e_createChat");
+        msg.insert("users", arr);
+        Director::getInstance()->sendJson(msg);
+    }
+    else {
+        Director::getInstance()->enterChat(id);
     }
 }
 

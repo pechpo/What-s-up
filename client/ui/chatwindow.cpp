@@ -38,6 +38,7 @@ void ChatWindow::switchChat(qint64 id) {
         return ;
     }
     chatId = id;
+    ui->idLabel->setText("Chat ID: " + QString::number(id));
     ui->MsgEdit->setText("");
     QJsonObject msg;
     msg.insert("type", "q_chatHistory");

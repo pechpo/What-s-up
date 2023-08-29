@@ -20,9 +20,9 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>10</y>
+     <y>40</y>
      <width>481</width>
-     <height>351</height>
+     <height>321</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -53,6 +53,19 @@
    </property>
    <property name="text">
     <string>发送</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="idLabel">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>20</y>
+     <width>131</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Chat</string>
    </property>
   </widget>
  </widget>

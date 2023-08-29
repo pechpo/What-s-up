@@ -41,6 +41,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ui/addnewfriend.h ui/addnewfriend.cpp ui/addnewfriend.ui
         ui/startchat.h ui/startchat.cpp ui/startchat.ui
         ui/createchat.h ui/createchat.cpp ui/createchat.ui
+        utils/avatarcreator.h utils/avatarcreator.cpp
 
 
 

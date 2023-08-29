@@ -25,6 +25,7 @@ public:
     void sendPureMessage(const QString&); // debug
     void toMainWindow();
     void refreshMainWindow();
+    void enterChat(qint64 id);
 
 signals:
     void receiveTestString(const QString&);
