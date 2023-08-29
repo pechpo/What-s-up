@@ -24,8 +24,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/database/data.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/data.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/database/db.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/db.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handle/handle_group.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/handle/handle_group.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/include/db.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/include/db.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,6 +106,7 @@
       <workItem from="1693233745982" duration="9638000" />
       <workItem from="1693279616968" duration="1458000" />
       <workItem from="1693283575366" duration="9019000" />
+      <workItem from="1693294807261" duration="921000" />
     </task>
     <servers />
   </component>

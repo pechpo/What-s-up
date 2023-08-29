@@ -302,19 +302,19 @@ bool DB::e_send(const Message &message) {
 
 QList<Message> DB::q_chatHistory(const quint32 &chat_ID, const quint32 &time, const quint32 &count) {
     QSqlQuery query(database);
-    query.prepare("SELECT * FROM message WHERE chat_id = ? AND time < ? ORDER BY time DESC LIMIT ?");
+    query.prepare("SELECT * FROM message WHERE chat_id = ?");
     query.addBindValue(chat_ID);
-    query.addBindValue(time);
-    query.addBindValue(count);
+//    query.addBindValue(time);
+//    query.addBindValue(count);
     query.exec();
     QList<Message> messages;
     while (query.next()) {
         Message message;
         message.setID(query.value(0).toUInt());
-        message.setReceiverID(query.value(1).toUInt());
         message.setSenderID(query.value(2).toUInt());
         message.setContent(query.value(3).toString());
         message.setTime(query.value(4).toString());
+        message.setSenderName(query.value(5).toString());
         messages.append(message);
     }
     return messages;
@@ -333,8 +333,8 @@ QList<Message> DB::q_list_filesInChat(const quint32 &chat_ID) {
         message.setSenderID(query.value(2).toUInt());
         message.setContent(query.value(3).toString());
         message.setTime(query.value(4).toString());
-        message.setIsFile(query.value(5).toBool());
-        message.setSenderName(query.value(6).toString());
+        message.setSenderName(query.value(5).toString());
+        message.setIsFile(query.value(6).toBool());
         messages.append(message);
     }
     return messages;
