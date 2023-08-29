@@ -27,6 +27,7 @@ public:
 public slots:
     void slot_r_list_myFriends(const QJsonObject&);
     void slot_r_list_friendRequests(const QJsonObject&);
+    void slot_a_newFriendRequest(const QJsonObject&);
 
 private slots:
     void on_closeButton_clicked();

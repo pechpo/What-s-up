@@ -19,6 +19,7 @@ mainWindow::mainWindow(QWidget *parent) :
 
     connect(Director::getInstance(), &Director::r_list_myFriends, this, &mainWindow::slot_r_list_myFriends);
     connect(Director::getInstance(), &Director::r_list_friendRequests, this, &mainWindow::slot_r_list_friendRequests);
+    connect(Director::getInstance(), &Director::a_newFriendRequest, this, &mainWindow::slot_a_newFriendRequest);
 
     cw = new ChatWindow(this);
     cw->move(250, 50);
@@ -186,4 +187,8 @@ void mainWindow::slot_r_list_friendRequests(const QJsonObject &obj) {
     if (0 == waiting) {
         waitingIsZero();
     }
+}
+
+void mainWindow::slot_a_newFriendRequest(const QJsonObject &obj) {
+    setState(Friend);
 }
