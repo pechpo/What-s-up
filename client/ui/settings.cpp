@@ -10,7 +10,7 @@ Settings::Settings(QWidget *parent) :
 
     connect(Director::getInstance(), &Director::r_editInfo, this, &Settings::slot_r_editInfo);  //send signal to dialog window if r_login received
     connect(Director::getInstance(), &Director::r_myInfo, this, &Settings::slot_r_myInfo);  //send signal to dialog window if r_login received
-    }
+}
 
 Settings::~Settings()
 {

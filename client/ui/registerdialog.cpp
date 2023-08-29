@@ -38,7 +38,7 @@ void RegisterDialog::on_confirmBtn_clicked() {
         msg.insert("type", "e_register");
         msg.insert("id", QJsonValue(id));
         msg.insert("password", QJsonValue(pwd));
-        msg.insert("username", QJsonValue("Bob" + QString::number(id)));
+        msg.insert("username", QJsonValue(ui->nameLineEdit->text()));
         msg.insert("email", QJsonValue(QString::number(id) + "@bit.edu.cn"));
         msg.insert("avatar", QJsonValue("hereIsAvatar" + QString::number(id)));
         if (Director::getInstance()->sendJson(msg))

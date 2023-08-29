@@ -166,12 +166,16 @@ void ChatWindow::slot_r_send(const QJsonObject &obj) {
 
 void ChatWindow::on_settingsButton_clicked()
 {
-    if (nullptr == settingsDialog) {
-        settingsDialog = new ChatSettings(this);
-    }
-    else {
+    if (nullptr != settingsDialog) {
         settingsDialog->close();
+        delete settingsDialog;
     }
+    settingsDialog = new ChatSettings(this, chatId);
     settingsDialog->show();
+    settingsDialog->setAttribute(Qt::WA_DeleteOnClose, true);
+    QJsonObject msg;
+    msg.insert("type", "q_chatInfo");
+    msg.insert("chatId", QJsonValue(chatId));
+    Director::getInstance()->sendJson(msg);
 }
 
