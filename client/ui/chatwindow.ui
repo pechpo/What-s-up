@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>500</width>
+    <width>521</width>
     <height>613</height>
    </rect>
   </property>
@@ -73,12 +73,25 @@
     <rect>
      <x>20</x>
      <y>370</y>
-     <width>71</width>
+     <width>111</width>
      <height>41</height>
     </rect>
    </property>
    <property name="text">
-    <string>...</string>
+    <string>Upload File</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>370</y>
+     <width>111</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Download File</string>
    </property>
   </widget>
  </widget>
