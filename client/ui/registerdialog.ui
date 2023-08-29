@@ -127,7 +127,7 @@ border-radius: 10px;</string>
      <enum>QLineEdit::Password</enum>
     </property>
     <property name="placeholderText">
-     <string>请输入密码</string>
+     <string>请输入您想要的密码</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="usrLineEdit">
@@ -149,7 +149,7 @@ border-radius: 10px;</string>
      <enum>QLineEdit::Normal</enum>
     </property>
     <property name="placeholderText">
-     <string>请输入用户名</string>
+     <string>请输入您想要的数字ID</string>
     </property>
    </widget>
    <widget class="QToolButton" name="closeButton">
