@@ -6,8 +6,6 @@ ChatSettings::ChatSettings(QWidget *parent) :
     ui(new Ui::ChatSettings)
 {
     ui->setupUi(this);
-
-    settingsDialog = nullptr;
 }
 
 ChatSettings::~ChatSettings()
