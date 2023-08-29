@@ -47,3 +47,11 @@ void StartChat::on_chatButton_clicked()
     }
 }
 
+qint64 StartChat::getId() {
+    return id;
+}
+
+QString StartChat::getName() {
+    return bar->getName();
+}
+

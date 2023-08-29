@@ -14,6 +14,7 @@ mainWindow::mainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     snf = nullptr;
+    newChatDialog = nullptr;
     waiting = 0;
     this->setState(Friend);
 
@@ -192,3 +193,25 @@ void mainWindow::slot_r_list_friendRequests(const QJsonObject &obj) {
 void mainWindow::slot_a_newFriendRequest(const QJsonObject &obj) {
     setState(Friend);
 }
+
+void mainWindow::on_toolButton_clicked()
+{
+    if (nullptr == newChatDialog) {
+        newChatDialog = new CreateChat(this);
+        for (quint32 i = 0; i < friends.size(); i++) {
+            StartChat *p = friends[i];
+            newChatDialog->addChoice(p->getId(), p->getName());
+        }
+        newChatDialog->show();
+    }
+    else {
+        newChatDialog->close();
+        newChatDialog->clear();
+        for (quint32 i = 0; i < friends.size(); i++) {
+            StartChat *p = friends[i];
+            newChatDialog->addChoice(p->getId(), p->getName());
+        }
+        newChatDialog->show();
+    }
+}
+

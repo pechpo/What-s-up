@@ -18,6 +18,8 @@ public:
     void setName(const QString&);
     void setId(quint32 newId);
     void setAvatar(const QString&);
+    qint64 getId();
+    QString getName();
 
 private slots:
     void on_chatButton_clicked();

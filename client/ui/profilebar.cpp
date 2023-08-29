@@ -23,3 +23,7 @@ void ProfileBar::setName(const QString &name) {
 void ProfileBar::setAvatar(const QString &newAvatar) {
     avatar = newAvatar;
 }
+
+QString ProfileBar::getName() {
+    return ui->username->text();
+}

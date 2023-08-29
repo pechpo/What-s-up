@@ -124,7 +124,7 @@ void Director::toMainWindow() {
         mainUI->show();
     }
     else {
-
+        refreshMainWindow();
     }
 }
 
