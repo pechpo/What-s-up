@@ -74,11 +74,14 @@
      <x>20</x>
      <y>370</y>
      <width>71</width>
-     <height>41</height>
+     <height>51</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">border-image: url(:/images/image/fileButton.png);</string>
+   </property>
    <property name="text">
-    <string>...</string>
+    <string/>
    </property>
   </widget>
  </widget>
