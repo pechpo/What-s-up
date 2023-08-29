@@ -24,8 +24,8 @@
     <rect>
      <x>-1</x>
      <y>-1</y>
-     <width>361</width>
-     <height>301</height>
+     <width>360</width>
+     <height>300</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -37,8 +37,8 @@ background-color: rgb(227, 232, 238);</string>
      <rect>
       <x>60</x>
       <y>40</y>
-      <width>31</width>
-      <height>21</height>
+      <width>30</width>
+      <height>20</height>
      </rect>
     </property>
     <property name="text">
@@ -50,8 +50,8 @@ background-color: rgb(227, 232, 238);</string>
      <rect>
       <x>260</x>
       <y>40</y>
-      <width>51</width>
-      <height>22</height>
+      <width>50</width>
+      <height>20</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -82,8 +82,8 @@ background-color: rgb(227, 232, 238);</string>
      <rect>
       <x>220</x>
       <y>40</y>
-      <width>31</width>
-      <height>21</height>
+      <width>30</width>
+      <height>20</height>
      </rect>
     </property>
     <property name="text">
@@ -137,8 +137,8 @@ background-color: rgb(227, 232, 238);</string>
      <rect>
       <x>100</x>
       <y>40</y>
-      <width>91</width>
-      <height>22</height>
+      <width>90</width>
+      <height>20</height>
      </rect>
     </property>
     <property name="styleSheet">

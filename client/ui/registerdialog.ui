@@ -18,8 +18,8 @@
     <rect>
      <x>40</x>
      <y>30</y>
-     <width>401</width>
-     <height>271</height>
+     <width>400</width>
+     <height>270</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -31,8 +31,8 @@ background-color: rgb(223, 243, 232);</string>
      <rect>
       <x>100</x>
       <y>20</y>
-      <width>211</width>
-      <height>31</height>
+      <width>200</width>
+      <height>30</height>
      </rect>
     </property>
     <property name="font">
@@ -56,7 +56,7 @@ background-color: rgb(197, 238, 241);</string>
      <rect>
       <x>230</x>
       <y>220</y>
-      <width>89</width>
+      <width>90</width>
       <height>25</height>
      </rect>
     </property>
@@ -66,23 +66,6 @@ border-radius:10px;</string>
     </property>
     <property name="text">
      <string>注册</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="regBtn">
-    <property name="geometry">
-     <rect>
-      <x>70</x>
-      <y>220</y>
-      <width>89</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(246, 245, 244);
-border-radius: 10px;</string>
-    </property>
-    <property name="text">
-     <string/>
     </property>
    </widget>
    <widget class="QLabel" name="label_3">
@@ -233,7 +216,6 @@ image: url(:/images/image/no.png);</string>
   <tabstop>confirmBtn</tabstop>
   <tabstop>minimizeButton</tabstop>
   <tabstop>closeButton</tabstop>
-  <tabstop>regBtn</tabstop>
  </tabstops>
  <resources/>
  <connections/>

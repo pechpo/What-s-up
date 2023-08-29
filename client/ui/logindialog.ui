@@ -25,8 +25,8 @@ background-color: white;</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>401</width>
-     <height>271</height>
+     <width>400</width>
+     <height>270</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -63,8 +63,8 @@ background-color: rgb(197, 238, 241);</string>
      <rect>
       <x>220</x>
       <y>180</y>
-      <width>92</width>
-      <height>23</height>
+      <width>90</width>
+      <height>20</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -79,7 +79,7 @@ background-color: rgb(197, 238, 241);</string>
      <rect>
       <x>230</x>
       <y>220</y>
-      <width>89</width>
+      <width>90</width>
       <height>25</height>
      </rect>
     </property>
@@ -96,7 +96,7 @@ border-radius:10px;</string>
      <rect>
       <x>70</x>
       <y>220</y>
-      <width>89</width>
+      <width>90</width>
       <height>25</height>
      </rect>
     </property>
