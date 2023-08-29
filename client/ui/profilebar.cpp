@@ -6,7 +6,7 @@ ProfileBar::ProfileBar(QWidget *parent) :
     ui(new Ui::ProfileBar)
 {
     ui->setupUi(this);
-    this->setWindowFlags(Qt::FramelessWindowHint | Qt::Dialog);
+    this->setWindowFlags(Qt::CustomizeWindowHint|Qt::FramelessWindowHint);
     this->setAttribute(Qt::WA_TranslucentBackground);      //把初始的 dialog 窗口设置为透明的
 
 }

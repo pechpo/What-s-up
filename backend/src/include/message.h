@@ -45,9 +45,6 @@ public:
     QString content;
 
     QString time;
-
-private:
-    static int message_id;
 };
 
 #endif //DATABASE_MESSAGE_H

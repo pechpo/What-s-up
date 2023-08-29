@@ -8,6 +8,7 @@
 #include <QTranslator>
 
 
+//login dialog initializing
 LoginDialog::LoginDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::LoginDialog)
@@ -24,7 +25,7 @@ LoginDialog::LoginDialog(QWidget *parent) :
     rd = nullptr;
     waiting = 0;
 
-    connect(Director::getInstance(), &Director::r_login, this, &LoginDialog::slot_r_login);
+    connect(Director::getInstance(), &Director::r_login, this, &LoginDialog::slot_r_login);  //send signal to dialog window if r_login received
 }
 
 LoginDialog::~LoginDialog()
@@ -43,22 +44,22 @@ void LoginDialog::on_loginBtn_clicked()
         msg.insert("type", "q_login");
         msg.insert("id", QJsonValue(id));
         msg.insert("password", QJsonValue(pwd));
-        if (Director::getInstance()->sendJson(msg))
+        if (Director::getInstance()->sendJson(msg))  //sending login information
             waiting++;
     }
 }
 
 void LoginDialog::slot_r_login(const QJsonObject &msg) {
-    waiting--;
+    waiting--;  //login feedback recieved
     if (!msg.value("success").isBool()) {
         return ;
     }
     if (true == msg.value("success").toBool()) {
-        Director::getInstance()->toMainWindow();
+        Director::getInstance()->toMainWindow();  //if success, go to mainwindow
         accept();
     }
     else {
-        if (msg.value("error").isString()) {
+        if (msg.value("error").isString()) {  //if not, print error
             qDebug() << msg.value("error").toString();
         }
     }
@@ -87,7 +88,7 @@ void LoginDialog::on_minimizeButton_clicked()
 void LoginDialog::on_ConnectionButton_clicked()
 {
     if (nullptr == lw) {
-        lw = new LoginWindow();
+        lw = new LoginWindow();  //create login subwindow
         lw->show();
     }
     else {
@@ -99,7 +100,7 @@ void LoginDialog::on_ConnectionButton_clicked()
 void LoginDialog::on_regBtn_clicked()
 {
     if (nullptr == rd) {
-        rd = new RegisterDialog();
+        rd = new RegisterDialog();  //create register subwindow
         rd->show();
     }
     else {

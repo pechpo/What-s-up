@@ -29,7 +29,7 @@ Director::Director(QObject *parent)
     logged = false;
 }
 
-void Director::act(const QJsonObject &obj) {
+void Director::act(const QJsonObject &obj) {  //after receiving the json package, emit the corresponding signal
     qDebug() << "recv: " << obj;
     // emit receiveTestString(obj.value("text").toString());
     if (!obj.contains("type")) {
@@ -83,8 +83,10 @@ bool Director::isConnected() {
 }
 
 QString Director::Hash(const QString &o) {
+    QString f = o;
+    f.append("h?^1~gf;:/vfz");
     QByteArray str;
-    str = QCryptographicHash::hash(o.toUtf8(), QCryptographicHash::Md5);
+    str = QCryptographicHash::hash(f.toUtf8(), QCryptographicHash::Md5);
     QString res(str.toHex());
     return res;
 }
@@ -124,4 +126,8 @@ void Director::toMainWindow() {
     else {
 
     }
+}
+
+void Director::refreshMainWindow() {
+    mainUI->setState(mainWindow::Friend);
 }

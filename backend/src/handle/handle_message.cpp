@@ -8,7 +8,7 @@
 #include "handle.h"
 #include "db.h"
 
-QJsonObject Handle::e_send(const QJsonObject &obj) {
+QJsonObject Handle::e_send(const int &ID, const QJsonObject &obj) {
     // Extract the necessary fields from obj
     quint32 chatId = obj["chatId"].toInt();
     qDebug() << "chatId: " << chatId;

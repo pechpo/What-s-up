@@ -1,7 +1,5 @@
 #include "message.h"
 
-int Message::message_id = 0;
-
 quint32 Message::getID() const {
     return ID;
 }

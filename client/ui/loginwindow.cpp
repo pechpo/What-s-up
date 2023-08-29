@@ -26,7 +26,7 @@ void LoginWindow::on_receiveTestString(const QString &text) {
     ui->receivedText->insertPlainText(text + "\n");
 }
 
-void LoginWindow::on_connectButton_clicked()
+void LoginWindow::on_connectButton_clicked()  //connect to a certain server
 {
     QString serverIP = ui->hostInput->text();
     quint16 serverPort = ui->portInput->text().toInt();

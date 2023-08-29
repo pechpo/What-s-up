@@ -40,6 +40,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ui/grouplist.h ui/grouplist.cpp ui/grouplist.ui
         ui/addnewfriend.h ui/addnewfriend.cpp ui/addnewfriend.ui
         ui/startchat.h ui/startchat.cpp ui/startchat.ui
+        ui/createchat.h ui/createchat.cpp ui/createchat.ui
 
 
 
