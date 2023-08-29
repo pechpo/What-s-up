@@ -24,6 +24,7 @@ public:
     bool sendJson(const QJsonObject&);
     void sendPureMessage(const QString&); // debug
     void toMainWindow();
+    void refreshMainWindow();
 
 signals:
     void receiveTestString(const QString&);

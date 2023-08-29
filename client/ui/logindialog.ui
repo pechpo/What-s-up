@@ -131,7 +131,7 @@ border-radius: 10px;</string>
      </rect>
     </property>
     <property name="text">
-     <string>用户名</string>
+     <string>用户ID</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="pwdLineEdit">
