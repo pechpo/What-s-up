@@ -87,12 +87,12 @@ void mainWindow::on_addnewfriendButton_clicked()
 {
     if (nullptr == snf) {
         snf = new SearchNewFriend();
-        snf->show();
     }
     else {
+        snf->clear();
         snf->close();
-        snf->show();
     }
+    snf->show();
 }
 
 void mainWindow::setState(enum Director::State tarState) {

@@ -18,6 +18,7 @@ class SearchNewFriend : public QWidget
 public:
     explicit SearchNewFriend(QWidget *parent = nullptr);
     ~SearchNewFriend();
+    void clear();
 
 public slots:
     void slot_r_userInfo(const QJsonObject&);

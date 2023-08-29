@@ -95,11 +95,15 @@ void SearchNewFriend::slot_r_joinChat(const QJsonObject &obj) {
     close();
 }
 
-void SearchNewFriend::on_switchButton_clicked()
-{
+void SearchNewFriend::clear() {
     userId = 0;
     ui->searchLineEdit->setText("");
     bar->setName(tr("Searching..."));
+}
+
+void SearchNewFriend::on_switchButton_clicked()
+{
+    clear();
     if (Director::Friend == curState) {
         curState = Director::Chat;
         ui->SearchButton->setText(tr("搜索聊天"));

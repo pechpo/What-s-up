@@ -173,8 +173,9 @@ void ChatWindow::on_settingsButton_clicked()
         delete settingsDialog;
     }
     settingsDialog = new ChatSettings(this, chatId);
+    settingsDialog->clear();
     settingsDialog->show();
-    qDebug() << "successful click";
+    //qDebug() << "successful click";
     QJsonObject msg;
     msg.insert("type", "q_chatInfo");
     msg.insert("chatId", QJsonValue(chatId));
