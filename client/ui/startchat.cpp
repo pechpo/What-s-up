@@ -29,11 +29,12 @@ void StartChat::setId(quint32 newId) {
 }
 
 void StartChat::setName(const QString &name) {
+    // 枣树
     if (isPerson) {
         bar->setName(name);
     }
     else {
-        bar->setName("Chat " + name);
+        bar->setName(name);
     }
 }
 

@@ -90,10 +90,10 @@ ChatWindow::Message ChatWindow::jsonToMessage(const QJsonObject &obj) {
         setIncompleteMessage(cur);
         return cur;
     }
-    /*if (!obj.value("senderName").isString()) {
+    if (!obj.value("senderName").isString()) {
         setIncompleteMessage(cur);
         return cur;
-    }*/
+    }
     if (!obj.value("content").isString()) {
         setIncompleteMessage(cur);
         return cur;
@@ -105,8 +105,8 @@ ChatWindow::Message ChatWindow::jsonToMessage(const QJsonObject &obj) {
     else {
         cur.isSystem = false;
         cur.senderId = obj.value("senderId").toInt();
-        //cur.senderName = obj.value("senderName").toString();
-        cur.senderName = "Carol" + QString::number(cur.senderId);
+        cur.senderName = obj.value("senderName").toString();
+        //cur.senderName = "Carol" + QString::number(cur.senderId);
     }
     cur.content = obj.value("content").toString();
     return cur;

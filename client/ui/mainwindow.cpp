@@ -15,6 +15,7 @@ mainWindow::mainWindow(QWidget *parent) :
 
     snf = nullptr;
     newChatDialog = nullptr;
+    settings = nullptr;
     waiting = 0;
     this->setState(Friend);
 
@@ -280,5 +281,20 @@ void mainWindow::on_grouplistButton_clicked()
     else {
 
     }
+}
+
+
+void mainWindow::on_settingButton_clicked()
+{
+    if (nullptr == settings) {
+        settings = new Settings(this);
+    }
+    else {
+        settings->close();
+    }
+    settings->show();
+    QJsonObject msg;
+    msg.insert("type", "q_myInfo");
+    Director::getInstance()->sendJson(msg);
 }
 
