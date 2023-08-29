@@ -10,22 +10,24 @@
 
 DB *DB::db = nullptr;
 
-int DB::user_id = 0;
-
-int DB::group_id = 1;
-
-int DB::message_id = 0;
-
 int DB::new_group_id() {
-    return ++group_id;
+    QSqlQuery query(database);
+    query.prepare("SELECT MAX(id) FROM chat");
+    query.exec();
+    if (query.next()) {
+        return query.value(0).toInt() + 1;
+    }
+    return 1;
 }
 
 int DB::new_message_id() {
-    return ++message_id;
-}
-
-int DB::new_user_id() {
-    return ++user_id;
+    QSqlQuery query(database);
+    query.prepare("SELECT MAX(id) FROM message");
+    query.exec();
+    if (query.next()) {
+        return query.value(0).toInt() + 1;
+    }
+    return 1;
 }
 
 DB::DB() {
@@ -286,7 +288,7 @@ bool DB::e_acceptFriend(const quint32 &id, const quint32 &ID, const bool &fl) {
 
 bool DB::e_send(const Message &message) {
     QSqlQuery query(database);
-    query.prepare("INSERT INTO message (id, chat_id, sender_id, content, time, sender_name, is_file, file_name) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    query.prepare("INSERT INTO message (id, chat_id, sender_id, content, time, sender_name, is_file, file_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
     query.addBindValue(message.getID());
     query.addBindValue(message.getReceiverID());
     query.addBindValue(message.getSenderID());

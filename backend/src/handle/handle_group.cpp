@@ -63,14 +63,16 @@ QJsonObject Handle::q_list_usersInChat(const int &ID, const QJsonObject &obj) {
 
 QJsonObject Handle::e_createChat(const int &ID, const QJsonObject &obj) {
     // Extract the necessary fields from obj
-    QJsonObject users = obj["users"].toObject();
+    QJsonArray users = obj["users"].toArray();
+    users.append(ID);
     DB *db = DB::get_instance();
     int chat_id = db->new_group_id();
-    db->e_createChat(chat_id, obj["name"].toString(), obj["avatar"].toString());
+    db->e_createChat(chat_id, "111", obj["avatar"].toString());
     QSet<int> S;
     for (const auto &x: users) {
         db->e_joinChat(x.toInt(), chat_id);
         S.insert(x.toInt());
+        qDebug() << x.toInt();
     }
 
     QJsonObject response;
@@ -79,7 +81,11 @@ QJsonObject Handle::e_createChat(const int &ID, const QJsonObject &obj) {
     QJsonObject OBJ;
     OBJ["type"] = "a_newChat";
     Server *sv = Server::get_instance();
+//    for (const auto &x: S) {
+//        qDebug() << x;
+//    }
     for (const auto &y: sv->connections_) {
+//        qDebug() << y->id;
         if (S.contains(y->id)) {
             y->sendMessage(OBJ);
         }

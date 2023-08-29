@@ -68,18 +68,11 @@ public :
 
     int new_message_id();
 
-    int new_user_id();
 
 private:
 
     static DB * db;
 
     QSqlDatabase database;
-
-    static int group_id;
-
-    static int message_id;
-
-    static int user_id;
 };
 #endif // DB_H
