@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>300</width>
-    <height>350</height>
+    <height>263</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -26,8 +26,8 @@
   <widget class="QPushButton" name="confirmButton">
    <property name="geometry">
     <rect>
-     <x>190</x>
-     <y>300</y>
+     <x>180</x>
+     <y>220</y>
      <width>90</width>
      <height>25</height>
     </rect>
@@ -39,14 +39,27 @@
   <widget class="QPushButton" name="SearchButton">
    <property name="geometry">
     <rect>
-     <x>190</x>
+     <x>180</x>
      <y>50</y>
      <width>90</width>
      <height>25</height>
     </rect>
    </property>
    <property name="text">
-    <string>搜索</string>
+    <string>搜索好友</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="switchButton">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>50</y>
+     <width>91</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>切换搜索模式</string>
    </property>
   </widget>
  </widget>

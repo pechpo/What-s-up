@@ -115,8 +115,10 @@ ChatWindow::Message ChatWindow::jsonToMessage(const QJsonObject &obj) {
 QString ChatWindow::messageToString(const Message &cur) {
     QString one;
     one.append(cur.senderName);
-    one.append(" (" + QString::number(cur.senderId) + ")\n");
-    one.append(cur.content + "\n");
+    if (cur.senderId > 0) {
+        one.append(" (" + QString::number(cur.senderId) + ")");
+    }
+    one.append("\n" + cur.content + "\n");
     return one;
 }
 
