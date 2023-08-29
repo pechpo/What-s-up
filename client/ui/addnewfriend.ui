@@ -28,6 +28,12 @@
    <property name="text">
     <string/>
    </property>
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="autoRaise">
+    <bool>true</bool>
+   </property>
   </widget>
   <widget class="QToolButton" name="acceptButton">
    <property name="geometry">
@@ -43,6 +49,12 @@
    </property>
    <property name="text">
     <string/>
+   </property>
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="autoRaise">
+    <bool>true</bool>
    </property>
   </widget>
  </widget>
