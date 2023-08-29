@@ -12,7 +12,7 @@ public:
     Message();
 
     Message(const quint32 &new_ID, const quint32 &new_sender_ID, const quint32 &new_receiver_ID, const QString &new_content,
-            const QString &new_time);
+            const QString &new_time, const QString &new_sender_name, const bool &is_file);
 
     ~Message();
 
@@ -26,6 +26,10 @@ public:
 
     QString getTime() const;
 
+    QString getSenderName() const;
+
+    QString getFileName() const;
+
     void setID(const quint32 &new_ID);
 
     void setSenderID(const quint32 &new_sender_ID);
@@ -36,6 +40,10 @@ public:
 
     void setTime(const QString &new_time);
 
+    void setSenderName(const QString &new_sender_name);
+
+    void setFileName(const QString &new_file_name);
+
     quint32 ID;
 
     quint32 sender_ID;
@@ -45,6 +53,12 @@ public:
     QString content;
 
     QString time;
+
+    QString sender_name;
+
+    bool is_file;
+
+    QString file_name;
 };
 
 #endif //DATABASE_MESSAGE_H

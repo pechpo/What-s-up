@@ -38,8 +38,6 @@ public:
 
     QJsonObject q_list_friendRequests(const int &id, const QJsonObject &json);
 
-    QJsonObject a_newFriendRequest(const int &id, const QJsonObject &json);
-
     QJsonObject q_list_myFriends(const int &id, const QJsonObject &json);
 
     QJsonObject e_acceptFriend(const int &id, const QJsonObject &json);
@@ -48,9 +46,9 @@ public:
 
     QJsonObject e_joinChat(const int &id, const QJsonObject &json);
 
-    QJsonObject a_newChat(const int &id, const QJsonObject &json);
-
     QJsonObject q_list_filesInChat(const int &id, const QJsonObject &json);
+
+    QJsonObject e_send_file(const int &id, const QJsonObject &json);
 
     std::map<QString, std::function<QJsonObject(const int &id, const QJsonObject &)>> handlemap;
 

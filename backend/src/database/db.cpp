@@ -2,7 +2,7 @@
 #include <QSqlQuery>
 
 //user id, name, password, avatar, email
-//message id, chat_id, sender_id, content, time
+//message id, chat_id, sender_id, content, time, is_file, sender_name
 //chat id, name, avatar
 //friend_request user_id, friend_id
 //friend user_id, friend_id
@@ -268,12 +268,14 @@ bool DB::e_acceptFriend(const quint32 &id, const quint32 &ID, const bool &fl) {
 
 bool DB::e_send(const Message &message) {
     QSqlQuery query(database);
-    query.prepare("INSERT INTO message (id, chat_id, sender_id, content, time) VALUES (?, ?, ?, ?, ?)");
+    query.prepare("INSERT INTO message (id, chat_id, sender_id, content, time, is_file, sender_name) VALUES (?, ?, ?, ?, ?, ?, ?)");
     query.addBindValue(message.getID());
     query.addBindValue(message.getReceiverID());
     query.addBindValue(message.getSenderID());
     query.addBindValue(message.getContent());
     query.addBindValue(message.getTime());
+    query.addBindValue(message.is_file);
+    query.addBindValue(message.getSenderName());
     return query.exec();
 }
 
@@ -299,7 +301,7 @@ QList<Message> DB::q_chatHistory(const quint32 &chat_ID, const quint32 &time, co
 
 QList<Message> DB::q_list_filesInChat(const quint32 &chat_ID) {
     QSqlQuery query(database);
-    query.prepare("SELECT * FROM message WHERE chat_id = ? AND content IS NULL");
+    query.prepare("SELECT * FROM message WHERE chat_id = ? AND is_file = true");
     query.addBindValue(chat_ID);
     query.exec();
     QList<Message> messages;
@@ -310,9 +312,22 @@ QList<Message> DB::q_list_filesInChat(const quint32 &chat_ID) {
         message.setSenderID(query.value(2).toUInt());
         message.setContent(query.value(3).toString());
         message.setTime(query.value(4).toString());
+        message.is_file = query.value(5).toBool();
+        message.setSenderName(query.value(6).toString());
         messages.append(message);
     }
     return messages;
+}
+
+QString DB::getName(const quint32 &ID) {
+    QSqlQuery query(database);
+    query.prepare("SELECT name FROM user WHERE id = ?");
+    query.addBindValue(ID);
+    query.exec();
+    if (query.next()) {
+        return query.value(0).toString();
+    }
+    return "";
 }
 
 bool DB::check(const int &id, const int &group) {

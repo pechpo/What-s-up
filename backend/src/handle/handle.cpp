@@ -59,6 +59,9 @@ Handle::Handle() {
     handlemap["q_list_filesInChat"] = [this](auto &&PH1, auto &&PH2) {
         return this->q_list_filesInChat(PH1, PH2);
     };
+    handlemap["e_send_file"] = [this](auto &&PH1, auto &&PH2) {
+        return this->e_send_file(PH1, PH2);
+    };
 }
 
 Handle::~Handle() {
