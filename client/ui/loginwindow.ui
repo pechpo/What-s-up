@@ -184,6 +184,16 @@ height: 0;</string>
    </widget>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>hostInput</tabstop>
+  <tabstop>connectButton</tabstop>
+  <tabstop>portInput</tabstop>
+  <tabstop>sendInput</tabstop>
+  <tabstop>sendButton</tabstop>
+  <tabstop>minimizeButton</tabstop>
+  <tabstop>closeButton</tabstop>
+  <tabstop>receivedText</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
