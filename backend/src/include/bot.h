@@ -17,17 +17,22 @@
 
 class ChatBot {
 public:
-    ChatBot(const QString& username, const QString& password, const QString& dbPath);
+    ChatBot();
 
     ~ChatBot();
 
     void run();
 
+    static ChatBot * get_instance();
+
+    void processMessage(const int&group, const QString& content);
+
 private:
+    static ChatBot * bt;
+
     void respondToCommand(const QString& command, const QString& to_user);
-    void respondToKeywords(const QString& content, const QString& to_user);
-    void sendMessage(const QString& sender, const QString& receiver, const QString& content);
-    void processMessage(const QString& sender, const QString& receiver, const QString& content);
+    void respondToKeywords(const QString& content, const int &group);
+    void sendMessage(const int &group, const QString& content);
 };
 
 #endif //WHAT_S_UP_BOT_H

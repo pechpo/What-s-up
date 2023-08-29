@@ -21,6 +21,8 @@ class Connection : public QTcpSocket {
 Q_OBJECT
 
 public:
+    int id = 0;
+
     explicit Connection(QTcpSocket* socket, QObject* parent = nullptr);
     ~Connection();
 
@@ -38,7 +40,6 @@ private:
 
     void handleReceivedMessage(const QString &message);
 
-    int id = 0;
 };
 
 #endif // WHAT_S_UP_CONNECTION_H
