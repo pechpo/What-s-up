@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
     //ChatWindow cw;
     //mainWindow mw;
     //ProfileBar pb;
-    LoginDialog d;
+    LoginDialog d;  //login dialog window
     d.show();
     //mw.show();
     //pb.show();

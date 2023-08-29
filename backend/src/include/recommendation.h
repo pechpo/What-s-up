@@ -5,21 +5,38 @@
 #ifndef WHAT_S_UP_RECOMMENDATION_H
 #define WHAT_S_UP_RECOMMENDATION_H
 #pragma once
-
-#include <string>
 #include <vector>
+#include <string>
 #include "user.h"
 
 class Recommendation {
 public:
-    Recommendation(UserDB& user_db);
+    Recommendation();
 
-    static const int MAX_RECOMMENDATIONS = 5; // 常量定义
+    // Recommend friends for the user
+    std::vector<quint32> recommendFriends(const quint32& userId);
 
-    std::vector<std::string> recommendFriends(const std::string& username);
+    // Recommend groups for the user
+    std::vector<quint32> recommendGroups(const quint32& userId);
+
+    // Recommend activities for the user (if needed)
+    std::vector<std::string> recommendActivities(const quint32& userId);
 
 private:
-    UserDB& user_db_; // 用户数据库引用
+    // Fetch the friend list of the user from the database
+    std::vector<quint32> getFriends(const quint32& userId);
+
+    // Fetch the group list of the user from the database
+    std::vector<quint32> getGroups(const quint32& userId);
+
+    // Fetch the tags of the user from the database
+    std::vector<int> getTags(const quint32& userId);
+
+    // Fetch the tags of the friends of the user from the database
+    std::vector<int> getFriendsTags(const quint32& userId);
+
+    // Fetch the tags of the groups of the user from the database
+    std::vector<int> getGroupsTags(const quint32& userId);
 };
 
 #endif //WHAT_S_UP_RECOMMENDATION_H

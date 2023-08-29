@@ -1,54 +1,56 @@
 cmake_minimum_required(VERSION 3.26)
-project(What_s_up)
+project(backend)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
-set(CMAKE_PREFIX_PATH "/home/zixin/Qt/6.5.2/gcc_64")
-
-
-include_directories("/home/zixin/Qt/6.5.2/Src/qtbase/src/3rdparty/sqlite")
-
-
 find_package(Qt6 COMPONENTS
         Core
         Gui
         Widgets
+        Network
+        Sql
         REQUIRED)
 
-add_executable(What_s_up
-        src/main.cpp
-        src/server/server.cpp
-        src/server/connection.cpp
-        src/database/db_connection.cpp
-        src/database/user.cpp
-        src/database/group.cpp
-        src/database/message.cpp
+
+add_executable(backend
+        src/include/db.h
+        src/include/group.h
+        src/include/message.h
+        src/include/user.h
+        src/bot/bot.cpp
+        src/include/clustering.h
+        src/include/connection.h
+        src/include/encryption.h
+        src/include/media.h
+        src/include/recommendation.h
+        src/include/server.h
+        src/media/media.cpp
         src/recommendation/clustering.cpp
         src/recommendation/recommendation.cpp
-        src/bot/bot.cpp
-        src/media/media.cpp
+        src/server/connection.cpp
+        src/server/server.cpp
         src/utils/encryption.cpp
-        src/include/server.h
-        src/include/user.h
-        src/include/recommendation.h
-        src/include/bot.h
-        src/include/media.h
-        src/include/encryption.h
-        src/include/message.h
-        src/include/db_connection.h
-        src/include/group.h
-        src/include/clustering.h
-        src/include/connection.h)
-target_link_libraries(What_s_up
+        src/main.cpp
+        src/database/user.cpp
+        src/database/message.cpp
+        src/database/group.cpp
+        src/database/db.cpp
+        src/include/handle.h
+        src/handle/handle.cpp
+        src/handle/handle_user.cpp
+        src/handle/handle_group.cpp
+        src/handle/handle_message.cpp
+)
+
+target_link_libraries(backend
         Qt::Core
         Qt::Gui
         Qt::Widgets
-        sqlite3
-
+        Qt::Network
+        Qt::Sql
 )
-
 
 include_directories(${PROJECT_SOURCE_DIR}/src/include)

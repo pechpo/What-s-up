@@ -1,80 +1,60 @@
-//
-// Created by zixin on 23-8-23.
-//
-
-// src/database/user.cpp
 #include "user.h"
-#include <sqlite3.h>
-#include <sstream>
 
-UserDB::UserDB(DBConnection& connection)
-        : connection_(connection.db) {
+quint32 User::getID() const {
+    return ID;
 }
 
-bool UserDB::addUser(const std::string& username, const std::string& password) {
-    std::string sql = "INSERT INTO users (username, password) VALUES (?, ?)";
-    sqlite3_stmt* stmt;
-    if (sqlite3_prepare_v2(connection_, sql.c_str(), -1, &stmt, nullptr) != SQLITE_OK) {
-        return false;
-    }
-    sqlite3_bind_text(stmt, 1, username.c_str(), -1, SQLITE_STATIC);
-    sqlite3_bind_text(stmt, 2, password.c_str(), -1, SQLITE_STATIC);
-    if (sqlite3_step(stmt) != SQLITE_DONE) {
-        return false;
-    }
-    sqlite3_finalize(stmt);
-    return true;
+QString User::getName() const {
+    return name;
 }
 
-bool UserDB::validateUser(const std::string& username, const std::string& password) {
-    std::string sql = "SELECT username FROM users WHERE username = ? AND password = ?";
-    sqlite3_stmt* stmt;
-    if (sqlite3_prepare_v2(connection_, sql.c_str(), -1, &stmt, nullptr) != SQLITE_OK) {
-        return false;
-    }
-    sqlite3_bind_text(stmt, 1, username.c_str(), -1, SQLITE_STATIC);
-    sqlite3_bind_text(stmt, 2, password.c_str(), -1, SQLITE_STATIC);
-    if (sqlite3_step(stmt) == SQLITE_ROW) {
-        sqlite3_finalize(stmt);
-        return true;
-    }
-    sqlite3_finalize(stmt);
-    return false;
+QString User::getPwd() const {
+    return pwd;
 }
 
-bool UserDB::updateUser(const std::string& username, const std::string& key, const std::string& value) {
-    std::string sql = "UPDATE users SET " + key + " = ? WHERE username = ?";
-    sqlite3_stmt* stmt;
-    if (sqlite3_prepare_v2(connection_, sql.c_str(), -1, &stmt, nullptr) != SQLITE_OK) {
-        return false;
-    }
-    sqlite3_bind_text(stmt, 1, value.c_str(), -1, SQLITE_STATIC);
-    sqlite3_bind_text(stmt, 2, username.c_str(), -1, SQLITE_STATIC);
-    if (sqlite3_step(stmt) != SQLITE_DONE) {
-        return false;
-    }
-    sqlite3_finalize(stmt);
-    return true;
+QString User::getAvatarName() const {
+    return ava;
 }
 
-std::unordered_map<std::string, std::vector<std::string>> UserDB::getAllUserTags() {
-    std::unordered_map<std::string, std::vector<std::string>> userTags;
-    std::string sql = "SELECT username, tags FROM users";
-    sqlite3_stmt* stmt;
-    if (sqlite3_prepare_v2(connection_, sql.c_str(), -1, &stmt, nullptr) != SQLITE_OK) {
-        return userTags; // Return empty map on failure
-    }
-    while (sqlite3_step(stmt) == SQLITE_ROW) {
-        std::string username = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 0));
-        std::string tagsStr = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 1));
-        std::vector<std::string> tags;
-        std::istringstream iss(tagsStr);
-        std::string tag;
-        while (std::getline(iss, tag, ',')) {
-            tags.push_back(tag);
-        }
-        userTags[username] = tags;
-    }
-    sqlite3_finalize(stmt);
-    return userTags;
+QString User::getEmail() const {
+    return ema;
 }
+
+void User::setID(const quint32 &new_ID) {
+    this->ID = new_ID;
+}
+
+void User::setName(const QString &new_name) {
+    this->name = new_name;
+}
+
+void User::setPwd(const QString &new_pwd) {
+    this->pwd = new_pwd;
+}
+
+void User::setAvatarName(const QString &new_ava) {
+    this->ava = new_ava;
+}
+
+void User::setEmail(const QString &new_ema) {
+    this->ema = new_ema;
+}
+
+User::User() {
+    this->ID = 0;
+    this->name = "";
+    this->pwd = "";
+    this->ava = "";
+    this->ema = "";
+}
+
+User::User(const quint32 &new_ID, const QString &new_name, const QString &new_pwd, const QString &new_ava,
+           const QString &new_ema) {
+    this->ID = new_ID;
+    this->name = new_name;
+    this->pwd = new_pwd;
+    this->ava = new_ava;
+    this->ema = new_ema;
+}
+
+User::~User() = default;

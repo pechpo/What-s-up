@@ -8,23 +8,26 @@
 #pragma once
 
 #include "message.h"
+#include "user.h"
+#include "db.h"
 #include <string>
 #include <chrono>
 #include <map>
 #include <functional>
 
 class ChatBot {
-    MessageDB& message_db;
-
 public:
-    ChatBot(MessageDB& message_db);
+    ChatBot(const QString& username, const QString& password, const QString& dbPath);
 
-    void processMessage(const std::string& sender, const std::string& receiver, const std::string& content);
+    ~ChatBot();
+
+    void run();
 
 private:
-    void respondToCommand(const std::string& command, const std::string& to_user);
-    void respondToKeywords(const std::string& content, const std::string& to_user);
-    void sendMessage(const std::string& sender, const std::string& receiver, const std::string& content);
+    void respondToCommand(const QString& command, const QString& to_user);
+    void respondToKeywords(const QString& content, const QString& to_user);
+    void sendMessage(const QString& sender, const QString& receiver, const QString& content);
+    void processMessage(const QString& sender, const QString& receiver, const QString& content);
 };
 
 #endif //WHAT_S_UP_BOT_H

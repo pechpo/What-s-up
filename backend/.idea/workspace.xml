@@ -3,15 +3,15 @@
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
-  <component name="CMakePresetLoader"><![CDATA[{
-  "useNewFormat": true
-}]]></component>
+  <component name="CMakePresetLoader">{
+  &quot;useNewFormat&quot;: true
+}</component>
   <component name="CMakeReloadState">
     <option name="reloaded" value="true" />
   </component>
   <component name="CMakeRunConfigurationManager">
     <generated>
-      <config projectName="What_s_up" targetName="What_s_up" />
+      <config projectName="backend" targetName="backend" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -20,8 +20,12 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d1a40369-b411-421a-a17e-96a17a10da7e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/QtSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/QtSettings.xml" afterDir="false" />
+    <list default="true" id="ef533f2d-2b4d-4d58-ad16-579cff76de6c" name="更改" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/database/data.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/data.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/database/db.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/db.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handle/handle_user.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/handle/handle_user.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/connection.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/connection.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,51 +39,73 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 1
-}]]></component>
-  <component name="ProjectId" id="2UTbYIPb1K9WAHjJtNzRE9fteTj" />
+  <component name="ProjectApplicationVersion">
+    <option name="ide" value="CLion" />
+    <option name="majorVersion" value="2023" />
+    <option name="minorVersion" value="2" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="2UVk6BWrrsxsXt3VS6CyYd7kgGC" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "last_opened_file_path": "/home/youtop/git/What-s-up/backend/CMakeLists.txt",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/backend&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/foreverlasting/git/What-s-up/backend&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/handle" />
+    </key>
+  </component>
   <component name="RunManager">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="What_s_up" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="What_s_up" TARGET_NAME="What_s_up" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="What_s_up" RUN_TARGET_NAME="What_s_up">
+    <configuration name="backend" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="backend" TARGET_NAME="backend" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="backend" RUN_TARGET_NAME="backend">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="d1a40369-b411-421a-a17e-96a17a10da7e" name="Changes" comment="" />
-      <created>1692966563646</created>
+    <task active="true" id="Default" summary="默认任务">
+      <changelist id="ef533f2d-2b4d-4d58-ad16-579cff76de6c" name="更改" comment="" />
+      <created>1693031960551</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1692966563646</updated>
-      <workItem from="1692966564677" duration="1219000" />
+      <updated>1693031960551</updated>
+      <workItem from="1693031965804" duration="3320000" />
+      <workItem from="1693035809111" duration="681000" />
+      <workItem from="1693037325168" duration="692000" />
+      <workItem from="1693038052044" duration="2288000" />
+      <workItem from="1693043347090" duration="785000" />
+      <workItem from="1693050164676" duration="7120000" />
+      <workItem from="1693122499841" duration="103000" />
+      <workItem from="1693122829814" duration="4950000" />
+      <workItem from="1693128263611" duration="726000" />
+      <workItem from="1693129234028" duration="7599000" />
+      <workItem from="1693215075142" duration="12000" />
+      <workItem from="1693215167061" duration="145000" />
+      <workItem from="1693224449666" duration="5857000" />
+      <workItem from="1693230551355" duration="2610000" />
+      <workItem from="1693233745982" duration="2613000" />
     </task>
     <servers />
   </component>
@@ -91,5 +117,9 @@
     <isAutomaticCheckingOnLaunch value="false" />
     <isAutomaticFoundErrors value="true" />
     <isAutomaticFoundErrors value="true" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
