@@ -66,9 +66,24 @@ QJsonObject Handle::q_userInfo(const int &ID, const QJsonObject &obj) {
     response["type"] = "r_userInfo";
     response["id"] = QJsonValue((int) flag.getID());
     response["username"] = flag.getName();
-    response["password"] = flag.getPwd();
     response["email"] = flag.getEmail();
     response["avatar"] = flag.getAvatarName();
+    QJsonArray sharedChats;
+    auto tmp = db->q_list_myChats(ID);
+    auto Tmp = db->q_list_myChats(id);
+    for (const auto &x: tmp) {
+        for (const auto &y: Tmp) {
+            if (x.getID() == y.getID()) {
+                QJsonObject chat;
+                chat["chatId"] = (int) x.getID();
+                chat["name"] = x.getName();
+                chat["avatar"] = x.getAvatarName();
+                sharedChats.append(chat);
+                break;
+            }
+        }
+    }
+    response["sharedChats"] = sharedChats;
     return response;
     // Send the response back to client
 }
@@ -81,14 +96,16 @@ QJsonObject Handle::e_editInfo(const int &ID, const QJsonObject &obj) {
     QString avatar = obj["avatar"].toString();
     QString email = obj["email"].toString();
     DB *db = DB::get_instance();
-    auto flag = db->e_editInfo(User(id, name, password, avatar, email));
+    auto user = User(id, name, password, avatar, email);
+
+    db->e_edit_name(user);
+    db->e_edit_password(user);
+    db->e_edit_avatar(user);
+    db->e_edit_email(user);
 
     QJsonObject response;
     response["type"] = "r_editInfo";
-    response["success"] = flag;  // set to false if insertion fails
-    if(!flag){
-        response["error"] = "Edit failed";
-    }
+    response["success"] = true;  // set to false if insertion fails
     return response;
     // Send the response back to client
 }
@@ -103,7 +120,7 @@ QJsonObject Handle::q_list_myChats(const int &ID, const QJsonObject &obj) {
     QJsonArray chats;
     for (const auto &x: flag) {
         QJsonObject chat;
-        chat["chatId"] = (int)x.getID();
+        chat["chatId"] = (int) x.getID();
         chat["name"] = x.getName();
         chat["avatar"] = x.getAvatarName();
         chats.append(chat);
@@ -122,7 +139,7 @@ QJsonObject Handle::e_addFriend(const int &ID, const QJsonObject &obj) {
     QJsonObject response;
     response["type"] = "r_addFriend";
     response["success"] = flag;  // set to false if insertion fails
-    if(!flag){
+    if (!flag) {
         response["error"] = "Add failed";
     }
     QJsonObject OBJ;
@@ -148,7 +165,7 @@ QJsonObject Handle::q_list_friendRequests(const int &ID, const QJsonObject &obj)
     QJsonArray users;
     for (const auto &x: flag) {
         QJsonObject user;
-        user["id"] = (int)x.getID();
+        user["id"] = (int) x.getID();
         user["name"] = x.getName();
         user["avatar"] = x.getAvatarName();
         users.append(user);
@@ -168,7 +185,7 @@ QJsonObject Handle::q_list_myFriends(const int &ID, const QJsonObject &obj) {
     QJsonArray users;
     for (const auto &x: flag) {
         QJsonObject user;
-        user["id"] = (int)x.getID();
+        user["id"] = (int) x.getID();
         user["name"] = x.getName();
         user["avatar"] = x.getAvatarName();
         users.append(user);
@@ -189,7 +206,7 @@ QJsonObject Handle::e_acceptFriend(const int &ID, const QJsonObject &obj) {
     QJsonObject response;
     response["type"] = "r_acceptFriend";
     response["success"] = flag;  // set to false if insertion fails
-    if(!flag){
+    if (!flag) {
         response["error"] = "Accept failed";
     }
     return response;

@@ -11,8 +11,9 @@ class Message {
 public:
     Message();
 
-    Message(const quint32 &new_ID, const quint32 &new_sender_ID, const quint32 &new_receiver_ID, const QString &new_content,
-            const QString &new_time, const QString &new_sender_name, const bool &is_file);
+    Message(const quint32 &new_ID, const quint32 &new_sender_ID, const quint32 &new_receiver_ID,
+            const QString &new_content,
+            const QString &new_time, const QString &new_sender_name, const bool &is_file, const QString &new_file_name);
 
     ~Message();
 
@@ -28,6 +29,8 @@ public:
 
     QString getSenderName() const;
 
+    bool getIsFile() const;
+
     QString getFileName() const;
 
     void setID(const quint32 &new_ID);
@@ -42,8 +45,11 @@ public:
 
     void setSenderName(const QString &new_sender_name);
 
+    void setIsFile(const bool &new_is_file);
+
     void setFileName(const QString &new_file_name);
 
+private:
     quint32 ID;
 
     quint32 sender_ID;

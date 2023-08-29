@@ -20,7 +20,13 @@ public :
 
     bool q_login(const quint32 &ID, const QString &password);
 
-    bool e_editInfo(const User &user);
+    bool e_edit_name(const User &user);
+
+    bool e_edit_password(const User &user);
+
+    bool e_edit_avatar(const User &user);
+
+    bool e_edit_email(const User &user);
 
     User q_myInfo(const quint32 &ID);
 

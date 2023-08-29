@@ -2,7 +2,7 @@
 #include <QSqlQuery>
 
 //user id, name, password, avatar, email
-//message id, chat_id, sender_id, content, time, is_file, sender_name
+//message id, chat_id, sender_id, content, time, sender_name, is_file, file_name
 //chat id, name, avatar
 //friend_request user_id, friend_id
 //friend user_id, friend_id
@@ -69,12 +69,37 @@ bool DB::q_login(const quint32 &ID, const QString &password) {
     return false;
 }
 
-bool DB::e_editInfo(const User &user) {
+bool DB::e_edit_name(const User &user) {
+    if (user.getName() == "")return true;
     QSqlQuery query(database);
-    query.prepare("UPDATE user SET name = ?, password = ?, avatar = ?, email = ? WHERE id = ?");
+    query.prepare("UPDATE user SET name = ? WHERE id = ?");
     query.addBindValue(user.getName());
+    query.addBindValue(user.getID());
+    return query.exec();
+}
+
+bool DB::e_edit_password(const User &user) {
+    if (user.getPwd() == "")return true;
+    QSqlQuery query(database);
+    query.prepare("UPDATE user SET password = ? WHERE id = ?");
     query.addBindValue(user.getPwd());
+    query.addBindValue(user.getID());
+    return query.exec();
+}
+
+bool DB::e_edit_avatar(const User &user) {
+    if (user.getAvatarName() == "")return true;
+    QSqlQuery query(database);
+    query.prepare("UPDATE user SET avatar = ? WHERE id = ?");
     query.addBindValue(user.getAvatarName());
+    query.addBindValue(user.getID());
+    return query.exec();
+}
+
+bool DB::e_edit_email(const User &user) {
+    if (user.getEmail() == "")return true;
+    QSqlQuery query(database);
+    query.prepare("UPDATE user SET email = ? WHERE id = ?");
     query.addBindValue(user.getEmail());
     query.addBindValue(user.getID());
     return query.exec();
@@ -268,14 +293,15 @@ bool DB::e_acceptFriend(const quint32 &id, const quint32 &ID, const bool &fl) {
 
 bool DB::e_send(const Message &message) {
     QSqlQuery query(database);
-    query.prepare("INSERT INTO message (id, chat_id, sender_id, content, time, is_file, sender_name) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    query.prepare("INSERT INTO message (id, chat_id, sender_id, content, time, sender_name, is_file, file_name) VALUES (?, ?, ?, ?, ?, ?, ?)");
     query.addBindValue(message.getID());
     query.addBindValue(message.getReceiverID());
     query.addBindValue(message.getSenderID());
     query.addBindValue(message.getContent());
     query.addBindValue(message.getTime());
-    query.addBindValue(message.is_file);
     query.addBindValue(message.getSenderName());
+    query.addBindValue(message.getIsFile());
+    query.addBindValue(message.getFileName());
     return query.exec();
 }
 
@@ -312,7 +338,7 @@ QList<Message> DB::q_list_filesInChat(const quint32 &chat_ID) {
         message.setSenderID(query.value(2).toUInt());
         message.setContent(query.value(3).toString());
         message.setTime(query.value(4).toString());
-        message.is_file = query.value(5).toBool();
+        message.setIsFile(query.value(5).toBool());
         message.setSenderName(query.value(6).toString());
         messages.append(message);
     }

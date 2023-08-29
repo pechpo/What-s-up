@@ -22,11 +22,14 @@ QJsonObject Handle::q_chatHistory(const int &ID, const QJsonObject &obj) {
     response["type"] = "r_chatHistory";
     response["chatId"] = (int) chatId;
     QJsonArray chatHistory;
+    std::sort(flag.begin(), flag.end(), [](const Message &a, const Message &b) {
+        return a.getTime() > b.getTime();
+    });
     for (const auto &x: flag) {
         QJsonObject message;
-        message["id"] = (int) x.getID();
+        message["msgId"] = (int) x.getID();
         message["senderId"] = (int) x.getSenderID();
-        message["receiverId"] = (int) x.getReceiverID();
+        message["senderName"] = x.getSenderName();
         message["content"] = x.getContent();
         message["time"] = x.getTime();
         chatHistory.append(message);
@@ -49,9 +52,7 @@ QJsonObject Handle::q_list_usersInChat(const int &ID, const QJsonObject &obj) {
     for (const auto &x: flag) {
         QJsonObject user;
         user["id"] = (int) x.getID();
-        user["username"] = x.getName();
-        user["password"] = x.getPwd();
-        user["email"] = x.getEmail();
+        user["name"] = x.getName();
         user["avatar"] = x.getAvatarName();
         users.append(user);
     }
@@ -114,7 +115,7 @@ QJsonObject Handle::q_list_filesInChat(const int &ID, const QJsonObject &obj) {
     for (const auto &x: flag) {
         QJsonObject file;
         file["fileId"] = (int) x.getID();
-        file["time"] = x.getTime();
+        file["name"] = x.getTime();
         file["senderId"] = (int) x.getSenderID();
         file["receiverId"] = (int) x.getReceiverID();
         files.append(file);
