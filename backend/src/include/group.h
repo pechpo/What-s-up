@@ -32,9 +32,6 @@ public:
     QString name;
 
     QString ava;
-
-private:
-    static int group_id;
 };
 
 #endif //DATABASE_GROUP_H

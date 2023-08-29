@@ -10,7 +10,7 @@
 #include "group.h"
 #include "db.h"
 
-QJsonObject Handle::q_chatHistory(const QJsonObject &obj) {
+QJsonObject Handle::q_chatHistory(const int &ID, const QJsonObject &obj) {
     // Extract the necessary fields from obj
     quint32 chatId = obj["chatId"].toInt();
     quint32 time = obj["time"].toInt();
@@ -38,7 +38,7 @@ QJsonObject Handle::q_chatHistory(const QJsonObject &obj) {
 
 
 
-QJsonObject Handle::q_list_usersInChat(const QJsonObject &obj) {
+QJsonObject Handle::q_list_usersInChat(const int &ID, const QJsonObject &obj) {
     // Extract the necessary fields from obj
     quint32 chatId = obj["chatId"].toInt();
     DB *db = DB::get_instance();
@@ -61,7 +61,7 @@ QJsonObject Handle::q_list_usersInChat(const QJsonObject &obj) {
     // Send the response back to client
 }
 
-QJsonObject Handle::e_createChat(const QJsonObject &obj) {
+QJsonObject Handle::e_createChat(const int &ID, const QJsonObject &obj) {
     // Extract the necessary fields from obj
     quint32 id = obj["id"].toInt();
     QString name = obj["name"].toString();
@@ -79,7 +79,7 @@ QJsonObject Handle::e_createChat(const QJsonObject &obj) {
     // Send the response back to client
 }
 
-QJsonObject Handle::e_joinChat(const QJsonObject &obj) {
+QJsonObject Handle::e_joinChat(const int &ID, const QJsonObject &obj) {
     // Extract the necessary fields from obj
     quint32 chatId = obj["chatId"].toInt();
     quint32 id = obj["id"].toInt();
@@ -96,7 +96,7 @@ QJsonObject Handle::e_joinChat(const QJsonObject &obj) {
     // Send the response back to client
 }
 
-QJsonObject Handle::q_list_filesInChat(const QJsonObject &obj) {
+QJsonObject Handle::q_list_filesInChat(const int &ID, const QJsonObject &obj) {
     // Extract the necessary fields from obj
     quint32 chatId = obj["chatId"].toInt();
     DB *db = DB::get_instance();
