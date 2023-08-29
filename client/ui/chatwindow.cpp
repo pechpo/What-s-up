@@ -75,7 +75,8 @@ void ChatWindow::slot_a_newMessage(const QJsonObject &obj) {
     QJsonObject msg = obj.value("message").toObject();
     Message cur = jsonToMessage(msg);
     history.append(cur);
-    appendText(messageToString(cur));
+    //appendText(messageToString(cur));
+    updateText();
 }
 
 ChatWindow::Message ChatWindow::jsonToMessage(const QJsonObject &obj) {
@@ -122,9 +123,12 @@ void ChatWindow::updateText() {
     // QVector<Message> history -> lineEdit->text()
     QString all;
     for (quint32 i = 0; i < history.size(); i++) {
-        all.append(messageToString(history[i]));
+        all.append(messageToString(history[i]) + "\n");
     }
     ui->MsgEdit->setPlainText(all);
+    QTextCursor cursor = ui->MsgEdit->textCursor();
+    cursor.movePosition(QTextCursor::End);
+    ui->MsgEdit->setTextCursor(cursor);
 }
 
 void ChatWindow::appendText(const QString &text) {
