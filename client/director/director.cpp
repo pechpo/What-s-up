@@ -29,7 +29,7 @@ Director::Director(QObject *parent)
     logged = false;
 }
 
-void Director::act(const QJsonObject &obj) {
+void Director::act(const QJsonObject &obj) {  //after receiving the json package, emit the corresponding signal
     qDebug() << "recv: " << obj;
     // emit receiveTestString(obj.value("text").toString());
     if (!obj.contains("type")) {
