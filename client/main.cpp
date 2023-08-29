@@ -25,11 +25,11 @@ int main(int argc, char *argv[])
     }
     //Director::getInstance()->toMainWindow();
     //ChatWindow cw;
-    //mainWindow mw;
+    mainWindow mw;
     //ProfileBar pb;
     LoginDialog d;
     d.show();
-    //mw.show();
+    mw.show();
     //pb.show();
     //cw.show();
     return a.exec();
