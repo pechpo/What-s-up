@@ -97,6 +97,7 @@ void mainWindow::on_addnewfriendButton_clicked()
 void mainWindow::setState(enum mainWindow::State tarState) {
     curState = tarState;
     if (curState == Friend) {
+        ui->viewLabel->setText("Friend List");
         QJsonObject msg1;
         msg1.insert("type", "q_list_myFriends");
         if (Director::getInstance()->sendJson(msg1)) {
@@ -109,6 +110,7 @@ void mainWindow::setState(enum mainWindow::State tarState) {
         }
     }
     else if (curState == Chat) {
+        ui->viewLabel->setText("Chat List");
         QJsonObject msg;
         msg.insert("type", "q_list_myChats");
         if (Director::getInstance()->sendJson(msg)) {

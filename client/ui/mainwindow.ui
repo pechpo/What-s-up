@@ -189,6 +189,19 @@
      </widget>
     </widget>
    </widget>
+   <widget class="QLabel" name="viewLabel">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>60</y>
+      <width>91</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Current View</string>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>
