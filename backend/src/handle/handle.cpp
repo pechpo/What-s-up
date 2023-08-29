@@ -65,6 +65,15 @@ Handle::Handle() {
     handlemap["q_downloadFile"] = [this](auto &&PH1, auto &&PH2) {
         return this->q_downloadFile(PH1, PH2);
     };
+    handlemap["q_chatInfo"] = [this](auto &&PH1, auto &&PH2) {
+        return this->q_chatInfo(PH1, PH2);
+    };
+    handlemap["e_editChatInfo"] = [this](auto &&PH1, auto &&PH2) {
+        return this->e_editChatInfo(PH1, PH2);
+    };
+    handlemap["q_talk"] = [this](auto &&PH1, auto &&PH2) {
+        return this->q_talk(PH1, PH2);
+    };
 }
 
 Handle::~Handle() {

@@ -6,7 +6,7 @@
 //message id, chat_id, sender_id, content, time, sender_name, is_file, file_name
 //chat id, name, avatar
 //friend_request user_id, friend_id
-//friend user_id, friend_id
+//friend user_id, friend_id, group_id
 
 
 DB *DB::db = nullptr;
@@ -186,7 +186,7 @@ QList<Group> DB::q_list_myChats(const quint32 &ID) {
         Query.prepare("SELECT * FROM chat WHERE id = ?");
         Query.addBindValue(query.value(0).toUInt());
         Query.exec();
-        if (!Query.next())return {};
+        if (!Query.next())continue;
         chat.setID(Query.value(0).toUInt());
         chat.setName(Query.value(1).toString());
         chat.setAvatarName(Query.value(3).toString());
@@ -207,7 +207,7 @@ QList<User> DB::q_list_usersInChat(const quint32 &chat_ID) {
         Query.prepare("SELECT * FROM user WHERE id = ?");
         Query.addBindValue(query.value(0).toUInt());
         Query.exec();
-        if (!Query.next())return {};
+        if (!Query.next())continue;
         user.setID(Query.value(0).toUInt());
         user.setName(Query.value(1).toString());
         user.setAvatarName(Query.value(3).toString());
@@ -234,9 +234,10 @@ QList<User> DB::q_list_friendRequests(const quint32 &ID) {
         User user;
         QSqlQuery Query(database);
         Query.prepare("SELECT * FROM user WHERE id = ?");
+        qDebug() << query.value(0).toUInt();
         Query.addBindValue(query.value(0).toUInt());
         Query.exec();
-        if (!Query.next())return {};
+        if (!Query.next())continue;
         user.setID(Query.value(0).toUInt());
         user.setName(Query.value(1).toString());
         user.setAvatarName(Query.value(3).toString());
@@ -257,7 +258,7 @@ QList<User> DB::q_list_myFriends(const quint32 &ID) {
         Query.prepare("SELECT * FROM user WHERE id = ?");
         Query.addBindValue(query.value(0).toUInt());
         Query.exec();
-        if (!Query.next())return {};
+        if (!Query.next())continue;
         user.setID(Query.value(0).toUInt());
         user.setName(Query.value(1).toString());
         user.setAvatarName(Query.value(3).toString());
@@ -269,16 +270,23 @@ QList<User> DB::q_list_myFriends(const quint32 &ID) {
 bool DB::e_acceptFriend(const quint32 &id, const quint32 &ID, const bool &fl) {
     QSqlQuery query(database);
     if (fl) {
-        query.prepare("INSERT INTO friend (user_id, friend_id) VALUES (?, ?)");
+        int group = new_group_id();
+        query.prepare("INSERT INTO friend (user_id, friend_id, group_id) VALUES (?, ?, ?)");
         query.addBindValue(id);
         query.addBindValue(ID);
+        query.addBindValue(group);
         query.exec();
 
         query.clear();
-        query.prepare("INSERT INTO friend (user_id, friend_id) VALUES (?, ?)");
+        query.prepare("INSERT INTO friend (user_id, friend_id, group_id) VALUES (?, ?, ?)");
         query.addBindValue(ID);
         query.addBindValue(id);
+        query.addBindValue(group);
         query.exec();
+
+        e_createChat(group, "default", "");
+        e_joinChat(id, group);
+        e_joinChat(ID, group);
     }
     query.clear();
     query.prepare("DELETE FROM friend_request WHERE user_id = ? AND friend_id = ?");
@@ -289,8 +297,7 @@ bool DB::e_acceptFriend(const quint32 &id, const quint32 &ID, const bool &fl) {
 
 bool DB::e_send(const Message &message) {
     QSqlQuery query(database);
-    query.prepare(
-            "INSERT INTO message (id, chat_id, sender_id, content, time, sender_name, is_file, file_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    query.prepare("INSERT INTO message (id, chat_id, sender_id, content, time, sender_name, is_file, file_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
     query.addBindValue(message.getID());
     query.addBindValue(message.getReceiverID());
     query.addBindValue(message.getSenderID());
@@ -322,6 +329,17 @@ QList<Message> DB::q_chatHistory(const quint32 &chat_ID, const quint32 &time, co
     return messages;
 }
 
+QString DB::getChatName(const int &ID) {
+    QSqlQuery query(database);
+    query.prepare("SELECT name FROM chat WHERE id = ?");
+    query.addBindValue(ID);
+    query.exec();
+    if (query.next()) {
+        return query.value(0).toString();
+    }
+    return "";
+}
+
 QList<Message> DB::q_list_filesInChat(const quint32 &chat_ID) {
     QSqlQuery query(database);
     query.prepare("SELECT * FROM message WHERE chat_id = ? AND is_file = true");
@@ -337,6 +355,7 @@ QList<Message> DB::q_list_filesInChat(const quint32 &chat_ID) {
         message.setTime(query.value(4).toString());
         message.setSenderName(query.value(5).toString());
         message.setIsFile(query.value(6).toBool());
+        message.setFileName(query.value(7).toString());
         messages.append(message);
     }
     return messages;
@@ -369,7 +388,7 @@ bool DB::uploadFileToFTP(const QString &filename) {
     curl_global_init(CURL_GLOBAL_DEFAULT);
     curl = curl_easy_init();
 
-    if (curl) {
+    if(curl) {
         std::string url = "ftp://192.168.66.128:21";
         url += filename.toStdString();
         curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
@@ -380,7 +399,7 @@ bool DB::uploadFileToFTP(const QString &filename) {
 
         res = curl_easy_perform(curl);
 
-        if (res != CURLE_OK) {
+        if(res != CURLE_OK) {
             fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
             return false;
         }
@@ -394,12 +413,45 @@ bool DB::uploadFileToFTP(const QString &filename) {
 
 QString DB::q_downloadFile(const int &ID, const QString &fileName) {
     QSqlQuery query(database);
-    query.prepare("SELECT * FROM message WHERE chat_id = ? AND fileName = ?");
+    query.prepare("SELECT * FROM message WHERE chat_id = ? AND file_name = ?");
     query.addBindValue(ID);
     query.addBindValue(fileName);
     query.exec();
     if (query.next())return query.value(3).toString();
     return "";
+}
+
+std::tuple<QString, QString, QList<User>> DB::q_chatInfo(const quint32 &ID) {
+    QSqlQuery query(database);
+    query.prepare("SELECT * FROM chat WHERE id = ?");
+    query.addBindValue(ID);
+    query.exec();
+    if (query.next()) {
+        QString name = query.value(1).toString();
+        QString avatar = query.value(2).toString();
+        QList<User> users = q_list_usersInChat(ID);
+        return std::make_tuple(name, avatar, users);
+    }
+    return std::make_tuple("", "", QList<User>({}));
+}
+
+bool DB::e_editChatInfo(const quint32 &ID, const QString &name, const QString &avatar) {
+    QSqlQuery query(database);
+    query.prepare("UPDATE chat SET name = ?, avatar = ? WHERE id = ?");
+    query.addBindValue(name);
+    query.addBindValue(avatar);
+    query.addBindValue(ID);
+    return query.exec();
+}
+
+int DB::q_talk(const int &id, const int &ID) {
+    QSqlQuery query(database);
+    query.prepare("SELECT * FROM friend WHERE user_id = ? AND friend_id = ?");
+    query.addBindValue(id);
+    query.addBindValue(ID);
+    query.exec();
+    if (query.next())return query.value(2).toInt();
+    return 0;
 }
 
 bool DB::add_tag(const int &ID, const std::vector<int> &tags) {
@@ -458,7 +510,7 @@ std::vector<quint32> DB::getFriends(const int &ID) {
 
 DB *DB::get_instance() {
     if (db == nullptr) {
-        db = new DB();
+        db = new DB;
     }
     return db;
 }

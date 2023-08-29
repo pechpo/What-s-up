@@ -52,6 +52,12 @@ public:
 
     QJsonObject q_downloadFile(const int &id, const QJsonObject &json);
 
+    QJsonObject q_chatInfo(const int &id, const QJsonObject &json);
+
+    QJsonObject e_editChatInfo(const int &id, const QJsonObject &json);
+
+    QJsonObject q_talk(const int &id, const QJsonObject &json);
+
     std::map<QString, std::function<QJsonObject(const int &id, const QJsonObject &)>> handlemap;
 
     bool check(const int &id, const int &group);

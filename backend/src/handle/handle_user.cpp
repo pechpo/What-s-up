@@ -132,6 +132,13 @@ QJsonObject Handle::q_list_myChats(const int &ID, const QJsonObject &obj) {
 QJsonObject Handle::e_addFriend(const int &ID, const QJsonObject &obj) {
     // Extract the necessary fields from obj
     quint32 id = obj["id"].toInt();
+    if (id == ID) {
+        QJsonObject response;
+        response["type"] = "r_addFriend";
+        response["success"] = false;
+        response["error"] = "Can't add myself!";
+        return response;
+    }
     DB *db = DB::get_instance();
     auto flag = db->e_addFriend(ID, id);
 

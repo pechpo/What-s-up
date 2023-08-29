@@ -60,7 +60,6 @@ QJsonObject Handle::e_updateFile(const int &ID, const QJsonObject &obj) {
     if (!flag) {
         response["error"] = "Send failed";
     }
-    obj["type"] = "a_newMessage";
     QJsonObject Message;
     Message["msgId"] = message_id;
     Message["senderId"] = ID;
@@ -71,6 +70,7 @@ QJsonObject Handle::e_updateFile(const int &ID, const QJsonObject &obj) {
     S["message"] = Message;
     Server *sv = Server::get_instance();
     for (const auto &y: sv->connections_) {
+        qDebug() << y->id << chatId;
         if (hd->check(y->id, chatId)) {
             y->sendMessage(S);
         }

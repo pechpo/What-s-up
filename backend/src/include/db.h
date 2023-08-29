@@ -62,7 +62,7 @@ public :
 
     bool check(const int &id, const int &group);
 
-    static DB * get_instance();
+    static DB *get_instance();
 
     int new_group_id();
 
@@ -70,9 +70,17 @@ public :
 
     bool uploadFileToFTP(const QString &filename);
 
+    std::tuple<QString, QString, QList<User>> q_chatInfo(const quint32 &ID);
+
+    bool e_editChatInfo(const quint32 &ID, const QString &name, const QString &avatar);
+
     QString q_downloadFile(const int &ID, const QString &filename);
 
-    bool add_tag(const int &ID,const std::vector<int> &tags);
+    int q_talk(const int &id, const int &ID);
+
+    QString getChatName(const int &ID);
+
+    bool add_tag(const int &ID, const std::vector<int> &tags);
 
     std::vector<int> get_tags(const int &ID);
 
@@ -82,8 +90,9 @@ public :
 
 private:
 
-    static DB * db;
+    static DB *db;
 
     QSqlDatabase database;
 };
+
 #endif // DB_H
