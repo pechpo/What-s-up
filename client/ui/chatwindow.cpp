@@ -1,12 +1,8 @@
-#include <QFile>
-#include <QFileInfo>
-#include <QFileDialog>
 #include <QCryptographicHash>
 #include "chatwindow.h"
 #include "ui_chatwindow.h"
 #include "director/director.h"
 
-#include <QJsonArray>
 
 ChatWindow::ChatWindow(QWidget *parent) :
     QWidget(parent),
@@ -17,6 +13,7 @@ ChatWindow::ChatWindow(QWidget *parent) :
     chatId = 0;
     waiting = 0;
     dl = nullptr;
+    ar = nullptr;
     settingsDialog = nullptr;
 
     connect(Director::getInstance(), &Director::r_chatHistory, this, &ChatWindow::slot_r_chatHistory);
@@ -205,6 +202,7 @@ void ChatWindow::on_fileButton_clicked() {
         msg.insert("chatId", QJsonValue(chatId));
         msg.insert("fileName", QJsonValue(fileInfo.fileName()));
         msg.insert("content", QJsonValue(content_str));
+        msg.insert("format", QJsonValue("file"));
         if (Director::getInstance()->sendJson(msg)) {
             waiting++;
         }
@@ -249,5 +247,24 @@ void ChatWindow::on_settingsButton_clicked()
     msg.insert("type", "q_chatInfo");
     msg.insert("chatId", QJsonValue(chatId));
     Director::getInstance()->sendJson(msg);
+}
+
+
+void ChatWindow::on_audioButton_clicked()
+{
+
+    if (nullptr == ar){
+        ar = new audioRecord();
+        ar->show();
+        ar->set(chatId, &waiting);
+    } else {
+        if (true == ar->isVisible())
+            ar->close();
+        else{
+            ar->show();
+            ar->set(chatId, &waiting);
+        }
+    }
+
 }
 

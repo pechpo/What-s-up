@@ -117,6 +117,19 @@ background-image: url(:/images/image/Logo.png);</string>
     <string/>
    </property>
   </widget>
+  <widget class="QPushButton" name="audioButton">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>370</y>
+     <width>101</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Audio Record</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

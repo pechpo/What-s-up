@@ -4,8 +4,13 @@
 #include <QWidget>
 #include <QVector>
 #include <QJsonObject>
+#include <QJsonArray>
 #include "filedownload.h"
+#include "audiorecord.h"
 #include "chatsettings.h"
+#include <QFile>
+#include <QFileInfo>
+#include <QFileDialog>
 
 namespace Ui {
 class ChatWindow;
@@ -37,9 +42,12 @@ private slots:
 
     void on_settingsButton_clicked();
 
+    void on_audioButton_clicked();
+
 private:
     Ui::ChatWindow *ui;
     fileDownload *dl;
+    audioRecord *ar;
     ChatSettings *settingsDialog;
 
     quint32 waiting;

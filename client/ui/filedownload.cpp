@@ -37,7 +37,7 @@ void fileDownload::set(qint64 Id, quint32 *wait, bool init){
     msg.insert("type", "q_list_filesInChat");
     msg.insert("chatId", QJsonValue(chatId));
     if (Director::getInstance()->sendJson(msg)) {
-        waiting++;
+        (*waiting)++;
     }
     if (init) connect(Director::getInstance(), &Director::r_list_filesInChat, this, &fileDownload::slot_r_list_filesInChat);
 }
@@ -56,7 +56,7 @@ void fileDownload::slot_r_list_filesInChat(const QJsonObject &obj) {
         ui->senderList->addItem(item2);
     }
     this->show();
-    waiting--;
+    (*waiting)--;
 }
 
 void fileDownload::on_Download_clicked()
@@ -69,7 +69,7 @@ void fileDownload::on_Download_clicked()
     msg.insert("chatId", QJsonValue(chatId));
     msg.insert("fileName", ui->fileList->selectedItems()[0]->text());
     if (Director::getInstance()->sendJson(msg)) {
-        waiting++;
+        (*waiting)++;
     }
     connect(Director::getInstance(), &Director::r_downloadFile, this, &fileDownload::slot_r_downloadFile);
 }
@@ -84,5 +84,5 @@ void fileDownload::slot_r_downloadFile(const QJsonObject &obj) {
     }
     file.write(QByteArray::fromBase64(obj.value("content").toString().toUtf8()));
     file.close();
-    waiting--;
+    (*waiting)--;
 }
