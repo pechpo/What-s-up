@@ -8,6 +8,8 @@ Settings::Settings(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    bar = new ProfileBar(ui->widget);
+
     connect(Director::getInstance(), &Director::r_editInfo, this, &Settings::slot_r_editInfo);  //send signal to dialog window if r_login received
     connect(Director::getInstance(), &Director::r_myInfo, this, &Settings::slot_r_myInfo);  //send signal to dialog window if r_login received
 }
@@ -44,11 +46,15 @@ void Settings::slot_r_editInfo(const QJsonObject &obj) {
 }
 
 void Settings::slot_r_myInfo(const QJsonObject &obj) {
-    ui->idLabel->setText(QString::number(obj.value("id").toInt()));
-    ui->newName->setText(obj.value("username").toString());
-    ui->newAvatar->setText(obj.value("avatar").toString());
+    ui->idLabel->setText("ID: " + QString::number(obj.value("id").toInt()));
+    QString name = obj.value("username").toString();
+    QString avatar = obj.value("avatar").toString();
+    ui->newName->setText(name);
+    ui->newAvatar->setText(avatar);
     ui->newEmail->setText(obj.value("email").toString());
     ui->currentPwd->setText("");
     ui->newPwd->setText("");
+    bar->setName(name);
+    bar->setAvatar(avatar);
 }
 

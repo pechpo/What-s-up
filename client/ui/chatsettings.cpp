@@ -13,7 +13,7 @@ ChatSettings::ChatSettings(QWidget *parent, qint64 id) :
     connect(Director::getInstance(), &Director::r_chatInfo, this, &ChatSettings::slot_r_chatInfo);
     connect(Director::getInstance(), &Director::r_editChatInfo, this, &ChatSettings::slot_r_editChatInfo);
     connect(Director::getInstance(), &Director::r_exitChat, this, &ChatSettings::slot_r_exitChat);
-    }
+}
 
 ChatSettings::~ChatSettings()
 {
@@ -64,6 +64,7 @@ void ChatSettings::slot_r_chatInfo(const QJsonObject &obj) {
         height += p->height() + gap;
         p->show();
     }
+    ui->scrollContent->adjustSize();
     //qDebug() << "successful recv";
 }
 
