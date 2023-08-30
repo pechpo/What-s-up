@@ -117,7 +117,7 @@ ChatWindow::Message ChatWindow::jsonToMessage(const QJsonObject &obj) {
     cur.content = obj.value("content").toString();
     return cur;
 }
-
+/*
 QString ChatWindow::messageToString(const Message &cur) {
     QString one;
     one.append(cur.senderName);
@@ -125,6 +125,31 @@ QString ChatWindow::messageToString(const Message &cur) {
         one.append(" (" + QString::number(cur.senderId) + ")");
     }
     one.append("\n" + cur.content + "\n");
+    return one;
+}
+*/
+// now String is html
+QString ChatWindow::messageToString(const Message &cur) {
+    QString one;
+    QString style="display:flex;flex-directon:column;margin:12px 0px 12px 0px";
+    if (cur.senderId == Director::getInstance()->myId()) {
+        // myself
+        style += ";color:#4477CE";
+    }
+    else if (cur.senderId == 0) {
+        // bot
+        style += ";color:red";
+    }
+    one.append("<div style=\"" + style + "\">");
+    one.append("<div style=\"font-size:16px\">");
+    one.append(cur.senderName);
+    if (cur.senderId > 0) {
+        one.append(" (" + QString::number(cur.senderId) + ")");
+    }
+    one.append("</div>");
+    one.append("<div style=\"font-size:15px;margin-top:5px\">" + cur.content + "</div>");
+    //one.append("<hr/>");
+    one.append("</div>");
     return one;
 }
 /*
@@ -142,13 +167,19 @@ void ChatWindow::updateText() {
 */
 void ChatWindow::updateText() {
     // QVector<Message> history -> lineEdit->text()
+    QString all;
     ui->MsgEdit->setHtml("");
+    all.append("<div style=\"display:flex;flex-directon:column;margin-left:5px\">");
     for (quint32 i = 0; i < history.size(); i++) {
         QString cur = "<div>";
         cur += messageToString(history[i]);
         cur += "</div>";
-        ui->MsgEdit->insertHtml(cur);
+        all.append(cur);
+        //ui->MsgEdit->insertHtml(cur);
     }
+    all.append("</div>");
+    all.append("<div style=\"margin:20px 0px 20px 0px\"></div>");
+    ui->MsgEdit->setHtml(all);
     QTextCursor cursor = ui->MsgEdit->textCursor();
     cursor.movePosition(QTextCursor::End);
     ui->MsgEdit->setTextCursor(cursor);
@@ -162,6 +193,9 @@ void ChatWindow::appendText(const QString &text) {
 void ChatWindow::on_sendButton_clicked()
 {
    if (0 == waiting) {
+        if (ui->inputEdit->toPlainText().length() == 0) {
+            return ;
+        }
         QJsonObject content;
         //content.insert("isPicture", false);
         content.insert("content", ui->inputEdit->toPlainText());

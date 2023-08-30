@@ -28,7 +28,9 @@ public:
     void sendPureMessage(const QString&); // debug
     void toMainWindow();
     void refreshMainWindow(enum Director::State);
-    void enterChat(qint64 id);
+    void enterChat(qint64);
+    void setId(qint64 id);
+    qint64 myId();
 
 signals:
     void receiveTestString(const QString&);
@@ -65,6 +67,7 @@ private:
     QHash<QString, Emitter> recvEmitter;
     mainWindow *mainUI;
     bool logged;
+    qint64 userId;
 };
 
 #endif // DIRECTOR_H

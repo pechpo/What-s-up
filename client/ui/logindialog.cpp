@@ -40,6 +40,7 @@ void LoginDialog::on_loginBtn_clicked()
 {
     if (0 == waiting) {
         qint64 id = ui->usrLineEdit->text().toInt();
+        Director::getInstance()->setId(id);
         QString pwd = Director::getInstance()->Hash(ui->pwdLineEdit->text());
         QJsonObject msg;
         msg.insert("type", "q_login");
