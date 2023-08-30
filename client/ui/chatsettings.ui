@@ -134,6 +134,13 @@ background-color: rgb(255, 255, 255);</string>
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>chatName</tabstop>
+  <tabstop>chatAvatar</tabstop>
+  <tabstop>confirmButton</tabstop>
+  <tabstop>scrollArea</tabstop>
+  <tabstop>exitButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

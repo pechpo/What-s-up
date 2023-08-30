@@ -201,6 +201,14 @@ background-color: rgb(255, 255, 255);</string>
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>currentPwd</tabstop>
+  <tabstop>newName</tabstop>
+  <tabstop>newAvatar</tabstop>
+  <tabstop>newEmail</tabstop>
+  <tabstop>newPwd</tabstop>
+  <tabstop>pushButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

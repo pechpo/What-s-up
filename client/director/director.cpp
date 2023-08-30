@@ -28,6 +28,8 @@ Director::Director(QObject *parent)
     recvEmitter.insert("r_editChatInfo", &Director::r_editChatInfo);
     recvEmitter.insert("r_talk", &Director::r_talk);
     recvEmitter.insert("r_exitChat", &Director::r_exitChat);
+    recvEmitter.insert("r_list_tags", &Director::r_list_tags);
+    recvEmitter.insert("r_editTags", &Director::r_editTags);
     recvEmitter.insert("a_newMessage", &Director::a_newMessage);
     recvEmitter.insert("a_newFriendRequest", &Director::a_newFriendRequest);
     recvEmitter.insert("a_newChat", &Director::a_newChat);
