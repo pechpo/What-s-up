@@ -30,7 +30,7 @@
    </property>
    <property name="styleSheet">
     <string notr="true">background-color: rgb(246, 245, 245);
-background-image: url(:/images/image/Logo.png);</string>
+background-image: url(:/images/image/Logo3.png);</string>
    </property>
    <widget class="QLabel" name="label">
     <property name="geometry">
@@ -113,8 +113,8 @@ border-radius: 10px;</string>
      <rect>
       <x>50</x>
       <y>140</y>
-      <width>71</width>
-      <height>21</height>
+      <width>70</width>
+      <height>25</height>
      </rect>
     </property>
     <property name="text">
@@ -126,12 +126,12 @@ border-radius: 10px;</string>
      <rect>
       <x>50</x>
       <y>80</y>
-      <width>71</width>
-      <height>21</height>
+      <width>50</width>
+      <height>25</height>
      </rect>
     </property>
     <property name="text">
-     <string>用户ID</string>
+     <string>用户名</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="pwdLineEdit">
@@ -139,7 +139,7 @@ border-radius: 10px;</string>
      <rect>
       <x>140</x>
       <y>140</y>
-      <width>191</width>
+      <width>190</width>
       <height>25</height>
      </rect>
     </property>
@@ -148,6 +148,9 @@ border-radius: 10px;</string>
     </property>
     <property name="echoMode">
      <enum>QLineEdit::Password</enum>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
     <property name="placeholderText">
      <string>请输入密码</string>
@@ -158,7 +161,7 @@ border-radius: 10px;</string>
      <rect>
       <x>140</x>
       <y>80</y>
-      <width>191</width>
+      <width>190</width>
       <height>25</height>
      </rect>
     </property>
@@ -171,8 +174,11 @@ border-radius: 10px;</string>
     <property name="echoMode">
      <enum>QLineEdit::Normal</enum>
     </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
     <property name="placeholderText">
-     <string>请输入用户ID</string>
+     <string>请输入用户名</string>
     </property>
    </widget>
    <widget class="QToolButton" name="closeButton">

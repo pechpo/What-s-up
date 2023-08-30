@@ -17,5 +17,6 @@
         <file>image/AddNewFriend.png</file>
         <file>image/CreateGroupChat.png</file>
         <file>image/logo2.png</file>
+        <file>image/Logo3.png</file>
     </qresource>
 </RCC>
