@@ -12,6 +12,7 @@ audioRecord::audioRecord(QWidget *parent) :
     format = nullptr;
     isRecording = false;
     player == nullptr;
+    connect(Director::getInstance(), &Director::r_updateFile, this, &audioRecord::slot_r_updateFile);
 }
 
 audioRecord::~audioRecord()
@@ -19,7 +20,7 @@ audioRecord::~audioRecord()
     delete ui;
 }
 
-void audioRecord::set(qint64 id, quint32 *wait) {
+void audioRecord::set(qint64 *id, quint32 *wait) {
     chatId = id;
     waiting = wait;
 }
@@ -115,11 +116,11 @@ void audioRecord::on_sendButton_clicked()
     QByteArray content = file.readAll();
     file.close();
     QString content_str = QString::fromUtf8(content.toBase64());  //redundent
-    QFileInfo fileInfo(path);
+    QString MD5 = QCryptographicHash::hash(content, QCryptographicHash::Md5).toHex();
     QJsonObject msg;
     msg.insert("type", "e_updateFile");
-    msg.insert("chatId", QJsonValue(chatId));
-    msg.insert("fileName", QJsonValue(fileInfo.fileName()));
+    msg.insert("chatId", QJsonValue(*chatId));
+    msg.insert("fileName", QJsonValue(MD5 + ".m4a"));
     msg.insert("content", QJsonValue(content_str));
     msg.insert("format", QJsonValue("audio"));
     if (Director::getInstance()->sendJson(msg)) {
@@ -128,3 +129,7 @@ void audioRecord::on_sendButton_clicked()
     ui->statusList->addItem(QString("Sending audio..."));
 }
 
+void audioRecord::slot_r_updateFile(const QJsonObject&)
+{
+    ui->statusList->addItem(QString("Success."));
+}

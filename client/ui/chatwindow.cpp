@@ -2,6 +2,7 @@
 #include "chatwindow.h"
 #include "ui_chatwindow.h"
 #include "director/director.h"
+#include <QMessageBox>
 
 
 ChatWindow::ChatWindow(QWidget *parent) :
@@ -40,6 +41,7 @@ qint64 ChatWindow::recvChatId(const QJsonObject &obj) {
     return recvId;
 }
 
+//switching chat
 void ChatWindow::switchChat(qint64 id) {
     if (id != chatId) {
         ui->inputEdit->setPlainText("");
@@ -243,6 +245,7 @@ void ChatWindow::slot_r_send(const QJsonObject &obj) {
 
 void ChatWindow::on_fileButton_clicked() {
     if (chatId == 0) {
+        show_error();
         return ;
     }
     if (0 == waiting) {
@@ -280,19 +283,34 @@ void ChatWindow::slot_r_updateFile(const QJsonObject &obj) {
     }
 }
 
+void ChatWindow::show_error(){
+    QMessageBox box;
+    box.setStyleSheet("QLabel{"
+            "min-width:100px;"
+            "min-height:40px; "
+            "font-size:16px;"
+            "}");
+    box.setText(QString::fromLocal8Bit("请先打开群聊"));
+    box.setWindowTitle(QString::fromLocal8Bit("警告"));
+    box.setIcon(QMessageBox::Icon::Warning );
+    box.setButtonText(QMessageBox::Ok , QString::fromLocal8Bit("确定"));
+    box.exec();
+}
+
 void ChatWindow::on_pushButton_clicked()
 {
     if (chatId == 0) {
+        show_error();
         return ;
     }
     if (nullptr == dl){
         dl = new fileDownload();
-        dl->set(chatId, &waiting, true);
+        dl->set(&chatId, &waiting, true);
     } else {
         if (true == dl->isVisible())
             dl->close();
         else{
-            dl->set(chatId, &waiting, false);
+            dl->set(&chatId, &waiting, false);
         }
     }
 }
@@ -300,6 +318,7 @@ void ChatWindow::on_pushButton_clicked()
 void ChatWindow::on_settingsButton_clicked()
 {
     if (chatId == 0) {
+        show_error();
         return ;
     }
     if (nullptr != settingsDialog) {
@@ -319,19 +338,54 @@ void ChatWindow::on_settingsButton_clicked()
 
 void ChatWindow::on_audioButton_clicked()
 {
-
+    if (chatId == 0) {
+        show_error();
+        return ;
+    }
     if (nullptr == ar){
         ar = new audioRecord();
         ar->show();
-        ar->set(chatId, &waiting);
+        ar->set(&chatId, &waiting);
     } else {
         if (true == ar->isVisible())
             ar->close();
         else{
             ar->show();
-            ar->set(chatId, &waiting);
+            ar->set(&chatId, &waiting);
         }
     }
 
+}
+
+
+void ChatWindow::on_photoButton_clicked()
+{
+    if (chatId == 0) {
+        show_error();
+        return ;
+    }
+    if (0 == waiting) {
+        QString str = QFileDialog::getOpenFileName(this, "Select Photo");
+        if ("" == str) return;
+        qDebug() << str;
+        QFile file(str);
+        if (!file.open(QIODevice::ReadOnly)){
+            qDebug() << "failed to read file.";
+            return;
+        }
+        QByteArray content = file.readAll();
+        file.close();
+        QString content_str = QString::fromUtf8(content.toBase64());  //redundent
+        QFileInfo fileInfo(str);
+        QJsonObject msg;
+        msg.insert("type", "e_updateFile");
+        msg.insert("chatId", QJsonValue(chatId));
+        msg.insert("fileName", QJsonValue(fileInfo.fileName()));
+        msg.insert("content", QJsonValue(content_str));
+        msg.insert("format", QJsonValue("photo"));
+        if (Director::getInstance()->sendJson(msg)) {
+            waiting++;
+        }
+    }
 }
 

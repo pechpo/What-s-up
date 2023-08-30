@@ -30,7 +30,7 @@ class audioRecord : public QWidget
 
 public:
     explicit audioRecord(QWidget*parent = nullptr);
-    void set(qint64 id, quint32 *wait);
+    void set(qint64 *id, quint32 *wait);
     ~audioRecord();
 
 private slots:
@@ -41,6 +41,8 @@ private slots:
     void on_listenButton_clicked();
 
     void on_sendButton_clicked();
+
+    void slot_r_updateFile(const QJsonObject&);
 
 private:
     Ui::audioRecord *ui;
@@ -53,7 +55,7 @@ private:
     QAudioOutput *audioOutput;
     bool isRecording;
     quint32 *waiting;
-    qint64 chatId;
+    qint64 *chatId;
 };
 
 #endif // AUDIORECORD_H

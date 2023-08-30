@@ -26,6 +26,7 @@ public:
 
     void switchChat(qint64);
     void appendText(const QString&);
+    void show_error();
 
 public slots:
     void slot_r_chatHistory(const QJsonObject&);
@@ -43,6 +44,8 @@ private slots:
     void on_settingsButton_clicked();
 
     void on_audioButton_clicked();
+
+    void on_photoButton_clicked();
 
 private:
     Ui::ChatWindow *ui;
