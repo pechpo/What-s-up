@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>302</width>
+    <width>232</width>
     <height>387</height>
    </rect>
   </property>
@@ -18,7 +18,7 @@
     <rect>
      <x>20</x>
      <y>30</y>
-     <width>261</width>
+     <width>191</width>
      <height>291</height>
     </rect>
    </property>
@@ -30,7 +30,7 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>259</width>
+      <width>189</width>
       <height>289</height>
      </rect>
     </property>
@@ -39,14 +39,14 @@
   <widget class="QPushButton" name="confirmButton">
    <property name="geometry">
     <rect>
-     <x>110</x>
+     <x>80</x>
      <y>340</y>
-     <width>80</width>
+     <width>71</width>
      <height>22</height>
     </rect>
    </property>
    <property name="text">
-    <string>修改</string>
+    <string>匹配好友</string>
    </property>
   </widget>
  </widget>

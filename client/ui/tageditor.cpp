@@ -60,12 +60,14 @@ void TagEditor::slot_r_list_tags(const QJsonObject &obj) {
         QCheckBox *box = new QCheckBox(state[i].first, ui->ScrollContent);
         choices->addButton(box, i);
     }
+    qDebug() << "show tags";
     const quint32 gap = 5;
     quint32 height = gap;
     auto lis = choices->buttons();
     for (quint32 i = 0; i < lis.size(); i++) {
         auto p = lis[i];
         p->move(gap, height);
+        p->show();
         height += p->height() + gap;
     }
     ui->ScrollContent->adjustSize();

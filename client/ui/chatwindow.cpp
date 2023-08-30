@@ -87,7 +87,8 @@ void ChatWindow::slot_r_chatHistory(const QJsonObject &obj) {
     for (int i = 0; i < recvSize; i++) {
         history[i] = jsonToMessage(recvHistory.at(i).toObject());
     }
-    updateText();
+    //updateText();
+    updateMessage();
 }
 
 void ChatWindow::slot_a_newMessage(const QJsonObject &obj) {
@@ -103,7 +104,8 @@ void ChatWindow::slot_a_newMessage(const QJsonObject &obj) {
     Message cur = jsonToMessage(msg);
     history.append(cur);
     //appendText(messageToString(cur));
-    updateText();
+    //updateText();
+    updateMessage();
 }
 
 ChatWindow::Message ChatWindow::jsonToMessage(const QJsonObject &obj) {
@@ -215,6 +217,11 @@ void ChatWindow::updateText() {
     QTextCursor cursor = ui->MsgEdit->textCursor();
     cursor.movePosition(QTextCursor::End);
     ui->MsgEdit->setTextCursor(cursor);
+}
+
+void ChatWindow::updateMessage() {
+    //updateText();
+
 }
 
 void ChatWindow::appendText(const QString &text) {

@@ -74,7 +74,8 @@ private:
     void clear();
     Message jsonToMessage(const QJsonObject&);
     QString messageToString(const Message&);
-    void updateText();
+    void updateMessage();
+    void updateText(); // outdated. do not use this
 };
 
 #endif // CHATWINDOW_H
