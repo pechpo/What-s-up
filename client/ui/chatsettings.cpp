@@ -87,11 +87,11 @@ void ChatSettings::on_exitButton_clicked()
 
 void ChatSettings::slot_r_exitChat(const QJsonObject &obj) {
     if (true == obj.value("success").toBool()) {
-        QJsonObject msg;
+        /*QJsonObject msg;
         msg.insert("type", "q_list_myChats");
-        Director::getInstance()->sendJson(msg);
+        Director::getInstance()->sendJson(msg);*/
         Director::getInstance()->refreshMainWindow(Director::Chat);
-        Director::getInstance()->enterChat(1);
+        Director::getInstance()->enterChat(0);
         accept();
     }
 }

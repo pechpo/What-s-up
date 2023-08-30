@@ -41,12 +41,12 @@ bool ChatWindow::isThisChat(const QJsonObject &obj) {
 }
 
 void ChatWindow::switchChat(qint64 id) {
-    if (id == chatId) {
-        //return ;
+    ui->MsgEdit->setText("");
+    if (id == 0) {
+        ui->idLabel->setText(tr("尚未打开任何群聊"));
+        return ;
     }
     chatId = id;
-    //ui->idLabel->setText("Chat ID: " + QString::number(id));
-    ui->MsgEdit->setText("");
     QJsonObject msg;
     msg.insert("type", "q_chatHistory");
     msg.insert("chatId", QJsonValue(chatId));
@@ -90,6 +90,7 @@ void ChatWindow::slot_a_newMessage(const QJsonObject &obj) {
 
 ChatWindow::Message ChatWindow::jsonToMessage(const QJsonObject &obj) {
     Message cur;
+    cur.type = Text;
     auto setIncompleteMessage = [] (Message &cur) -> void {
         cur.isSystem = true;
         cur.content = "Incomplete Message.";
