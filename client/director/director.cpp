@@ -39,7 +39,6 @@ Director::Director(QObject *parent)
 }
 
 void Director::act(const QJsonObject &obj) {  //after receiving the json package, emit the corresponding signal
-    qDebug() << "recv: " << obj;
     // emit receiveTestString(obj.value("text").toString());
     if (!obj.contains("type")) {
         // todo
@@ -60,6 +59,10 @@ void Director::act(const QJsonObject &obj) {  //after receiving the json package
     }
     Emitter e = recvEmitter.value(index);
     emit (this->*e)(obj);
+    if (obj["type"].toString() == "r_downloadFile"){
+        qDebug() << "receive file ";
+    }
+    else qDebug() << "recv: " << obj;
 }
 
 Director::~Director() {
@@ -105,8 +108,12 @@ QString Director::Hash(const QString &o) {
 bool Director::sendJson(const QJsonObject &obj) {
     Connection *conn = getConnection();
     if (conn->isConnected()) {
-        qDebug() << "send: " << obj;
         conn->sendMessage(obj);
+        //simplify file json output
+        if (obj["type"].toString() == "e_updateFile"){
+            qDebug() << "sendfile ";
+        }
+        else qDebug() << "send: " << obj;
         return true;
     }
     else {

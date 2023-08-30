@@ -13,7 +13,7 @@ class fileDownload : public QWidget
 
 public:
     explicit fileDownload(QWidget *parent = nullptr);
-    void set(qint64 chatId, quint32 *waiting, bool init);
+    void set(qint64 *chatId, quint32 *waiting, bool init);
     ~fileDownload();
 
 public slots:
@@ -25,7 +25,7 @@ private slots:
 
 private:
     Ui::fileDownload *ui;
-    qint64 chatId;
+    qint64 *chatId;
     quint32 *waiting;
 };
 

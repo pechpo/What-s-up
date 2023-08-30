@@ -60,6 +60,14 @@ mainWindow::mainWindow(QWidget *parent) :
     waitingIsZero();*/
     //for (quint16 i = 0; i < 50; i++)
     //    cw->appendText("Hello, world" + QString::number(i));
+
+    //create path to store photo and audio.
+    QString path = QCoreApplication::applicationDirPath() + "/tmp";
+    QDir dir(path);
+    if (!dir.exists()) {
+        if (!dir.mkdir(path))
+            qDebug() << "Failed to create folder";
+    }
 }
 
 mainWindow::~mainWindow()

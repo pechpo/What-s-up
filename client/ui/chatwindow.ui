@@ -79,8 +79,8 @@ background-image: url(:/images/image/Logo.png);</string>
     <rect>
      <x>10</x>
      <y>360</y>
-     <width>40</width>
-     <height>40</height>
+     <width>61</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -93,10 +93,10 @@ background-image: url(:/images/image/Logo.png);</string>
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>70</x>
+     <x>100</x>
      <y>360</y>
-     <width>40</width>
-     <height>40</height>
+     <width>61</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -120,6 +120,32 @@ background-image: url(:/images/image/Logo.png);</string>
    </property>
    <property name="text">
     <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="audioButton">
+   <property name="geometry">
+    <rect>
+     <x>320</x>
+     <y>360</y>
+     <width>101</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Audio Record</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="photoButton">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>360</y>
+     <width>101</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Upload Photo</string>
    </property>
   </widget>
  </widget>
