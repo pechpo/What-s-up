@@ -33,7 +33,10 @@ QJsonObject Handle::q_chatHistory(const int &ID, const QJsonObject &obj) {
         message["senderId"] = (int) x.getSenderID();
         message["senderName"] = x.getSenderName();
         message["content"] = x.getContent();
+        message["is_file"] = x.getIsFile();
         message["time"] = x.getTime();
+        message["format"] = x.getFormat();
+        message["filename"] = x.getFileName();
         chatHistory.append(message);
     }
     response["chatHistory"] = chatHistory;

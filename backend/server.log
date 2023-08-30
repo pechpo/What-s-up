@@ -182,3 +182,71 @@
 [2023-08-30 23:05:37] [Edit Tags] [Success] User with ID 777 edited their tags.
 [2023-08-30 23:05:37] [List Recommend] [Success] User with ID 777 listed their recommended friends.
 [2023-08-30 23:05:41] [Add Friend] [Success] User with ID 777 sent friend request to ID 2048.
+[2023-08-30 23:07:37] [User Login] [Success] User with ID 787 logged in successfully.
+[2023-08-30 23:07:37] [List My Friends] [Success] User with ID 787 listed their friends.
+[2023-08-30 23:07:37] [List Friend Requests] [Success] User with ID 787 listed their friend requests.
+[2023-08-30 23:08:26] [User Login] [Success] User with ID 787 logged in successfully.
+[2023-08-30 23:08:26] [List My Friends] [Success] User with ID 787 listed their friends.
+[2023-08-30 23:08:26] [List Friend Requests] [Success] User with ID 787 listed their friend requests.
+[2023-08-30 23:08:28] [List Tags] [Success] User with ID 787 listed their tags.
+[2023-08-30 23:09:35] [User Login] [Success] User with ID 787 logged in successfully.
+[2023-08-30 23:09:35] [List My Friends] [Success] User with ID 787 listed their friends.
+[2023-08-30 23:09:35] [List Friend Requests] [Success] User with ID 787 listed their friend requests.
+[2023-08-30 23:11:47] [User Login] [Success] User with ID 573902690 logged in successfully.
+[2023-08-30 23:11:47] [List My Friends] [Success] User with ID 573902690 listed their friends.
+[2023-08-30 23:11:47] [List Friend Requests] [Success] User with ID 573902690 listed their friend requests.
+[2023-08-30 23:11:50] [List Tags] [Success] User with ID 573902690 listed their tags.
+[2023-08-30 23:11:55] [Edit Tags] [Success] User with ID 573902690 edited their tags.
+[2023-08-30 23:11:55] [List Recommend] [Success] User with ID 573902690 listed their recommended friends.
+[2023-08-30 23:11:59] [Edit User Info] [Success] User with ID 573902690 edited their information.
+[2023-08-30 23:12:06] [Edit User Info] [Success] User with ID 573902690 edited their information.
+[2023-08-30 23:12:10] [Query Chat] [Success] User with ID 573902690 queried the chat with user with ID 666.
+[2023-08-30 23:12:10] [Query Chat History] [Success] User with ID 573902690 queried the chat history of chat 17.
+[2023-08-30 23:12:10] [Query Chat] [Success] User with ID 573902690 queried their chats.
+[2023-08-30 23:12:12] [List My Friends] [Success] User with ID 573902690 listed their friends.
+[2023-08-30 23:12:12] [List Friend Requests] [Success] User with ID 573902690 listed their friend requests.
+[2023-08-30 23:12:24] [Query Chat] [Success] User with ID 573902690 queried the chat with user with ID 666.
+[2023-08-30 23:12:24] [Query Chat History] [Success] User with ID 573902690 queried the chat history of chat 17.
+[2023-08-30 23:12:24] [Query Chat] [Success] User with ID 573902690 queried their chats.
+[2023-08-30 23:12:24] [Query Chat History] [Success] User with ID 573902690 queried the chat history of chat 17.
+[2023-08-30 23:12:24] [Query Chat History] [Success] User with ID 573902690 queried the chat history of chat 17.
+[2023-08-30 23:12:25] [Query Chat History] [Success] User with ID 573902690 queried the chat history of chat 1.
+[2023-08-30 23:13:18] [User Login] [Success] User with ID 666 logged in successfully.
+[2023-08-30 23:13:18] [List My Friends] [Success] User with ID 666 listed their friends.
+[2023-08-30 23:13:18] [List Friend Requests] [Success] User with ID 666 listed their friend requests.
+[2023-08-30 23:13:21] [Query Chat] [Success] User with ID 666 queried their chats.
+[2023-08-30 23:13:23] [Query Chat History] [Success] User with ID 666 queried the chat history of chat 1.
+[2023-08-30 23:13:32] [List Tags] [Success] User with ID 666 listed their tags.
+[2023-08-30 23:13:36] [Edit Tags] [Success] User with ID 666 edited their tags.
+[2023-08-30 23:13:36] [List Recommend] [Success] User with ID 666 listed their recommended friends.
+[2023-08-30 23:13:39] [Add Friend] [Success] User with ID 666 sent friend request to ID 777.
+[2023-08-30 23:14:24] [User Login] [Success] User with ID 777 logged in successfully.
+[2023-08-30 23:14:24] [List My Friends] [Success] User with ID 777 listed their friends.
+[2023-08-30 23:14:24] [List Friend Requests] [Success] User with ID 777 listed their friend requests.
+[2023-08-30 23:14:26] [Accept Friend] [Success] User with ID 777 accepted/rejected friend request from ID 666.
+[2023-08-30 23:14:26] [List My Friends] [Success] User with ID 777 listed their friends.
+[2023-08-30 23:14:26] [List Friend Requests] [Success] User with ID 777 listed their friend requests.
+[2023-08-30 23:14:27] [Query Chat] [Success] User with ID 777 queried their chats.
+[2023-08-30 23:14:29] [Query Chat History] [Success] User with ID 777 queried the chat history of chat 1.
+[2023-08-30 23:18:49] [Server] [Success] Server started at 0.0.0.0:10043
+[2023-08-30 23:20:33] [User Login] [Success] User with ID 888 logged in successfully.
+[2023-08-30 23:20:33] [List My Friends] [Success] User with ID 888 listed their friends.
+[2023-08-30 23:20:33] [List Friend Requests] [Success] User with ID 888 listed their friend requests.
+[2023-08-30 23:20:35] [Query Chat] [Success] User with ID 888 queried their chats.
+[2023-08-30 23:20:36] [Query Chat History] [Success] User with ID 888 queried the chat history of chat 1.
+[2023-08-30 23:20:41] [Query Chat History] [Success] User with ID 888 queried the chat history of chat 2.
+[2023-08-30 23:21:12] [User Login] [Success] User with ID 888 logged in successfully.
+[2023-08-30 23:21:13] [List My Friends] [Success] User with ID 888 listed their friends.
+[2023-08-30 23:21:13] [List Friend Requests] [Success] User with ID 888 listed their friend requests.
+[2023-08-30 23:21:13] [Query Chat] [Success] User with ID 888 queried their chats.
+[2023-08-30 23:21:14] [Query Chat History] [Success] User with ID 888 queried the chat history of chat 1.
+[2023-08-30 23:21:34] [User Login] [Success] User with ID 573902690 logged in successfully.
+[2023-08-30 23:21:34] [List My Friends] [Success] User with ID 573902690 listed their friends.
+[2023-08-30 23:21:34] [List Friend Requests] [Success] User with ID 573902690 listed their friend requests.
+[2023-08-30 23:22:32] [User Login] [Failure] Failed to log in user with ID 573902690.
+[2023-08-30 23:22:36] [User Login] [Success] User with ID 573902690 logged in successfully.
+[2023-08-30 23:22:36] [List My Friends] [Success] User with ID 573902690 listed their friends.
+[2023-08-30 23:22:36] [List Friend Requests] [Success] User with ID 573902690 listed their friend requests.
+[2023-08-30 23:22:38] [List Tags] [Success] User with ID 573902690 listed their tags.
+[2023-08-30 23:22:44] [Edit Tags] [Success] User with ID 573902690 edited their tags.
+[2023-08-30 23:22:44] [List Recommend] [Success] User with ID 573902690 listed their recommended friends.

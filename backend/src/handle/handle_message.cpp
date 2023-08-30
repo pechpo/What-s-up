@@ -31,7 +31,9 @@ QJsonObject Handle::e_send(const int &ID, const QJsonObject &obj) {
     Message["senderId"] = ID;
     Message["senderName"] = db->getName(ID);
     Message["content"] = obj["message"].toObject()["content"];
+    Message["is_file"] = false;
     Message["time"] = ctime(&Time);
+    Message["format"] = "";
     QJsonObject S;
     S["type"] = "a_newMessage";
     S["chatId"] = (int) chatId;
@@ -77,7 +79,9 @@ QJsonObject Handle::e_updateFile(const int &ID, const QJsonObject &obj) {
     Message["senderId"] = ID;
     Message["senderName"] = db->getName(ID);
     Message["content"] = obj["fileName"];
+    Message["is_file"] = true;
     Message["time"] = ctime(&Time);
+    Message["format"] = format;
     QJsonObject S;
     S["type"] = "a_newMessage";
     S["chatId"] = (int) chatId;
@@ -137,7 +141,9 @@ QJsonObject Handle::e_send_bot(const QString &name, const QJsonObject &obj) {
     Message["senderId"] = 0;
     Message["senderName"] = name;
     Message["content"] = obj["message"].toObject()["content"];
+    Message["is_file"] = false;
     Message["time"] = ctime(&Time);
+    Message["format"] = "";
     QJsonObject S;
     S["type"] = "a_newMessage";
     S["chatId"] = (int) chatId;
