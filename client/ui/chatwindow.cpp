@@ -11,6 +11,7 @@ ChatWindow::ChatWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->MsgEdit->setReadOnly(true);
+    ui->scrollArea->setWidgetResizable(false);
     chatId = 0;
     waiting = 0;
     dl = nullptr;
