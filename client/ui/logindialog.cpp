@@ -19,7 +19,6 @@ LoginDialog::LoginDialog(QWidget *parent) :
     ui->setupUi(this);
 
     ui->closeButton->setVisible(false);
-    ui->minimizeButton->setVisible(false);
 
     lw = nullptr;
     rd = nullptr;
@@ -79,10 +78,7 @@ void LoginDialog::on_closeButton_triggered(QAction *arg1)
 }
 
 
-void LoginDialog::on_minimizeButton_clicked()
-{
-    showMinimized();
-}
+
 
 
 
