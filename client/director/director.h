@@ -6,6 +6,7 @@
 #include <QMap>
 
 #include "network/connection.h"
+#include "utils/avatarcreator.h"
 
 class mainWindow;
 class Director : public QObject
@@ -32,6 +33,7 @@ public:
     void setId(qint64 id);
     void raiseChat(qint64 id);
     qint64 myId();
+    QString genAvatarPath(const QString&);
 
 signals:
     void receiveTestString(const QString&);
@@ -69,6 +71,7 @@ private:
     mainWindow *mainUI;
     bool logged;
     qint64 userId;
+    AvatarCreator *avatarGen;
 };
 
 #endif // DIRECTOR_H

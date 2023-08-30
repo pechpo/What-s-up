@@ -34,6 +34,8 @@ Director::Director(QObject *parent)
 
     mainUI = nullptr;
     logged = false;
+
+    avatarGen = new AvatarCreator();
 }
 
 void Director::act(const QJsonObject &obj) {  //after receiving the json package, emit the corresponding signal
@@ -61,6 +63,7 @@ void Director::act(const QJsonObject &obj) {  //after receiving the json package
 }
 
 Director::~Director() {
+    delete avatarGen;
     delete mainUI;
     delete conn;
     delete self;
@@ -137,7 +140,7 @@ void Director::toMainWindow() {
 }
 
 void Director::refreshMainWindow(enum Director::State x) {
-    mainUI->setState(x);
+    mainUI->setState(x, false);
 }
 
 void Director::enterChat(qint64 id) {
@@ -155,4 +158,8 @@ qint64 Director::myId() {
 
 void Director::raiseChat(qint64 id) {
     mainUI->raiseChat(id);
+}
+
+QString Director::genAvatarPath(const QString &avatar) {
+    return avatarGen->stringToPath(avatar);
 }

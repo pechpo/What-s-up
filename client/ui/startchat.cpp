@@ -68,6 +68,7 @@ void StartChat::slot_r_talk(const QJsonObject &obj) {
     qint64 id = obj.value("chatId").toInt();
     if (id > 0) {
         Director::getInstance()->enterChat(id);
+        //Director::getInstance()->raiseChat(id);
     }
 }
 
