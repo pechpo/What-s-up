@@ -12,7 +12,8 @@ ChatSettings::ChatSettings(QWidget *parent, qint64 id) :
     ui->idLabel->setText(QString::number(chatId) + "号聊天");
     connect(Director::getInstance(), &Director::r_chatInfo, this, &ChatSettings::slot_r_chatInfo);
     connect(Director::getInstance(), &Director::r_editChatInfo, this, &ChatSettings::slot_r_editChatInfo);
-}
+    connect(Director::getInstance(), &Director::r_exitChat, this, &ChatSettings::slot_r_exitChat);
+    }
 
 ChatSettings::~ChatSettings()
 {
@@ -86,10 +87,11 @@ void ChatSettings::on_exitButton_clicked()
 
 void ChatSettings::slot_r_exitChat(const QJsonObject &obj) {
     if (true == obj.value("success").toBool()) {
-        accept();
         QJsonObject msg;
         msg.insert("type", "q_list_myChats");
         Director::getInstance()->sendJson(msg);
         Director::getInstance()->refreshMainWindow(Director::Chat);
+        Director::getInstance()->enterChat(1);
+        accept();
     }
 }
