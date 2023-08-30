@@ -257,7 +257,7 @@ QJsonObject Handle::q_list_tags(const int &ID, const QJsonObject &obj) {
     for (int i = 0; i < 36; i++) {
         QJsonObject tag;
         tag["tag"] = TAGS[i];
-        tag["value"] = flag[i];
+        tag["value"] = flag[i] != 0;
         tags.append(tag);
     }
     response["tags"] = tags;
@@ -271,12 +271,12 @@ QJsonObject Handle::e_editTags(const int &ID, const QJsonObject &obj) {
     QJsonArray editList = obj["editList"].toArray();
 
     DB *db = DB::get_instance();
-    std::vector<int> tags = db->q_list_tags(ID);
+    std::vector<int> tags(36);
     for (const auto &x: editList) {
         auto y = x.toObject();
         tags[tags_map[y["tag"].toString()]] = y["value"].toBool();
     }
-
+    qDebug() << tags << tags.size();
     auto flag = db->add_tag(ID, tags);
 
     QJsonObject response;
@@ -295,18 +295,23 @@ QJsonObject Handle::e_editTags(const int &ID, const QJsonObject &obj) {
     // Send the response back to client
 }
 
-//7.2 设置自己的标签
-//client:
-//{
-//"type": "e_editTags",
-//"editList": [{
-//  "tag": String,
-//  "value": Boolean
-//}]
-//}
-//server:
-//{
-//"type": "r_editTags",
-//"success": Boolean,
-//(*)error: String
-//}
+QJsonObject Handle::q_list_recommend(const int &ID, const QJsonObject &obj) {
+    // Extract the necessary fields from obj
+    DB *db = DB::get_instance();
+    auto flag = db->q_list_recommend(ID);
+
+    QJsonObject response;
+    response["type"] = "r_list_recommend";
+    QJsonArray users;
+    for (const auto &x: flag) {
+        QJsonObject user;
+        user["id"] = (int) x.getID();
+        user["name"] = x.getName();
+        user["avatar"] = x.getAvatarName();
+        users.append(user);
+    }
+    response["users"] = users;
+    writeLog("List Recommend", "User with ID " + QString::number(ID) + " listed their recommended friends.", true);
+    return response;
+    // Send the response back to client
+}

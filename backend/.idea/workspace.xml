@@ -24,11 +24,14 @@
       <change beforePath="$PROJECT_DIR$/.idea/QtSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/QtSettings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server.log" beforeDir="false" afterPath="$PROJECT_DIR$/server.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/database/data.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/data.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/database/db.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/db.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/handle/handle.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/handle/handle.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/handle/handle_user.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/handle/handle_user.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/include/db.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/include/db.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/include/handle.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/include/handle.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/include/recommendation.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/include/recommendation.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/recommendation/clustering.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/recommendation/clustering.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/recommendation/recommendation.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/recommendation/recommendation.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -81,9 +84,9 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration name="backend" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="backend" TARGET_NAME="backend" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="backend" RUN_TARGET_NAME="backend">
@@ -132,6 +135,7 @@
       <workItem from="1693382575989" duration="2579000" />
       <workItem from="1693385420824" duration="8000" />
       <workItem from="1693400723967" duration="1310000" />
+      <workItem from="1693404773804" duration="3075000" />
     </task>
     <servers />
   </component>

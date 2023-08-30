@@ -87,6 +87,10 @@ public :
 
     bool e_exitChat(const int &ID, const int &chatId);
 
+    bool init_tags(const int &ID);
+
+    QList<User> q_list_recommend(const int &ID);
+
 private:
 
     static DB *db;

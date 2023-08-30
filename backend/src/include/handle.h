@@ -111,6 +111,8 @@ public:
 
     QJsonObject e_send_bot(const QString &name, const QJsonObject &json);
 
+    QJsonObject q_list_recommend(const int &id, const QJsonObject &json);
+
     static Handle * get_instance();
 
 private:

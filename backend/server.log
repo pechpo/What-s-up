@@ -82,3 +82,103 @@
 [2023-08-30 21:32:27] [List Friend Requests] [Success] User with ID 777 listed their friend requests.
 [2023-08-30 21:32:28] [Query Chat] [Success] User with ID 777 queried their chats.
 [2023-08-30 21:34:12] [Server] [Success] Server started at 0.0.0.0:10043
+[2023-08-30 22:13:56] [Server] [Success] Server started at 0.0.0.0:10043
+[2023-08-30 22:15:27] [Server] [Success] Server started at 0.0.0.0:10043
+[2023-08-30 22:17:29] [Server] [Success] Server started at 0.0.0.0:10043
+[2023-08-30 22:17:52] [Server] [Success] Server started at 0.0.0.0:10043
+[2023-08-30 22:18:14] [Server] [Success] Server started at 0.0.0.0:10043
+[2023-08-30 22:18:26] [User Login] [Failure] Failed to log in user with ID 555.
+[2023-08-30 22:18:29] [User Login] [Failure] Failed to log in user with ID 555.
+[2023-08-30 22:18:33] [User Login] [Failure] Failed to log in user with ID 555.
+[2023-08-30 22:18:41] [User Login] [Failure] Failed to log in user with ID 555.
+[2023-08-30 22:18:45] [User Login] [Failure] Failed to log in user with ID 555.
+[2023-08-30 22:18:56] [User Login] [Success] User with ID 666 logged in successfully.
+[2023-08-30 22:18:56] [List My Friends] [Success] User with ID 666 listed their friends.
+[2023-08-30 22:18:56] [List Friend Requests] [Success] User with ID 666 listed their friend requests.
+[2023-08-30 22:20:39] [Server] [Success] Server started at 0.0.0.0:10043
+[2023-08-30 22:21:16] [User Login] [Success] User with ID 777 logged in successfully.
+[2023-08-30 22:21:16] [List My Friends] [Success] User with ID 777 listed their friends.
+[2023-08-30 22:21:16] [List Friend Requests] [Success] User with ID 777 listed their friend requests.
+[2023-08-30 22:21:20] [Query Chat] [Success] User with ID 777 queried their chats.
+[2023-08-30 22:21:21] [List Tags] [Success] User with ID 777 listed their tags.
+[2023-08-30 22:23:13] [Server] [Success] Server started at 0.0.0.0:10043
+[2023-08-30 22:23:50] [User Login] [Success] User with ID 777 logged in successfully.
+[2023-08-30 22:23:51] [List My Friends] [Success] User with ID 777 listed their friends.
+[2023-08-30 22:23:51] [List Friend Requests] [Success] User with ID 777 listed their friend requests.
+[2023-08-30 22:23:52] [List Tags] [Success] User with ID 777 listed their tags.
+[2023-08-30 22:24:26] [User Login] [Success] User with ID 777 logged in successfully.
+[2023-08-30 22:24:26] [List My Friends] [Success] User with ID 777 listed their friends.
+[2023-08-30 22:24:26] [List Friend Requests] [Success] User with ID 777 listed their friend requests.
+[2023-08-30 22:24:27] [List Tags] [Success] User with ID 777 listed their tags.
+[2023-08-30 22:24:37] [Edit Tags] [Failure] User with ID 777 failed to edit their tags.
+[2023-08-30 22:31:52] [Server] [Success] Server started at 0.0.0.0:10043
+[2023-08-30 22:32:10] [User Login] [Success] User with ID 777 logged in successfully.
+[2023-08-30 22:32:10] [List My Friends] [Success] User with ID 777 listed their friends.
+[2023-08-30 22:32:10] [List Friend Requests] [Success] User with ID 777 listed their friend requests.
+[2023-08-30 22:32:11] [List Tags] [Success] User with ID 777 listed their tags.
+[2023-08-30 22:32:16] [Edit Tags] [Failure] User with ID 777 failed to edit their tags.
+[2023-08-30 22:36:13] [Server] [Success] Server started at 0.0.0.0:10043
+[2023-08-30 22:37:57] [User Login] [Success] User with ID 888 logged in successfully.
+[2023-08-30 22:37:57] [List My Friends] [Success] User with ID 888 listed their friends.
+[2023-08-30 22:37:57] [List Friend Requests] [Success] User with ID 888 listed their friend requests.
+[2023-08-30 22:37:58] [List Tags] [Success] User with ID 888 listed their tags.
+[2023-08-30 22:38:02] [Edit Tags] [Success] User with ID 888 edited their tags.
+[2023-08-30 22:46:16] [Server] [Success] Server started at 0.0.0.0:10043
+[2023-08-30 22:46:26] [User Login] [Success] User with ID 777 logged in successfully.
+[2023-08-30 22:46:26] [List My Friends] [Success] User with ID 777 listed their friends.
+[2023-08-30 22:46:26] [List Friend Requests] [Success] User with ID 777 listed their friend requests.
+[2023-08-30 22:46:27] [List Tags] [Success] User with ID 777 listed their tags.
+[2023-08-30 22:46:32] [Edit Tags] [Success] User with ID 777 edited their tags.
+[2023-08-30 22:46:32] [List Recommend] [Success] User with ID 777 listed their recommended friends.
+[2023-08-30 22:47:53] [User Login] [Success] User with ID 666 logged in successfully.
+[2023-08-30 22:47:53] [List My Friends] [Success] User with ID 666 listed their friends.
+[2023-08-30 22:47:53] [List Friend Requests] [Success] User with ID 666 listed their friend requests.
+[2023-08-30 22:47:55] [List Tags] [Success] User with ID 666 listed their tags.
+[2023-08-30 22:48:00] [Edit Tags] [Success] User with ID 666 edited their tags.
+[2023-08-30 22:48:00] [List Recommend] [Success] User with ID 666 listed their recommended friends.
+[2023-08-30 22:49:44] [Server] [Success] Server started at 0.0.0.0:10043
+[2023-08-30 22:50:04] [User Login] [Success] User with ID 777 logged in successfully.
+[2023-08-30 22:50:04] [List My Friends] [Success] User with ID 777 listed their friends.
+[2023-08-30 22:50:04] [List Friend Requests] [Success] User with ID 777 listed their friend requests.
+[2023-08-30 22:50:05] [List Tags] [Success] User with ID 777 listed their tags.
+[2023-08-30 22:50:10] [Edit Tags] [Success] User with ID 777 edited their tags.
+[2023-08-30 22:50:10] [List Recommend] [Success] User with ID 777 listed their recommended friends.
+[2023-08-30 22:50:41] [User Login] [Success] User with ID 666 logged in successfully.
+[2023-08-30 22:50:41] [List My Friends] [Success] User with ID 666 listed their friends.
+[2023-08-30 22:50:41] [List Friend Requests] [Success] User with ID 666 listed their friend requests.
+[2023-08-30 22:50:42] [List Tags] [Success] User with ID 666 listed their tags.
+[2023-08-30 22:50:47] [Edit Tags] [Success] User with ID 666 edited their tags.
+[2023-08-30 22:50:47] [List Recommend] [Success] User with ID 666 listed their recommended friends.
+[2023-08-30 22:50:52] [List Tags] [Success] User with ID 666 listed their tags.
+[2023-08-30 22:50:56] [Edit Tags] [Success] User with ID 666 edited their tags.
+[2023-08-30 22:50:56] [List Recommend] [Success] User with ID 666 listed their recommended friends.
+[2023-08-30 22:51:03] [Edit Tags] [Success] User with ID 666 edited their tags.
+[2023-08-30 22:51:03] [List Recommend] [Success] User with ID 666 listed their recommended friends.
+[2023-08-30 22:53:21] [Server] [Success] Server started at 0.0.0.0:10043
+[2023-08-30 22:54:50] [User Login] [Success] User with ID 777 logged in successfully.
+[2023-08-30 22:54:50] [List My Friends] [Success] User with ID 777 listed their friends.
+[2023-08-30 22:54:50] [List Friend Requests] [Success] User with ID 777 listed their friend requests.
+[2023-08-30 22:54:54] [List Tags] [Success] User with ID 777 listed their tags.
+[2023-08-30 22:55:01] [Edit Tags] [Success] User with ID 777 edited their tags.
+[2023-08-30 22:55:01] [List Recommend] [Success] User with ID 777 listed their recommended friends.
+[2023-08-30 23:00:38] [Server] [Success] Server started at 0.0.0.0:10043
+[2023-08-30 23:00:50] [User Login] [Success] User with ID 787 logged in successfully.
+[2023-08-30 23:00:50] [List My Friends] [Success] User with ID 787 listed their friends.
+[2023-08-30 23:00:50] [List Friend Requests] [Success] User with ID 787 listed their friend requests.
+[2023-08-30 23:01:04] [User Login] [Success] User with ID 777 logged in successfully.
+[2023-08-30 23:01:04] [List My Friends] [Success] User with ID 777 listed their friends.
+[2023-08-30 23:01:04] [List Friend Requests] [Success] User with ID 777 listed their friend requests.
+[2023-08-30 23:01:13] [List Tags] [Success] User with ID 777 listed their tags.
+[2023-08-30 23:01:20] [Edit Tags] [Success] User with ID 777 edited their tags.
+[2023-08-30 23:01:20] [List Recommend] [Success] User with ID 777 listed their recommended friends.
+[2023-08-30 23:02:39] [User Login] [Success] User with ID 787 logged in successfully.
+[2023-08-30 23:02:39] [List My Friends] [Success] User with ID 787 listed their friends.
+[2023-08-30 23:02:39] [List Friend Requests] [Success] User with ID 787 listed their friend requests.
+[2023-08-30 23:05:13] [Server] [Success] Server started at 0.0.0.0:10043
+[2023-08-30 23:05:31] [User Login] [Success] User with ID 777 logged in successfully.
+[2023-08-30 23:05:31] [List My Friends] [Success] User with ID 777 listed their friends.
+[2023-08-30 23:05:31] [List Friend Requests] [Success] User with ID 777 listed their friend requests.
+[2023-08-30 23:05:32] [List Tags] [Success] User with ID 777 listed their tags.
+[2023-08-30 23:05:37] [Edit Tags] [Success] User with ID 777 edited their tags.
+[2023-08-30 23:05:37] [List Recommend] [Success] User with ID 777 listed their recommended friends.
+[2023-08-30 23:05:41] [Add Friend] [Success] User with ID 777 sent friend request to ID 2048.
