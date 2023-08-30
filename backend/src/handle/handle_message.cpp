@@ -16,7 +16,8 @@ QJsonObject Handle::e_send(const int &ID, const QJsonObject &obj) {
     QString content = message["content"].toString();
     DB *db = DB::get_instance();
     int message_id = db->new_message_id();
-    auto flag = db->e_send(Message(message_id, ID, chatId, content, "111", db->getName(ID), false, "", ""));
+    time_t Time = time(0);
+    auto flag = db->e_send(Message(message_id, ID, chatId, content, ctime(&Time), db->getName(ID), false, "", ""));
 
     QJsonObject response;
     response["type"] = "r_send";
@@ -29,6 +30,7 @@ QJsonObject Handle::e_send(const int &ID, const QJsonObject &obj) {
     Message["senderId"] = ID;
     Message["senderName"] = db->getName(ID);
     Message["content"] = obj["message"].toObject()["content"];
+    Message["time"] = ctime(&Time);
     QJsonObject S;
     S["type"] = "a_newMessage";
     S["chatId"] = (int) chatId;
@@ -55,7 +57,8 @@ QJsonObject Handle::e_updateFile(const int &ID, const QJsonObject &obj) {
     QString format = obj["format"].toString();
     DB *db = DB::get_instance();
     int message_id = db->new_message_id();
-    auto flag = db->e_send(Message(message_id, ID, chatId, content, "111", db->getName(ID), true, name, format));
+    time_t Time = time(0);
+    auto flag = db->e_send(Message(message_id, ID, chatId, content, ctime(&Time), db->getName(ID), true, name, format));
 
     QJsonObject response;
     response["type"] = "r_updateFile";
@@ -68,6 +71,7 @@ QJsonObject Handle::e_updateFile(const int &ID, const QJsonObject &obj) {
     Message["senderId"] = ID;
     Message["senderName"] = db->getName(ID);
     Message["content"] = obj["fileName"];
+    Message["time"] = ctime(&Time);
     QJsonObject S;
     S["type"] = "a_newMessage";
     S["chatId"] = (int) chatId;
@@ -107,7 +111,8 @@ QJsonObject Handle::e_send_bot(const QString &name, const QJsonObject &obj) {
     QString content = message["content"].toString();
     DB *db = DB::get_instance();
     int message_id = db->new_message_id();
-    auto flag = db->e_send(Message(message_id, 0, chatId, content, "111", name, false, "", ""));
+    time_t Time = time(0);
+    auto flag = db->e_send(Message(message_id, 0, chatId, content, ctime(&Time), name, false, "", ""));
 
     QJsonObject response;
     response["type"] = "r_send";
@@ -120,6 +125,7 @@ QJsonObject Handle::e_send_bot(const QString &name, const QJsonObject &obj) {
     Message["senderId"] = 0;
     Message["senderName"] = name;
     Message["content"] = obj["message"].toObject()["content"];
+    Message["time"] = ctime(&Time);
     QJsonObject S;
     S["type"] = "a_newMessage";
     S["chatId"] = (int) chatId;
