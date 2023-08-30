@@ -18,9 +18,9 @@ ChatWindow::ChatWindow(QWidget *parent) :
     waiting = 0;
     dl = nullptr;
     settingsDialog = nullptr;
-    ui->fileButton->setToolTip("上传文件");
-    ui->settingsButton->setToolTip("群聊信息设置");
-    ui->pushButton->setToolTip("下载文件");
+    ui->fileButton->setToolTip(tr("上传文件"));
+    ui->settingsButton->setToolTip(tr("群聊信息设置"));
+    ui->pushButton->setToolTip(tr("下载文件"));
 
     connect(Director::getInstance(), &Director::r_chatHistory, this, &ChatWindow::slot_r_chatHistory);
     connect(Director::getInstance(), &Director::a_newMessage, this, &ChatWindow::slot_a_newMessage);
