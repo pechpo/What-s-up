@@ -161,5 +161,5 @@ void Director::raiseChat(qint64 id) {
 }
 
 QString Director::genAvatarPath(const QString &avatar) {
-    return avatarGen->stringToPath(avatar);
+    return avatarGen->stringToPath(Hash(avatar));
 }
