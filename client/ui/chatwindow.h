@@ -70,6 +70,8 @@ private:
         QString content;
     };
     QVector<Message> history;
+    QVector<QWidget*> messages;
+    void clear();
     Message jsonToMessage(const QJsonObject&);
     QString messageToString(const Message&);
     void updateText();

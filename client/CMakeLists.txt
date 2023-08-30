@@ -48,13 +48,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ui/audiorecord.h ui/audiorecord.cpp ui/audiorecord.ui
         ui/tageditor.h ui/tageditor.cpp ui/tageditor.ui
         ui/friendrequest.h ui/friendrequest.cpp ui/friendrequest.ui
-
-
-
-
-
-
-
+        ui/photomessage.h ui/photomessage.cpp ui/photomessage.ui
+        ui/audiomessage.h ui/audiomessage.cpp ui/audiomessage.ui
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET client APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

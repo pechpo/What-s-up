@@ -28,18 +28,6 @@ void audioRecord::set(qint64 *id, quint32 *wait) {
 
 void audioRecord::on_startButton_clicked()
 {
-    /*if (nullptr != player) {
-        delete player;
-        delete audioOutput;
-    }
-    player = new QMediaPlayer;
-    audioOutput = new QAudioOutput;
-    const QAudioDevice &outputDevice = QMediaDevices::defaultAudioOutput();
-    audioOutput->setDevice(outputDevice);
-    player->setAudioOutput(audioOutput);
-    player->setSource(QUrl::fromLocalFile("/home/pechpo/109896__timkahn__leaf.wav"));
-    audioOutput->setVolume(50);
-    player->play();*/
 
     if (nullptr != session) {
         delete session;

@@ -366,7 +366,7 @@ void ChatWindow::on_photoButton_clicked()
         return ;
     }
     if (0 == waiting) {
-        QString str = QFileDialog::getOpenFileName(this, "Select Photo");
+        QString str = QFileDialog::getOpenFileName(this, tr("Select photo"), "" , "Image(*.png *.jpg *.bmp)");
         if ("" == str) return;
         qDebug() << str;
         QFile file(str);
