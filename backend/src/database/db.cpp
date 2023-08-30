@@ -308,10 +308,14 @@ QList<Message> DB::q_chatHistory(const quint32 &chat_ID, const quint32 &time, co
     while (query.next()) {
         Message message;
         message.setID(query.value(0).toUInt());
+        message.setReceiverID(query.value(1).toUInt());
         message.setSenderID(query.value(2).toUInt());
         message.setContent(query.value(3).toString());
         message.setTime(query.value(4).toString());
         message.setSenderName(query.value(5).toString());
+        message.setIsFile(query.value(6).toBool());
+        message.setFileName(query.value(7).toString());
+        message.setFormat(query.value(8).toString());
         messages.append(message);
     }
     return messages;
