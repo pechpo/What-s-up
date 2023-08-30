@@ -9,8 +9,8 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets LinguistTools)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets LinguistTools)
+find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets LinguistTools Multimedia)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets LinguistTools Multimedia)
 find_package(Qt6 COMPONENTS Network REQUIRED)
 set(TS_FILES client_zh_CN.ts)
 
@@ -77,6 +77,7 @@ endif()
 
 target_link_libraries(client PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 target_link_libraries(client PRIVATE Qt6::Network)
+target_link_libraries(client PRIVATE Qt6::Multimedia)
 
 include_directories(./)
 
