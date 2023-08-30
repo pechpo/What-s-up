@@ -50,13 +50,8 @@ int DB::new_message_id() {
     return 1;
 }
 
-int DB::e_register(const User &user) {
+bool DB::e_register(const User &user) {
     QSqlQuery query(database);
-    query.prepare("SELECT * FROM user WHERE id = ?");
-    query.addBindValue(user.getID());
-    query.exec();
-    if (query.next())return -1;
-    query.clear();
     query.prepare("INSERT INTO user (id, name, password, avatar, email) VALUES (?, ?, ?, ?, ?)");
     query.addBindValue(user.getID());
     query.addBindValue(user.getName());
@@ -152,7 +147,7 @@ bool DB::e_createChat(const quint32 &ID, const QString &name, const QString &ava
     query.prepare("INSERT INTO chat (id, name, avatar) VALUES (?, ?, ?)");
     query.addBindValue(ID);
     query.addBindValue(name);
-    query.addBindValue(ID);
+    query.addBindValue(avatarName);
     return query.exec();
 }
 
@@ -185,7 +180,7 @@ QList<chat> DB::q_list_myChats(const quint32 &ID) {
         if (!Query.next())continue;
         chat.setID(Query.value(0).toUInt());
         chat.setName(Query.value(1).toString());
-        chat.setAvatarName(Query.value(2).toString());
+        chat.setAvatarName(Query.value(3).toString());
         chats.append(chat);
     }
     return chats;

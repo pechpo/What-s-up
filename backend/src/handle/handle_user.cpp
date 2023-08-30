@@ -21,7 +21,6 @@ QJsonObject Handle::e_register(const int &ID, const QJsonObject &obj) {
     auto flag = db->e_register(User(id, name, password, avatar, email));
     QJsonObject response;
     response["type"] = "r_register";
-    if (flag == -1)response["error"] = "Have registered!", flag = 0;
     response["success"] = flag;  // set to false if insertion fails
     if (flag) {
         writeLog("User Registration", "User with ID " + QString::number(id) + " registered successfully.", true);
@@ -45,7 +44,6 @@ QJsonObject Handle::q_login(const int &ID, const QJsonObject &obj) {
     if (flag) {
         writeLog("User Login", "User with ID " + QString::number(id) + " logged in successfully.", true);
     } else {
-        response["error"] = "ID or Password is wrong!";
         writeLog("User Login", "Failed to log in user with ID " + QString::number(id) + ".", false);
     }
     return response;

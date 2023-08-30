@@ -24,7 +24,6 @@ add_executable(backend
         src/bot/bot.cpp
         src/include/clustering.h
         src/include/connection.h
-        src/include/encryption.h
         src/include/media.h
         src/include/log.h
         src/include/recommendation.h

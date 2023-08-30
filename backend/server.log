@@ -1,233 +1,62 @@
-[2023-08-30 16:08:06] [Server] [Success] Server started at 0.0.0.0:10043
-[2023-08-30 16:24:38] [Server] [Success] Server started at 0.0.0.0:10043
-[2023-08-30 16:29:30] [Server] [Success] Server started at 0.0.0.0:10043
-[2023-08-30 16:34:27] [Server] [Success] Server started at 0.0.0.0:10043
-[2023-08-30 16:45:49] [Server] [Success] Server started at 0.0.0.0:10043
-[2023-08-30 16:50:40] [Server] [Success] Server started at 0.0.0.0:10043
-[2023-08-30 16:57:45] [User Login] [Success] User with ID 573902690 logged in successfully.
-[2023-08-30 16:57:45] [List My Friends] [Success] User with ID 573902690 listed their friends.
-[2023-08-30 16:57:46] [List Friend Requests] [Success] User with ID 573902690 listed their friend requests.
-[2023-08-30 16:57:48] [User Login] [Success] User with ID 114514 logged in successfully.
-[2023-08-30 16:57:49] [List My Friends] [Success] User with ID 114514 listed their friends.
-[2023-08-30 16:57:49] [List Friend Requests] [Success] User with ID 114514 listed their friend requests.
-[2023-08-30 16:57:49] [Query Chat History] [Success] User with ID 114514 queried the chat history of chat 1.
-[2023-08-30 16:57:53] [User Login] [Success] User with ID 787 logged in successfully.
-[2023-08-30 16:57:53] [List My Friends] [Success] User with ID 787 listed their friends.
-[2023-08-30 16:57:54] [List Friend Requests] [Success] User with ID 787 listed their friend requests.
-[2023-08-30 16:57:59] [Query Chat] [Success] User with ID 787 queried their chats.
-[2023-08-30 16:58:03] [Add Friend] [Success] User with ID 787 sent friend request to ID 114514.
-[2023-08-30 16:58:03] [List My Friends] [Success] User with ID 114514 listed their friends.
-[2023-08-30 16:58:03] [List Friend Requests] [Success] User with ID 114514 listed their friend requests.
-[2023-08-30 16:58:05] [Query Chat] [Success] User with ID 573902690 queried the chat with user with ID 666.
-[2023-08-30 16:58:05] [Query Chat History] [Success] User with ID 573902690 queried the chat history of chat 17.
-[2023-08-30 16:58:05] [Query Chat] [Success] User with ID 573902690 queried their chats.
-[2023-08-30 16:58:10] [Query Chat History] [Success] User with ID 787 queried the chat history of chat 1.
-[2023-08-30 16:58:13] [Upload File] [Success] User with ID 114514 uploaded a file to chat 1.
-[2023-08-30 16:58:21] [List Files in Chat] [Success] User with ID 787 listed files in chat 1.
-[2023-08-30 16:58:21] [Query Chat History] [Success] User with ID 573902690 queried the chat history of chat 1.
-[2023-08-30 16:58:21] [List Files in Chat] [Success] User with ID 114514 listed files in chat 1.
-[2023-08-30 16:58:27] [List Files in Chat] [Success] User with ID 573902690 listed files in chat 1.
-[2023-08-30 16:58:27] [Download File] [Success] User with ID 114514 downloaded a file from chat 1.
-[2023-08-30 16:58:33] [Query Info] [Success] User with ID 787 queried information of user with ID 573902690.
-[2023-08-30 16:58:35] [Add Friend] [Success] User with ID 787 sent friend request to ID 573902690.
-[2023-08-30 16:58:35] [List My Friends] [Success] User with ID 573902690 listed their friends.
-[2023-08-30 16:58:35] [List Friend Requests] [Success] User with ID 573902690 listed their friend requests.
-[2023-08-30 17:00:08] [User Login] [Success] User with ID 114514 logged in successfully.
-[2023-08-30 17:00:09] [List My Friends] [Success] User with ID 114514 listed their friends.
-[2023-08-30 17:00:09] [List Friend Requests] [Success] User with ID 114514 listed their friend requests.
-[2023-08-30 17:00:09] [Query Chat History] [Success] User with ID 114514 queried the chat history of chat 1.
-[2023-08-30 17:00:15] [List Files in Chat] [Success] User with ID 114514 listed files in chat 1.
-[2023-08-30 17:00:17] [Download File] [Success] User with ID 114514 downloaded a file from chat 1.
-[2023-08-30 17:00:41] [User Login] [Success] User with ID 114514 logged in successfully.
-[2023-08-30 17:00:41] [List My Friends] [Success] User with ID 114514 listed their friends.
-[2023-08-30 17:00:41] [List Friend Requests] [Success] User with ID 114514 listed their friend requests.
-[2023-08-30 17:00:42] [Query Chat History] [Success] User with ID 114514 queried the chat history of chat 1.
-[2023-08-30 17:00:46] [List Files in Chat] [Success] User with ID 114514 listed files in chat 1.
-[2023-08-30 17:00:53] [Download File] [Success] User with ID 114514 downloaded a file from chat 1.
-[2023-08-30 17:04:53] [Accept Friend] [Success] User with ID 573902690 accepted/rejected friend request from ID 787.
-[2023-08-30 17:04:53] [List My Friends] [Success] User with ID 573902690 listed their friends.
-[2023-08-30 17:04:53] [List Friend Requests] [Success] User with ID 573902690 listed their friend requests.
-[2023-08-30 17:08:03] [User Login] [Success] User with ID 114514 logged in successfully.
-[2023-08-30 17:08:03] [List My Friends] [Success] User with ID 114514 listed their friends.
-[2023-08-30 17:08:03] [List Friend Requests] [Success] User with ID 114514 listed their friend requests.
-[2023-08-30 17:08:36] [User Login] [Success] User with ID 114514 logged in successfully.
-[2023-08-30 17:08:36] [List My Friends] [Success] User with ID 114514 listed their friends.
-[2023-08-30 17:08:37] [List Friend Requests] [Success] User with ID 114514 listed their friend requests.
-[2023-08-30 17:08:45] [Query Chat] [Success] User with ID 114514 queried their chats.
-[2023-08-30 17:08:47] [Query Chat History] [Success] User with ID 114514 queried the chat history of chat 1.
-[2023-08-30 17:08:55] [Send Message] [Success] User with ID 114514 sent a message to chat 1.
-[2023-08-30 17:10:15] [List Files in Chat] [Success] User with ID 114514 listed files in chat 1.
-[2023-08-30 17:10:20] [Download File] [Success] User with ID 114514 downloaded a file from chat 1.
-[2023-08-30 17:13:11] [User Login] [Success] User with ID 787 logged in successfully.
-[2023-08-30 17:13:11] [List My Friends] [Success] User with ID 787 listed their friends.
-[2023-08-30 17:15:37] [Send Message] [Success] Bot 陈平 sent a message to chat 1.
-[2023-08-30 17:15:37] [Send Message] [Success] User with ID 573902690 sent a message to chat 1.
-[2023-08-30 17:17:13] [User Login] [Success] User with ID 114514 logged in successfully.
-[2023-08-30 17:17:13] [List My Friends] [Success] User with ID 114514 listed their friends.
-[2023-08-30 17:17:13] [List Friend Requests] [Success] User with ID 114514 listed their friend requests.
-[2023-08-30 17:17:48] [List Files in Chat] [Success] User with ID 573902690 listed files in chat 1.
-[2023-08-30 17:18:27] [User Login] [Success] User with ID 114514 logged in successfully.
-[2023-08-30 17:18:27] [List My Friends] [Success] User with ID 114514 listed their friends.
-[2023-08-30 17:18:27] [List Friend Requests] [Success] User with ID 114514 listed their friend requests.
-[2023-08-30 17:18:53] [Query Chat] [Success] User with ID 114514 queried their chats.
-[2023-08-30 17:18:54] [Query Chat History] [Success] User with ID 114514 queried the chat history of chat 1.
-[2023-08-30 17:18:58] [List Files in Chat] [Success] User with ID 114514 listed files in chat 1.
-[2023-08-30 17:19:52] [User Login] [Success] User with ID 114514 logged in successfully.
-[2023-08-30 17:19:52] [List My Friends] [Success] User with ID 114514 listed their friends.
-[2023-08-30 17:19:52] [List Friend Requests] [Success] User with ID 114514 listed their friend requests.
-[2023-08-30 17:19:54] [Query Chat] [Success] User with ID 114514 queried their chats.
-[2023-08-30 17:19:54] [Query Chat History] [Success] User with ID 114514 queried the chat history of chat 1.
-[2023-08-30 17:21:31] [User Login] [Success] User with ID 114514 logged in successfully.
-[2023-08-30 17:21:31] [List My Friends] [Success] User with ID 114514 listed their friends.
-[2023-08-30 17:21:31] [List Friend Requests] [Success] User with ID 114514 listed their friend requests.
-[2023-08-30 17:21:52] [Query Chat] [Success] User with ID 114514 queried their chats.
-[2023-08-30 17:21:54] [Query Chat History] [Success] User with ID 114514 queried the chat history of chat 1.
-[2023-08-30 17:21:59] [User Login] [Success] User with ID 888 logged in successfully.
-[2023-08-30 17:21:59] [List My Friends] [Success] User with ID 888 listed their friends.
-[2023-08-30 17:21:59] [List Friend Requests] [Success] User with ID 888 listed their friend requests.
-[2023-08-30 17:22:03] [Query Chat] [Success] User with ID 888 queried their chats.
-[2023-08-30 17:22:11] [User Login] [Success] User with ID 114514 logged in successfully.
-[2023-08-30 17:22:11] [List My Friends] [Success] User with ID 114514 listed their friends.
-[2023-08-30 17:22:11] [List Friend Requests] [Success] User with ID 114514 listed their friend requests.
-[2023-08-30 17:22:42] [User Login] [Success] User with ID 114514 logged in successfully.
-[2023-08-30 17:22:42] [List My Friends] [Success] User with ID 114514 listed their friends.
-[2023-08-30 17:22:42] [List Friend Requests] [Success] User with ID 114514 listed their friend requests.
-[2023-08-30 17:23:00] [Upload File] [Success] User with ID 114514 uploaded a file to chat 0.
-[2023-08-30 17:23:19] [Query Chat] [Success] User with ID 114514 queried their chats.
-[2023-08-30 17:23:22] [Query Chat History] [Success] User with ID 114514 queried the chat history of chat 1.
-[2023-08-30 17:23:26] [List Files in Chat] [Success] User with ID 114514 listed files in chat 1.
-[2023-08-30 17:23:32] [User Login] [Success] User with ID 787 logged in successfully.
-[2023-08-30 17:23:32] [List My Friends] [Success] User with ID 787 listed their friends.
-[2023-08-30 17:23:37] [Upload File] [Success] User with ID 114514 uploaded a file to chat 1.
-[2023-08-30 17:23:42] [List Files in Chat] [Success] User with ID 114514 listed files in chat 1.
-[2023-08-30 17:23:58] [User Login] [Success] User with ID 999 logged in successfully.
-[2023-08-30 17:23:58] [List My Friends] [Success] User with ID 999 listed their friends.
-[2023-08-30 17:23:59] [List Friend Requests] [Success] User with ID 999 listed their friend requests.
-[2023-08-30 17:24:01] [Query Chat] [Success] User with ID 999 queried their chats.
-[2023-08-30 17:24:08] [List My Friends] [Success] User with ID 999 listed their friends.
-[2023-08-30 17:24:08] [List Friend Requests] [Success] User with ID 999 listed their friend requests.
-[2023-08-30 17:24:12] [Query Info] [Success] User with ID 999 queried information of user with ID 777.
-[2023-08-30 17:24:14] [Query Info] [Success] User with ID 999 queried information of user with ID 666.
-[2023-08-30 17:24:16] [Query Info] [Success] User with ID 999 queried information of user with ID 999.
-[2023-08-30 17:25:05] [Server] [Success] Server started at 0.0.0.0:10043
-[2023-08-30 17:27:38] [User Login] [Success] User with ID 573902690 logged in successfully.
-[2023-08-30 17:27:38] [List My Friends] [Success] User with ID 573902690 listed their friends.
-[2023-08-30 17:27:38] [List Friend Requests] [Success] User with ID 573902690 listed their friend requests.
-[2023-08-30 17:27:47] [Query Chat] [Success] User with ID 573902690 queried their chats.
-[2023-08-30 17:27:48] [Query Chat History] [Success] User with ID 573902690 queried the chat history of chat 1.
-[2023-08-30 17:27:50] [Query Chat Info] [Success] User with ID 573902690 queried the info of chat 1.
-[2023-08-30 17:27:53] [Edit User Info] [Success] User with ID 573902690 edited their information.
-[2023-08-30 17:27:57] [Edit User Info] [Success] User with ID 573902690 edited their information.
-[2023-08-30 17:27:57] [Edit User Info] [Success] User with ID 573902690 edited their information.
-[2023-08-30 17:27:59] [Query Chat Info] [Success] User with ID 573902690 queried the info of chat 1.
-[2023-08-30 17:28:05] [Query Chat History] [Success] User with ID 573902690 queried the chat history of chat 17.
-[2023-08-30 17:28:06] [Query Chat Info] [Success] User with ID 573902690 queried the info of chat 17.
-[2023-08-30 17:28:09] [Edit User Info] [Success] User with ID 573902690 edited their information.
-[2023-08-30 17:28:11] [Edit User Info] [Success] User with ID 573902690 edited their information.
-[2023-08-30 17:28:11] [Edit User Info] [Success] User with ID 573902690 edited their information.
-[2023-08-30 17:28:13] [Query Chat Info] [Success] User with ID 573902690 queried the info of chat 17.
-[2023-08-30 17:28:17] [Edit Chat Info] [Success] User with ID 573902690 edited the info of chat 17.
-[2023-08-30 17:28:17] [Query Chat Info] [Success] User with ID 573902690 queried the info of chat 17.
-[2023-08-30 17:28:17] [Query Chat] [Success] User with ID 573902690 queried their chats.
-[2023-08-30 17:28:20] [Edit Chat Info] [Success] User with ID 573902690 edited the info of chat 17.
-[2023-08-30 17:28:20] [Query Chat Info] [Success] User with ID 573902690 queried the info of chat 17.
-[2023-08-30 17:28:20] [Query Chat] [Success] User with ID 573902690 queried their chats.
-[2023-08-30 17:28:23] [Edit Chat Info] [Success] User with ID 573902690 edited the info of chat 17.
-[2023-08-30 17:28:23] [Query Chat Info] [Success] User with ID 573902690 queried the info of chat 17.
-[2023-08-30 17:28:23] [Query Chat] [Success] User with ID 573902690 queried their chats.
-[2023-08-30 17:28:24] [List My Friends] [Success] User with ID 573902690 listed their friends.
-[2023-08-30 17:28:24] [List Friend Requests] [Success] User with ID 573902690 listed their friend requests.
-[2023-08-30 17:28:25] [Query Chat] [Success] User with ID 573902690 queried their chats.
-[2023-08-30 17:28:25] [User Login] [Success] User with ID 114514 logged in successfully.
-[2023-08-30 17:28:25] [List My Friends] [Success] User with ID 114514 listed their friends.
-[2023-08-30 17:28:25] [List Friend Requests] [Success] User with ID 114514 listed their friend requests.
-[2023-08-30 17:28:27] [Query Chat Info] [Success] User with ID 573902690 queried the info of chat 17.
-[2023-08-30 17:28:27] [Query Chat] [Success] User with ID 114514 queried their chats.
-[2023-08-30 17:28:28] [Query Chat History] [Success] User with ID 114514 queried the chat history of chat 1.
-[2023-08-30 17:29:07] [User Login] [Success] User with ID 787 logged in successfully.
-[2023-08-30 17:29:07] [List My Friends] [Success] User with ID 787 listed their friends.
-[2023-08-30 17:29:45] [User Login] [Success] User with ID 787 logged in successfully.
-[2023-08-30 17:29:45] [List My Friends] [Success] User with ID 787 listed their friends.
-[2023-08-30 17:29:59] [User Login] [Success] User with ID 114514 logged in successfully.
-[2023-08-30 17:29:59] [List My Friends] [Success] User with ID 114514 listed their friends.
-[2023-08-30 17:29:59] [List Friend Requests] [Success] User with ID 114514 listed their friend requests.
-[2023-08-30 17:30:01] [Accept Friend] [Success] User with ID 114514 accepted/rejected friend request from ID 666.
-[2023-08-30 17:30:02] [List My Friends] [Success] User with ID 114514 listed their friends.
-[2023-08-30 17:30:02] [List Friend Requests] [Success] User with ID 114514 listed their friend requests.
-[2023-08-30 17:30:02] [List My Friends] [Success] User with ID 114514 listed their friends.
-[2023-08-30 17:30:02] [List Friend Requests] [Success] User with ID 114514 listed their friend requests.
-[2023-08-30 17:30:03] [Accept Friend] [Success] User with ID 114514 accepted/rejected friend request from ID 787.
-[2023-08-30 17:30:03] [List My Friends] [Success] User with ID 114514 listed their friends.
-[2023-08-30 17:30:03] [List Friend Requests] [Success] User with ID 114514 listed their friend requests.
-[2023-08-30 17:30:07] [Query Chat] [Success] User with ID 114514 queried their chats.
-[2023-08-30 17:30:09] [Query Chat History] [Success] User with ID 114514 queried the chat history of chat 1.
-[2023-08-30 17:30:12] [List My Friends] [Success] User with ID 114514 listed their friends.
-[2023-08-30 17:30:12] [List Friend Requests] [Success] User with ID 114514 listed their friend requests.
-[2023-08-30 17:30:14] [Query Chat] [Success] User with ID 114514 queried their chats.
-[2023-08-30 17:30:19] [List My Friends] [Success] User with ID 114514 listed their friends.
-[2023-08-30 17:30:19] [List Friend Requests] [Success] User with ID 114514 listed their friend requests.
-[2023-08-30 17:30:21] [User Login] [Success] User with ID 787 logged in successfully.
-[2023-08-30 17:30:22] [List My Friends] [Success] User with ID 787 listed their friends.
-[2023-08-30 17:30:22] [List Friend Requests] [Success] User with ID 787 listed their friend requests.
-[2023-08-30 17:30:25] [Send Message] [Success] User with ID 114514 sent a message to chat 1.
-[2023-08-30 17:30:27] [Query Chat] [Success] User with ID 787 queried their chats.
-[2023-08-30 17:30:29] [Query Chat] [Success] User with ID 114514 queried their chats.
-[2023-08-30 17:30:32] [List My Friends] [Success] User with ID 787 listed their friends.
-[2023-08-30 17:30:32] [List Friend Requests] [Success] User with ID 787 listed their friend requests.
-[2023-08-30 17:30:33] [Query Chat] [Success] User with ID 787 queried the chat with user with ID 888.
-[2023-08-30 17:30:33] [Query Chat History] [Success] User with ID 787 queried the chat history of chat 7.
-[2023-08-30 17:30:33] [Query Chat] [Success] User with ID 787 queried their chats.
-[2023-08-30 17:30:33] [Query Chat History] [Success] User with ID 787 queried the chat history of chat 7.
-[2023-08-30 17:30:33] [Query Chat History] [Success] User with ID 787 queried the chat history of chat 7.
-[2023-08-30 17:30:33] [Query Chat History] [Success] User with ID 787 queried the chat history of chat 7.
-[2023-08-30 17:30:33] [Query Chat History] [Success] User with ID 787 queried the chat history of chat 7.
-[2023-08-30 17:30:33] [Query Chat History] [Success] User with ID 787 queried the chat history of chat 7.
-[2023-08-30 17:30:33] [Query Chat History] [Success] User with ID 787 queried the chat history of chat 7.
-[2023-08-30 17:30:33] [Query Chat History] [Success] User with ID 787 queried the chat history of chat 7.
-[2023-08-30 17:31:29] [User Login] [Success] User with ID 888 logged in successfully.
-[2023-08-30 17:31:29] [List My Friends] [Success] User with ID 888 listed their friends.
-[2023-08-30 17:31:29] [List Friend Requests] [Success] User with ID 888 listed their friend requests.
-[2023-08-30 17:31:30] [Query Chat] [Success] User with ID 888 queried their chats.
-[2023-08-30 17:31:33] [Query Chat History] [Success] User with ID 888 queried the chat history of chat 1.
-[2023-08-30 17:31:34] [Query Chat Info] [Success] User with ID 888 queried the info of chat 1.
-[2023-08-30 17:31:39] [Query Chat History] [Success] User with ID 888 queried the chat history of chat 2.
-[2023-08-30 17:31:40] [Query Chat Info] [Success] User with ID 888 queried the info of chat 2.
-[2023-08-30 17:31:44] [Edit Chat Info] [Success] User with ID 888 edited the info of chat 2.
-[2023-08-30 17:31:44] [Query Chat Info] [Success] User with ID 888 queried the info of chat 2.
-[2023-08-30 17:31:44] [Query Chat] [Success] User with ID 888 queried their chats.
-[2023-08-30 17:32:59] [Server] [Success] Server started at 0.0.0.0:10043
-[2023-08-30 17:33:18] [User Login] [Success] User with ID 999 logged in successfully.
-[2023-08-30 17:33:18] [List My Friends] [Success] User with ID 999 listed their friends.
-[2023-08-30 17:33:18] [List Friend Requests] [Success] User with ID 999 listed their friend requests.
-[2023-08-30 17:33:20] [Query Chat] [Success] User with ID 999 queried their chats.
-[2023-08-30 17:33:25] [List My Friends] [Success] User with ID 999 listed their friends.
-[2023-08-30 17:33:25] [List Friend Requests] [Success] User with ID 999 listed their friend requests.
-[2023-08-30 17:33:27] [Query Chat] [Success] User with ID 999 queried their chats.
-[2023-08-30 17:36:03] [User Login] [Success] User with ID 573902690 logged in successfully.
-[2023-08-30 17:36:03] [List My Friends] [Success] User with ID 573902690 listed their friends.
-[2023-08-30 17:36:03] [List Friend Requests] [Success] User with ID 573902690 listed their friend requests.
-[2023-08-30 17:36:04] [Query Chat] [Success] User with ID 573902690 queried the chat with user with ID 666.
-[2023-08-30 17:36:04] [Query Chat History] [Success] User with ID 573902690 queried the chat history of chat 17.
-[2023-08-30 17:36:04] [Query Chat] [Success] User with ID 573902690 queried their chats.
-[2023-08-30 17:36:09] [Query Chat Info] [Success] User with ID 573902690 queried the info of chat 17.
-[2023-08-30 17:36:12] [Edit Chat Info] [Success] User with ID 573902690 edited the info of chat 17.
-[2023-08-30 17:36:12] [Query Chat Info] [Success] User with ID 573902690 queried the info of chat 17.
-[2023-08-30 17:36:12] [Query Chat] [Success] User with ID 573902690 queried their chats.
-[2023-08-30 17:36:16] [Edit Chat Info] [Success] User with ID 573902690 edited the info of chat 17.
-[2023-08-30 17:36:16] [Query Chat Info] [Success] User with ID 573902690 queried the info of chat 17.
-[2023-08-30 17:36:16] [Query Chat] [Success] User with ID 573902690 queried their chats.
-[2023-08-30 17:36:17] [Edit Chat Info] [Success] User with ID 573902690 edited the info of chat 17.
-[2023-08-30 17:36:17] [Query Chat Info] [Success] User with ID 573902690 queried the info of chat 17.
-[2023-08-30 17:36:17] [Query Chat] [Success] User with ID 573902690 queried their chats.
-[2023-08-30 17:36:17] [Edit Chat Info] [Success] User with ID 573902690 edited the info of chat 17.
-[2023-08-30 17:36:17] [Query Chat Info] [Success] User with ID 573902690 queried the info of chat 17.
-[2023-08-30 17:36:17] [Query Chat] [Success] User with ID 573902690 queried their chats.
-[2023-08-30 17:36:18] [Edit Chat Info] [Success] User with ID 573902690 edited the info of chat 17.
-[2023-08-30 17:36:18] [Query Chat Info] [Success] User with ID 573902690 queried the info of chat 17.
-[2023-08-30 17:36:18] [Query Chat] [Success] User with ID 573902690 queried their chats.
-[2023-08-30 17:36:18] [Edit Chat Info] [Success] User with ID 573902690 edited the info of chat 17.
-[2023-08-30 17:36:18] [Query Chat Info] [Success] User with ID 573902690 queried the info of chat 17.
-[2023-08-30 17:36:18] [Query Chat] [Success] User with ID 573902690 queried their chats.
-[2023-08-30 17:37:26] [User Login] [Success] User with ID 777 logged in successfully.
-[2023-08-30 17:37:27] [List My Friends] [Success] User with ID 777 listed their friends.
-[2023-08-30 17:37:27] [List Friend Requests] [Success] User with ID 777 listed their friend requests.
+[2023-08-30 18:15:43] [Server] [Success] Server started at 0.0.0.0:10043
+[2023-08-30 18:18:19] [Server] [Success] Server started at 0.0.0.0:10043
+[2023-08-30 18:19:52] [Server] [Success] Server started at 0.0.0.0:10043
+[2023-08-30 18:22:00] [Server] [Success] Server started at 0.0.0.0:10043
+[2023-08-30 18:22:13] [User Login] [Success] User with ID 787 logged in successfully.
+[2023-08-30 18:22:13] [List My Friends] [Success] User with ID 787 listed their friends.
+[2023-08-30 18:22:13] [List Friend Requests] [Success] User with ID 787 listed their friend requests.
+[2023-08-30 18:22:38] [User Login] [Success] User with ID 888 logged in successfully.
+[2023-08-30 18:22:38] [List My Friends] [Success] User with ID 888 listed their friends.
+[2023-08-30 18:22:39] [List Friend Requests] [Success] User with ID 888 listed their friend requests.
+[2023-08-30 18:22:43] [Query Chat] [Success] User with ID 888 queried their chats.
+[2023-08-30 18:22:44] [Query Chat History] [Success] User with ID 888 queried the chat history of chat 1.
+[2023-08-30 18:22:48] [Query Chat Info] [Success] User with ID 888 queried the info of chat 1.
+[2023-08-30 18:22:58] [List My Friends] [Success] User with ID 888 listed their friends.
+[2023-08-30 18:22:58] [List Friend Requests] [Success] User with ID 888 listed their friend requests.
+[2023-08-30 18:23:45] [User Login] [Success] User with ID 888 logged in successfully.
+[2023-08-30 18:23:45] [List My Friends] [Success] User with ID 888 listed their friends.
+[2023-08-30 18:23:45] [List Friend Requests] [Success] User with ID 888 listed their friend requests.
+[2023-08-30 18:24:22] [User Login] [Success] User with ID 888 logged in successfully.
+[2023-08-30 18:24:22] [List My Friends] [Success] User with ID 888 listed their friends.
+[2023-08-30 18:24:22] [List Friend Requests] [Success] User with ID 888 listed their friend requests.
+[2023-08-30 18:24:48] [User Login] [Failure] Failed to log in user with ID 999.
+[2023-08-30 18:24:52] [User Login] [Success] User with ID 999 logged in successfully.
+[2023-08-30 18:24:52] [List My Friends] [Success] User with ID 999 listed their friends.
+[2023-08-30 18:24:53] [List Friend Requests] [Success] User with ID 999 listed their friend requests.
+[2023-08-30 18:24:56] [Query Chat] [Success] User with ID 999 queried their chats.
+[2023-08-30 18:25:01] [Create Chat] [Success] User with ID 999 created a new chat.
+[2023-08-30 18:25:01] [Query Chat] [Success] User with ID 787 queried their chats.
+[2023-08-30 18:25:01] [Query Chat] [Success] User with ID 999 queried their chats.
+[2023-08-30 18:25:10] [Query Chat History] [Success] User with ID 999 queried the chat history of chat 1.
+[2023-08-30 18:25:11] [Query Chat Info] [Success] User with ID 999 queried the info of chat 1.
+[2023-08-30 18:25:53] [User Login] [Success] User with ID 114514 logged in successfully.
+[2023-08-30 18:25:53] [List My Friends] [Success] User with ID 114514 listed their friends.
+[2023-08-30 18:25:53] [List Friend Requests] [Success] User with ID 114514 listed their friend requests.
+[2023-08-30 18:25:59] [Query Chat] [Success] User with ID 114514 queried their chats.
+[2023-08-30 18:26:01] [Query Chat History] [Success] User with ID 114514 queried the chat history of chat 1.
+[2023-08-30 18:26:11] [User Login] [Success] User with ID 777 logged in successfully.
+[2023-08-30 18:26:11] [List My Friends] [Success] User with ID 777 listed their friends.
+[2023-08-30 18:26:12] [List Friend Requests] [Success] User with ID 777 listed their friend requests.
+[2023-08-30 18:26:14] [Query Chat] [Success] User with ID 777 queried their chats.
+[2023-08-30 18:26:16] [List My Friends] [Success] User with ID 777 listed their friends.
+[2023-08-30 18:26:16] [List Friend Requests] [Success] User with ID 777 listed their friend requests.
+[2023-08-30 18:26:19] [Edit User Info] [Success] User with ID 777 edited their information.
+[2023-08-30 18:26:28] [Query Chat] [Success] User with ID 777 queried their chats.
+[2023-08-30 18:26:28] [User Login] [Success] User with ID 114514 logged in successfully.
+[2023-08-30 18:26:28] [List My Friends] [Success] User with ID 114514 listed their friends.
+[2023-08-30 18:26:28] [List Friend Requests] [Success] User with ID 114514 listed their friend requests.
+[2023-08-30 18:26:29] [Query Chat History] [Success] User with ID 777 queried the chat history of chat 4.
+[2023-08-30 18:26:30] [Query Chat Info] [Success] User with ID 777 queried the info of chat 4.
+[2023-08-30 18:26:30] [Query Chat] [Success] User with ID 114514 queried their chats.
+[2023-08-30 18:26:31] [Query Chat History] [Success] User with ID 114514 queried the chat history of chat 1.
+[2023-08-30 18:27:43] [User Login] [Success] User with ID 999 logged in successfully.
+[2023-08-30 18:27:43] [List My Friends] [Success] User with ID 999 listed their friends.
+[2023-08-30 18:27:43] [List Friend Requests] [Success] User with ID 999 listed their friend requests.
+[2023-08-30 18:27:45] [Query Chat] [Success] User with ID 999 queried their chats.
+[2023-08-30 18:27:46] [Query Chat History] [Success] User with ID 999 queried the chat history of chat 1.
+[2023-08-30 18:27:48] [Query Chat Info] [Success] User with ID 999 queried the info of chat 1.
+[2023-08-30 18:28:11] [User Login] [Success] User with ID 114514 logged in successfully.
+[2023-08-30 18:28:11] [List My Friends] [Success] User with ID 114514 listed their friends.
+[2023-08-30 18:28:12] [List Friend Requests] [Success] User with ID 114514 listed their friend requests.
+[2023-08-30 18:28:16] [Query Chat] [Success] User with ID 114514 queried their chats.
+[2023-08-30 18:28:17] [Query Chat History] [Success] User with ID 114514 queried the chat history of chat 1.
