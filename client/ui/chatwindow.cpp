@@ -47,8 +47,10 @@ void ChatWindow::switchChat(qint64 id) {
     }
     if (id == 0) {
         ui->idLabel->setText(tr("尚未打开任何群聊"));
+        ui->inputEdit->setReadOnly(true);
         return ;
     }
+    ui->inputEdit->setReadOnly(false);
     chatId = id;
     QJsonObject msg;
     msg.insert("type", "q_chatHistory");
@@ -109,9 +111,12 @@ ChatWindow::Message ChatWindow::jsonToMessage(const QJsonObject &obj) {
         return cur;
     }
     //
-    QString name = "Bot";
+    QString name = tr("Bot"), time = tr("Just now");
     if (obj.value("senderName").isString()) {
         name = obj.value("senderName").toString();
+    }
+    if (obj.value("time").isString()) {
+        time = obj.value("time").toString();
     }
     else {
         cur.isSystem = true;
@@ -120,6 +125,7 @@ ChatWindow::Message ChatWindow::jsonToMessage(const QJsonObject &obj) {
     cur.senderId = obj.value("senderId").toInt();
     //cur.senderName = "Carol" + QString::number(cur.senderId);
     cur.senderName = name;
+    cur.time = time;
     cur.content = obj.value("content").toString();
     return cur;
 }
@@ -136,25 +142,33 @@ QString ChatWindow::messageToString(const Message &cur) {
 */
 // now String is html
 QString ChatWindow::messageToString(const Message &cur) {
-    QString one;
-    QString style="display:flex;flex-directon:column;margin:12px 0px 12px 0px";
+    QString color;
     if (cur.senderId == Director::getInstance()->myId()) {
         // myself
-        style += ";color:#4477CE";
+        color = "#4477CE";
     }
     else if (cur.senderId == 0) {
         // bot
-        style += ";color:#5C469C";
+        color = "#5C469C";
     }
+    else {
+        // others
+        color = "black";
+    }
+    QString style="display:flex;flex-directon:column;margin:12px 0px 12px 0px;color:" + color;
+    // keep this strange indentation for HTML
+    QString one;
     one.append("<div style=\"" + style + "\">");
-    one.append("<div style=\"font-size:16px\">");
-    one.append(cur.senderName.toHtmlEscaped());
-    if (cur.senderId > 0) {
-        one.append(" (" + QString::number(cur.senderId).toHtmlEscaped() + ")");
-    }
-    one.append("</div>");
-    one.append("<div style=\"font-size:15px;margin-top:5px\">" + cur.content.toHtmlEscaped() + "</div>");
-    //one.append("<hr/>");
+        one.append("<div style=\"display:flex;flex-direction:row;justify-content:space-between;align-items:flex-start;flex-wrap:nowrap\">");
+            one.append("<div style=\"font-size:16px\">");
+                one.append(cur.senderName.toHtmlEscaped());
+                if (cur.senderId > 0) {
+                    one.append(" (" + QString::number(cur.senderId).toHtmlEscaped() + ")");
+                }
+            one.append("</div>");
+            one.append("<div style=\"font-size:10px\">" + cur.time.toHtmlEscaped() + "</div>");
+        one.append("</div>");
+        one.append("<div style=\"font-size:15px;margin-top:5px\">" + cur.content.toHtmlEscaped() + "</div>");
     one.append("</div>");
     return one;
 }
