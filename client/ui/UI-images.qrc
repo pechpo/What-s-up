@@ -1,7 +1,6 @@
 <RCC>
     <qresource prefix="/images">
         <file>image/settings.png</file>
-        <file>image/chatList.png</file>
         <file>image/imagetest.png</file>
         <file>image/AddNewFriend.png</file>
         <file>image/accept.png</file>
@@ -16,5 +15,6 @@
         <file>image/background4.png</file>
         <file>image/Logo.png</file>
         <file>image/startChat.png</file>
+        <file>image/chatList.png</file>
     </qresource>
 </RCC>
