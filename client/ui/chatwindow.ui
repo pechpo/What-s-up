@@ -30,7 +30,7 @@
 background-image: url(:/images/image/Logo.png);</string>
    </property>
   </widget>
-  <widget class="QTextEdit" name="inputEdit">
+  <widget class="QPlainTextEdit" name="inputEdit">
    <property name="geometry">
     <rect>
      <x>10</x>
