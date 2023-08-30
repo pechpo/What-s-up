@@ -467,7 +467,7 @@ bool DB::add_tag(const int &ID, const std::vector<int> &tags) {
     return query.exec();
 }
 
-std::vector<int> DB::get_tags(const int &ID) {
+std::vector<int> DB::q_list_tags(const int &ID) {
     QSqlQuery query(database);
     query.prepare("SELECT * FROM user_tags WHERE user_id = ?");
     query.addBindValue(ID);

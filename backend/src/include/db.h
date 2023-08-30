@@ -79,7 +79,7 @@ public :
 
     bool add_tag(const int &ID, const std::vector<int> &tags);
 
-    std::vector<int> get_tags(const int &ID);
+    std::vector<int> q_list_tags(const int &ID);
 
     std::unordered_map<quint32, std::vector<int>> get_all_tags();
 

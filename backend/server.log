@@ -60,3 +60,4 @@
 [2023-08-30 18:28:12] [List Friend Requests] [Success] User with ID 114514 listed their friend requests.
 [2023-08-30 18:28:16] [Query Chat] [Success] User with ID 114514 queried their chats.
 [2023-08-30 18:28:17] [Query Chat History] [Success] User with ID 114514 queried the chat history of chat 1.
+[2023-08-30 21:27:04] [Server] [Success] Server started at 0.0.0.0:10043

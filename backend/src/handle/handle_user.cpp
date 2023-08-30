@@ -245,3 +245,68 @@ QJsonObject Handle::e_acceptFriend(const int &ID, const QJsonObject &obj) {
     return response;
     // Send the response back to client
 }
+
+QJsonObject Handle::q_list_tags(const int &ID, const QJsonObject &obj) {
+    // Extract the necessary fields from obj
+    DB *db = DB::get_instance();
+    auto flag = db->q_list_tags(ID);
+
+    QJsonObject response;
+    response["type"] = "r_list_tags";
+    QJsonArray tags;
+    for (int i = 0; i < 36; i++) {
+        QJsonObject tag;
+        tag["tag"] = TAGS[i];
+        tag["value"] = flag[i];
+        tags.append(tag);
+    }
+    response["tags"] = tags;
+    writeLog("List Tags", "User with ID " + QString::number(ID) + " listed their tags.", true);
+    return response;
+    // Send the response back to client
+}
+
+QJsonObject Handle::e_editTags(const int &ID, const QJsonObject &obj) {
+    // Extract the necessary fields from obj
+    QJsonArray editList = obj["editList"].toArray();
+
+    DB *db = DB::get_instance();
+    std::vector<int> tags = db->q_list_tags(ID);
+    for (const auto &x: editList) {
+        auto y = x.toObject();
+        tags[tags_map[y["tag"].toString()]] = y["value"].toBool();
+    }
+
+    auto flag = db->add_tag(ID, tags);
+
+    QJsonObject response;
+    response["type"] = "r_editTags";
+    response["success"] = flag;  // set to false if insertion fails
+    if (!flag) {
+        response["error"] = "Edit failed";
+    }
+    if (flag) {
+        writeLog("Edit Tags", "User with ID " + QString::number(ID) + " edited their tags.", true);
+    } else {
+        writeLog("Edit Tags", "User with ID " + QString::number(ID) + " failed to edit their tags.", false);
+    }
+
+    return response;
+    // Send the response back to client
+}
+
+//7.2 设置自己的标签
+//client:
+//{
+//"type": "e_editTags",
+//"editList": [{
+//  "tag": String,
+//  "value": Boolean
+//}]
+//}
+//server:
+//{
+//"type": "r_editTags",
+//"success": Boolean,
+//(*)error: String
+//}

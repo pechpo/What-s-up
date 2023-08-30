@@ -11,6 +11,9 @@
 Handle *Handle::hd = nullptr;
 
 Handle::Handle() {
+    for (int i = 0; i < 36; i++) {
+        tags_map[TAGS[i]] = i;
+    }
     handlemap["e_register"] = [this](auto &&PH1, auto &&PH2) {
         return this->e_register(PH1, PH2);
     };
