@@ -14,6 +14,7 @@ RegisterDialog::RegisterDialog(QWidget *parent) :
 
     ui->closeButton->setVisible(false);
     ui->minimizeButton->setVisible(false);
+    ui->label_3->setStyleSheet("QLabel { background-color: transparent; }");
 
 }
 

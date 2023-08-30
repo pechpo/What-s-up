@@ -17,6 +17,7 @@ StartChat::StartChat(QWidget *parent, bool isRealPerson) :
     bar->show();
     bar->stackUnder(this);
     ui->chatButton->raise();
+    ui->chatButton->setToolTip("进入聊天/群聊");
 
     connect(Director::getInstance(), &Director::r_talk, this, &StartChat::slot_r_talk);
 }

@@ -32,6 +32,10 @@ mainWindow::mainWindow(QWidget *parent) :
     ui->closeButton->setVisible(false);
     ui->minimizeButton->setVisible(false);
     ui->GroupList->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+    ui->settingButton->setToolTip("设置个人信息");
+    ui->grouplistButton->setToolTip("显示群聊/好友信息");
+    ui->NewGroupButton->setToolTip("新建群聊");
+    ui->addnewfriendButton->setToolTip("添加好友");
 
     /*friendRequests.resize(20);
     for (int i = 0; i < 20; i++) {
