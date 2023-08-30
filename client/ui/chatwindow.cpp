@@ -169,7 +169,7 @@ QString ChatWindow::messageToString(const Message &cur) {
                     one.append(" (" + QString::number(cur.senderId).toHtmlEscaped() + ")");
                 }
             one.append("</td>");
-            one.append("<td style=\"vertical-align:middle;font-size:10px;padding-left:10px\">" + cur.time.toHtmlEscaped() + "</td>");
+                one.append("<td style=\"vertical-align:middle;font-size:10px;padding-left:8px\">" + tr("发送于 ") + cur.time.toHtmlEscaped() + "</td>");
             //one.append("<div style=\"clear:both\"></div>");
         one.append("</tr></table>");
         one.append("<div style=\"font-size:15px;margin-top:5px\">" + cur.content.toHtmlEscaped() + "</div>");
