@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>个人信息</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(246, 245, 245);</string>

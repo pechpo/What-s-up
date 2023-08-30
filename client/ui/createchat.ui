@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>发起新的聊天</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(246, 245, 245);</string>
@@ -26,7 +26,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>选择好友并创建群聊</string>
+    <string>选择好友并创建聊天</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>

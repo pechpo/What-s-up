@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>添加好友 &amp; 加入聊天</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(246, 245, 245);</string>
