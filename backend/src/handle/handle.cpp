@@ -74,6 +74,9 @@ Handle::Handle() {
     handlemap["q_talk"] = [this](auto &&PH1, auto &&PH2) {
         return this->q_talk(PH1, PH2);
     };
+    handlemap["e_exitChat"] = [this](auto &&PH1, auto &&PH2) {
+        return this->e_exitChat(PH1, PH2);
+    };
 }
 
 Handle::~Handle() {
@@ -91,7 +94,7 @@ Handle *Handle::get_instance() {
     return hd;
 }
 
-bool Handle::check(const int &id, const int &group) {
+bool Handle::check(const int &id, const int &chat) {
     DB *db = DB::get_instance();
-    return db->check(id, group);
+    return db->check(id, chat);
 }

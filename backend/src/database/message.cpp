@@ -64,6 +64,14 @@ void Message::setFileName(const QString &new_file_name) {
     this->file_name = new_file_name;
 }
 
+QString Message::getFormat() const {
+    return format;
+}
+
+void Message::setFormat(const QString &new_format) {
+    this->format = new_format;
+}
+
 Message::Message() {
     this->ID = 0;
     this->sender_ID = 0;
@@ -73,19 +81,21 @@ Message::Message() {
     this->sender_name = "";
     this->is_file = false;
     this->file_name = "";
+    this->format = "";
 }
 
 Message::Message(const quint32 &new_ID, const quint32 &new_sender_ID, const quint32 &new_receiver_ID,
                  const QString &new_content, const QString &new_time, const QString &new_sender_name,
-                 const bool &is_file, const QString &new_file_name) {
+                 const bool &new_is_file, const QString &new_file_name, const QString &new_format) {
     this->ID = new_ID;
     this->sender_ID = new_sender_ID;
     this->receiver_ID = new_receiver_ID;
     this->content = new_content;
     this->time = new_time;
     this->sender_name = new_sender_name;
-    this->is_file = is_file;
+    this->is_file = new_is_file;
     this->file_name = new_file_name;
+    this->format = new_format;
 }
 
 Message::~Message() = default;

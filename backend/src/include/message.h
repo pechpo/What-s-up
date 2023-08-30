@@ -13,7 +13,8 @@ public:
 
     Message(const quint32 &new_ID, const quint32 &new_sender_ID, const quint32 &new_receiver_ID,
             const QString &new_content,
-            const QString &new_time, const QString &new_sender_name, const bool &is_file, const QString &new_file_name);
+            const QString &new_time, const QString &new_sender_name, const bool &new_is_file,
+            const QString &new_file_name, const QString &new_type);
 
     ~Message();
 
@@ -33,6 +34,8 @@ public:
 
     QString getFileName() const;
 
+    QString getFormat() const;
+
     void setID(const quint32 &new_ID);
 
     void setSenderID(const quint32 &new_sender_ID);
@@ -48,6 +51,8 @@ public:
     void setIsFile(const bool &new_is_file);
 
     void setFileName(const QString &new_file_name);
+
+    void setFormat(const QString &new_format);
 
 private:
     quint32 ID;
@@ -65,6 +70,8 @@ private:
     bool is_file;
 
     QString file_name;
+
+    QString format;
 };
 
 #endif //DATABASE_MESSAGE_H

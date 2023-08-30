@@ -20,7 +20,24 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ef533f2d-2b4d-4d58-ad16-579cff76de6c" name="更改" comment="" />
+    <list default="true" id="ef533f2d-2b4d-4d58-ad16-579cff76de6c" name="更改" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bot/bot.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/bot/bot.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/database/data.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/data.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/database/db.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/db.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/database/group.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/database/message.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/message.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handle/handle.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/handle/handle.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handle/handle_group.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handle/handle_message.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/handle/handle_message.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/include/bot.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/include/bot.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/include/db.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/include/db.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/include/group.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/include/handle.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/include/handle.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/include/message.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/include/message.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/encryption.cpp" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -104,7 +121,10 @@
       <workItem from="1693283575366" duration="9019000" />
       <workItem from="1693294807261" duration="5404000" />
       <workItem from="1693300468298" duration="7824000" />
-      <workItem from="1693314856644" duration="5283000" />
+      <workItem from="1693314856644" duration="5426000" />
+      <workItem from="1693320745322" duration="377000" />
+      <workItem from="1693356691964" duration="9666000" />
+      <workItem from="1693366944229" duration="136000" />
     </task>
     <servers />
   </component>

@@ -2,18 +2,18 @@
 // Created by zixin on 23-8-25.
 //
 
-#ifndef DATABASE_GROUP_H
-#define DATABASE_GROUP_H
+#ifndef DATABASE_chat_H
+#define DATABASE_chat_H
 
 #include "QString"
 
-class Group {
+class chat {
 public:
-    Group();
+    chat();
 
-    Group(const quint32 &new_ID, const QString &new_name, const QString &new_ava);
+    chat(const quint32 &new_ID, const QString &new_name, const QString &new_ava);
 
-    ~Group();
+    ~chat();
 
     quint32 getID() const;
 
@@ -34,4 +34,4 @@ public:
     QString ava;
 };
 
-#endif //DATABASE_GROUP_H
+#endif //DATABASE_chat_H

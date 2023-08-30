@@ -43,11 +43,11 @@ ChatBot *ChatBot::get_instance() {
     return bt;
 }
 
-void ChatBot::processMessage(const int &group, const QString &content) {
-    respondToKeywords(content, group);
+void ChatBot::processMessage(const int &chat, const QString &content) {
+    respondToKeywords(content, chat);
 }
 
-void ChatBot::respondToKeywords(const QString &content, const int &group) {
+void ChatBot::respondToKeywords(const QString &content, const int &chat) {
     std::map<QString, QString> keywordResponses = {
             {"你好",   "你好喵，有什么我可以帮你的喵？😺"},
             {"时间",   "时间就像猫喵，总是不等人的喵！⏰"},
@@ -120,27 +120,19 @@ void ChatBot::respondToKeywords(const QString &content, const int &group) {
 
     for (const auto &[keyword, response]: keywordResponses) {
         if (content.contains(keyword)) {
-            sendMessage(group, response);
+            sendMessage(chat, response);
             break;
         }
     }
 }
 
-void ChatBot::sendMessage(const int &group, const QString &content) {
+void ChatBot::sendMessage(const int &chat, const QString &content) {
     QJsonObject Message;
-    Message["msgId"] = 0;
-    Message["senderId"] = 0;
-    Message["senderName"] = get_random();
     Message["content"] = content;
     QJsonObject S;
-    S["type"] = "a_newMessage";
-    S["chatId"] = (int) group;
+    S["type"] = "e_send";
+    S["chatId"] = (int) chat;
     S["message"] = Message;
-    Server *sv = Server::get_instance();
     Handle *hd = Handle::get_instance();
-    for (const auto &y: sv->connections_) {
-        if (hd->check(y->id, group)) {
-            y->sendMessage(S);
-        }
-    }
+    hd->e_send_bot(get_random(), S);
 }

@@ -2,12 +2,12 @@
 // Created by zixin on 23-8-27.
 //
 
-// src/server/handle_group.cpp
+// src/server/handle_chat.cpp
 
 #include <QJsonObject>
 #include <QJsonArray>
 #include "handle.h"
-#include "group.h"
+#include "chat.h"
 #include "db.h"
 
 QJsonObject Handle::q_chatHistory(const int &ID, const QJsonObject &obj) {
@@ -69,7 +69,7 @@ QJsonObject Handle::e_createChat(const int &ID, const QJsonObject &obj) {
     QString avatar = obj["avatar"].toString();
     users.append(ID);
     DB *db = DB::get_instance();
-    int chat_id = db->new_group_id();
+    int chat_id = db->new_chat_id();
     db->e_createChat(chat_id, "111", avatar);
     QSet<int> S;
     for (const auto &x: users) {
@@ -128,6 +128,7 @@ QJsonObject Handle::q_list_filesInChat(const int &ID, const QJsonObject &obj) {
         file["name"] = x.getFileName();
         file["senderId"] = (int) x.getSenderID();
         file["senderName"] = x.getSenderName();
+        file["format"] = x.getFormat();
         files.append(file);
     }
     response["files"] = files;
@@ -178,5 +179,15 @@ QJsonObject Handle::q_talk(const int &ID, const QJsonObject &obj) {
     QJsonObject response;
     response["type"] = "r_talk";
     response["chatId"] = flag;
+    return response;
+}
+
+QJsonObject Handle::e_exitChat(const int &ID, const QJsonObject &obj) {
+    quint32 chatId = obj["chatId"].toInt();
+    DB *db = DB::get_instance();
+    auto flag = db->e_exitChat(ID, chatId);
+    QJsonObject response;
+    response["type"] = "r_exitChat";
+    response["success"] = flag;
     return response;
 }
