@@ -17,7 +17,7 @@ public :
 
     ~DB();
 
-    bool e_register(const User &user);
+    int e_register(const User &user);
 
     bool q_login(const quint32 &ID, const QString &password);
 
