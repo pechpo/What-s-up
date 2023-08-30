@@ -31,6 +31,18 @@ mainWindow::mainWindow(QWidget *parent) :
     cw->move(270, 50);
     cw->show();
 
+    QIcon Group(":/images/image/group.png");
+    QIcon AddNewFriend(":/images/image/AddNewFriend.png");
+    QIcon CreatNewGroup(":/images/image/StartNewGroup.png");
+
+    ui->grouplistButton->setIcon(Group);
+    ui->addnewfriendButton->setIcon(AddNewFriend);
+    ui->NewGroupButton->setIcon(CreatNewGroup);
+
+    ui->grouplistButton->setIconSize(QSize(60,60));
+    ui->addnewfriendButton->setIconSize(QSize(60,60));
+    ui->NewGroupButton->setIconSize(QSize(55,55));
+
     ui->closeButton->setVisible(false);
     ui->minimizeButton->setVisible(false);
     ui->GroupList->setWidgetResizable(false);

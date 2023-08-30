@@ -19,6 +19,9 @@ LoginDialog::LoginDialog(QWidget *parent) :
     ui->setupUi(this);
 
     ui->closeButton->setVisible(false);
+    QIcon Settings(":/images/image/settings.png");
+    ui->ConnectionButton->setIcon(Settings);
+    ui->ConnectionButton->setIconSize(QSize(30,30));
     ui->ConnectionButton->setToolTip(tr("连接设置"));
 
     lw = nullptr;
