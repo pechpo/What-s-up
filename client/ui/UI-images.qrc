@@ -51,5 +51,6 @@
         <file>image/Avatars/A7.WEBP</file>
         <file>image/Avatars/A8.WEBP</file>
         <file>image/Avatars/A9.WEBP</file>
+        <file>image/play.png</file>
     </qresource>
 </RCC>
