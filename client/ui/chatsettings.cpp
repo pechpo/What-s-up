@@ -10,6 +10,7 @@ ChatSettings::ChatSettings(QWidget *parent, qint64 id) :
 {
     ui->setupUi(this);
     ui->idLabel->setText(QString::number(chatId) + "号聊天");
+    ui->scrollArea->setWidgetResizable(false);
     connect(Director::getInstance(), &Director::r_chatInfo, this, &ChatSettings::slot_r_chatInfo);
     connect(Director::getInstance(), &Director::r_editChatInfo, this, &ChatSettings::slot_r_editChatInfo);
     connect(Director::getInstance(), &Director::r_exitChat, this, &ChatSettings::slot_r_exitChat);
@@ -57,6 +58,7 @@ void ChatSettings::slot_r_chatInfo(const QJsonObject &obj) {
         }
         QJsonObject user = users[i].toObject();
         auto *p = userList[i] = new ProfileBar(ui->scrollContent);
+        //p->setMinimumWidth(250);
         qint64 id = user.value("id").toInt();
         p->setName(user.value("name").toString() + " (" + QString::number(id) + ")");
         p->setAvatar(user.value("avatar").toString());
