@@ -1,20 +1,23 @@
+//
+//src/utils/log.cpp
+//
+
 #include "log.h"
+#include <QFile>
+#include <QTextStream>
+#include <QDateTime>
 
-#include "utilities.h"
-
-Log::Log(QObject *parent) : QObject(parent) {
-
-}
-
-Log *Log::log_obj = nullptr;
-
-Log *Log::GetLogObj() {
-    if (!log_obj) {
-        log_obj = new Log();
+void writeLog(const QString& operation, const QString& message, bool success) {
+    QFile logFile("server.log");
+    if (!logFile.open(QIODevice::Append | QIODevice::Text)) {
+        return; // Failed to open log file
     }
-    return log_obj;
-}
 
-void Log::writeLog(QString log_str) {
-    emit readyShowLog(StdDatetimeUtilities::GetDateTime() + " " + log_str);
+    QTextStream out(&logFile);
+    QString timestamp = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
+    QString status = success ? "Success" : "Failure";
+
+    out << "[" << timestamp << "] [" << operation << "] [" << status << "] " << message << "\n";
+
+    logFile.close();
 }

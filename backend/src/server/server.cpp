@@ -30,10 +30,11 @@ Server::~Server() {
     stop();
 }
 
-void Server::start() {
+bool Server::start() {
     // 服务器启动时，可以添加一些额外的配置
     sv = this;
     qDebug() << "Server started with additional configurations.";
+    return tcpServer_.isListening();
 }
 
 void Server::stop() {

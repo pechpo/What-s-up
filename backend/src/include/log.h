@@ -1,27 +1,8 @@
 #ifndef LOG_H
 #define LOG_H
 
-#include <QObject>
+#include <QString>
 
-
-//产生日志
-
-class Log : public QObject {
-Q_OBJECT
-
-public:
-    explicit Log(QObject *parent = nullptr);
-
-    static Log *GetLogObj();
-
-    void writeLog(QString log);
-
-signals:
-
-    void readyShowLog(QString log);
-
-private:
-    static Log *log_obj;
-};
+void writeLog(const QString& operation, const QString& message, bool success);
 
 #endif // LOG_H
