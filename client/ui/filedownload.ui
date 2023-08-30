@@ -51,7 +51,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Download</string>
+    <string>下载</string>
    </property>
   </widget>
   <widget class="QListWidget" name="senderList">

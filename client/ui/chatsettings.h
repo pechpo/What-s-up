@@ -20,9 +20,12 @@ public:
 public slots:
     void slot_r_chatInfo(const QJsonObject&);
     void slot_r_editChatInfo(const QJsonObject&);
+    void slot_r_exitChat(const QJsonObject&);
 
 private slots:
     void on_confirmButton_clicked();
+
+    void on_exitButton_clicked();
 
 private:
     Ui::ChatSettings *ui;

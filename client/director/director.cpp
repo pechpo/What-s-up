@@ -27,6 +27,7 @@ Director::Director(QObject *parent)
     recvEmitter.insert("r_chatInfo", &Director::r_chatInfo);
     recvEmitter.insert("r_editChatInfo", &Director::r_editChatInfo);
     recvEmitter.insert("r_talk", &Director::r_talk);
+    recvEmitter.insert("r_exitChat", &Director::r_exitChat);
     recvEmitter.insert("a_newMessage", &Director::a_newMessage);
     recvEmitter.insert("a_newFriendRequest", &Director::a_newFriendRequest);
     recvEmitter.insert("a_newChat", &Director::a_newChat);
@@ -141,5 +142,17 @@ void Director::refreshMainWindow(enum Director::State x) {
 
 void Director::enterChat(qint64 id) {
     mainUI->getChatWindow()->switchChat(id);
-    refreshMainWindow(Director::Chat);
+    mainUI->setState(Director::Chat, true);
+}
+
+void Director::setId(qint64 newId) {
+    userId = newId;
+}
+
+qint64 Director::myId() {
+    return userId;
+}
+
+void Director::raiseChat(qint64 id) {
+    mainUI->raiseChat(id);
 }

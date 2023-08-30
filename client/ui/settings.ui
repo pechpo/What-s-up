@@ -14,7 +14,7 @@
    <string>Dialog</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(233, 228, 230);</string>
+   <string notr="true">background-color: rgb(246, 245, 245);</string>
   </property>
   <widget class="QLabel" name="idLabel">
    <property name="geometry">
@@ -77,6 +77,10 @@
      <height>22</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">border-radius:10px;
+background-color: rgb(255, 255, 255);</string>
+   </property>
    <property name="echoMode">
     <enum>QLineEdit::Password</enum>
    </property>
@@ -90,6 +94,10 @@
      <height>22</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">border-radius:10px;
+background-color: rgb(255, 255, 255);</string>
+   </property>
   </widget>
   <widget class="QLineEdit" name="newPwd">
    <property name="geometry">
@@ -99,6 +107,10 @@
      <width>201</width>
      <height>22</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-radius:10px;
+background-color: rgb(255, 255, 255);</string>
    </property>
    <property name="echoMode">
     <enum>QLineEdit::Password</enum>
@@ -126,6 +138,10 @@
      <height>22</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">border-radius:10px;
+background-color: rgb(255, 255, 255);</string>
+   </property>
    <property name="echoMode">
     <enum>QLineEdit::Normal</enum>
    </property>
@@ -140,7 +156,8 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: rgb(4, 137, 152);</string>
+    <string notr="true">background-color: rgb(4, 137, 152);
+border-radius:10px;</string>
    </property>
    <property name="text">
     <string>修改</string>
@@ -154,6 +171,10 @@
      <width>201</width>
      <height>22</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-radius:10px;
+background-color: rgb(255, 255, 255);</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_6">

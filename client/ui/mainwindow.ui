@@ -22,11 +22,11 @@
      <x>0</x>
      <y>0</y>
      <width>900</width>
-     <height>650</height>
+     <height>660</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: rgb(233, 228, 230);</string>
+    <string notr="true">background-color: rgb(246, 245, 245);</string>
    </property>
    <widget class="QToolButton" name="minimizeButton">
     <property name="geometry">
@@ -60,17 +60,18 @@
      </size>
     </property>
    </widget>
-   <widget class="QToolButton" name="settingButton">
+   <widget class="QPushButton" name="settingButton">
     <property name="geometry">
      <rect>
-      <x>16</x>
-      <y>8</y>
+      <x>10</x>
+      <y>5</y>
       <width>40</width>
       <height>40</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-image: url(:/images/image/settings.png);</string>
+     <string notr="true">image: url(:/images/image/settings.png);
+color: rgb(233, 228, 230);</string>
     </property>
     <property name="text">
      <string/>
@@ -86,9 +87,9 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(233, 228, 230);</string>
+     <string notr="true">background-color: rgb(246, 245, 245);</string>
     </property>
-    <widget class="QToolButton" name="grouplistButton">
+    <widget class="QPushButton" name="grouplistButton">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -98,13 +99,13 @@
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">border-image: url(:/images/image/chatList.png);</string>
+      <string notr="true">image: url(:/images/image/chatList.png);</string>
      </property>
      <property name="text">
       <string/>
      </property>
     </widget>
-    <widget class="QToolButton" name="addnewfriendButton">
+    <widget class="QPushButton" name="addnewfriendButton">
      <property name="geometry">
       <rect>
        <x>75</x>
@@ -114,13 +115,13 @@
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">border-image: url(:/images/image/AddNewFriend.png);</string>
+      <string notr="true">image: url(:/images/image/AddNewFriend.png);</string>
      </property>
      <property name="text">
       <string/>
      </property>
     </widget>
-    <widget class="QToolButton" name="toolButton">
+    <widget class="QPushButton" name="NewGroupButton">
      <property name="geometry">
       <rect>
        <x>140</x>
@@ -130,7 +131,7 @@
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">border-image: url(:/images/image/CreateGroupChat.png);</string>
+      <string notr="true">image: url(:/images/image/CreateGroupChat.png);</string>
      </property>
      <property name="text">
       <string/>
@@ -141,7 +142,7 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>40</y>
+      <y>50</y>
       <width>881</width>
       <height>16</height>
      </rect>
@@ -193,7 +194,7 @@
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>20</y>
+      <y>15</y>
       <width>121</width>
       <height>16</height>
      </rect>

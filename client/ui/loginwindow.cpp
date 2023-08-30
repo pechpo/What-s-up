@@ -14,6 +14,10 @@ LoginWindow::LoginWindow(QWidget *parent) :
 
     ui->closeButton->setVisible(false);
     ui->minimizeButton->setVisible(false);
+    ui->receivedText->setVisible(false);
+    ui->sendButton->setVisible(false);
+    ui->sendInput->setVisible(false);
+    ui->portLabel->setStyleSheet("QLabel { background-color: transparent; }");
 
 }
 
