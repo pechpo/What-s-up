@@ -103,7 +103,7 @@ ChatWindow::Message ChatWindow::jsonToMessage(const QJsonObject &obj) {
     cur.type = Text;
     auto setIncompleteMessage = [] (Message &cur) -> void {
         cur.isSystem = true;
-        cur.content = "Incomplete Message.";
+        cur.content = tr("Incomplete Message.");
     };
     if (!obj.value("senderId").isDouble()) {
         setIncompleteMessage(cur);
@@ -162,7 +162,7 @@ QString ChatWindow::messageToString(const Message &cur) {
     // keep this strange indentation for HTML
     QString one;
     one.append("<div style=\"" + style + "\">");
-        one.append("<div style=\"display:flex;flex-direction:row;justify-content:space-between;align-items:flex-start;flex-wrap:nowrap\">");
+        one.append("<div style=\"display:flex;flex-direction:row;justify-content:flex-start;align-items:flex-end;flex-wrap:nowrap\">");
             one.append("<div style=\"font-size:16px\">");
                 one.append(cur.senderName.toHtmlEscaped());
                 if (cur.senderId > 0) {
@@ -244,6 +244,9 @@ void ChatWindow::slot_r_send(const QJsonObject &obj) {
 }
 
 void ChatWindow::on_fileButton_clicked() {
+    if (chatId == 0) {
+        return ;
+    }
     if (0 == waiting) {
         QString str = QFileDialog::getOpenFileName(this, "Select File");
         if ("" == str) return;
@@ -280,6 +283,9 @@ void ChatWindow::slot_r_updateFile(const QJsonObject &obj) {
 
 void ChatWindow::on_pushButton_clicked()
 {
+    if (chatId == 0) {
+        return ;
+    }
     if (nullptr == dl){
         dl = new fileDownload();
         dl->set(chatId, &waiting, true);
@@ -294,6 +300,9 @@ void ChatWindow::on_pushButton_clicked()
 
 void ChatWindow::on_settingsButton_clicked()
 {
+    if (chatId == 0) {
+        return ;
+    }
     if (nullptr != settingsDialog) {
         settingsDialog->close();
         delete settingsDialog;
