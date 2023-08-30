@@ -36,7 +36,7 @@ bool ChatWindow::isThisChat(const QJsonObject &obj) {
 
 void ChatWindow::switchChat(qint64 id) {
     if (id == chatId) {
-        return ;
+        //return ;
     }
     chatId = id;
     //ui->idLabel->setText("Chat ID: " + QString::number(id));

@@ -51,6 +51,7 @@ signals:
     void r_chatInfo(const QJsonObject&);
     void r_editChatInfo(const QJsonObject&);
     void r_talk(const QJsonObject&);
+    void r_exitChat(const QJsonObject&);
     void a_newMessage(const QJsonObject&);
     void a_newFriendRequest(const QJsonObject&);
     void a_newChat(const QJsonObject&);

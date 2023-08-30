@@ -75,3 +75,21 @@ void ChatSettings::slot_r_editChatInfo(const QJsonObject &obj) {
         Director::getInstance()->refreshMainWindow(Director::Chat);
     }
 }
+
+void ChatSettings::on_exitButton_clicked()
+{
+    QJsonObject msg;
+    msg.insert("type", "e_exitChat");
+    msg.insert("chatId", QJsonValue(chatId));
+    Director::getInstance()->sendJson(msg);
+}
+
+void ChatSettings::slot_r_exitChat(const QJsonObject &obj) {
+    if (true == obj.value("success").toBool()) {
+        accept();
+        QJsonObject msg;
+        msg.insert("type", "q_list_myChats");
+        Director::getInstance()->sendJson(msg);
+        Director::getInstance()->refreshMainWindow(Director::Chat);
+    }
+}
