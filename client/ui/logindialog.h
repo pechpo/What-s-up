@@ -33,8 +33,6 @@ private slots:
 
     void on_closeButton_triggered(QAction *arg1);
 
-    void on_minimizeButton_clicked();
-
     void on_ConnectionButton_clicked();
 
     void on_regBtn_clicked();

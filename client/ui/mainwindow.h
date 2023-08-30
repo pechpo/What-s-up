@@ -22,8 +22,9 @@ class mainWindow : public QWidget
 public:
     explicit mainWindow(QWidget *parent = nullptr);
     ~mainWindow();
-    void setState(enum Director::State);
+    void setState(enum Director::State, bool noRefresh = false);
     ChatWindow* getChatWindow();
+    void raiseChat(qint64 chatId);
 
 public slots:
     void slot_r_list_myFriends(const QJsonObject&);
@@ -31,6 +32,7 @@ public slots:
     void slot_a_newFriendRequest(const QJsonObject&);
     void slot_r_list_myChats(const QJsonObject&);
     void slot_a_newChat(const QJsonObject&);
+    void slot_a_newMessage(const QJsonObject&);
 
 private slots:
     void on_closeButton_clicked();

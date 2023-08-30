@@ -6,6 +6,7 @@
 #define BACKEND_HANDLE_H
 
 #include <QObject>
+#include "server.h"
 
 class Handle : public QObject{
 public:
@@ -37,8 +38,6 @@ public:
 
     QJsonObject q_list_friendRequests(const int &id, const QJsonObject &json);
 
-    QJsonObject a_newFriendRequest(const int &id, const QJsonObject &json);
-
     QJsonObject q_list_myFriends(const int &id, const QJsonObject &json);
 
     QJsonObject e_acceptFriend(const int &id, const QJsonObject &json);
@@ -47,9 +46,17 @@ public:
 
     QJsonObject e_joinChat(const int &id, const QJsonObject &json);
 
-    QJsonObject a_newChat(const int &id, const QJsonObject &json);
-
     QJsonObject q_list_filesInChat(const int &id, const QJsonObject &json);
+
+    QJsonObject e_updateFile(const int &id, const QJsonObject &json);
+
+    QJsonObject q_downloadFile(const int &id, const QJsonObject &json);
+
+    QJsonObject q_chatInfo(const int &id, const QJsonObject &json);
+
+    QJsonObject e_editChatInfo(const int &id, const QJsonObject &json);
+
+    QJsonObject q_talk(const int &id, const QJsonObject &json);
 
     std::map<QString, std::function<QJsonObject(const int &id, const QJsonObject &)>> handlemap;
 

@@ -15,13 +15,16 @@ ChatWindow::ChatWindow(QWidget *parent) :
     dl = nullptr;
     ar = nullptr;
     settingsDialog = nullptr;
+    ui->fileButton->setToolTip(tr("上传文件"));
+    ui->settingsButton->setToolTip(tr("群聊信息设置"));
+    ui->pushButton->setToolTip(tr("下载文件"));
 
     connect(Director::getInstance(), &Director::r_chatHistory, this, &ChatWindow::slot_r_chatHistory);
     connect(Director::getInstance(), &Director::a_newMessage, this, &ChatWindow::slot_a_newMessage);
     connect(Director::getInstance(), &Director::r_send, this, &ChatWindow::slot_r_send);
     connect(Director::getInstance(), &Director::r_updateFile, this, &ChatWindow::slot_r_updateFile);
 
-    switchChat(1);
+    switchChat(0);
 }
 
 ChatWindow::~ChatWindow()
@@ -29,21 +32,26 @@ ChatWindow::~ChatWindow()
     delete ui;
 }
 
-bool ChatWindow::isThisChat(const QJsonObject &obj) {
+qint64 ChatWindow::recvChatId(const QJsonObject &obj) {
     if (!obj.value("chatId").isDouble()) {
-        return false;
+        return 0;
     }
     int recvId = obj.value("chatId").toInt();
-    return (recvId == chatId);
+    return recvId;
 }
 
 void ChatWindow::switchChat(qint64 id) {
-    if (id == chatId) {
-        //return ;
+    if (id != chatId) {
+        ui->inputEdit->setPlainText("");
+        ui->MsgEdit->setHtml("");
     }
+    if (id == 0) {
+        ui->idLabel->setText(tr("尚未打开任何群聊"));
+        ui->inputEdit->setReadOnly(true);
+        return ;
+    }
+    ui->inputEdit->setReadOnly(false);
     chatId = id;
-    //ui->idLabel->setText("Chat ID: " + QString::number(id));
-    ui->MsgEdit->setText("");
     QJsonObject msg;
     msg.insert("type", "q_chatHistory");
     msg.insert("chatId", QJsonValue(chatId));
@@ -52,7 +60,7 @@ void ChatWindow::switchChat(qint64 id) {
 }
 
 void ChatWindow::slot_r_chatHistory(const QJsonObject &obj) {
-    if (!isThisChat(obj)) {
+    if (recvChatId(obj) != chatId) {
         return ;
     }
     if (!obj.value("chatHistory").isArray()) {
@@ -72,7 +80,9 @@ void ChatWindow::slot_r_chatHistory(const QJsonObject &obj) {
 }
 
 void ChatWindow::slot_a_newMessage(const QJsonObject &obj) {
-    if (!isThisChat(obj)) {
+    qint64 recvId = recvChatId(obj);
+    if (recvId != chatId) {
+        Director::getInstance()->raiseChat(recvId);
         return ;
     }
     if (!obj.value("message").isObject()) {
@@ -87,9 +97,10 @@ void ChatWindow::slot_a_newMessage(const QJsonObject &obj) {
 
 ChatWindow::Message ChatWindow::jsonToMessage(const QJsonObject &obj) {
     Message cur;
+    cur.type = Text;
     auto setIncompleteMessage = [] (Message &cur) -> void {
         cur.isSystem = true;
-        cur.content = "Incomplete Message.";
+        cur.content = tr("Incomplete Message.");
     };
     if (!obj.value("senderId").isDouble()) {
         setIncompleteMessage(cur);
@@ -100,9 +111,12 @@ ChatWindow::Message ChatWindow::jsonToMessage(const QJsonObject &obj) {
         return cur;
     }
     //
-    QString name = "Bot";
+    QString name = tr("Bot"), time = tr("Just now");
     if (obj.value("senderName").isString()) {
         name = obj.value("senderName").toString();
+    }
+    if (obj.value("time").isString()) {
+        time = obj.value("time").toString();
     }
     else {
         cur.isSystem = true;
@@ -111,10 +125,11 @@ ChatWindow::Message ChatWindow::jsonToMessage(const QJsonObject &obj) {
     cur.senderId = obj.value("senderId").toInt();
     //cur.senderName = "Carol" + QString::number(cur.senderId);
     cur.senderName = name;
+    cur.time = time;
     cur.content = obj.value("content").toString();
     return cur;
 }
-
+/*
 QString ChatWindow::messageToString(const Message &cur) {
     QString one;
     one.append(cur.senderName);
@@ -122,6 +137,40 @@ QString ChatWindow::messageToString(const Message &cur) {
         one.append(" (" + QString::number(cur.senderId) + ")");
     }
     one.append("\n" + cur.content + "\n");
+    return one;
+}
+*/
+// now String is html
+QString ChatWindow::messageToString(const Message &cur) {
+    QString color;
+    if (cur.senderId == Director::getInstance()->myId()) {
+        // myself
+        color = "#4477CE";
+    }
+    else if (cur.senderId == 0) {
+        // bot
+        color = "#5C469C";
+    }
+    else {
+        // others
+        color = "black";
+    }
+    QString style="display:flex;flex-directon:column;margin:12px 0px 12px 0px;color:" + color;
+    // keep this strange indentation for HTML
+    QString one;
+    one.append("<div style=\"" + style + "\">");
+        one.append("<table style=\"border:0;border-collapse:collapse;\"><tr>");
+            one.append("<td style=\"font-size:16px\">");
+                one.append(cur.senderName.toHtmlEscaped());
+                if (cur.senderId > 0) {
+                    one.append(" (" + QString::number(cur.senderId).toHtmlEscaped() + ")");
+                }
+            one.append("</td>");
+                one.append("<td style=\"vertical-align:middle;font-size:10px;padding-left:8px\">" + tr("发送于 ") + cur.time.toHtmlEscaped() + "</td>");
+            //one.append("<div style=\"clear:both\"></div>");
+        one.append("</tr></table>");
+        one.append("<div style=\"font-size:15px;margin-top:5px\">" + cur.content.toHtmlEscaped() + "</div>");
+    one.append("</div>");
     return one;
 }
 /*
@@ -139,13 +188,19 @@ void ChatWindow::updateText() {
 */
 void ChatWindow::updateText() {
     // QVector<Message> history -> lineEdit->text()
+    QString all;
     ui->MsgEdit->setHtml("");
+    all.append("<div style=\"display:flex;flex-directon:column;margin-left:5px\">");
     for (quint32 i = 0; i < history.size(); i++) {
         QString cur = "<div>";
         cur += messageToString(history[i]);
         cur += "</div>";
-        ui->MsgEdit->insertHtml(cur);
+        all.append(cur);
+        //ui->MsgEdit->insertHtml(cur);
     }
+    all.append("</div>");
+    all.append("<div style=\"margin:20px 0px 20px 0px\"></div>");
+    ui->MsgEdit->setHtml(all);
     QTextCursor cursor = ui->MsgEdit->textCursor();
     cursor.movePosition(QTextCursor::End);
     ui->MsgEdit->setTextCursor(cursor);
@@ -159,6 +214,9 @@ void ChatWindow::appendText(const QString &text) {
 void ChatWindow::on_sendButton_clicked()
 {
    if (0 == waiting) {
+        if (ui->inputEdit->toPlainText().length() == 0) {
+            return ;
+        }
         QJsonObject content;
         //content.insert("isPicture", false);
         content.insert("content", ui->inputEdit->toPlainText());
@@ -184,6 +242,9 @@ void ChatWindow::slot_r_send(const QJsonObject &obj) {
 }
 
 void ChatWindow::on_fileButton_clicked() {
+    if (chatId == 0) {
+        return ;
+    }
     if (0 == waiting) {
         QString str = QFileDialog::getOpenFileName(this, "Select File");
         if ("" == str) return;
@@ -221,6 +282,9 @@ void ChatWindow::slot_r_updateFile(const QJsonObject &obj) {
 
 void ChatWindow::on_pushButton_clicked()
 {
+    if (chatId == 0) {
+        return ;
+    }
     if (nullptr == dl){
         dl = new fileDownload();
         dl->set(chatId, &waiting, true);
@@ -235,6 +299,9 @@ void ChatWindow::on_pushButton_clicked()
 
 void ChatWindow::on_settingsButton_clicked()
 {
+    if (chatId == 0) {
+        return ;
+    }
     if (nullptr != settingsDialog) {
         settingsDialog->close();
         delete settingsDialog;

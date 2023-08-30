@@ -16,6 +16,8 @@ SearchNewFriend::SearchNewFriend(QWidget *parent) :
     userId = 0;
     waiting = 0;
 
+    ui->switchButton->setToolTip(tr("搜索好友/群聊"));
+
     connect(Director::getInstance(), &Director::r_userInfo, this, &SearchNewFriend::slot_r_userInfo);
     connect(Director::getInstance(), &Director::r_chatInfo, this, &SearchNewFriend::slot_r_chatInfo);
     connect(Director::getInstance(), &Director::r_addFriend, this, &SearchNewFriend::slot_r_addFriend);

@@ -24,6 +24,7 @@ mainWindow::mainWindow(QWidget *parent) :
     connect(Director::getInstance(), &Director::a_newFriendRequest, this, &mainWindow::slot_a_newFriendRequest);
     connect(Director::getInstance(), &Director::r_list_myChats, this, &mainWindow::slot_r_list_myChats);
     connect(Director::getInstance(), &Director::a_newChat, this, &mainWindow::slot_a_newChat);
+    connect(Director::getInstance(), &Director::a_newMessage, this, &mainWindow::slot_a_newMessage);
 
     cw = new ChatWindow(this);
     cw->move(250, 50);
@@ -32,6 +33,10 @@ mainWindow::mainWindow(QWidget *parent) :
     ui->closeButton->setVisible(false);
     ui->minimizeButton->setVisible(false);
     ui->GroupList->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+    ui->settingButton->setToolTip(tr("设置个人信息"));
+    ui->grouplistButton->setToolTip(tr("显示群聊/好友信息"));
+    ui->NewGroupButton->setToolTip(tr("新建群聊"));
+    ui->addnewfriendButton->setToolTip(tr("添加好友"));
 
     /*friendRequests.resize(20);
     for (int i = 0; i < 20; i++) {
@@ -90,7 +95,6 @@ void mainWindow::on_minimizeButton_clicked()
     showMinimized();
 }
 
-
 void mainWindow::on_addnewfriendButton_clicked()
 {
     if (nullptr == snf) {
@@ -103,8 +107,11 @@ void mainWindow::on_addnewfriendButton_clicked()
     snf->show();
 }
 
-void mainWindow::setState(enum Director::State tarState) {
+void mainWindow::setState(enum Director::State tarState, bool noRefresh) {
     qDebug() << "setState" << (tarState == Director::Friend ? "Friend" : "Chat");
+    if (tarState == curState && noRefresh) {
+        return ;
+    }
     curState = tarState;
     for (quint32 i = 0; i < friendRequests.size(); i++) {
         AddNewFriend *p = friendRequests[i];
@@ -145,6 +152,7 @@ void mainWindow::setState(enum Director::State tarState) {
 }
 
 void mainWindow::waitingIsZero() {
+    qDebug() << "WatingIs0 with "<< (curState == Director::Friend ? "Friend" : "Chat");
     //QVBoxLayout *layout = new QVBoxLayout(ui->scrollAreaWidgetContents);
     //layout->setSpacing(5);
     const quint32 gap = 5;
@@ -180,6 +188,7 @@ void mainWindow::waitingIsZero() {
 }
 
 void mainWindow::slot_r_list_myFriends(const QJsonObject &obj) {
+    waiting--;
     if (false == obj.value("users").isArray()) {
         return ;
     }
@@ -201,13 +210,13 @@ void mainWindow::slot_r_list_myFriends(const QJsonObject &obj) {
         friends[i]->setName(user.value("name").toString());
         friends[i]->setAvatar(user.value("avatar").toString());
     }
-    waiting--;
     if (0 == waiting) {
         waitingIsZero();
     }
 }
 
 void mainWindow::slot_r_list_friendRequests(const QJsonObject &obj) {
+    waiting--;
     if (false == obj.value("users").isArray()) {
         return ;
     }
@@ -230,7 +239,6 @@ void mainWindow::slot_r_list_friendRequests(const QJsonObject &obj) {
         friendRequests[i]->setAvatar(user.value("avatar").toString());
         //qDebug() << "add" + user.value("name").toString();
     }
-    waiting--;
     if (0 == waiting) {
         waitingIsZero();
     }
@@ -245,6 +253,8 @@ void mainWindow::slot_a_newChat(const QJsonObject &obj) {
 }
 
 void mainWindow::slot_r_list_myChats(const QJsonObject &obj) {
+    qDebug() << "slot_r_list_myChats";
+    waiting--;
     if (false == obj.value("chats").isArray()) {
         return ;
     }
@@ -266,13 +276,10 @@ void mainWindow::slot_r_list_myChats(const QJsonObject &obj) {
         chats[i]->setName(user.value("name").toString());
         chats[i]->setAvatar(user.value("avatar").toString());
     }
-    waiting--;
     if (0 == waiting) {
         waitingIsZero();
     }
 }
-
-
 
 void mainWindow::on_grouplistButton_clicked()
 {
@@ -287,7 +294,6 @@ void mainWindow::on_grouplistButton_clicked()
     }
 }
 
-
 void mainWindow::on_settingButton_clicked()
 {
     if (nullptr == settings) {
@@ -301,10 +307,6 @@ void mainWindow::on_settingButton_clicked()
     msg.insert("type", "q_myInfo");
     Director::getInstance()->sendJson(msg);
 }
-
-
-
-
 
 void mainWindow::on_NewGroupButton_clicked()
 {
@@ -325,3 +327,27 @@ void mainWindow::on_NewGroupButton_clicked()
     newChatDialog->show();
 }
 
+void mainWindow::slot_a_newMessage(const QJsonObject &obj) {
+    quint64 id = obj.value("chatId").toInt();
+    for (quint32 i = 1; i < chats.size(); i++) {
+        auto *p = chats[i];
+        if (p->getId() == id) {
+            chats.removeAt(i);
+            chats.push_front(p);
+            break ;
+        }
+    }
+    if (0 == waiting) {
+        waitingIsZero();
+    }
+}
+
+void mainWindow::raiseChat(qint64 id) {
+    for (quint32 i = 0; i < chats.size(); i++) {
+        auto *p = chats[i];
+        if (p->getId() == id) {
+            p->setNewTag(true);
+            break ;
+        }
+    }
+}

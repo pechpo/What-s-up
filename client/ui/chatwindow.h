@@ -52,12 +52,17 @@ private:
 
     quint32 waiting;
 
-    bool isThisChat(const QJsonObject&);
+    qint64 recvChatId(const QJsonObject&);
 
     qint64 chatId;
+    enum MsgType {
+        Text, Picture, Voice
+    };
     struct Message {
         bool isSystem;
+        MsgType type;
         qint64 senderId;
+        QString time;
         QString senderName;
         QString content;
     };

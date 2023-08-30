@@ -26,7 +26,7 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: rgb(233, 228, 230);</string>
+    <string notr="true">background-color: rgb(246, 245, 245);</string>
    </property>
    <widget class="QToolButton" name="minimizeButton">
     <property name="geometry">
@@ -87,9 +87,9 @@ color: rgb(233, 228, 230);</string>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(233, 228, 230);</string>
+     <string notr="true">background-color: rgb(246, 245, 245);</string>
     </property>
-    <widget class="QToolButton" name="grouplistButton">
+    <widget class="QPushButton" name="grouplistButton">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -99,13 +99,13 @@ color: rgb(233, 228, 230);</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">border-image: url(:/images/image/chatList.png);</string>
+      <string notr="true">image: url(:/images/image/chatList.png);</string>
      </property>
      <property name="text">
       <string/>
      </property>
     </widget>
-    <widget class="QToolButton" name="addnewfriendButton">
+    <widget class="QPushButton" name="addnewfriendButton">
      <property name="geometry">
       <rect>
        <x>75</x>
@@ -115,7 +115,7 @@ color: rgb(233, 228, 230);</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">border-image: url(:/images/image/AddNewFriend.png);</string>
+      <string notr="true">image: url(:/images/image/AddNewFriend.png);</string>
      </property>
      <property name="text">
       <string/>

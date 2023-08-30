@@ -19,7 +19,7 @@ LoginDialog::LoginDialog(QWidget *parent) :
     ui->setupUi(this);
 
     ui->closeButton->setVisible(false);
-    ui->minimizeButton->setVisible(false);
+    ui->ConnectionButton->setToolTip(tr("连接设置"));
 
     lw = nullptr;
     rd = nullptr;
@@ -41,6 +41,7 @@ void LoginDialog::on_loginBtn_clicked()
 {
     if (0 == waiting) {
         qint64 id = ui->usrLineEdit->text().toInt();
+        Director::getInstance()->setId(id);
         QString pwd = Director::getInstance()->Hash(ui->pwdLineEdit->text());
         QJsonObject msg;
         msg.insert("type", "q_login");
@@ -79,10 +80,7 @@ void LoginDialog::on_closeButton_triggered(QAction *arg1)
 }
 
 
-void LoginDialog::on_minimizeButton_clicked()
-{
-    showMinimized();
-}
+
 
 
 
