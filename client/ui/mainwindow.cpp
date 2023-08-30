@@ -137,6 +137,7 @@ void mainWindow::setState(enum Director::State tarState) {
 }
 
 void mainWindow::waitingIsZero() {
+    qDebug() << "WatingIs0 with "<< (curState == Director::Friend ? "Friend" : "Chat");
     //QVBoxLayout *layout = new QVBoxLayout(ui->scrollAreaWidgetContents);
     //layout->setSpacing(5);
     const quint32 gap = 5;
@@ -172,6 +173,7 @@ void mainWindow::waitingIsZero() {
 }
 
 void mainWindow::slot_r_list_myFriends(const QJsonObject &obj) {
+    waiting--;
     if (false == obj.value("users").isArray()) {
         return ;
     }
@@ -193,13 +195,13 @@ void mainWindow::slot_r_list_myFriends(const QJsonObject &obj) {
         friends[i]->setName(user.value("name").toString());
         friends[i]->setAvatar(user.value("avatar").toString());
     }
-    waiting--;
     if (0 == waiting) {
         waitingIsZero();
     }
 }
 
 void mainWindow::slot_r_list_friendRequests(const QJsonObject &obj) {
+    waiting--;
     if (false == obj.value("users").isArray()) {
         return ;
     }
@@ -222,7 +224,6 @@ void mainWindow::slot_r_list_friendRequests(const QJsonObject &obj) {
         friendRequests[i]->setAvatar(user.value("avatar").toString());
         //qDebug() << "add" + user.value("name").toString();
     }
-    waiting--;
     if (0 == waiting) {
         waitingIsZero();
     }
@@ -237,6 +238,8 @@ void mainWindow::slot_a_newChat(const QJsonObject &obj) {
 }
 
 void mainWindow::slot_r_list_myChats(const QJsonObject &obj) {
+    qDebug() << "slot_r_list_myChats";
+    waiting--;
     if (false == obj.value("chats").isArray()) {
         return ;
     }
@@ -258,7 +261,6 @@ void mainWindow::slot_r_list_myChats(const QJsonObject &obj) {
         chats[i]->setName(user.value("name").toString());
         chats[i]->setAvatar(user.value("avatar").toString());
     }
-    waiting--;
     if (0 == waiting) {
         waitingIsZero();
     }
