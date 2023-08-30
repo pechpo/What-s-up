@@ -138,16 +138,16 @@ QString ChatWindow::messageToString(const Message &cur) {
     }
     else if (cur.senderId == 0) {
         // bot
-        style += ";color:red";
+        style += ";color:#5C469C";
     }
     one.append("<div style=\"" + style + "\">");
     one.append("<div style=\"font-size:16px\">");
-    one.append(cur.senderName);
+    one.append(cur.senderName.toHtmlEscaped());
     if (cur.senderId > 0) {
-        one.append(" (" + QString::number(cur.senderId) + ")");
+        one.append(" (" + QString::number(cur.senderId).toHtmlEscaped() + ")");
     }
     one.append("</div>");
-    one.append("<div style=\"font-size:15px;margin-top:5px\">" + cur.content + "</div>");
+    one.append("<div style=\"font-size:15px;margin-top:5px\">" + cur.content.toHtmlEscaped() + "</div>");
     //one.append("<hr/>");
     one.append("</div>");
     return one;
