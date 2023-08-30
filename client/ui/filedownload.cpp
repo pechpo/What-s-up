@@ -17,7 +17,7 @@ fileDownload::~fileDownload()
     delete ui;
 }
 
-void fileDownload::set(qint64 Id, quint32 *wait, bool init){
+void fileDownload::set(qint64 *Id, quint32 *wait, bool init){
 
     //clear the list
     int n=ui->fileList->count();
@@ -35,9 +35,9 @@ void fileDownload::set(qint64 Id, quint32 *wait, bool init){
     waiting = wait;
     QJsonObject msg;
     msg.insert("type", "q_list_filesInChat");
-    msg.insert("chatId", QJsonValue(chatId));
+    msg.insert("chatId", QJsonValue(*chatId));
     if (Director::getInstance()->sendJson(msg)) {
-        waiting++;
+        (*waiting)++;
     }
     if (init) connect(Director::getInstance(), &Director::r_list_filesInChat, this, &fileDownload::slot_r_list_filesInChat);
 }
@@ -49,6 +49,8 @@ void fileDownload::slot_r_list_filesInChat(const QJsonObject &obj) {
     for (int i = 0; i < recvSize; i++) {
         QListWidgetItem *item = new QListWidgetItem;
         QJsonObject tmp = recvHistory[i].toObject();
+        if (tmp["format"] != "file")
+            continue;
         item->setText(tmp["name"].toString());
         ui->fileList->addItem(item);
         QListWidgetItem *item2 = new QListWidgetItem;
@@ -56,7 +58,7 @@ void fileDownload::slot_r_list_filesInChat(const QJsonObject &obj) {
         ui->senderList->addItem(item2);
     }
     this->show();
-    waiting--;
+    (*waiting)--;
 }
 
 void fileDownload::on_Download_clicked()
@@ -66,10 +68,10 @@ void fileDownload::on_Download_clicked()
     }
     QJsonObject msg;
     msg.insert("type", "q_downloadFile");
-    msg.insert("chatId", QJsonValue(chatId));
+    msg.insert("chatId", QJsonValue(*chatId));
     msg.insert("fileName", ui->fileList->selectedItems()[0]->text());
     if (Director::getInstance()->sendJson(msg)) {
-        waiting++;
+        (*waiting)++;
     }
     connect(Director::getInstance(), &Director::r_downloadFile, this, &fileDownload::slot_r_downloadFile);
 }
@@ -84,5 +86,5 @@ void fileDownload::slot_r_downloadFile(const QJsonObject &obj) {
     }
     file.write(QByteArray::fromBase64(obj.value("content").toString().toUtf8()));
     file.close();
-    waiting--;
+    (*waiting)--;
 }
