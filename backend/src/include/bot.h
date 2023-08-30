@@ -21,7 +21,6 @@ public:
 
     ~ChatBot();
 
-    void run();
 
     static ChatBot * get_instance();
 
@@ -30,7 +29,6 @@ public:
 private:
     static ChatBot * bt;
 
-    void respondToCommand(const QString& command, const QString& to_user);
     void respondToKeywords(const QString& content, const int &chat);
     void sendMessage(const int &chat, const QString& content);
 };

@@ -3,10 +3,9 @@
 #include <QApplication>
 #include "server.h"
 #include "db.h"
+#include "log.h"
 
 int main(int argc, char *argv[]) {
-//    DB::get_instance()->e_createChat(1, "", "test");
-
     QApplication app(argc, argv);
 
     // 设置服务器监听的 IP 地址和端口
@@ -15,7 +14,12 @@ int main(int argc, char *argv[]) {
 
     // 创建并启动服务器
     Server server(address, port);
-    server.start();
+
+    if (server.start()) {
+        writeLog("Server", "Server started at " + address + ":" + QString::number(port), true);
+    } else {
+        writeLog("Server", "Failed to start server at " + address + ":" + QString::number(port), false);
+    }
 
     return QApplication::exec();
 }
