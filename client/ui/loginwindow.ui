@@ -35,7 +35,7 @@ background-image: url(:/images/image/Logo3.png);</string>
    <widget class="QLabel" name="hostLabel">
     <property name="geometry">
      <rect>
-      <x>70</x>
+      <x>50</x>
       <y>90</y>
       <width>30</width>
       <height>20</height>
@@ -48,7 +48,7 @@ background-image: url(:/images/image/Logo3.png);</string>
    <widget class="QLineEdit" name="portInput">
     <property name="geometry">
      <rect>
-      <x>270</x>
+      <x>280</x>
       <y>90</y>
       <width>50</width>
       <height>20</height>
@@ -81,7 +81,7 @@ border-radius:10px;</string>
    <widget class="QLabel" name="portLabel">
     <property name="geometry">
      <rect>
-      <x>230</x>
+      <x>240</x>
       <y>90</y>
       <width>30</width>
       <height>20</height>
@@ -137,9 +137,9 @@ background-color: rgb(255, 255, 255);</string>
    <widget class="QLineEdit" name="hostInput">
     <property name="geometry">
      <rect>
-      <x>110</x>
+      <x>90</x>
       <y>90</y>
-      <width>90</width>
+      <width>111</width>
       <height>20</height>
      </rect>
     </property>
@@ -148,7 +148,7 @@ background-color: rgb(255, 255, 255);</string>
 border-radius:10px;</string>
     </property>
     <property name="text">
-     <string>127.0.0.1</string>
+     <string>192.168.43.11</string>
     </property>
    </widget>
    <widget class="QToolButton" name="minimizeButton">
