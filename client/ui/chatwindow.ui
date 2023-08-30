@@ -63,13 +63,10 @@ background-image: url(:/images/image/Logo.png);</string>
    <property name="geometry">
     <rect>
      <x>10</x>
-<<<<<<< HEAD
      <y>20</y>
      <width>481</width>
-=======
      <y>10</y>
      <width>241</width>
->>>>>>> refs/remotes/origin/feature/client
      <height>16</height>
     </rect>
    </property>

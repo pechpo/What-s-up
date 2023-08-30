@@ -33,6 +33,7 @@ mainWindow::mainWindow(QWidget *parent) :
 
     ui->closeButton->setVisible(false);
     ui->minimizeButton->setVisible(false);
+    ui->GroupList->setWidgetResizable(false);
     ui->GroupList->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
     ui->settingButton->setToolTip(tr("设置个人信息"));
     ui->grouplistButton->setToolTip(tr("显示群聊/好友信息"));
