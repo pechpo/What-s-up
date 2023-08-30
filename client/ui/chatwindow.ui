@@ -72,7 +72,7 @@ background-image: url(:/images/image/Logo.png);</string>
     <string>Chat</string>
    </property>
   </widget>
-  <widget class="QToolButton" name="fileButton">
+  <widget class="QPushButton" name="fileButton">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -82,7 +82,7 @@ background-image: url(:/images/image/Logo.png);</string>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">border-image: url(:/images/image/fileButton.png);</string>
+    <string notr="true">image: url(:/images/image/upload.png);</string>
    </property>
    <property name="text">
     <string/>
