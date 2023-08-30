@@ -2,6 +2,7 @@
 #define SETTINGS_H
 
 #include <QDialog>
+#include "profilebar.h"
 
 namespace Ui {
 class Settings;
@@ -24,6 +25,7 @@ private slots:
 
 private:
     Ui::Settings *ui;
+    ProfileBar *bar;
 };
 
 #endif // SETTINGS_H
