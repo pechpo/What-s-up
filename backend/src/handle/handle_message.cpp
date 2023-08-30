@@ -8,6 +8,7 @@
 #include "handle.h"
 #include "db.h"
 #include "bot.h"
+#include "log.h"
 
 QJsonObject Handle::e_send(const int &ID, const QJsonObject &obj) {
     // Extract the necessary fields from obj
@@ -45,6 +46,11 @@ QJsonObject Handle::e_send(const int &ID, const QJsonObject &obj) {
     }
     ChatBot *bt = ChatBot::get_instance();
     bt->processMessage(chatId, content);
+    if (flag) {
+        writeLog("Send Message", "User with ID " + QString::number(ID) + " sent a message to chat " + QString::number(chatId) + ".", true);
+    } else {
+        writeLog("Send Message", "Failed to send message from user with ID " + QString::number(ID) + " to chat " + QString::number(chatId) + ".", false);
+    }
     return response;
     // Send the response back to client
 }
@@ -85,6 +91,11 @@ QJsonObject Handle::e_updateFile(const int &ID, const QJsonObject &obj) {
             y->sendMessage(S);
         }
     }
+    if (flag) {
+        writeLog("Upload File", "User with ID " + QString::number(ID) + " uploaded a file to chat " + QString::number(chatId) + ".", true);
+    } else {
+        writeLog("Upload File", "Failed to upload a file from user with ID " + QString::number(ID) + " to chat " + QString::number(chatId) + ".", false);
+    }
     return response;
     // Send the response back to client
 }
@@ -101,6 +112,7 @@ QJsonObject Handle::q_downloadFile(const int &ID, const QJsonObject &obj) {
     response["fileName"] = name;
     response["content"] = flag.first;
     response["format"] = flag.second;
+    writeLog("Download File", "User with ID " + QString::number(ID) + " downloaded a file from chat " + QString::number(chatId) + ".", true);
     return response;
 }
 
@@ -135,6 +147,11 @@ QJsonObject Handle::e_send_bot(const QString &name, const QJsonObject &obj) {
         if (hd->check(y->id, chatId)) {
             y->sendMessage(S);
         }
+    }
+    if (flag) {
+        writeLog("Send Message", "Bot " + name + " sent a message to chat " + QString::number(chatId) + ".", true);
+    } else {
+        writeLog("Send Message", "Failed to send message from bot " + name + " to chat " + QString::number(chatId) + ".", false);
     }
     return response;
     // Send the response back to client
