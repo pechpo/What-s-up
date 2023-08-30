@@ -11,6 +11,7 @@ StartChat::StartChat(QWidget *parent, bool isRealPerson) :
     isPerson(isRealPerson)
 {
     ui->setupUi(this);
+    ui->chatButton->setStyleSheet("QPushButton{border:none;image: url(:/images/image/startChat.png);}");
     bar = new ProfileBar(this);
     bar->move(0, 0);
     bar->show();
