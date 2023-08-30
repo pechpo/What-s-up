@@ -19,6 +19,7 @@ LoginDialog::LoginDialog(QWidget *parent) :
     ui->setupUi(this);
 
     ui->closeButton->setVisible(false);
+    ui->ConnectionButton->setToolTip("连接设置");
 
     lw = nullptr;
     rd = nullptr;

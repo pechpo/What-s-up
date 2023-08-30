@@ -17,9 +17,13 @@ StartChat::StartChat(QWidget *parent, bool isRealPerson) :
     bar->show();
     bar->stackUnder(this);
     ui->chatButton->raise();
+<<<<<<< HEAD
+    ui->chatButton->setToolTip("进入聊天/群聊");
+=======
     ui->newMsgLabel->setVisible(false);
 
     hasNew = false;
+>>>>>>> refs/remotes/origin/feature/client
 
     connect(Director::getInstance(), &Director::r_talk, this, &StartChat::slot_r_talk);
 }
