@@ -1,6 +1,6 @@
 #include "log.h"
 
-#include "Utilities/utilities.h"
+#include "utilities.h"
 
 Log::Log(QObject *parent) : QObject(parent) {
 

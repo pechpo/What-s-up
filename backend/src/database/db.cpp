@@ -283,7 +283,7 @@ bool DB::e_acceptFriend(const quint32 &id, const quint32 &ID, const bool &fl) {
 bool DB::e_send(const Message &message) {
     QSqlQuery query(database);
     query.prepare(
-            "INSERT INTO message (id, chat_id, sender_id, content, time, sender_name, is_file, file_name, format) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            "INSERT INTO message (id, chat_id, sender_id, content, time, sender_name, is_file, file_name, format) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
     query.addBindValue(message.getID());
     query.addBindValue(message.getReceiverID());
     query.addBindValue(message.getSenderID());
