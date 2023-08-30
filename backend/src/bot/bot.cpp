@@ -49,6 +49,8 @@ void ChatBot::processMessage(const int &chat, const QString &content) {
 
 void ChatBot::respondToKeywords(const QString &content, const int &chat) {
     std::map<QString, QString> keywordResponses = {
+            {"机器人", "我在喵😺"},
+            {"bot",   "我在喵😺"},
             {"你好",   "你好喵，有什么我可以帮你的喵？😺"},
             {"时间",   "时间就像猫喵，总是不等人的喵！⏰"},
             {"帮助",   "怎么了喵？有什么我可以帮助你的喵？🐾"},
