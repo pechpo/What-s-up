@@ -20,7 +20,13 @@ public :
 
     bool q_login(const quint32 &ID, const QString &password);
 
-    bool e_editInfo(const User &user);
+    bool e_edit_name(const User &user);
+
+    bool e_edit_password(const User &user);
+
+    bool e_edit_avatar(const User &user);
+
+    bool e_edit_email(const User &user);
 
     User q_myInfo(const quint32 &ID);
 
@@ -52,26 +58,41 @@ public :
 
     QList<Message> q_list_filesInChat(const quint32 &chat_ID);
 
+    QString getName(const quint32 &ID);
+
     bool check(const int &id, const int &group);
 
-    static DB * get_instance();
+    static DB *get_instance();
 
     int new_group_id();
 
     int new_message_id();
 
-    int new_user_id();
+    bool uploadFileToFTP(const QString &filename);
+
+    std::tuple<QString, QString, QList<User>> q_chatInfo(const quint32 &ID);
+
+    bool e_editChatInfo(const quint32 &ID, const QString &name, const QString &avatar);
+
+    QString q_downloadFile(const int &ID, const QString &filename);
+
+    int q_talk(const int &id, const int &ID);
+
+    QString getChatName(const int &ID);
+
+    bool add_tag(const int &ID, const std::vector<int> &tags);
+
+    std::vector<int> get_tags(const int &ID);
+
+    std::unordered_map<quint32, std::vector<int>> get_all_tags();
+
+    std::vector<quint32> getFriends(const int &ID);
 
 private:
 
-    static DB * db;
+    static DB *db;
 
     QSqlDatabase database;
-
-    static int group_id;
-
-    static int message_id;
-
-    static int user_id;
 };
+
 #endif // DB_H

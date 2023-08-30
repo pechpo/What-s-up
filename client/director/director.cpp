@@ -22,6 +22,8 @@ Director::Director(QObject *parent)
     recvEmitter.insert("r_createChat", &Director::r_createChat);
     recvEmitter.insert("r_joinChat", &Director::r_joinChat);
     recvEmitter.insert("r_list_filesInChat", &Director::r_list_filesInChat);
+    recvEmitter.insert("r_updateFile", &Director::r_updateFile);
+    recvEmitter.insert("r_downloadFile", &Director::r_downloadFile);
     recvEmitter.insert("r_chatInfo", &Director::r_chatInfo);
     recvEmitter.insert("r_editChatInfo", &Director::r_editChatInfo);
     recvEmitter.insert("r_talk", &Director::r_talk);

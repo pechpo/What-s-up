@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QVector>
 #include <QJsonObject>
+#include "filedownload.h"
 #include "chatsettings.h"
 
 namespace Ui {
@@ -25,14 +26,20 @@ public slots:
     void slot_r_chatHistory(const QJsonObject&);
     void slot_a_newMessage(const QJsonObject&);
     void slot_r_send(const QJsonObject&);
+    void slot_r_updateFile(const QJsonObject &obj);
 
 private slots:
     void on_sendButton_clicked();
+
+    void on_fileButton_clicked();
+
+    void on_pushButton_clicked();
 
     void on_settingsButton_clicked();
 
 private:
     Ui::ChatWindow *ui;
+    fileDownload *dl;
     ChatSettings *settingsDialog;
 
     quint32 waiting;

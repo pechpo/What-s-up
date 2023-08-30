@@ -14,6 +14,7 @@ find_package(Qt6 COMPONENTS
         Sql
         REQUIRED)
 
+find_package(CURL REQUIRED)
 
 add_executable(backend
         src/include/db.h
@@ -52,5 +53,7 @@ target_link_libraries(backend
         Qt::Network
         Qt::Sql
 )
+
+target_link_libraries(backend ${CURL_LIBRARIES})
 
 include_directories(${PROJECT_SOURCE_DIR}/src/include)
