@@ -153,6 +153,12 @@ bool DB::e_createChat(const quint32 &ID, const QString &name, const QString &ava
 
 bool DB::e_joinChat(const quint32 &ID, const quint32 &chat_ID) {
     QSqlQuery query(database);
+    query.prepare("SELECT * FROM friend WHERE chat_id = ?");
+    query.addBindValue(chat_ID);
+    query.exec();
+    if (query.next())return false;
+    query.clear();
+
     query.prepare("INSERT INTO user_chat (user_id, chat_id) VALUES (?, ?)");
     query.addBindValue(ID);
     query.addBindValue(chat_ID);
@@ -256,6 +262,10 @@ bool DB::e_acceptFriend(const quint32 &id, const quint32 &ID, const bool &fl) {
     QSqlQuery query(database);
     if (fl) {
         int chat = new_chat_id();
+
+        e_joinChat(id, chat);
+        e_joinChat(ID, chat);
+
         query.prepare("INSERT INTO friend (user_id, friend_id, chat_id) VALUES (?, ?, ?)");
         query.addBindValue(id);
         query.addBindValue(ID);
@@ -270,8 +280,6 @@ bool DB::e_acceptFriend(const quint32 &id, const quint32 &ID, const bool &fl) {
         query.exec();
 
         e_createChat(chat, "default", "");
-        e_joinChat(id, chat);
-        e_joinChat(ID, chat);
     }
     query.clear();
     query.prepare("DELETE FROM friend_request WHERE user_id = ? AND friend_id = ?");
@@ -503,11 +511,39 @@ std::vector<quint32> DB::getFriends(const int &ID) {
 
 bool DB::e_exitChat(const int &ID, const int &chatId) {
     QSqlQuery query(database);
-    query.prepare("SELECT * FROM friend WHERE user_id = ? AND chat_id = ?");
-    query.addBindValue(ID);
+    query.prepare("SELECT * FROM friend WHERE chat_id = ?");
     query.addBindValue(chatId);
     query.exec();
-    if (query.next())return false;
+    if (query.next()) {
+        auto x = query.value(0).toInt();
+        auto y = query.value(1).toInt();
+
+        query.clear();
+        query.prepare("DELETE FROM friend WHERE user_id = ? AND chat_id = ?");
+        query.addBindValue(x);
+        query.addBindValue(chatId);
+        query.exec();
+
+        query.clear();
+        query.prepare("DELETE FROM friend WHERE user_id = ? AND chat_id = ?");
+        query.addBindValue(y);
+        query.addBindValue(chatId);
+        query.exec();
+
+        query.clear();
+        query.prepare("DELETE FROM user_chat WHERE user_id = ? AND chat_id = ?");
+        query.addBindValue(x);
+        query.addBindValue(chatId);
+        query.exec();
+
+        query.clear();
+        query.prepare("DELETE FROM user_chat WHERE user_id = ? AND chat_id = ?");
+        query.addBindValue(x);
+        query.addBindValue(chatId);
+        query.exec();
+
+        return true;
+    }
     query.clear();
     query.prepare("DELETE FROM user_chat WHERE user_id = ? AND chat_id = ?");
     query.addBindValue(ID);
