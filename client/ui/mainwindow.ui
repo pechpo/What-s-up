@@ -70,8 +70,7 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">image: url(:/images/image/settings.png);
-color: rgb(233, 228, 230);</string>
+     <string notr="true">color: rgb(233, 228, 230);</string>
     </property>
     <property name="text">
      <string/>
@@ -99,7 +98,7 @@ color: rgb(233, 228, 230);</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">image: url(:/images/image/chatList.png);</string>
+      <string notr="true"/>
      </property>
      <property name="text">
       <string/>
@@ -115,7 +114,7 @@ color: rgb(233, 228, 230);</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">image: url(:/images/image/AddNewFriend.png);</string>
+      <string notr="true"/>
      </property>
      <property name="text">
       <string/>
@@ -131,7 +130,7 @@ color: rgb(233, 228, 230);</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">image: url(:/images/image/CreateGroupChat.png);</string>
+      <string notr="true"/>
      </property>
      <property name="text">
       <string/>
