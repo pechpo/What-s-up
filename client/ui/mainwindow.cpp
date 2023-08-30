@@ -35,14 +35,20 @@ mainWindow::mainWindow(QWidget *parent) :
     QIcon Group(":/images/image/group.png");
     QIcon AddNewFriend(":/images/image/AddNewFriend.png");
     QIcon CreatNewGroup(":/images/image/StartNewGroup.png");
+    QIcon Settings(":/images/image/settings.png");
+    QIcon Tags(":/images/image/tags.png");
 
     ui->grouplistButton->setIcon(Group);
     ui->addnewfriendButton->setIcon(AddNewFriend);
     ui->NewGroupButton->setIcon(CreatNewGroup);
+    ui->settingButton->setIcon(Settings);
+    ui->tagsButton->setIcon(Tags);
 
     ui->grouplistButton->setIconSize(QSize(60,60));
     ui->addnewfriendButton->setIconSize(QSize(60,60));
     ui->NewGroupButton->setIconSize(QSize(55,55));
+    ui->settingButton->setIconSize(QSize(40,40));
+    ui->tagsButton->setIconSize(QSize(40,40));
 
     ui->closeButton->setVisible(false);
     ui->minimizeButton->setVisible(false);
@@ -52,6 +58,7 @@ mainWindow::mainWindow(QWidget *parent) :
     ui->grouplistButton->setToolTip(tr("显示群聊/好友信息"));
     ui->NewGroupButton->setToolTip(tr("新建群聊"));
     ui->addnewfriendButton->setToolTip(tr("添加好友"));
+    ui->tagsButton->setToolTip("设置个人标签");
 
     /*friendRequests.resize(20);
     for (int i = 0; i < 20; i++) {

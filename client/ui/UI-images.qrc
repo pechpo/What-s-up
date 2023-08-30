@@ -14,7 +14,6 @@
         <file>image/Logo3.png</file>
         <file>image/download.png</file>
         <file>image/upload.png</file>
-        <file>image/startChat.png</file>
         <file>image/Avatars/A1.WEBP</file>
         <file>image/Avatars/A10.WEBP</file>
         <file>image/Avatars/A11.WEBP</file>
@@ -54,5 +53,9 @@
         <file>image/add.png</file>
         <file>image/settings.png</file>
         <file>image/play.png</file>
+        <file>image/message.png</file>
+        <file>image/tags.png</file>
+        <file>image/audio record.png</file>
+        <file>image/upload image.png</file>
     </qresource>
 </RCC>

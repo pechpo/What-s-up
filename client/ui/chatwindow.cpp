@@ -309,7 +309,7 @@ void ChatWindow::show_error(){
     box.setText(QString::fromLocal8Bit("请先打开群聊"));
     box.setWindowTitle(QString::fromLocal8Bit("警告"));
     box.setIcon(QMessageBox::Icon::Warning );
-    box.setButtonText(QMessageBox::Ok , QString::fromLocal8Bit("确定"));
+    box.addButton(QString::fromLocal8Bit("确定"), QMessageBox::AcceptRole);
     box.exec();
 }
 
