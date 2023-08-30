@@ -18,9 +18,9 @@ ChatWindow::ChatWindow(QWidget *parent) :
     waiting = 0;
     dl = nullptr;
     settingsDialog = nullptr;
-    ui->fileButton->setToolTip("上传文件");
-    ui->settingsButton->setToolTip("群聊信息设置");
-    ui->pushButton->setToolTip("下载文件");
+    ui->fileButton->setToolTip(tr("上传文件"));
+    ui->settingsButton->setToolTip(tr("群聊信息设置"));
+    ui->pushButton->setToolTip(tr("下载文件"));
 
     connect(Director::getInstance(), &Director::r_chatHistory, this, &ChatWindow::slot_r_chatHistory);
     connect(Director::getInstance(), &Director::a_newMessage, this, &ChatWindow::slot_a_newMessage);
@@ -103,7 +103,7 @@ ChatWindow::Message ChatWindow::jsonToMessage(const QJsonObject &obj) {
     cur.type = Text;
     auto setIncompleteMessage = [] (Message &cur) -> void {
         cur.isSystem = true;
-        cur.content = "Incomplete Message.";
+        cur.content = tr("Incomplete Message.");
     };
     if (!obj.value("senderId").isDouble()) {
         setIncompleteMessage(cur);
@@ -159,18 +159,19 @@ QString ChatWindow::messageToString(const Message &cur) {
         color = "black";
     }
     QString style="display:flex;flex-directon:column;margin:12px 0px 12px 0px;color:" + color;
-    // keep this strange indentation for HTML
+    // !keep this strange indentation for HTML
     QString one;
     one.append("<div style=\"" + style + "\">");
-        one.append("<div style=\"display:flex;flex-direction:row;justify-content:space-between;align-items:flex-start;flex-wrap:nowrap\">");
-            one.append("<div style=\"font-size:16px\">");
+        one.append("<table style=\"border:0;border-collapse:collapse;\"><tr>");
+            one.append("<td style=\"font-size:16px\">");
                 one.append(cur.senderName.toHtmlEscaped());
                 if (cur.senderId > 0) {
                     one.append(" (" + QString::number(cur.senderId).toHtmlEscaped() + ")");
                 }
-            one.append("</div>");
-            one.append("<div style=\"font-size:10px\">" + cur.time.toHtmlEscaped() + "</div>");
-        one.append("</div>");
+            one.append("</td>");
+            one.append("<td style=\"vertical-align:middle;font-size:10px;padding-left:8px\">" + tr("发送于 ") + cur.time.toHtmlEscaped() + "</td>");
+            //one.append("<div style=\"clear:both\"></div>");
+        one.append("</tr></table>");
         one.append("<div style=\"font-size:15px;margin-top:5px\">" + cur.content.toHtmlEscaped() + "</div>");
     one.append("</div>");
     return one;
@@ -244,6 +245,9 @@ void ChatWindow::slot_r_send(const QJsonObject &obj) {
 }
 
 void ChatWindow::on_fileButton_clicked() {
+    if (chatId == 0) {
+        return ;
+    }
     if (0 == waiting) {
         QString str = QFileDialog::getOpenFileName(this, "Select File");
         if ("" == str) return;
@@ -280,6 +284,9 @@ void ChatWindow::slot_r_updateFile(const QJsonObject &obj) {
 
 void ChatWindow::on_pushButton_clicked()
 {
+    if (chatId == 0) {
+        return ;
+    }
     if (nullptr == dl){
         dl = new fileDownload();
         dl->set(chatId, &waiting, true);
@@ -294,6 +301,9 @@ void ChatWindow::on_pushButton_clicked()
 
 void ChatWindow::on_settingsButton_clicked()
 {
+    if (chatId == 0) {
+        return ;
+    }
     if (nullptr != settingsDialog) {
         settingsDialog->close();
         delete settingsDialog;

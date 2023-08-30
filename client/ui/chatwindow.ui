@@ -75,7 +75,7 @@ background-image: url(:/images/image/Logo.png);</string>
   <widget class="QPushButton" name="fileButton">
    <property name="geometry">
     <rect>
-     <x>20</x>
+     <x>10</x>
      <y>375</y>
      <width>40</width>
      <height>40</height>
@@ -91,7 +91,7 @@ background-image: url(:/images/image/Logo.png);</string>
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>230</x>
+     <x>70</x>
      <y>375</y>
      <width>40</width>
      <height>40</height>
