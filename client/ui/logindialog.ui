@@ -205,12 +205,12 @@ height: 0;</string>
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>31</width>
-      <height>31</height>
+      <width>30</width>
+      <height>30</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">image: url(:/images/image/settings.png);</string>
+     <string notr="true"/>
     </property>
     <property name="text">
      <string/>
