@@ -36,7 +36,7 @@ bool ChatWindow::isThisChat(const QJsonObject &obj) {
 
 void ChatWindow::switchChat(qint64 id) {
     if (id == chatId) {
-        return ;
+        //return ;
     }
     chatId = id;
     //ui->idLabel->setText("Chat ID: " + QString::number(id));
@@ -121,7 +121,7 @@ QString ChatWindow::messageToString(const Message &cur) {
     one.append("\n" + cur.content + "\n");
     return one;
 }
-
+/*
 void ChatWindow::updateText() {
     // QVector<Message> history -> lineEdit->text()
     QString all;
@@ -129,6 +129,20 @@ void ChatWindow::updateText() {
         all.append(messageToString(history[i]) + "\n");
     }
     ui->MsgEdit->setPlainText(all);
+    QTextCursor cursor = ui->MsgEdit->textCursor();
+    cursor.movePosition(QTextCursor::End);
+    ui->MsgEdit->setTextCursor(cursor);
+}
+*/
+void ChatWindow::updateText() {
+    // QVector<Message> history -> lineEdit->text()
+    ui->MsgEdit->setHtml("");
+    for (quint32 i = 0; i < history.size(); i++) {
+        QString cur = "<div>";
+        cur += messageToString(history[i]);
+        cur += "</div>";
+        ui->MsgEdit->insertHtml(cur);
+    }
     QTextCursor cursor = ui->MsgEdit->textCursor();
     cursor.movePosition(QTextCursor::End);
     ui->MsgEdit->setTextCursor(cursor);

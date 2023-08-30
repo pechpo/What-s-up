@@ -96,6 +96,7 @@ void mainWindow::on_addnewfriendButton_clicked()
 }
 
 void mainWindow::setState(enum Director::State tarState) {
+    qDebug() << "setState" << (tarState == Director::Friend ? "Friend" : "Chat");
     curState = tarState;
     for (quint32 i = 0; i < friendRequests.size(); i++) {
         AddNewFriend *p = friendRequests[i];
@@ -164,6 +165,7 @@ void mainWindow::waitingIsZero() {
             height += p->height() + gap;
             p->show();
         }
+        qDebug() << "group";
     }
     ui->scrollAreaWidgetContents->adjustSize();
     //qDebug() << ui->scrollAreaWidgetContents->height();

@@ -60,7 +60,10 @@ void StartChat::on_chatButton_clicked()
 }
 
 void StartChat::slot_r_talk(const QJsonObject &obj) {
-    Director::getInstance()->enterChat(obj.value("chatId").toInt());
+    qint64 id = obj.value("chatId").toInt();
+    if (id > 0) {
+        Director::getInstance()->enterChat(id);
+    }
 }
 
 qint64 StartChat::getId() {
