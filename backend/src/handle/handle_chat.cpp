@@ -9,6 +9,7 @@
 #include "handle.h"
 #include "chat.h"
 #include "db.h"
+#include "log.h"
 
 QJsonObject Handle::q_chatHistory(const int &ID, const QJsonObject &obj) {
     // Extract the necessary fields from obj
@@ -36,6 +37,7 @@ QJsonObject Handle::q_chatHistory(const int &ID, const QJsonObject &obj) {
         chatHistory.append(message);
     }
     response["chatHistory"] = chatHistory;
+    writeLog("Query Chat History", "User with ID " + QString::number(ID) + " queried the chat history of chat " + QString::number(chatId) + ".", true);
     return response;
     // Send the response back to client
 }
@@ -58,6 +60,7 @@ QJsonObject Handle::q_list_usersInChat(const int &ID, const QJsonObject &obj) {
         users.append(user);
     }
     response["users"] = users;
+    writeLog("List Users in Chat", "User with ID " + QString::number(ID) + " listed users in chat " + QString::number(chatId) + ".", true);
     return response;
     // Send the response back to client
 }
@@ -84,15 +87,12 @@ QJsonObject Handle::e_createChat(const int &ID, const QJsonObject &obj) {
     QJsonObject OBJ;
     OBJ["type"] = "a_newChat";
     Server *sv = Server::get_instance();
-//    for (const auto &x: S) {
-//        qDebug() << x;
-//    }
     for (const auto &y: sv->connections_) {
-//        qDebug() << y->id;
         if (S.contains(y->id)) {
             y->sendMessage(OBJ);
         }
     }
+    writeLog("Create Chat", "User with ID " + QString::number(ID) + " created a new chat.", true);
     return response;
     // Send the response back to client
 }
@@ -108,6 +108,11 @@ QJsonObject Handle::e_joinChat(const int &ID, const QJsonObject &obj) {
     response["success"] = flag;  // set to false if insertion fails
     if (!flag) {
         response["error"] = "Join failed";
+    }
+    if (flag) {
+        writeLog("Join Chat", "User with ID " + QString::number(ID) + " joined chat " + QString::number(chatId) + ".", true);
+    } else {
+        writeLog("Join Chat", "User with ID " + QString::number(ID) + " failed to join chat " + QString::number(chatId) + ".", false);
     }
     return response;
     // Send the response back to client
@@ -132,6 +137,7 @@ QJsonObject Handle::q_list_filesInChat(const int &ID, const QJsonObject &obj) {
         files.append(file);
     }
     response["files"] = files;
+    writeLog("List Files in Chat", "User with ID " + QString::number(ID) + " listed files in chat " + QString::number(chatId) + ".", true);
     return response;
     // Send the response back to client
 }
@@ -156,6 +162,7 @@ QJsonObject Handle::q_chatInfo(const int &id, const QJsonObject &obj) {
         users.append(user);
     }
     response["users"] = users;
+    writeLog("Query Chat Info", "User with ID " + QString::number(id) + " queried the info of chat " + QString::number(chatId) + ".", true);
     return response;
 }
 
@@ -169,6 +176,11 @@ QJsonObject Handle::e_editChatInfo(const int &id, const QJsonObject &obj) {
     QJsonObject response;
     response["type"] = "r_editChatInfo";
     response["success"] = flag;
+    if (flag) {
+        writeLog("Edit Chat Info", "User with ID " + QString::number(id) + " edited the info of chat " + QString::number(chatId) + ".", true);
+    } else {
+        writeLog("Edit Chat Info", "User with ID " + QString::number(id) + " failed to edit the info of chat " + QString::number(chatId) + ".", false);
+    }
     return response;
 }
 
@@ -179,6 +191,7 @@ QJsonObject Handle::q_talk(const int &ID, const QJsonObject &obj) {
     QJsonObject response;
     response["type"] = "r_talk";
     response["chatId"] = flag;
+    writeLog("Query Chat", "User with ID " + QString::number(ID) + " queried the chat with user with ID " + QString::number(id) + ".", true);
     return response;
 }
 
@@ -189,5 +202,11 @@ QJsonObject Handle::e_exitChat(const int &ID, const QJsonObject &obj) {
     QJsonObject response;
     response["type"] = "r_exitChat";
     response["success"] = flag;
+    if (flag) {
+        writeLog("Exit Chat", "User with ID " + QString::number(ID) + " exited chat " + QString::number(chatId) + ".", true);
+    } else {
+        writeLog("Exit Chat", "User with ID " + QString::number(ID) + " failed to exit chat " + QString::number(chatId) + ".", false);
+    }
+
     return response;
 }
