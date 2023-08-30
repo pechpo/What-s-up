@@ -24,7 +24,7 @@ ChatWindow::ChatWindow(QWidget *parent) :
     connect(Director::getInstance(), &Director::r_send, this, &ChatWindow::slot_r_send);
     connect(Director::getInstance(), &Director::r_updateFile, this, &ChatWindow::slot_r_updateFile);
 
-    switchChat(1);
+    switchChat(0);
 }
 
 ChatWindow::~ChatWindow()
@@ -32,16 +32,19 @@ ChatWindow::~ChatWindow()
     delete ui;
 }
 
-bool ChatWindow::isThisChat(const QJsonObject &obj) {
+qint64 ChatWindow::recvChatId(const QJsonObject &obj) {
     if (!obj.value("chatId").isDouble()) {
-        return false;
+        return 0;
     }
     int recvId = obj.value("chatId").toInt();
-    return (recvId == chatId);
+    return recvId;
 }
 
 void ChatWindow::switchChat(qint64 id) {
-    ui->MsgEdit->setText("");
+    if (id != chatId) {
+        ui->inputEdit->setPlainText("");
+        ui->MsgEdit->setHtml("");
+    }
     if (id == 0) {
         ui->idLabel->setText(tr("尚未打开任何群聊"));
         return ;
@@ -55,7 +58,7 @@ void ChatWindow::switchChat(qint64 id) {
 }
 
 void ChatWindow::slot_r_chatHistory(const QJsonObject &obj) {
-    if (!isThisChat(obj)) {
+    if (recvChatId(obj) != chatId) {
         return ;
     }
     if (!obj.value("chatHistory").isArray()) {
@@ -75,7 +78,9 @@ void ChatWindow::slot_r_chatHistory(const QJsonObject &obj) {
 }
 
 void ChatWindow::slot_a_newMessage(const QJsonObject &obj) {
-    if (!isThisChat(obj)) {
+    qint64 recvId = recvChatId(obj);
+    if (recvId != chatId) {
+        Director::getInstance()->raiseChat(recvId);
         return ;
     }
     if (!obj.value("message").isObject()) {

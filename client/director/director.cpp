@@ -142,7 +142,7 @@ void Director::refreshMainWindow(enum Director::State x) {
 
 void Director::enterChat(qint64 id) {
     mainUI->getChatWindow()->switchChat(id);
-    refreshMainWindow(Director::Chat);
+    mainUI->setState(Director::Chat, true);
 }
 
 void Director::setId(qint64 newId) {
@@ -151,4 +151,8 @@ void Director::setId(qint64 newId) {
 
 qint64 Director::myId() {
     return userId;
+}
+
+void Director::raiseChat(qint64 id) {
+    mainUI->raiseChat(id);
 }

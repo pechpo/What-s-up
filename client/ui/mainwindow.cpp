@@ -24,6 +24,7 @@ mainWindow::mainWindow(QWidget *parent) :
     connect(Director::getInstance(), &Director::a_newFriendRequest, this, &mainWindow::slot_a_newFriendRequest);
     connect(Director::getInstance(), &Director::r_list_myChats, this, &mainWindow::slot_r_list_myChats);
     connect(Director::getInstance(), &Director::a_newChat, this, &mainWindow::slot_a_newChat);
+    connect(Director::getInstance(), &Director::a_newMessage, this, &mainWindow::slot_a_newMessage);
 
     cw = new ChatWindow(this);
     cw->move(250, 50);
@@ -82,7 +83,6 @@ void mainWindow::on_minimizeButton_clicked()
     showMinimized();
 }
 
-
 void mainWindow::on_addnewfriendButton_clicked()
 {
     if (nullptr == snf) {
@@ -95,8 +95,11 @@ void mainWindow::on_addnewfriendButton_clicked()
     snf->show();
 }
 
-void mainWindow::setState(enum Director::State tarState) {
+void mainWindow::setState(enum Director::State tarState, bool noRefresh) {
     qDebug() << "setState" << (tarState == Director::Friend ? "Friend" : "Chat");
+    if (tarState == curState && noRefresh) {
+        return ;
+    }
     curState = tarState;
     for (quint32 i = 0; i < friendRequests.size(); i++) {
         AddNewFriend *p = friendRequests[i];
@@ -266,8 +269,6 @@ void mainWindow::slot_r_list_myChats(const QJsonObject &obj) {
     }
 }
 
-
-
 void mainWindow::on_grouplistButton_clicked()
 {
     if (Director::Friend == curState) {
@@ -280,7 +281,6 @@ void mainWindow::on_grouplistButton_clicked()
 
     }
 }
-
 
 void mainWindow::on_settingButton_clicked()
 {
@@ -295,10 +295,6 @@ void mainWindow::on_settingButton_clicked()
     msg.insert("type", "q_myInfo");
     Director::getInstance()->sendJson(msg);
 }
-
-
-
-
 
 void mainWindow::on_NewGroupButton_clicked()
 {
@@ -319,3 +315,27 @@ void mainWindow::on_NewGroupButton_clicked()
     newChatDialog->show();
 }
 
+void mainWindow::slot_a_newMessage(const QJsonObject &obj) {
+    quint64 id = obj.value("chatId").toInt();
+    for (quint32 i = 1; i < chats.size(); i++) {
+        auto *p = chats[i];
+        if (p->getId() == id) {
+            chats.removeAt(i);
+            chats.push_front(p);
+            break ;
+        }
+    }
+    if (0 == waiting) {
+        waitingIsZero();
+    }
+}
+
+void mainWindow::raiseChat(qint64 id) {
+    for (quint32 i = 0; i < chats.size(); i++) {
+        auto *p = chats[i];
+        if (p->getId() == id) {
+            p->setNewTag(true);
+            break ;
+        }
+    }
+}

@@ -30,6 +30,7 @@ public:
     void refreshMainWindow(enum Director::State);
     void enterChat(qint64);
     void setId(qint64 id);
+    void raiseChat(qint64 id);
     qint64 myId();
 
 signals:

@@ -44,7 +44,7 @@ private:
 
     quint32 waiting;
 
-    bool isThisChat(const QJsonObject&);
+    qint64 recvChatId(const QJsonObject&);
 
     qint64 chatId;
     enum MsgType {
