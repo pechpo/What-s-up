@@ -2,7 +2,7 @@
 #define CHATSETTINGS_H
 
 #include <QDialog>
-#include "profilebar.h"
+#include "friendrequest.h"
 
 namespace Ui {
 class ChatSettings;
@@ -30,7 +30,7 @@ private slots:
 private:
     Ui::ChatSettings *ui;
     qint64 chatId;
-    QVector<ProfileBar*> userList;
+    QVector<FriendRequest*> userList;
 };
 
 #endif // CHATSETTINGS_H

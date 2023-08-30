@@ -57,10 +57,11 @@ void ChatSettings::slot_r_chatInfo(const QJsonObject &obj) {
             continue ;
         }
         QJsonObject user = users[i].toObject();
-        auto *p = userList[i] = new ProfileBar(ui->scrollContent);
+        auto *p = userList[i] = new FriendRequest(ui->scrollContent);
         //p->setMinimumWidth(250);
         qint64 id = user.value("id").toInt();
-        p->setName(user.value("name").toString() + " (" + QString::number(id) + ")");
+        p->setId(id);
+        p->setName(user.value("name").toString());
         p->setAvatar(user.value("avatar").toString());
         p->move(gap, height);
         height += p->height() + gap;

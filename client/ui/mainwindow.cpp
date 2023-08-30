@@ -17,6 +17,7 @@ mainWindow::mainWindow(QWidget *parent) :
     snf = nullptr;
     newChatDialog = nullptr;
     settings = nullptr;
+    tags = nullptr;
     waiting = 0;
     this->setState(Director::Friend);
 
@@ -328,6 +329,16 @@ void mainWindow::on_NewGroupButton_clicked()
     newChatDialog->show();
 }
 
+void mainWindow::on_tagsButton_clicked()
+{
+    if (nullptr != tags) {
+        tags->close();
+        delete tags;
+    }
+    tags = new TagEditor(this);
+    tags->show();
+}
+
 void mainWindow::slot_a_newMessage(const QJsonObject &obj) {
     quint64 id = obj.value("chatId").toInt();
     for (quint32 i = 1; i < chats.size(); i++) {
@@ -352,3 +363,4 @@ void mainWindow::raiseChat(qint64 id) {
         }
     }
 }
+

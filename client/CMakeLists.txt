@@ -46,6 +46,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ui/settings.h ui/settings.cpp ui/settings.ui
         ui/chatsettings.h ui/chatsettings.cpp ui/chatsettings.ui
         ui/audiorecord.h ui/audiorecord.cpp ui/audiorecord.ui
+        ui/tageditor.h ui/tageditor.cpp ui/tageditor.ui
+        ui/friendrequest.h ui/friendrequest.cpp ui/friendrequest.ui
 
 
 

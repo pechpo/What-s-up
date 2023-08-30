@@ -9,6 +9,7 @@
 #include "startchat.h"
 #include "createchat.h"
 #include "settings.h"
+#include "tageditor.h"
 #include "director/director.h"
 
 namespace Ui {
@@ -47,12 +48,15 @@ private slots:
 
     void on_NewGroupButton_clicked();
 
+    void on_tagsButton_clicked();
+
 private:
     Ui::mainWindow *ui;
     ChatWindow *cw;
     SearchNewFriend *snf;
     CreateChat *newChatDialog;
     Settings *settings;
+    TagEditor *tags;
     QVector<AddNewFriend*> friendRequests;
     QVector<StartChat*> friends;
     QVector<StartChat*> chats;
