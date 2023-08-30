@@ -24,7 +24,7 @@ QJsonObject Handle::q_chatHistory(const int &ID, const QJsonObject &obj) {
     response["name"] = db->getChatName(chatId);
     QJsonArray chatHistory;
     std::sort(flag.begin(), flag.end(), [](const Message &a, const Message &b) {
-        return a.getID() > b.getID();
+        return a.getID() < b.getID();
     });
     for (const auto &x: flag) {
         QJsonObject message;
