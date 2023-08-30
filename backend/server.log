@@ -61,3 +61,24 @@
 [2023-08-30 18:28:16] [Query Chat] [Success] User with ID 114514 queried their chats.
 [2023-08-30 18:28:17] [Query Chat History] [Success] User with ID 114514 queried the chat history of chat 1.
 [2023-08-30 21:27:04] [Server] [Success] Server started at 0.0.0.0:10043
+[2023-08-30 21:30:02] [Server] [Success] Server started at 0.0.0.0:10043
+[2023-08-30 21:30:14] [User Login] [Success] User with ID 777 logged in successfully.
+[2023-08-30 21:30:15] [List My Friends] [Success] User with ID 777 listed their friends.
+[2023-08-30 21:30:15] [List Friend Requests] [Success] User with ID 777 listed their friend requests.
+[2023-08-30 21:30:17] [Query Chat] [Success] User with ID 777 queried their chats.
+[2023-08-30 21:30:18] [Query Chat History] [Success] User with ID 777 queried the chat history of chat 1.
+[2023-08-30 21:30:18] [Query Chat Info] [Success] User with ID 777 queried the info of chat 1.
+[2023-08-30 21:30:27] [List My Friends] [Success] User with ID 777 listed their friends.
+[2023-08-30 21:30:27] [List Friend Requests] [Success] User with ID 777 listed their friend requests.
+[2023-08-30 21:30:29] [Query Chat Info] [Success] User with ID 777 queried the info of chat 1.
+[2023-08-30 21:32:07] [User Login] [Success] User with ID 777 logged in successfully.
+[2023-08-30 21:32:07] [List My Friends] [Success] User with ID 777 listed their friends.
+[2023-08-30 21:32:07] [List Friend Requests] [Success] User with ID 777 listed their friend requests.
+[2023-08-30 21:32:09] [Query Chat] [Success] User with ID 777 queried their chats.
+[2023-08-30 21:32:11] [Query Chat History] [Success] User with ID 777 queried the chat history of chat 1.
+[2023-08-30 21:32:16] [Query Chat Info] [Success] User with ID 777 queried the info of chat 1.
+[2023-08-30 21:32:19] [Add Friend] [Success] User with ID 777 sent friend request to ID 999.
+[2023-08-30 21:32:27] [List My Friends] [Success] User with ID 777 listed their friends.
+[2023-08-30 21:32:27] [List Friend Requests] [Success] User with ID 777 listed their friend requests.
+[2023-08-30 21:32:28] [Query Chat] [Success] User with ID 777 queried their chats.
+[2023-08-30 21:34:12] [Server] [Success] Server started at 0.0.0.0:10043

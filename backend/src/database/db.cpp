@@ -180,7 +180,7 @@ QList<chat> DB::q_list_myChats(const quint32 &ID) {
         if (!Query.next())continue;
         chat.setID(Query.value(0).toUInt());
         chat.setName(Query.value(1).toString());
-        chat.setAvatarName(Query.value(3).toString());
+        chat.setAvatarName(Query.value(2).toString());
         chats.append(chat);
     }
     return chats;
