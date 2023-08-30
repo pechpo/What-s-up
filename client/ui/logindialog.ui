@@ -209,7 +209,7 @@ height: 0;</string>
      <string>-</string>
     </property>
    </widget>
-   <widget class="QToolButton" name="ConnectionButton">
+   <widget class="QPushButton" name="ConnectionButton">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -219,7 +219,7 @@ height: 0;</string>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-image: url(:/images/image/settings.png);</string>
+     <string notr="true">image: url(:/images/image/settings.png);</string>
     </property>
     <property name="text">
      <string/>
