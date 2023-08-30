@@ -93,5 +93,6 @@ void ChatSettings::slot_r_exitChat(const QJsonObject &obj) {
         Director::getInstance()->refreshMainWindow(Director::Chat);
         Director::getInstance()->enterChat(0);
         accept();
+        close();
     }
 }
