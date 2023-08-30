@@ -144,3 +144,11 @@ void Director::enterChat(qint64 id) {
     mainUI->getChatWindow()->switchChat(id);
     refreshMainWindow(Director::Chat);
 }
+
+void Director::setId(qint64 newId) {
+    userId = newId;
+}
+
+qint64 Director::myId() {
+    return userId;
+}
