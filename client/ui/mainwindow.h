@@ -39,11 +39,11 @@ private slots:
 
     void on_addnewfriendButton_clicked();
 
-    void on_toolButton_clicked();
-
     void on_grouplistButton_clicked();
 
     void on_settingButton_clicked();
+
+    void on_NewGroupButton_clicked();
 
 private:
     Ui::mainWindow *ui;

@@ -262,24 +262,6 @@ void mainWindow::slot_r_list_myChats(const QJsonObject &obj) {
     }
 }
 
-void mainWindow::on_toolButton_clicked()
-{
-    if (nullptr == newChatDialog) {
-        //qDebug() << "aaaa";
-        newChatDialog = new CreateChat(this);
-    }
-    else {
-        //qDebug() << "bbbb";
-        newChatDialog->close();
-        newChatDialog->clear();
-    }
-    for (quint32 i = 0; i < friends.size(); i++) {
-        StartChat *p = friends[i];
-        newChatDialog->addChoice(p->getId(), p->getName());
-    }
-    newChatDialog->update();
-    newChatDialog->show();
-}
 
 
 void mainWindow::on_grouplistButton_clicked()
@@ -308,5 +290,28 @@ void mainWindow::on_settingButton_clicked()
     QJsonObject msg;
     msg.insert("type", "q_myInfo");
     Director::getInstance()->sendJson(msg);
+}
+
+
+
+
+
+void mainWindow::on_NewGroupButton_clicked()
+{
+    if (nullptr == newChatDialog) {
+        //qDebug() << "aaaa";
+        newChatDialog = new CreateChat(this);
+    }
+    else {
+        //qDebug() << "bbbb";
+        newChatDialog->close();
+        newChatDialog->clear();
+    }
+    for (quint32 i = 0; i < friends.size(); i++) {
+        StartChat *p = friends[i];
+        newChatDialog->addChoice(p->getId(), p->getName());
+    }
+    newChatDialog->update();
+    newChatDialog->show();
 }
 

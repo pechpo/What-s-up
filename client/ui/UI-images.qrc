@@ -6,7 +6,6 @@
         <file>image/AddNewFriend.png</file>
         <file>image/accept.png</file>
         <file>image/refuse.png</file>
-        <file>image/startChat.png</file>
         <file>image/CreatGroup.png</file>
         <file>image/CreateGroupChat.png</file>
         <file>image/fileButton.png</file>
@@ -16,5 +15,6 @@
         <file>image/background1.png</file>
         <file>image/background4.png</file>
         <file>image/Logo.png</file>
+        <file>image/startChat.png</file>
     </qresource>
 </RCC>
