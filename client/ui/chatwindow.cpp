@@ -42,11 +42,19 @@ qint64 ChatWindow::recvChatId(const QJsonObject &obj) {
     return recvId;
 }
 
+void ChatWindow::clear() {
+    for (quint32 i = 0; i < messages.size(); i++) {
+        messages[i]->close();
+        delete messages[i];
+    }
+    ui->inputEdit->setPlainText("");
+    //ui->MsgEdit->setHtml("");
+}
+
 //switching chat
 void ChatWindow::switchChat(qint64 id) {
     if (id != chatId) {
-        ui->inputEdit->setPlainText("");
-        ui->MsgEdit->setHtml("");
+        clear();
     }
     if (id == 0) {
         ui->idLabel->setText(tr("尚未打开任何群聊"));
@@ -336,7 +344,6 @@ void ChatWindow::on_settingsButton_clicked()
     Director::getInstance()->sendJson(msg);
 }
 
-
 void ChatWindow::on_audioButton_clicked()
 {
     if (chatId == 0) {
@@ -355,9 +362,7 @@ void ChatWindow::on_audioButton_clicked()
             ar->set(&chatId, &waiting);
         }
     }
-
 }
-
 
 void ChatWindow::on_photoButton_clicked()
 {

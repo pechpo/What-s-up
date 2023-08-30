@@ -47,15 +47,12 @@
         <file>image/Avatars/A7.WEBP</file>
         <file>image/Avatars/A8.WEBP</file>
         <file>image/Avatars/A9.WEBP</file>
-<<<<<<< HEAD
         <file>image/AddNewFriend.png</file>
         <file>image/group.png</file>
         <file>image/StartNewGroup.png</file>
         <file>image/user.png</file>
         <file>image/add.png</file>
         <file>image/settings.png</file>
-=======
         <file>image/play.png</file>
->>>>>>> refs/remotes/origin/feature/client
     </qresource>
 </RCC>
