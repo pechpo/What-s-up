@@ -59,7 +59,7 @@ private:
 
     qint64 chatId;
     enum MsgType {
-        Text, Picture, Voice
+        Text, File, Picture, Voice
     };
     struct Message {
         bool isSystem;
@@ -74,6 +74,7 @@ private:
     void clear();
     Message jsonToMessage(const QJsonObject&);
     QString messageToString(const Message&);
+    QWidget* messageToWidget(const Message&);
     void updateMessage();
     void updateText(); // outdated. do not use this
 };

@@ -1,6 +1,8 @@
 #include <QCryptographicHash>
 #include "chatwindow.h"
 #include "ui_chatwindow.h"
+#include "audiomessage.h"
+#include "photomessage.h"
 #include "director/director.h"
 #include <QMessageBox>
 
@@ -140,6 +142,21 @@ ChatWindow::Message ChatWindow::jsonToMessage(const QJsonObject &obj) {
     cur.senderName = name;
     cur.time = time;
     cur.content = obj.value("content").toString();
+    if (true == obj.value("is_file").toBool()) {
+        QString format = obj.value("format").toString();
+        if ("file" == format) {
+            cur.type = File;
+        }
+        else if ("photo" == format) {
+            cur.type = Picture;
+        }
+        else if ("voice" == format) {
+            cur.type = Voice;
+        }
+    }
+    else {
+        cur.type = Text;
+    }
     return cur;
 }
 /*
@@ -154,6 +171,7 @@ QString ChatWindow::messageToString(const Message &cur) {
 }
 */
 // now String is html
+// upd: outdated. do not use this.
 QString ChatWindow::messageToString(const Message &cur) {
     QString color;
     if (cur.senderId == Director::getInstance()->myId()) {
@@ -186,6 +204,30 @@ QString ChatWindow::messageToString(const Message &cur) {
     one.append("</div>");
     return one;
 }
+
+QWidget* ChatWindow::messageToWidget(const Message &cur) {
+    if (Text == cur.type) {
+                    QWidget *res = new QWidget(ui->messageArea);
+                    QTextEdit *text = new QTextEdit(res);
+                    QString one = messageToString(cur);
+                    text->setHtml(one);
+                    text->adjustSize();
+                    //qint32 docHeight = text->document()->size().height();
+                    //text->setFixedHeight(docHeight);
+                    res->adjustSize();
+                    return res;
+    }
+    else if (Picture == cur.type) {
+
+    }
+    else if (Voice == cur.type) {
+
+    }
+    else if (File == cur.type) {
+
+    }
+}
+
 /*
 void ChatWindow::updateText() {
     // QVector<Message> history -> lineEdit->text()
@@ -221,7 +263,18 @@ void ChatWindow::updateText() {
 
 void ChatWindow::updateMessage() {
     //updateText();
-
+    clear();
+    quint32 siz = history.size();
+    messages.resize(siz);
+    const quint32 gap = 5;
+    quint32 height = gap;
+    for (quint32 i = 0; i < siz; i++) {
+        auto *p = messages[i] = messageToWidget(history[i]);
+        p->move(gap, height);
+        p->show();
+        height += gap + p->height();
+    }
+    ui->messageArea->adjustSize();
 }
 
 void ChatWindow::appendText(const QString &text) {
