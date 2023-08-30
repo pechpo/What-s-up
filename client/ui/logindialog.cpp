@@ -82,12 +82,6 @@ void LoginDialog::on_closeButton_triggered(QAction *arg1)
     close();
 }
 
-
-
-
-
-
-
 void LoginDialog::on_ConnectionButton_clicked()
 {
     if (nullptr == lw) {

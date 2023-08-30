@@ -77,7 +77,10 @@ void TagEditor::slot_r_editTags(const QJsonObject &obj) {
     if (true == obj.value("success").toBool()) {
         auto lis = choices->buttons();
         for (quint32 i = 0; i < lis.size(); i++) {
-            choices->removeButton(lis[i]);
+            auto *p = lis[i];
+            p->close();
+            choices->removeButton(p);
+            delete p;
         }
         QJsonObject msg;
         msg.insert("type", "q_list_recommend");
