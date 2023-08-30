@@ -162,15 +162,16 @@ QString ChatWindow::messageToString(const Message &cur) {
     // keep this strange indentation for HTML
     QString one;
     one.append("<div style=\"" + style + "\">");
-        one.append("<div style=\"display:flex;flex-direction:row;justify-content:flex-start;align-items:flex-end;flex-wrap:nowrap\">");
-            one.append("<div style=\"font-size:16px\">");
+        one.append("<table style=\"border:0;border-collapse:collapse;\"><tr>");
+            one.append("<td style=\"font-size:16px\">");
                 one.append(cur.senderName.toHtmlEscaped());
                 if (cur.senderId > 0) {
                     one.append(" (" + QString::number(cur.senderId).toHtmlEscaped() + ")");
                 }
-            one.append("</div>");
-            one.append("<div style=\"font-size:10px\">" + cur.time.toHtmlEscaped() + "</div>");
-        one.append("</div>");
+            one.append("</td>");
+            one.append("<td style=\"vertical-align:middle;font-size:10px;padding-left:10px\">" + cur.time.toHtmlEscaped() + "</td>");
+            //one.append("<div style=\"clear:both\"></div>");
+        one.append("</tr></table>");
         one.append("<div style=\"font-size:15px;margin-top:5px\">" + cur.content.toHtmlEscaped() + "</div>");
     one.append("</div>");
     return one;
