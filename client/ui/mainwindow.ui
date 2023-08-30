@@ -70,7 +70,8 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">image: url(:/images/image/settings.png);</string>
+     <string notr="true">image: url(:/images/image/settings.png);
+color: rgb(233, 228, 230);</string>
     </property>
     <property name="text">
      <string/>
