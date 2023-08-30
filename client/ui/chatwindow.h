@@ -54,6 +54,7 @@ private:
         bool isSystem;
         MsgType type;
         qint64 senderId;
+        QString time;
         QString senderName;
         QString content;
     };
