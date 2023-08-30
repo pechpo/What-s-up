@@ -21,6 +21,7 @@ public:
     void setAvatar(const QString&);
     qint64 getId();
     QString getName();
+    void setNewTag(bool);
 
 public slots:
     void slot_r_talk(const QJsonObject&);
@@ -33,6 +34,7 @@ private:
     ProfileBar *bar;
     qint64 id;
     bool isPerson;
+    bool hasNew;
 };
 
 #endif // STARTCHAT_H
