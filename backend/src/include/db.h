@@ -7,7 +7,8 @@
 #include <QString>
 #include "user.h"
 #include "message.h"
-#include "group.h"
+#include "chat.h"
+#include <ctime>
 
 class DB {
 
@@ -36,7 +37,7 @@ public :
 
     QList<Message> q_chatHistory(const quint32 &chat_ID, const quint32 &time, const quint32 &count);
 
-    QList<Group> q_list_myChats(const quint32 &ID);
+    QList<chat> q_list_myChats(const quint32 &ID);
 
     QList<User> q_list_usersInChat(const quint32 &chat_ID);
 
@@ -52,19 +53,15 @@ public :
 
     bool e_joinChat(const quint32 &ID, const quint32 &chat_ID);
 
-    bool e_quitChat(const quint32 &ID, const quint32 &chat_ID);
-
-    bool e_delChat(const quint32 &ID, const quint32 &chat_ID);
-
     QList<Message> q_list_filesInChat(const quint32 &chat_ID);
 
     QString getName(const quint32 &ID);
 
-    bool check(const int &id, const int &group);
+    bool check(const int &id, const int &chat);
 
     static DB *get_instance();
 
-    int new_group_id();
+    int new_chat_id();
 
     int new_message_id();
 
@@ -74,7 +71,7 @@ public :
 
     bool e_editChatInfo(const quint32 &ID, const QString &name, const QString &avatar);
 
-    QString q_downloadFile(const int &ID, const QString &filename);
+    std::pair<QString, QString> q_downloadFile(const int &ID, const QString &filename);
 
     int q_talk(const int &id, const int &ID);
 
@@ -87,6 +84,8 @@ public :
     std::unordered_map<quint32, std::vector<int>> get_all_tags();
 
     std::vector<quint32> getFriends(const int &ID);
+
+    bool e_exitChat(const int &ID, const int &chatId);
 
 private:
 

@@ -25,14 +25,14 @@ public:
 
     static ChatBot * get_instance();
 
-    void processMessage(const int&group, const QString& content);
+    void processMessage(const int&chat, const QString& content);
 
 private:
     static ChatBot * bt;
 
     void respondToCommand(const QString& command, const QString& to_user);
-    void respondToKeywords(const QString& content, const int &group);
-    void sendMessage(const int &group, const QString& content);
+    void respondToKeywords(const QString& content, const int &chat);
+    void sendMessage(const int &chat, const QString& content);
 };
 
 #endif //WHAT_S_UP_BOT_H

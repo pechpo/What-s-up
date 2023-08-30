@@ -58,9 +58,13 @@ public:
 
     QJsonObject q_talk(const int &id, const QJsonObject &json);
 
+    QJsonObject e_exitChat(const int &id, const QJsonObject &json);
+
     std::map<QString, std::function<QJsonObject(const int &id, const QJsonObject &)>> handlemap;
 
-    bool check(const int &id, const int &group);
+    bool check(const int &id, const int &chat);
+
+    QJsonObject e_send_bot(const QString &name, const QJsonObject &json);
 
     static Handle * get_instance();
 
