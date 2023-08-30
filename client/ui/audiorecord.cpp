@@ -11,7 +11,8 @@ audioRecord::audioRecord(QWidget *parent) :
     recorder = nullptr;
     format = nullptr;
     isRecording = false;
-    player == nullptr;
+    player = nullptr;
+    audioOutput = nullptr;
     connect(Director::getInstance(), &Director::r_updateFile, this, &audioRecord::slot_r_updateFile);
 }
 

@@ -19,5 +19,37 @@
         <file>image/download.png</file>
         <file>image/upload.png</file>
         <file>image/startChat.png</file>
+        <file>image/Avatars/A1.WEBP</file>
+        <file>image/Avatars/A10.WEBP</file>
+        <file>image/Avatars/A11.WEBP</file>
+        <file>image/Avatars/A12.WEBP</file>
+        <file>image/Avatars/A13.WEBP</file>
+        <file>image/Avatars/A14.WEBP</file>
+        <file>image/Avatars/A15.WEBP</file>
+        <file>image/Avatars/A16.WEBP</file>
+        <file>image/Avatars/A17.WEBP</file>
+        <file>image/Avatars/A18.WEBP</file>
+        <file>image/Avatars/A19.WEBP</file>
+        <file>image/Avatars/A2.WEBP</file>
+        <file>image/Avatars/A20.WEBP</file>
+        <file>image/Avatars/A21.WEBP</file>
+        <file>image/Avatars/A22.WEBP</file>
+        <file>image/Avatars/A23.WEBP</file>
+        <file>image/Avatars/A24.WEBP</file>
+        <file>image/Avatars/A25.WEBP</file>
+        <file>image/Avatars/A26.WEBP</file>
+        <file>image/Avatars/A27.WEBP</file>
+        <file>image/Avatars/A28.WEBP</file>
+        <file>image/Avatars/A29.WEBP</file>
+        <file>image/Avatars/A3.WEBP</file>
+        <file>image/Avatars/A30.WEBP</file>
+        <file>image/Avatars/A31.WEBP</file>
+        <file>image/Avatars/A32.WEBP</file>
+        <file>image/Avatars/A4.WEBP</file>
+        <file>image/Avatars/A5.WEBP</file>
+        <file>image/Avatars/A6.WEBP</file>
+        <file>image/Avatars/A7.WEBP</file>
+        <file>image/Avatars/A8.WEBP</file>
+        <file>image/Avatars/A9.WEBP</file>
     </qresource>
 </RCC>

@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>876</width>
+    <width>800</width>
     <height>640</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>What-s-up</string>
   </property>
   <property name="styleSheet">
    <string notr="true"/>
@@ -21,7 +21,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>900</width>
+     <width>800</width>
      <height>660</height>
     </rect>
    </property>
@@ -81,7 +81,7 @@ color: rgb(233, 228, 230);</string>
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>560</y>
+      <y>540</y>
       <width>210</width>
       <height>81</height>
      </rect>
@@ -142,7 +142,7 @@ color: rgb(233, 228, 230);</string>
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>50</y>
+      <y>48</y>
       <width>881</width>
       <height>16</height>
      </rect>
@@ -156,7 +156,7 @@ color: rgb(233, 228, 230);</string>
      <rect>
       <x>10</x>
       <y>79</y>
-      <width>210</width>
+      <width>231</width>
       <height>460</height>
      </rect>
     </property>
@@ -171,7 +171,7 @@ color: rgb(233, 228, 230);</string>
       <rect>
        <x>0</x>
        <y>0</y>
-       <width>208</width>
+       <width>229</width>
        <height>458</height>
       </rect>
      </property>
@@ -182,7 +182,7 @@ color: rgb(233, 228, 230);</string>
      <rect>
       <x>10</x>
       <y>60</y>
-      <width>91</width>
+      <width>211</width>
       <height>16</height>
      </rect>
     </property>

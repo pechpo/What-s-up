@@ -12,6 +12,7 @@ mainWindow::mainWindow(QWidget *parent) :
 //    this->setWindowFlags(Qt::FramelessWindowHint | Qt::Widget);
 //    this->setAttribute(Qt::WA_TranslucentBackground);      //把初始的 dialog 窗口设置为透明的
     ui->setupUi(this);
+    ui->GroupList->setWidgetResizable(false);
 
     snf = nullptr;
     newChatDialog = nullptr;
@@ -27,7 +28,7 @@ mainWindow::mainWindow(QWidget *parent) :
     connect(Director::getInstance(), &Director::a_newMessage, this, &mainWindow::slot_a_newMessage);
 
     cw = new ChatWindow(this);
-    cw->move(250, 50);
+    cw->move(270, 50);
     cw->show();
 
     ui->closeButton->setVisible(false);
