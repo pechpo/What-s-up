@@ -3,3 +3,6 @@ CMakeLists.txt.user
 cmake-build-debug/
 .vscode/
 build*/
+backend/CMakeLists.txt.user
+backend/.idea/
+backend/src/.idea/

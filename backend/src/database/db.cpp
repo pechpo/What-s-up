@@ -1,6 +1,5 @@
 #include "db.h"
 #include <QSqlQuery>
-#include <curl/curl.h>
 #include "recommendation.h"
 
 //user id, name, password, avatar, email
@@ -392,7 +391,7 @@ bool DB::check(const int &id, const int &chat) {
 }
 
 bool DB::uploadFileToFTP(const QString &filename) {
-    CURL *curl;
+/*    CURL *curl;
     CURLcode res;
     curl_global_init(CURL_GLOBAL_DEFAULT);
     curl = curl_easy_init();
@@ -417,6 +416,7 @@ bool DB::uploadFileToFTP(const QString &filename) {
     }
 
     curl_global_cleanup();
+    return true;*/
     return true;
 }
 
