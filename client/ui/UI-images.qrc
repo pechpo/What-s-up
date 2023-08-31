@@ -1,20 +1,62 @@
 <RCC>
     <qresource prefix="/images">
-        <file>image/settings.png</file>
-        <file>image/chatList.png</file>
         <file>image/imagetest.png</file>
-        <file>image/AddNewFriend.png</file>
         <file>image/accept.png</file>
         <file>image/refuse.png</file>
-        <file>image/startChat.png</file>
-        <file>image/CreatGroup.png</file>
-        <file>image/CreateGroupChat.png</file>
         <file>image/fileButton.png</file>
-        <file>image/upload.png</file>
         <file>image/background2.png</file>
         <file>image/background3.png</file>
         <file>image/background1.png</file>
         <file>image/background4.png</file>
         <file>image/Logo.png</file>
+        <file>image/chatList.png</file>
+        <file>image/logo2.png</file>
+        <file>image/Logo3.png</file>
+        <file>image/download.png</file>
+        <file>image/upload.png</file>
+        <file>image/Avatars/A1.WEBP</file>
+        <file>image/Avatars/A10.WEBP</file>
+        <file>image/Avatars/A11.WEBP</file>
+        <file>image/Avatars/A12.WEBP</file>
+        <file>image/Avatars/A13.WEBP</file>
+        <file>image/Avatars/A14.WEBP</file>
+        <file>image/Avatars/A15.WEBP</file>
+        <file>image/Avatars/A16.WEBP</file>
+        <file>image/Avatars/A17.WEBP</file>
+        <file>image/Avatars/A18.WEBP</file>
+        <file>image/Avatars/A19.WEBP</file>
+        <file>image/Avatars/A2.WEBP</file>
+        <file>image/Avatars/A20.WEBP</file>
+        <file>image/Avatars/A21.WEBP</file>
+        <file>image/Avatars/A22.WEBP</file>
+        <file>image/Avatars/A23.WEBP</file>
+        <file>image/Avatars/A24.WEBP</file>
+        <file>image/Avatars/A25.WEBP</file>
+        <file>image/Avatars/A26.WEBP</file>
+        <file>image/Avatars/A27.WEBP</file>
+        <file>image/Avatars/A28.WEBP</file>
+        <file>image/Avatars/A29.WEBP</file>
+        <file>image/Avatars/A3.WEBP</file>
+        <file>image/Avatars/A30.WEBP</file>
+        <file>image/Avatars/A31.WEBP</file>
+        <file>image/Avatars/A32.WEBP</file>
+        <file>image/Avatars/A4.WEBP</file>
+        <file>image/Avatars/A5.WEBP</file>
+        <file>image/Avatars/A6.WEBP</file>
+        <file>image/Avatars/A7.WEBP</file>
+        <file>image/Avatars/A8.WEBP</file>
+        <file>image/Avatars/A9.WEBP</file>
+        <file>image/AddNewFriend.png</file>
+        <file>image/group.png</file>
+        <file>image/StartNewGroup.png</file>
+        <file>image/user.png</file>
+        <file>image/add.png</file>
+        <file>image/settings.png</file>
+        <file>image/play.png</file>
+        <file>image/message.png</file>
+        <file>image/tags.png</file>
+        <file>image/audio record.png</file>
+        <file>image/upload image.png</file>
+        <file>image/stop.png</file>
     </qresource>
 </RCC>

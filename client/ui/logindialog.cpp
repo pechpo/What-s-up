@@ -18,8 +18,35 @@ LoginDialog::LoginDialog(QWidget *parent) :
     this->installEventFilter(this);
     ui->setupUi(this);
 
+    QString loginstyle = R"(
+        QPushButton {
+            border: none;
+            background-color: rgba(59, 180, 193, 0.75);
+            border-radius:10px;
+        }
+        QPushButton:hover {
+            background-color: rgba(59, 180, 193, 1);
+        }
+    )";
+    QString regstyle = R"(
+        QPushButton {
+            border: none;
+        background-color: rgba(222, 221, 218, 0.75);
+        border-radius: 10px;
+        }
+        QPushButton:hover {
+            background-color: rgba(222, 221, 218, 1);
+        }
+    )";
+
+    ui->loginBtn->setStyleSheet(loginstyle);
+    ui->regBtn->setStyleSheet(regstyle);
+
     ui->closeButton->setVisible(false);
-    ui->minimizeButton->setVisible(false);
+    QIcon Settings(":/images/image/settings.png");
+    ui->ConnectionButton->setIcon(Settings);
+    ui->ConnectionButton->setIconSize(QSize(30,30));
+    ui->ConnectionButton->setToolTip(tr("连接设置"));
 
     lw = nullptr;
     rd = nullptr;
@@ -41,6 +68,7 @@ void LoginDialog::on_loginBtn_clicked()
 {
     if (0 == waiting) {
         qint64 id = ui->usrLineEdit->text().toInt();
+        Director::getInstance()->setId(id);
         QString pwd = Director::getInstance()->Hash(ui->pwdLineEdit->text());
         QJsonObject msg;
         msg.insert("type", "q_login");
@@ -77,15 +105,6 @@ void LoginDialog::on_closeButton_triggered(QAction *arg1)
 {
     close();
 }
-
-
-void LoginDialog::on_minimizeButton_clicked()
-{
-    showMinimized();
-}
-
-
-
 
 void LoginDialog::on_ConnectionButton_clicked()
 {

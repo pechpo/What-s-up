@@ -2,7 +2,7 @@
 #define CHATSETTINGS_H
 
 #include <QDialog>
-#include "profilebar.h"
+#include "friendrequest.h"
 
 namespace Ui {
 class ChatSettings;
@@ -20,14 +20,17 @@ public:
 public slots:
     void slot_r_chatInfo(const QJsonObject&);
     void slot_r_editChatInfo(const QJsonObject&);
+    void slot_r_exitChat(const QJsonObject&);
 
 private slots:
     void on_confirmButton_clicked();
 
+    void on_exitButton_clicked();
+
 private:
     Ui::ChatSettings *ui;
     qint64 chatId;
-    QVector<ProfileBar*> userList;
+    QVector<FriendRequest*> userList;
 };
 
 #endif // CHATSETTINGS_H

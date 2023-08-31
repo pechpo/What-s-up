@@ -9,6 +9,7 @@
 #include "startchat.h"
 #include "createchat.h"
 #include "settings.h"
+#include "tageditor.h"
 #include "director/director.h"
 
 namespace Ui {
@@ -22,8 +23,9 @@ class mainWindow : public QWidget
 public:
     explicit mainWindow(QWidget *parent = nullptr);
     ~mainWindow();
-    void setState(enum Director::State);
+    void setState(enum Director::State, bool noRefresh = false);
     ChatWindow* getChatWindow();
+    void raiseChat(qint64 chatId);
 
 public slots:
     void slot_r_list_myFriends(const QJsonObject&);
@@ -31,6 +33,7 @@ public slots:
     void slot_a_newFriendRequest(const QJsonObject&);
     void slot_r_list_myChats(const QJsonObject&);
     void slot_a_newChat(const QJsonObject&);
+    void slot_a_newMessage(const QJsonObject&);
 
 private slots:
     void on_closeButton_clicked();
@@ -39,11 +42,13 @@ private slots:
 
     void on_addnewfriendButton_clicked();
 
-    void on_toolButton_clicked();
-
     void on_grouplistButton_clicked();
 
     void on_settingButton_clicked();
+
+    void on_NewGroupButton_clicked();
+
+    void on_tagsButton_clicked();
 
 private:
     Ui::mainWindow *ui;
@@ -51,6 +56,7 @@ private:
     SearchNewFriend *snf;
     CreateChat *newChatDialog;
     Settings *settings;
+    TagEditor *tags;
     QVector<AddNewFriend*> friendRequests;
     QVector<StartChat*> friends;
     QVector<StartChat*> chats;

@@ -1,5 +1,6 @@
 #include "profilebar.h"
 #include "ui_profilebar.h"
+#include "director/director.h"
 
 ProfileBar::ProfileBar(QWidget *parent) :
     QWidget(parent),
@@ -22,6 +23,9 @@ void ProfileBar::setName(const QString &name) {
 
 void ProfileBar::setAvatar(const QString &newAvatar) {
     avatar = newAvatar;
+    QString imagePath = Director::getInstance()->genAvatarPath(avatar);
+    QString style = QString("border-image: url(%1);").arg(imagePath);
+    ui->avatar->setStyleSheet(style);
 }
 
 QString ProfileBar::getName() {

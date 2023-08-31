@@ -9,8 +9,8 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets LinguistTools)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets LinguistTools)
+find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets LinguistTools Multimedia)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets LinguistTools Multimedia)
 find_package(Qt6 COMPONENTS Network REQUIRED)
 set(TS_FILES client_zh_CN.ts)
 
@@ -45,13 +45,11 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ui/filedownload.h ui/filedownload.cpp ui/filedownload.ui
         ui/settings.h ui/settings.cpp ui/settings.ui
         ui/chatsettings.h ui/chatsettings.cpp ui/chatsettings.ui
-
-
-
-
-
-
-
+        ui/audiorecord.h ui/audiorecord.cpp ui/audiorecord.ui
+        ui/tageditor.h ui/tageditor.cpp ui/tageditor.ui
+        ui/friendrequest.h ui/friendrequest.cpp ui/friendrequest.ui
+        ui/photomessage.h ui/photomessage.cpp ui/photomessage.ui
+        ui/audiomessage.h ui/audiomessage.cpp ui/audiomessage.ui
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET client APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
@@ -77,6 +75,7 @@ endif()
 
 target_link_libraries(client PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 target_link_libraries(client PRIVATE Qt6::Network)
+target_link_libraries(client PRIVATE Qt6::Multimedia)
 
 include_directories(./)
 
