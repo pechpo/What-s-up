@@ -5,7 +5,7 @@
 #include "photomessage.h"
 #include "director/director.h"
 #include <QMessageBox>
-
+#include <QScrollBar>
 
 ChatWindow::ChatWindow(QWidget *parent) :
     QWidget(parent),
@@ -163,6 +163,12 @@ ChatWindow::Message ChatWindow::jsonToMessage(const QJsonObject &obj) {
     cur.senderName = name;
     cur.time = time;
     cur.content = obj.value("content").toString();
+    while (cur.content.endsWith('\n') || cur.content.endsWith(' ')) {
+        cur.content.removeLast();
+    }
+    if (cur.content.length() == 0) {
+        cur.content = tr("...");
+    }
     if (true == obj.value("is_file").toBool()) {
         QString format = obj.value("format").toString();
         if ("file" == format) {
@@ -228,17 +234,56 @@ QString ChatWindow::messageToString(const Message &cur) {
 }
 
 QWidget* ChatWindow::messageToWidget(const Message &cur) {
+    const quint32 gap = 0;
     if (Text == cur.type) {
                     QWidget *res = new QWidget(ui->messageArea);
+                    const quint32 width = ui->messageArea->width() - 16;
+                    /*QString color;
+                    if (cur.senderId == Director::getInstance()->myId()) {
+                        // myself
+                        color = "#4477CE";
+                    }
+                    else if (cur.senderId == 0) {
+                        // bot
+                        color = "#5C469C";
+                    }
+                    else {
+                        // others
+                        color = "black";
+                    }
+                    res->setFixedWidth(width);
+                    QTextEdit *head = new QTextEdit(res);
+                    head->setFixedWidth(width - gap - gap);
+                    head->setText(cur.senderName + " (" + QString::number(cur.senderId) + ")");
+                    head->setStyleSheet(QString("QTextEdit { border: none; font-size: 16px; color: %1 }").arg(color));
+                    head->move(gap, gap);
+                    QTextEdit *body = new QTextEdit(res);
+                    body->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+                    body->setSizeAdjustPolicy(QAbstractScrollArea::AdjustIgnored);
+                    body->setFixedWidth(width - gap - gap);
+                    body->setText(cur.content);
+                    body->setStyleSheet(QString("QTextEdit { border: none; font-size: 15px; color: %1 }").arg(color));
+                    body->move(gap, head->height() + gap);
+                    body->document()->adjustSize();
+                    qint32 docHeight = body->document()->size().height();
+                    qDebug() << "docHeight " << docHeight;
+                    body->setFixedHeight(docHeight);*/
+                    /*QAbstractTextDocumentLayout *layout = body->document()->documentLayout();
+                    QSizeF htmlSize = layout->documentSize();
+                    qDebug() << htmlSize;
+                    body->setFixedHeight(htmlSize.height());*/
                     QTextEdit *text = new QTextEdit(res);
+                    text->setFixedWidth(width - gap - gap);
+                    text->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+                    text->setStyleSheet("QTextEdit { border: none; }");
                     QString one = messageToString(cur);
                     text->setHtml(one);
-                    text->adjustSize();
-                    text->show();
-                    //qint32 docHeight = text->document()->
+                    text->document()->adjustSize();
+                    qint32 docHeight = text->document()->size().height();
                     //qDebug() << "docHeight " << docHeight;
-                    //text->setFixedHeight(docHeight);
+                    text->setFixedHeight(docHeight);
                     res->adjustSize();
+                    res->show();
                     return res;
     }
     else if (Picture == cur.type) {
@@ -304,9 +349,11 @@ void ChatWindow::updateMessage() {
         auto *p = messages[i] = messageToWidget(history[i]);
         p->move(gap, height);
         p->show();
-        height += gap + p->height();
+        height += /*gap + */p->height();
     }
     ui->messageArea->adjustSize();
+    auto *roll = ui->scrollArea->verticalScrollBar();
+    roll->setValue(roll->maximum());
 }
 
 void ChatWindow::appendText(const QString &text) {

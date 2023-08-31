@@ -85,6 +85,8 @@ void TagEditor::slot_r_editTags(const QJsonObject &obj) {
             choices->removeButton(p);
             delete p;
         }
+        ui->confirmButton->setVisible(false);
+        setWindowTitle(tr("为你推荐"));
         QJsonObject msg;
         msg.insert("type", "q_list_recommend");
         Director::getInstance()->sendJson(msg);

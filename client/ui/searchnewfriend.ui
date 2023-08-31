@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>300</width>
-    <height>263</height>
+    <height>218</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -34,7 +34,7 @@ border-radius:10px;</string>
    <property name="geometry">
     <rect>
      <x>180</x>
-     <y>220</y>
+     <y>180</y>
      <width>90</width>
      <height>25</height>
     </rect>

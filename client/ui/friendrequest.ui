@@ -16,7 +16,7 @@
   <widget class="QPushButton" name="requestButton">
    <property name="geometry">
     <rect>
-     <x>160</x>
+     <x>170</x>
      <y>20</y>
      <width>30</width>
      <height>30</height>
