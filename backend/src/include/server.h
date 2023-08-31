@@ -16,7 +16,7 @@ public:
     Server(const QString& address, quint16 port, QObject* parent = nullptr);
     ~Server();
 
-    void start(); // 开始监听
+    bool start(); // 开始监听
     void stop();  // 停止服务器
 
     static Server * get_instance();

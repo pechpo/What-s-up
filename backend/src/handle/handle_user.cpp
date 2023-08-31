@@ -8,6 +8,7 @@
 #include <QJsonArray>
 #include "handle.h"
 #include "db.h"
+#include "log.h"
 
 QJsonObject Handle::e_register(const int &ID, const QJsonObject &obj) {
     // Extract the necessary fields from obj
@@ -18,10 +19,14 @@ QJsonObject Handle::e_register(const int &ID, const QJsonObject &obj) {
     QString email = obj["email"].toString();
     DB *db = DB::get_instance();
     auto flag = db->e_register(User(id, name, password, avatar, email));
-    db->e_joinChat(id, 1);
     QJsonObject response;
     response["type"] = "r_register";
     response["success"] = flag;  // set to false if insertion fails
+    if (flag) {
+        writeLog("User Registration", "User with ID " + QString::number(id) + " registered successfully.", true);
+    } else {
+        writeLog("User Registration", "Failed to register user with ID " + QString::number(id) + ".", false);
+    }
     return response;
     // Send the response back to client
 }
@@ -36,6 +41,11 @@ QJsonObject Handle::q_login(const int &ID, const QJsonObject &obj) {
     QJsonObject response;
     response["type"] = "r_login";
     response["success"] = flag;  // set to false if query fails
+    if (flag) {
+        writeLog("User Login", "User with ID " + QString::number(id) + " logged in successfully.", true);
+    } else {
+        writeLog("User Login", "Failed to log in user with ID " + QString::number(id) + ".", false);
+    }
     return response;
     // Send the response back to client
 }
@@ -52,6 +62,7 @@ QJsonObject Handle::q_myInfo(const int &ID, const QJsonObject &obj) {
     response["password"] = flag.getPwd();
     response["email"] = flag.getEmail();
     response["avatar"] = flag.getAvatarName();
+    writeLog("Edit User Info", "User with ID " + QString::number(ID) + " edited their information.", true);
     return response;
     // Send the response back to client
 }
@@ -84,6 +95,7 @@ QJsonObject Handle::q_userInfo(const int &ID, const QJsonObject &obj) {
         }
     }
     response["sharedChats"] = sharedChats;
+    writeLog("Query Info", "User with ID " + QString::number(ID) + " queried information of user with ID " + QString::number(id) + ".", true);
     return response;
     // Send the response back to client
 }
@@ -105,6 +117,7 @@ QJsonObject Handle::e_editInfo(const int &ID, const QJsonObject &obj) {
     QJsonObject response;
     response["type"] = "r_editInfo";
     response["success"] = true;  // set to false if insertion fails
+    writeLog("Edit User Info", "User with ID " + QString::number(ID) + " edited their information.", true);
     return response;
     // Send the response back to client
 }
@@ -125,6 +138,7 @@ QJsonObject Handle::q_list_myChats(const int &ID, const QJsonObject &obj) {
         chats.append(chat);
     }
     response["chats"] = chats;
+    writeLog("Query Chat", "User with ID " + QString::number(ID) + " queried their chats.", true);
     return response;
     // Send the response back to client
 }
@@ -157,6 +171,11 @@ QJsonObject Handle::e_addFriend(const int &ID, const QJsonObject &obj) {
             y->sendMessage(OBJ);
         }
     }
+    if (flag) {
+        writeLog("Add Friend", "User with ID " + QString::number(ID) + " sent friend request to ID " + QString::number(id) + ".", true);
+    } else {
+        writeLog("Add Friend", "User with ID " + QString::number(ID) + " failed to send friend request to ID " + QString::number(id) + ".", false);
+    }
     return response;
     // Send the response back to client
 }
@@ -177,6 +196,7 @@ QJsonObject Handle::q_list_friendRequests(const int &ID, const QJsonObject &obj)
         users.append(user);
     }
     response["users"] = users;
+    writeLog("List Friend Requests", "User with ID " + QString::number(ID) + " listed their friend requests.", true);
     return response;
     // Send the response back to client
 }
@@ -197,6 +217,7 @@ QJsonObject Handle::q_list_myFriends(const int &ID, const QJsonObject &obj) {
         users.append(user);
     }
     response["users"] = users;
+    writeLog("List My Friends", "User with ID " + QString::number(ID) + " listed their friends.", true);
     return response;
     // Send the response back to client
 }
@@ -215,6 +236,82 @@ QJsonObject Handle::e_acceptFriend(const int &ID, const QJsonObject &obj) {
     if (!flag) {
         response["error"] = "Accept failed";
     }
+    if (flag) {
+        writeLog("Accept Friend", "User with ID " + QString::number(ID) + " accepted/rejected friend request from ID " + QString::number(id) + ".", true);
+    } else {
+        writeLog("Accept Friend", "User with ID " + QString::number(ID) + " failed to accept/reject friend request from ID " + QString::number(id) + ".", false);
+    }
+
+    return response;
+    // Send the response back to client
+}
+
+QJsonObject Handle::q_list_tags(const int &ID, const QJsonObject &obj) {
+    // Extract the necessary fields from obj
+    DB *db = DB::get_instance();
+    auto flag = db->q_list_tags(ID);
+
+    QJsonObject response;
+    response["type"] = "r_list_tags";
+    QJsonArray tags;
+    for (int i = 0; i < 36; i++) {
+        QJsonObject tag;
+        tag["tag"] = TAGS[i];
+        tag["value"] = flag[i] != 0;
+        tags.append(tag);
+    }
+    response["tags"] = tags;
+    writeLog("List Tags", "User with ID " + QString::number(ID) + " listed their tags.", true);
+    return response;
+    // Send the response back to client
+}
+
+QJsonObject Handle::e_editTags(const int &ID, const QJsonObject &obj) {
+    // Extract the necessary fields from obj
+    QJsonArray editList = obj["editList"].toArray();
+
+    DB *db = DB::get_instance();
+    std::vector<int> tags = db->q_list_tags(ID);
+    for (const auto &x: editList) {
+        auto y = x.toObject();
+        tags[tags_map[y["tag"].toString()]] = y["value"].toBool();
+    }
+    qDebug() << tags << tags.size();
+    auto flag = db->add_tag(ID, tags);
+
+    QJsonObject response;
+    response["type"] = "r_editTags";
+    response["success"] = flag;  // set to false if insertion fails
+    if (!flag) {
+        response["error"] = "Edit failed";
+    }
+    if (flag) {
+        writeLog("Edit Tags", "User with ID " + QString::number(ID) + " edited their tags.", true);
+    } else {
+        writeLog("Edit Tags", "User with ID " + QString::number(ID) + " failed to edit their tags.", false);
+    }
+
+    return response;
+    // Send the response back to client
+}
+
+QJsonObject Handle::q_list_recommend(const int &ID, const QJsonObject &obj) {
+    // Extract the necessary fields from obj
+    DB *db = DB::get_instance();
+    auto flag = db->q_list_recommend(ID);
+
+    QJsonObject response;
+    response["type"] = "r_list_recommend";
+    QJsonArray users;
+    for (const auto &x: flag) {
+        QJsonObject user;
+        user["id"] = (int) x.getID();
+        user["name"] = x.getName();
+        user["avatar"] = x.getAvatarName();
+        users.append(user);
+    }
+    response["users"] = users;
+    writeLog("List Recommend", "User with ID " + QString::number(ID) + " listed their recommended friends.", true);
     return response;
     // Send the response back to client
 }

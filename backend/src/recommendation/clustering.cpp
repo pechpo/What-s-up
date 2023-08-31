@@ -9,6 +9,7 @@
 #include <algorithm>
 #include <iterator>
 #include <limits>
+#include <qDebug>
 
 KMeans::KMeans(int k) : k_(k) {}
 
@@ -61,6 +62,7 @@ std::vector<std::vector<std::pair<quint32, std::vector<double>>>> KMeans::run(co
     // Iterative K-means clustering
     for (int iter = 0; iter < 100; ++iter) {
         // Assignment step
+        std::vector<std::vector<std::pair<quint32, std::vector<double>>>>(k_).swap(clusters);
         for (const auto& [userId, featureVec] : features) {
             double min_dist = std::numeric_limits<double>::max();
             int cluster_idx = 0;
