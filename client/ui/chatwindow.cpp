@@ -22,6 +22,8 @@ ChatWindow::ChatWindow(QWidget *parent) :
     ui->fileButton->setToolTip(tr("上传文件"));
     ui->settingsButton->setToolTip(tr("群聊信息设置"));
     ui->pushButton->setToolTip(tr("下载文件"));
+    ui->audioButton->setToolTip("发送语音");
+    ui->photoButton->setToolTip("上传照片");
 
     connect(Director::getInstance(), &Director::r_chatHistory, this, &ChatWindow::slot_r_chatHistory);
     connect(Director::getInstance(), &Director::a_newMessage, this, &ChatWindow::slot_a_newMessage);
