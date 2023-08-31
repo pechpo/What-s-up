@@ -433,11 +433,12 @@ void ChatWindow::on_fileButton_clicked() {
     }
 }
 
+//upload file status
 void ChatWindow::slot_r_updateFile(const QJsonObject &obj) {
+    waiting--;
     if (obj.value("format") != "file"){
         return;
     }
-    waiting--;
     if (!obj.value("success").isBool()) {
         return ;
     }
