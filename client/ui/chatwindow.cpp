@@ -246,22 +246,30 @@ QString ChatWindow::messageToString(const Message &cur) {
 
 QWidget* ChatWindow::messageToWidget(const Message &cur) {
     const quint32 gap = 0;
+    QString color;
+    if (cur.senderId == Director::getInstance()->myId()) {
+        // myself
+        color = "#4477CE";
+    }
+    else if (cur.senderId == 0) {
+        // bot
+        color = "#5C469C";
+    }
+    else {
+        // others
+        color = "black";
+    }
+    QWidget *res = new QWidget(ui->messageArea);
+    const quint32 width = ui->messageArea->width() - 16;
+    QTextEdit *head = new QTextEdit(res);
+    head->setFixedWidth(width - gap - gap);
+    head->setText(cur.senderName + " (" + QString::number(cur.senderId) + ")");
+    head->setStyleSheet(QString("QTextEdit { border: none; font-size: 16px; color: %1 }").arg(color));
+    head->move(gap, gap);
     if (Text == cur.type) {
                     QWidget *res = new QWidget(ui->messageArea);
                     const quint32 width = ui->messageArea->width() - 16;
-                    /*QString color;
-                    if (cur.senderId == Director::getInstance()->myId()) {
-                        // myself
-                        color = "#4477CE";
-                    }
-                    else if (cur.senderId == 0) {
-                        // bot
-                        color = "#5C469C";
-                    }
-                    else {
-                        // others
-                        color = "black";
-                    }
+                    /*
                     res->setFixedWidth(width);
                     QTextEdit *head = new QTextEdit(res);
                     head->setFixedWidth(width - gap - gap);
