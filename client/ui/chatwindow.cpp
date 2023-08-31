@@ -5,7 +5,7 @@
 #include "photomessage.h"
 #include "director/director.h"
 #include <QMessageBox>
-
+#include <QScrollBar>
 
 ChatWindow::ChatWindow(QWidget *parent) :
     QWidget(parent),
@@ -19,6 +19,18 @@ ChatWindow::ChatWindow(QWidget *parent) :
     dl = nullptr;
     ar = nullptr;
     settingsDialog = nullptr;
+    QString sendstyle = R"(
+        QPushButton {
+            border: none;
+            background-color: rgba(59, 180, 193, 0.75);
+            border-radius:10px;
+        }
+        QPushButton:hover {
+            background-color: rgba(59, 180, 193, 1);
+        }
+    )";
+    ui->sendButton->setStyleSheet(sendstyle);
+    messages.clear();
     ui->fileButton->setToolTip(tr("上传文件"));
     ui->settingsButton->setToolTip(tr("群聊信息设置"));
     ui->pushButton->setToolTip(tr("下载文件"));
@@ -29,6 +41,7 @@ ChatWindow::ChatWindow(QWidget *parent) :
     connect(Director::getInstance(), &Director::a_newMessage, this, &ChatWindow::slot_a_newMessage);
     connect(Director::getInstance(), &Director::r_send, this, &ChatWindow::slot_r_send);
     connect(Director::getInstance(), &Director::r_updateFile, this, &ChatWindow::slot_r_updateFile);
+    connect(Director::getInstance(), &Director::r_talk, this, &ChatWindow::slot_r_talk);
 
     switchChat(0);
 }
@@ -47,16 +60,32 @@ qint64 ChatWindow::recvChatId(const QJsonObject &obj) {
 }
 
 void ChatWindow::clear() {
+    //qDebug() << "message size: " << messages.size();
     for (quint32 i = 0; i < messages.size(); i++) {
+        if (!messages[i]) {
+            //qDebug() << "GGGGGGGGGGGGGGGGGGGGGGGGGGGG";
+            continue ;
+        }
         messages[i]->close();
         delete messages[i];
+        //qDebug() << "success " << i;
     }
+    messages.clear();
     ui->inputEdit->setPlainText("");
     //ui->MsgEdit->setHtml("");
 }
 
+void ChatWindow::slot_r_talk(const QJsonObject &obj) {
+    qint64 id = obj.value("chatId").toInt();
+    if (id > 0) {
+        switchChat(id);
+        //Director::getInstance()->raiseChat(id);
+    }
+}
+
 //switching chat
 void ChatWindow::switchChat(qint64 id) {
+    //qDebug() << "start switch";
     if (id != chatId) {
         clear();
     }
@@ -72,6 +101,7 @@ void ChatWindow::switchChat(qint64 id) {
     msg.insert("chatId", QJsonValue(chatId));
     msg.insert("count", 64);
     Director::getInstance()->sendJson(msg);
+    //qDebug() << "end switch";
 }
 
 void ChatWindow::slot_r_chatHistory(const QJsonObject &obj) {
@@ -144,6 +174,12 @@ ChatWindow::Message ChatWindow::jsonToMessage(const QJsonObject &obj) {
     cur.senderName = name;
     cur.time = time;
     cur.content = obj.value("content").toString();
+    while (cur.content.endsWith('\n') || cur.content.endsWith(' ')) {
+        cur.content.removeLast();
+    }
+    if (cur.content.length() == 0) {
+        cur.content = tr("...");
+    }
     if (true == obj.value("is_file").toBool()) {
         QString format = obj.value("format").toString();
         if ("file" == format) {
@@ -154,7 +190,7 @@ ChatWindow::Message ChatWindow::jsonToMessage(const QJsonObject &obj) {
         }
         else if ("audio" == format) {
             cur.type = Voice;
-            qDebug() << "recv voice";
+            //qDebug() << "recv voice";
         }
     }
     else {
@@ -209,17 +245,56 @@ QString ChatWindow::messageToString(const Message &cur) {
 }
 
 QWidget* ChatWindow::messageToWidget(const Message &cur) {
+    const quint32 gap = 0;
     if (Text == cur.type) {
                     QWidget *res = new QWidget(ui->messageArea);
+                    const quint32 width = ui->messageArea->width() - 16;
+                    /*QString color;
+                    if (cur.senderId == Director::getInstance()->myId()) {
+                        // myself
+                        color = "#4477CE";
+                    }
+                    else if (cur.senderId == 0) {
+                        // bot
+                        color = "#5C469C";
+                    }
+                    else {
+                        // others
+                        color = "black";
+                    }
+                    res->setFixedWidth(width);
+                    QTextEdit *head = new QTextEdit(res);
+                    head->setFixedWidth(width - gap - gap);
+                    head->setText(cur.senderName + " (" + QString::number(cur.senderId) + ")");
+                    head->setStyleSheet(QString("QTextEdit { border: none; font-size: 16px; color: %1 }").arg(color));
+                    head->move(gap, gap);
+                    QTextEdit *body = new QTextEdit(res);
+                    body->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+                    body->setSizeAdjustPolicy(QAbstractScrollArea::AdjustIgnored);
+                    body->setFixedWidth(width - gap - gap);
+                    body->setText(cur.content);
+                    body->setStyleSheet(QString("QTextEdit { border: none; font-size: 15px; color: %1 }").arg(color));
+                    body->move(gap, head->height() + gap);
+                    body->document()->adjustSize();
+                    qint32 docHeight = body->document()->size().height();
+                    qDebug() << "docHeight " << docHeight;
+                    body->setFixedHeight(docHeight);*/
+                    /*QAbstractTextDocumentLayout *layout = body->document()->documentLayout();
+                    QSizeF htmlSize = layout->documentSize();
+                    qDebug() << htmlSize;
+                    body->setFixedHeight(htmlSize.height());*/
                     QTextEdit *text = new QTextEdit(res);
+                    text->setFixedWidth(width - gap - gap);
+                    text->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+                    text->setStyleSheet("QTextEdit { border: none; }");
                     QString one = messageToString(cur);
                     text->setHtml(one);
-                    text->adjustSize();
-                    text->show();
-                    //qint32 docHeight = text->document()->
+                    text->document()->adjustSize();
+                    qint32 docHeight = text->document()->size().height();
                     //qDebug() << "docHeight " << docHeight;
-                    //text->setFixedHeight(docHeight);
+                    text->setFixedHeight(docHeight);
                     res->adjustSize();
+                    res->show();
                     return res;
     }
     else if (Picture == cur.type) {
@@ -238,6 +313,7 @@ QWidget* ChatWindow::messageToWidget(const Message &cur) {
                     QWidget *res = new QWidget(ui->messageArea);
                     return res;
     }
+    //qDebug() << "nullptr!!!!!!!!!!!!!!!!..";
     return nullptr;
 }
 
@@ -285,9 +361,11 @@ void ChatWindow::updateMessage() {
         auto *p = messages[i] = messageToWidget(history[i]);
         p->move(gap, height);
         p->show();
-        height += gap + p->height();
+        height += /*gap + */p->height();
     }
     ui->messageArea->adjustSize();
+    auto *roll = ui->scrollArea->verticalScrollBar();
+    roll->setValue(roll->maximum());
 }
 
 void ChatWindow::appendText(const QString &text) {

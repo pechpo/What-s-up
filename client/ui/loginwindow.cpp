@@ -12,6 +12,18 @@ LoginWindow::LoginWindow(QWidget *parent) :
     ui->setupUi(this);
     connect(Director::getInstance(), &Director::receiveTestString, this, &LoginWindow::on_receiveTestString);
 
+    QString connectstyle = R"(
+        QPushButton {
+            border: none;
+            background-color: rgba(255, 255, 255, 0.75);
+            border-radius:10px;
+        }
+        QPushButton:hover {
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+    )";
+    ui->connectButton->setStyleSheet(connectstyle);
+
     ui->closeButton->setVisible(false);
     ui->minimizeButton->setVisible(false);
     ui->receivedText->setVisible(false);

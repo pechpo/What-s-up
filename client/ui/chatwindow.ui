@@ -53,7 +53,8 @@ background-image: url(:/images/image/Logo.png);</string>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: rgb(59, 180, 193);</string>
+    <string notr="true">background-color: rgb(59, 180, 193);
+border-radius:10px;</string>
    </property>
    <property name="text">
     <string>发送</string>
@@ -160,6 +161,12 @@ background-image: url(:/images/image/Logo.png);</string>
      <width>481</width>
      <height>321</height>
     </rect>
+   </property>
+   <property name="verticalScrollBarPolicy">
+    <enum>Qt::ScrollBarAlwaysOff</enum>
+   </property>
+   <property name="horizontalScrollBarPolicy">
+    <enum>Qt::ScrollBarAlwaysOff</enum>
    </property>
    <property name="widgetResizable">
     <bool>true</bool>

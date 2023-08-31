@@ -12,6 +12,18 @@ TagEditor::TagEditor(QWidget *parent) :
     ui->setupUi(this);
     ui->scrollArea->setWidgetResizable(false);
 
+    QString confirmstyle = R"(
+        QPushButton {
+            border: none;
+            background-color: rgba(255, 255, 255, 0.75);
+            border-radius:10px;
+        }
+        QPushButton:hover {
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+    )";
+    ui->confirmButton->setStyleSheet(confirmstyle);
+
     choices = new QButtonGroup(ui->ScrollContent);
     choices->setExclusive(false);
     state.clear();
@@ -85,6 +97,8 @@ void TagEditor::slot_r_editTags(const QJsonObject &obj) {
             choices->removeButton(p);
             delete p;
         }
+        ui->confirmButton->setVisible(false);
+        setWindowTitle(tr("为你推荐"));
         QJsonObject msg;
         msg.insert("type", "q_list_recommend");
         Director::getInstance()->sendJson(msg);

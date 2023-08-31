@@ -65,8 +65,7 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: rgb(59, 180, 193);
-border-radius:10px;</string>
+    <string notr="true"/>
    </property>
    <property name="text">
     <string>创建</string>

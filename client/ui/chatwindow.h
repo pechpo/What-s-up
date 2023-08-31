@@ -44,6 +44,7 @@ public slots:
     void slot_a_newMessage(const QJsonObject&);
     void slot_r_send(const QJsonObject&);
     void slot_r_updateFile(const QJsonObject &obj);
+    void slot_r_talk(const QJsonObject&);
 
 private slots:
     void on_sendButton_clicked();

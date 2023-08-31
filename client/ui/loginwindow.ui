@@ -29,7 +29,7 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: rgb(233, 228, 230);
+    <string notr="true">background-color: rgb(246, 245, 245);
 background-image: url(:/images/image/Logo3.png);</string>
    </property>
    <widget class="QLabel" name="hostLabel">

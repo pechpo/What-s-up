@@ -16,6 +16,30 @@ SearchNewFriend::SearchNewFriend(QWidget *parent) :
     userId = 0;
     waiting = 0;
 
+    QString searchstyle = R"(
+        QPushButton {
+            border: none;
+            background-color: rgba(255, 255, 255, 0.75);
+            border-radius:10px;
+        }
+        QPushButton:hover {
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+    )";
+    QString confirmstyle = R"(
+        QPushButton {
+            border: none;
+            background-color: rgba(59, 180, 193, 0.75);
+            border-radius:10px;
+        }
+        QPushButton:hover {
+            background-color: rgba(59, 180, 193, 1);
+        }
+    )";
+
+    ui->SearchButton->setStyleSheet(searchstyle);
+    ui->switchButton->setStyleSheet(searchstyle);
+    ui->confirmButton->setStyleSheet(confirmstyle);
     ui->switchButton->setToolTip(tr("搜索好友/群聊"));
 
     connect(Director::getInstance(), &Director::r_userInfo, this, &SearchNewFriend::slot_r_userInfo);

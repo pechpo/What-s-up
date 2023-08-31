@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: rgb(223, 243, 232);
+    <string notr="true">background-color: rgb(246, 245, 245);
 background-image: url(:/images/image/Logo3.png);</string>
    </property>
    <widget class="QLabel" name="label">
@@ -41,8 +41,7 @@ background-image: url(:/images/image/Logo3.png);</string>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-radius:15px;
-background-color: rgb(197, 238, 241);</string>
+     <string notr="true"/>
     </property>
     <property name="text">
      <string>注册</string>
@@ -61,8 +60,7 @@ background-color: rgb(197, 238, 241);</string>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(87, 227, 137);
-border-radius:10px;</string>
+     <string notr="true"/>
     </property>
     <property name="text">
      <string>注册</string>
