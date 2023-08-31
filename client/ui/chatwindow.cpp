@@ -259,9 +259,9 @@ QWidget* ChatWindow::messageToWidget(const Message &cur) {
         // others
         color = "black";
     }
-    QWidget *res = new QWidget(ui->messageArea);
+    QWidget *tot = new QWidget(ui->messageArea);
     const quint32 width = ui->messageArea->width() - 16;
-    QTextEdit *head = new QTextEdit(res);
+    QTextEdit *head = new QTextEdit(tot);
     head->setFixedWidth(width - gap - gap);
     head->setText(cur.senderName + " (" + QString::number(cur.senderId) + ")");
     head->setStyleSheet(QString("QTextEdit { border: none; font-size: 16px; color: %1 }").arg(color));
@@ -306,23 +306,23 @@ QWidget* ChatWindow::messageToWidget(const Message &cur) {
                     return res;
     }
     else if (Picture == cur.type) {
-                    photoMessage *res = new photoMessage(ui->messageArea);
+                    photoMessage *res = new photoMessage(tot);
                     res->init(cur, chatId, &waiting);
+                    res->move(gap, head->height() + gap);
                     res->show();
-                    return res;
     }
     else if (Voice == cur.type) {
-                    audioMessage *res = new audioMessage(ui->messageArea);
+                    audioMessage *res = new audioMessage(tot);
                     res->init(cur, chatId, &waiting);
+                    res->move(gap, head->height() + gap);
                     res->show();
-                    return res;
     }
     else if (File == cur.type) {
-                    QWidget *res = new QWidget(ui->messageArea);
-                    return res;
+                    QWidget *res = new QWidget(tot);
+                    res->show();
     }
     //qDebug() << "nullptr!!!!!!!!!!!!!!!!..";
-    return nullptr;
+    return tot;
 }
 
 /*
