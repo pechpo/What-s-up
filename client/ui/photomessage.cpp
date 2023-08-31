@@ -60,6 +60,7 @@ bool photoMessage::slot_receive_photo(const QJsonObject &obj){
     qDebug() << "slot_receive_photo_message";
     qDebug() << path;
     show_photo();
+    return true;
 }
 
 void photoMessage::show_photo(){
