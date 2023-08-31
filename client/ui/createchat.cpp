@@ -14,6 +14,17 @@ CreateChat::CreateChat(QWidget *parent) :
 
     choices = new QButtonGroup(ui->scrollAreaWidgetContents);
     choices->setExclusive(false);
+    QString style = R"(
+        QPushButton {
+            border: none;
+            background-color: rgba(59, 180, 193,0.75);
+            border-radius:10px;
+        }
+        QPushButton:hover {
+            background-color: rgba(59, 180, 193, 1);
+        }
+    )";
+    ui->pushButton->setStyleSheet(style);
     chosen.clear();
     connect(choices, &QButtonGroup::idToggled, this, &CreateChat::checkStateChanged);
     connect(Director::getInstance(), &Director::r_createChat, this, &CreateChat::slot_r_createChat);

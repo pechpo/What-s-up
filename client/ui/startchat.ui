@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">border-image: url(:/images/image/startChat.png);</string>
+    <string notr="true">border-image: url(:/images/image/message.png);</string>
    </property>
    <property name="text">
     <string/>

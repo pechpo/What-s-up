@@ -28,6 +28,9 @@ Director::Director(QObject *parent)
     recvEmitter.insert("r_editChatInfo", &Director::r_editChatInfo);
     recvEmitter.insert("r_talk", &Director::r_talk);
     recvEmitter.insert("r_exitChat", &Director::r_exitChat);
+    recvEmitter.insert("r_list_tags", &Director::r_list_tags);
+    recvEmitter.insert("r_editTags", &Director::r_editTags);
+    recvEmitter.insert("r_list_recommend", &Director::r_list_recommend);
     recvEmitter.insert("a_newMessage", &Director::a_newMessage);
     recvEmitter.insert("a_newFriendRequest", &Director::a_newFriendRequest);
     recvEmitter.insert("a_newChat", &Director::a_newChat);
@@ -39,7 +42,6 @@ Director::Director(QObject *parent)
 }
 
 void Director::act(const QJsonObject &obj) {  //after receiving the json package, emit the corresponding signal
-    qDebug() << "recv: " << obj;
     // emit receiveTestString(obj.value("text").toString());
     if (!obj.contains("type")) {
         // todo
@@ -60,6 +62,10 @@ void Director::act(const QJsonObject &obj) {  //after receiving the json package
     }
     Emitter e = recvEmitter.value(index);
     emit (this->*e)(obj);
+    if (obj["type"].toString() == "r_downloadFile"){
+        qDebug() << "receive file ";
+    }
+    else qDebug() << "recv: " << obj;
 }
 
 Director::~Director() {
@@ -105,8 +111,12 @@ QString Director::Hash(const QString &o) {
 bool Director::sendJson(const QJsonObject &obj) {
     Connection *conn = getConnection();
     if (conn->isConnected()) {
-        qDebug() << "send: " << obj;
         conn->sendMessage(obj);
+        //simplify file json output
+        if (obj["type"].toString() == "e_updateFile"){
+            qDebug() << "sendfile ";
+        }
+        else qDebug() << "send: " << obj;
         return true;
     }
     else {

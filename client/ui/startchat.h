@@ -24,7 +24,6 @@ public:
     void setNewTag(bool);
 
 public slots:
-    void slot_r_talk(const QJsonObject&);
 
 private slots:
     void on_chatButton_clicked();

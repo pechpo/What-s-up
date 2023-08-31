@@ -14,7 +14,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>登录</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: white;</string>
@@ -83,8 +83,7 @@ background-color: rgb(245, 245, 245);</string>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-radius:10px;
-background-color: rgb(59, 180, 193);</string>
+     <string notr="true"/>
     </property>
     <property name="text">
      <string>登录</string>
@@ -100,9 +99,7 @@ background-color: rgb(59, 180, 193);</string>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">;
-background-color: rgb(222, 221, 218);
-border-radius: 10px;</string>
+     <string notr="true"/>
     </property>
     <property name="text">
      <string>注册</string>
@@ -205,12 +202,12 @@ height: 0;</string>
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>31</width>
-      <height>31</height>
+      <width>30</width>
+      <height>30</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">image: url(:/images/image/settings.png);</string>
+     <string notr="true"/>
     </property>
     <property name="text">
      <string/>

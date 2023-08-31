@@ -12,10 +12,12 @@ mainWindow::mainWindow(QWidget *parent) :
 //    this->setWindowFlags(Qt::FramelessWindowHint | Qt::Widget);
 //    this->setAttribute(Qt::WA_TranslucentBackground);      //把初始的 dialog 窗口设置为透明的
     ui->setupUi(this);
+    ui->GroupList->setWidgetResizable(false);
 
     snf = nullptr;
     newChatDialog = nullptr;
     settings = nullptr;
+    tags = nullptr;
     waiting = 0;
     this->setState(Director::Friend);
 
@@ -27,16 +29,36 @@ mainWindow::mainWindow(QWidget *parent) :
     connect(Director::getInstance(), &Director::a_newMessage, this, &mainWindow::slot_a_newMessage);
 
     cw = new ChatWindow(this);
-    cw->move(250, 50);
+    cw->move(270, 50);
     cw->show();
+
+    QIcon Group(":/images/image/group.png");
+    QIcon AddNewFriend(":/images/image/AddNewFriend.png");
+    QIcon CreatNewGroup(":/images/image/StartNewGroup.png");
+    QIcon Settings(":/images/image/settings.png");
+    QIcon Tags(":/images/image/tags.png");
+
+    ui->grouplistButton->setIcon(Group);
+    ui->addnewfriendButton->setIcon(AddNewFriend);
+    ui->NewGroupButton->setIcon(CreatNewGroup);
+    ui->settingButton->setIcon(Settings);
+    ui->tagsButton->setIcon(Tags);
+
+    ui->grouplistButton->setIconSize(QSize(60,60));
+    ui->addnewfriendButton->setIconSize(QSize(60,60));
+    ui->NewGroupButton->setIconSize(QSize(55,55));
+    ui->settingButton->setIconSize(QSize(40,40));
+    ui->tagsButton->setIconSize(QSize(40,40));
 
     ui->closeButton->setVisible(false);
     ui->minimizeButton->setVisible(false);
+    ui->GroupList->setWidgetResizable(false);
     ui->GroupList->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
     ui->settingButton->setToolTip(tr("设置个人信息"));
     ui->grouplistButton->setToolTip(tr("显示群聊/好友信息"));
     ui->NewGroupButton->setToolTip(tr("新建群聊"));
     ui->addnewfriendButton->setToolTip(tr("添加好友"));
+    ui->tagsButton->setToolTip("设置个人标签");
 
     /*friendRequests.resize(20);
     for (int i = 0; i < 20; i++) {
@@ -58,6 +80,14 @@ mainWindow::mainWindow(QWidget *parent) :
     waitingIsZero();*/
     //for (quint16 i = 0; i < 50; i++)
     //    cw->appendText("Hello, world" + QString::number(i));
+
+    //create path to store photo and audio.
+    QString path = QCoreApplication::applicationDirPath() + "/tmp";
+    QDir dir(path);
+    if (!dir.exists()) {
+        if (!dir.mkdir(path))
+            qDebug() << "Failed to create folder";
+    }
 }
 
 mainWindow::~mainWindow()
@@ -319,6 +349,16 @@ void mainWindow::on_NewGroupButton_clicked()
     newChatDialog->show();
 }
 
+void mainWindow::on_tagsButton_clicked()
+{
+    if (nullptr != tags) {
+        tags->close();
+        delete tags;
+    }
+    tags = new TagEditor(this);
+    tags->show();
+}
+
 void mainWindow::slot_a_newMessage(const QJsonObject &obj) {
     quint64 id = obj.value("chatId").toInt();
     for (quint32 i = 1; i < chats.size(); i++) {
@@ -343,3 +383,4 @@ void mainWindow::raiseChat(qint64 id) {
         }
     }
 }
+
