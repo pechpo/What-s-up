@@ -18,6 +18,13 @@ bool photoMessage::init(const ChatWindow::Message &obj, qint64 chatId, quint32 *
     if (chatId == 0) {
         return false;
     }
+    path = QCoreApplication::applicationDirPath() + "/tmp/" + obj.content;
+    QFile file(path);
+    //if the photo exists, then no need to request the photo.
+    if (file.exists()){
+        show_photo();
+        return true;
+    }
     QJsonObject msg;
     msg.insert("type", "q_downloadFile");
     msg.insert("chatId", QJsonValue(chatId));
@@ -41,7 +48,7 @@ bool photoMessage::slot_receive_photo(const QJsonObject &obj){
     //if the audio exists, then no need to store the audio.
     if (file.exists()){
         show_photo();
-        return false;
+        return true;
     }
     if (!file.open(QIODevice::ReadWrite)){
         qDebug() << "failed to write file.";

@@ -21,6 +21,13 @@ bool audioMessage::init(const ChatWindow::Message &obj, qint64 chatId, quint32 *
     if (chatId == 0) {
         return false;
     }
+    path = QCoreApplication::applicationDirPath() + "/tmp/" + obj.content;
+    QFile file(path);
+    //if the audio exists, then no need to request the audio.
+    if (file.exists()){
+        getAudioLength();
+        return true;
+    }
     QJsonObject msg;
     msg.insert("type", "q_downloadFile");
     msg.insert("chatId", QJsonValue(chatId));
@@ -31,6 +38,14 @@ bool audioMessage::init(const ChatWindow::Message &obj, qint64 chatId, quint32 *
     waiting = wait;
     (*waiting)++;
     return true;
+}
+
+void audioMessage::getAudioLength(){
+    player = new QMediaPlayer;
+    player->setSource(QUrl::fromLocalFile(path));
+    qint64 time = player->metaData()[QMediaMetaData::Duration].toInt();
+    if (time != 0)
+        ui->label->setText(QString("%1s").arg(time / 1000.0));
 }
 
 //after recieve the audio file, call this function to store file
@@ -54,13 +69,7 @@ bool audioMessage::slot_receive_audio(const QJsonObject &obj){
     (*waiting)--;
     qDebug() << "slot_receive_audio_message";
     qDebug() << path;
-
-    //get audio length
-    player = new QMediaPlayer;
-    player->setSource(QUrl::fromLocalFile(path));
-    qint64 time = player->metaData()[QMediaMetaData::Duration].toInt();
-    if (time != 0)
-        ui->label->setText(QString("%1s").arg(time / 1000.0));
+    getAudioLength();
     return true;
 }
 

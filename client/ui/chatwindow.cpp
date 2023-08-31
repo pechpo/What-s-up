@@ -434,6 +434,9 @@ void ChatWindow::on_fileButton_clicked() {
 }
 
 void ChatWindow::slot_r_updateFile(const QJsonObject &obj) {
+    if (obj.value("format") != "file"){
+        return;
+    }
     waiting--;
     if (!obj.value("success").isBool()) {
         return ;
@@ -521,6 +524,7 @@ void ChatWindow::on_photoButton_clicked()
         show_error();
         return ;
     }
+    qDebug() << waiting;
     if (0 == waiting) {
         QString str = QFileDialog::getOpenFileName(this, tr("Select photo"), "" , "Image(*.png *.jpg *.bmp)");
         if ("" == str) return;

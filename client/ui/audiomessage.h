@@ -21,6 +21,7 @@ class audioMessage : public QWidget
 public:
     explicit audioMessage(QWidget *parent = nullptr);
     bool init(const ChatWindow::Message &obj, qint64 chatId, quint32 *wait);
+    void getAudioLength();
     ~audioMessage();
 
 public slots:
