@@ -21,8 +21,6 @@ StartChat::StartChat(QWidget *parent, bool isRealPerson) :
     ui->newMsgLabel->setVisible(false);
 
     hasNew = false;
-
-    connect(Director::getInstance(), &Director::r_talk, this, &StartChat::slot_r_talk);
 }
 
 StartChat::~StartChat()
@@ -61,14 +59,6 @@ void StartChat::on_chatButton_clicked()
     else {
         setNewTag(false);
         Director::getInstance()->enterChat(id);
-    }
-}
-
-void StartChat::slot_r_talk(const QJsonObject &obj) {
-    qint64 id = obj.value("chatId").toInt();
-    if (id > 0) {
-        Director::getInstance()->enterChat(id);
-        //Director::getInstance()->raiseChat(id);
     }
 }
 

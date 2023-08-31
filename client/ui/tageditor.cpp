@@ -70,6 +70,9 @@ void TagEditor::slot_r_list_tags(const QJsonObject &obj) {
         QJsonObject obj = arr[i].toObject();
         state[i] = qMakePair(obj.value("tag").toString(), obj.value("value").toBool());
         QCheckBox *box = new QCheckBox(state[i].first, ui->ScrollContent);
+        if (true == state[i].second) {
+            box->setCheckState(Qt::Checked);
+        }
         choices->addButton(box, i);
     }
     qDebug() << "show tags";
