@@ -19,6 +19,17 @@ ChatWindow::ChatWindow(QWidget *parent) :
     dl = nullptr;
     ar = nullptr;
     settingsDialog = nullptr;
+    QString sendstyle = R"(
+        QPushButton {
+            border: none;
+            background-color: rgba(59, 180, 193, 0.75);
+            border-radius:10px;
+        }
+        QPushButton:hover {
+            background-color: rgba(59, 180, 193, 1);
+        }
+    )";
+    ui->sendButton->setStyleSheet(sendstyle);
     messages.clear();
     ui->fileButton->setToolTip(tr("上传文件"));
     ui->settingsButton->setToolTip(tr("群聊信息设置"));

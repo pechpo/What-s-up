@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>选择你的个人特点</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(246, 245, 245);
+</string>
+  </property>
   <widget class="QScrollArea" name="scrollArea">
    <property name="geometry">
     <rect>

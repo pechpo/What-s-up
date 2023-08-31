@@ -10,6 +10,19 @@ Settings::Settings(QWidget *parent) :
 
     bar = new ProfileBar(ui->widget);
 
+    QString confirmstyle = R"(
+        QPushButton {
+            border: none;
+            background-color: rgba(4, 137, 152, 0.75);
+            border-radius:10px;
+        }
+        QPushButton:hover {
+            background-color: rgba(4, 137, 152, 1);
+        }
+    )";
+
+    ui->pushButton->setStyleSheet(confirmstyle);
+
     connect(Director::getInstance(), &Director::r_editInfo, this, &Settings::slot_r_editInfo);  //send signal to dialog window if r_login received
     connect(Director::getInstance(), &Director::r_myInfo, this, &Settings::slot_r_myInfo);  //send signal to dialog window if r_login received
 }
