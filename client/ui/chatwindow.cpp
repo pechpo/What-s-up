@@ -150,8 +150,9 @@ ChatWindow::Message ChatWindow::jsonToMessage(const QJsonObject &obj) {
         else if ("photo" == format) {
             cur.type = Picture;
         }
-        else if ("voice" == format) {
+        else if ("audio" == format) {
             cur.type = Voice;
+            qDebug() << "recv voice";
         }
     }
     else {
@@ -212,20 +213,29 @@ QWidget* ChatWindow::messageToWidget(const Message &cur) {
                     QString one = messageToString(cur);
                     text->setHtml(one);
                     text->adjustSize();
-                    //qint32 docHeight = text->document()->size().height();
+                    text->show();
+                    //qint32 docHeight = text->document()->
+                    //qDebug() << "docHeight " << docHeight;
                     //text->setFixedHeight(docHeight);
                     res->adjustSize();
                     return res;
     }
     else if (Picture == cur.type) {
+                    photoMessage *res = new photoMessage(ui->messageArea);
 
+                    res->show();
+                    return res;
     }
     else if (Voice == cur.type) {
-
+                    audioMessage *res = new audioMessage(ui->messageArea);
+                    res->show();
+                    return res;
     }
     else if (File == cur.type) {
-
+                    QWidget *res = new QWidget(ui->messageArea);
+                    return res;
     }
+    return nullptr;
 }
 
 /*
