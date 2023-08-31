@@ -37,6 +37,10 @@ QJsonObject Handle::q_chatHistory(const int &ID, const QJsonObject &obj) {
         message["time"] = x.getTime();
         message["format"] = x.getFormat();
         message["filename"] = x.getFileName();
+        if (x.getIsFile()) {
+            message["content"] = x.getFileName();
+        }
+//        qDebug() << message;
         chatHistory.append(message);
     }
     response["chatHistory"] = chatHistory;

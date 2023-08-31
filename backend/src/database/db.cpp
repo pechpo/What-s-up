@@ -315,9 +315,8 @@ bool DB::e_send(const Message &message) {
 
 QList<Message> DB::q_chatHistory(const quint32 &chat_ID, const quint32 &time, const quint32 &count) {
     QSqlQuery query(database);
-    query.prepare("SELECT * FROM message WHERE chat_id = ? AND is_file = ?");
+    query.prepare("SELECT * FROM message WHERE chat_id = ?");
     query.addBindValue(chat_ID);
-    query.addBindValue(false);
 //    query.addBindValue(time);
 //    query.addBindValue(count);
     query.exec();

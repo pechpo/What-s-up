@@ -271,7 +271,7 @@ QJsonObject Handle::e_editTags(const int &ID, const QJsonObject &obj) {
     QJsonArray editList = obj["editList"].toArray();
 
     DB *db = DB::get_instance();
-    std::vector<int> tags(36);
+    std::vector<int> tags = db->q_list_tags(ID);
     for (const auto &x: editList) {
         auto y = x.toObject();
         tags[tags_map[y["tag"].toString()]] = y["value"].toBool();

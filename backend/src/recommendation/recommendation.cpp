@@ -35,7 +35,7 @@ std::vector<quint32> Recommendation::recommendFriends(const quint32 &userId) {
     std::unordered_map<quint32, std::vector<int>> users = db->get_all_tags();
     // Fetch user tags from the database
 
-    KMeans kmeans(4);  // Assuming 5 clusters
+    KMeans kmeans(4);  // Assuming 4 clusters
     auto clusters = kmeans.run(users);
 
     // Logic to recommend friends based on clustering result
@@ -43,10 +43,6 @@ std::vector<quint32> Recommendation::recommendFriends(const quint32 &userId) {
     std::vector<quint32> existing_friends = getFriends(userId);  // Fetch existing friends to exclude them
 
     for (const auto &cluster: clusters) {
-//        for (const auto &[uid, _]: cluster) {
-//            qDebug() << uid << ' ';
-//        }
-//        qDebug() << "------------------\n";
         for (const auto &[uid, _]: cluster) {
             if (uid == userId) {
                 for (const auto &[other_uid, _]: cluster) {
