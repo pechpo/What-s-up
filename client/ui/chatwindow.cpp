@@ -224,12 +224,13 @@ QWidget* ChatWindow::messageToWidget(const Message &cur) {
     }
     else if (Picture == cur.type) {
                     photoMessage *res = new photoMessage(ui->messageArea);
-
+                    res->init(cur, chatId, &waiting);
                     res->show();
                     return res;
     }
     else if (Voice == cur.type) {
                     audioMessage *res = new audioMessage(ui->messageArea);
+                    res->init(cur, chatId, &waiting);
                     res->show();
                     return res;
     }

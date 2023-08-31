@@ -8,6 +8,7 @@
 #include <QAudioOutput>
 #include <QMediaDevices>
 #include <QAudioDevice>
+#include "chatwindow.h"
 
 namespace Ui {
 class audioMessage;
@@ -19,10 +20,11 @@ class audioMessage : public QWidget
 
 public:
     explicit audioMessage(QWidget *parent = nullptr);
-    bool init(const QJsonObject &obj);
+    bool init(const ChatWindow::Message &obj, qint64 chatId, quint32 *wait);
     ~audioMessage();
 
 public slots:
+    bool slot_receive_audio(const QJsonObject &obj);
     void slot_StatusChange(QMediaPlayer::MediaStatus status);
 
 private slots:
@@ -34,6 +36,8 @@ private:
     QMediaPlayer *player;
     QAudioOutput *audioOutput;
     QString path;
+    quint32 *waiting;
+    QString fileName;
 };
 
 #endif // AUDIOMESSAGE_H

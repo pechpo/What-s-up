@@ -57,5 +57,6 @@
         <file>image/tags.png</file>
         <file>image/audio record.png</file>
         <file>image/upload image.png</file>
+        <file>image/stop.png</file>
     </qresource>
 </RCC>

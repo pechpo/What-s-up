@@ -27,6 +27,17 @@ public:
     void switchChat(qint64);
     void appendText(const QString&);
     void show_error();
+    enum MsgType {
+        Text, File, Picture, Voice
+    };
+    struct Message {
+        bool isSystem;
+        MsgType type;
+        qint64 senderId;
+        QString time;
+        QString senderName;
+        QString content;
+    };
 
 public slots:
     void slot_r_chatHistory(const QJsonObject&);
@@ -58,17 +69,6 @@ private:
     qint64 recvChatId(const QJsonObject&);
 
     qint64 chatId;
-    enum MsgType {
-        Text, File, Picture, Voice
-    };
-    struct Message {
-        bool isSystem;
-        MsgType type;
-        qint64 senderId;
-        QString time;
-        QString senderName;
-        QString content;
-    };
     QVector<Message> history;
     QVector<QWidget*> messages;
     void clear();
