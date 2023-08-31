@@ -21,7 +21,7 @@ public:
     void addChoice(quint32, const QString&);
     void update();
 
-public:
+public slots:
     void slot_r_createChat(const QJsonObject&);
 
 private slots:

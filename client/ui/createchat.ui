@@ -7,11 +7,11 @@
     <x>0</x>
     <y>0</y>
     <width>300</width>
-    <height>344</height>
+    <height>340</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>发起新的聊天</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(246, 245, 245);</string>
@@ -20,13 +20,13 @@
    <property name="geometry">
     <rect>
      <x>25</x>
-     <y>10</y>
+     <y>7</y>
      <width>250</width>
-     <height>31</height>
+     <height>30</height>
     </rect>
    </property>
    <property name="text">
-    <string>Select friends &amp; create a chat</string>
+    <string>选择好友并创建聊天</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
@@ -65,10 +65,10 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: rgb(59, 180, 193);</string>
+    <string notr="true"/>
    </property>
    <property name="text">
-    <string>Confirm</string>
+    <string>创建</string>
    </property>
   </widget>
  </widget>

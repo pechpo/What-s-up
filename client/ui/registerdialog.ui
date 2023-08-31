@@ -6,25 +6,25 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>480</width>
-    <height>640</height>
+    <width>398</width>
+    <height>300</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>注册</string>
   </property>
   <widget class="QWidget" name="widget" native="true">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>30</y>
+     <x>0</x>
+     <y>0</y>
      <width>400</width>
-     <height>321</height>
+     <height>301</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">border-radius: 30px;
-background-color: rgb(223, 243, 232);</string>
+    <string notr="true">background-color: rgb(246, 245, 245);
+background-image: url(:/images/image/Logo3.png);</string>
    </property>
    <widget class="QLabel" name="label">
     <property name="geometry">
@@ -41,8 +41,7 @@ background-color: rgb(223, 243, 232);</string>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-radius:15px;
-background-color: rgb(197, 238, 241);</string>
+     <string notr="true"/>
     </property>
     <property name="text">
      <string>注册</string>
@@ -54,15 +53,14 @@ background-color: rgb(197, 238, 241);</string>
    <widget class="QPushButton" name="confirmBtn">
     <property name="geometry">
      <rect>
-      <x>230</x>
-      <y>270</y>
+      <x>240</x>
+      <y>260</y>
       <width>90</width>
       <height>25</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(87, 227, 137);
-border-radius:10px;</string>
+     <string notr="true"/>
     </property>
     <property name="text">
      <string>注册</string>
@@ -73,7 +71,7 @@ border-radius:10px;</string>
      <rect>
       <x>50</x>
       <y>170</y>
-      <width>71</width>
+      <width>61</width>
       <height>21</height>
      </rect>
     </property>
@@ -86,7 +84,7 @@ border-radius:10px;</string>
      <rect>
       <x>50</x>
       <y>70</y>
-      <width>71</width>
+      <width>51</width>
       <height>21</height>
      </rect>
     </property>
@@ -104,7 +102,8 @@ border-radius:10px;</string>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(255, 255, 255);</string>
+     <string notr="true">background-color: rgb(255, 255, 255);
+border-radius:10px;</string>
     </property>
     <property name="echoMode">
      <enum>QLineEdit::Password</enum>
@@ -123,7 +122,8 @@ border-radius:10px;</string>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(255, 255, 255);</string>
+     <string notr="true">background-color: rgb(255, 255, 255);
+border-radius:10px;</string>
     </property>
     <property name="inputMethodHints">
      <set>Qt::ImhNone</set>
@@ -185,7 +185,8 @@ image: url(:/images/image/no.png);</string>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(255, 255, 255);</string>
+     <string notr="true">background-color: rgb(255, 255, 255);
+border-radius:10px;</string>
     </property>
     <property name="text">
      <string/>
@@ -233,7 +234,8 @@ image: url(:/images/image/no.png);</string>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(255, 255, 255);</string>
+     <string notr="true">background-color: rgb(255, 255, 255);
+border-radius:10px;</string>
     </property>
     <property name="inputMethodHints">
      <set>Qt::ImhNone</set>

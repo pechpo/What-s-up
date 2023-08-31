@@ -7,11 +7,11 @@
     <x>0</x>
     <y>0</y>
     <width>300</width>
-    <height>263</height>
+    <height>218</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>添加好友 &amp; 加入聊天</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(246, 245, 245);</string>
@@ -25,15 +25,22 @@
      <height>25</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);
+border-radius:10px;</string>
+   </property>
   </widget>
   <widget class="QPushButton" name="confirmButton">
    <property name="geometry">
     <rect>
      <x>180</x>
-     <y>220</y>
+     <y>180</y>
      <width>90</width>
      <height>25</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
    </property>
    <property name="text">
     <string>添加好友</string>
@@ -45,8 +52,11 @@
      <x>180</x>
      <y>50</y>
      <width>90</width>
-     <height>25</height>
+     <height>30</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
    </property>
    <property name="text">
     <string>搜索好友</string>
@@ -57,9 +67,12 @@
     <rect>
      <x>30</x>
      <y>50</y>
-     <width>91</width>
-     <height>31</height>
+     <width>100</width>
+     <height>30</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
    </property>
    <property name="text">
     <string>切换搜索模式</string>

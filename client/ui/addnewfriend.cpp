@@ -15,6 +15,8 @@ AddNewFriend::AddNewFriend(QWidget *parent) :
     bar->stackUnder(this);
     ui->acceptButton->raise();
     ui->declineButton->raise();
+    ui->acceptButton->setToolTip(tr("通过"));
+    ui->declineButton->setToolTip(tr("拒绝"));
 
     connect(Director::getInstance(), &Director::r_acceptFriend, this, &AddNewFriend::slot_r_acceptFriend);
 

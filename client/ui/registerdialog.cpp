@@ -9,11 +9,23 @@ RegisterDialog::RegisterDialog(QWidget *parent) :
     ui->setupUi(this);
 
     waiting = 0;
+    QString confirmstyle = R"(
+        QPushButton {
+            border: none;
+            background-color: rgba(87, 227, 137, 0.75);
+            border-radius:10px;
+        }
+        QPushButton:hover {
+            background-color: rgba(87, 227, 137, 1);
+        }
+    )";
 
     connect(Director::getInstance(), &Director::r_register, this, &RegisterDialog::slot_r_register);
 
+    ui->confirmBtn->setStyleSheet(confirmstyle);
     ui->closeButton->setVisible(false);
     ui->minimizeButton->setVisible(false);
+    ui->label_3->setStyleSheet("QLabel { background-color: transparent; }");
 
 }
 
