@@ -53,7 +53,8 @@ background-image: url(:/images/image/Logo.png);</string>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: rgb(59, 180, 193);</string>
+    <string notr="true">background-color: rgb(59, 180, 193);
+border-radius:10px;</string>
    </property>
    <property name="text">
     <string>发送</string>

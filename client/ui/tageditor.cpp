@@ -12,6 +12,18 @@ TagEditor::TagEditor(QWidget *parent) :
     ui->setupUi(this);
     ui->scrollArea->setWidgetResizable(false);
 
+    QString confirmstyle = R"(
+        QPushButton {
+            border: none;
+            background-color: rgba(255, 255, 255, 0.75);
+            border-radius:10px;
+        }
+        QPushButton:hover {
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+    )";
+    ui->confirmButton->setStyleSheet(confirmstyle);
+
     choices = new QButtonGroup(ui->ScrollContent);
     choices->setExclusive(false);
     state.clear();

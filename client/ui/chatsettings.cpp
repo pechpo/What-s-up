@@ -11,6 +11,28 @@ ChatSettings::ChatSettings(QWidget *parent, qint64 id) :
     ui->setupUi(this);
     ui->idLabel->setText(QString::number(chatId) + "号聊天");
     ui->scrollArea->setWidgetResizable(false);
+    QString exitstyle = R"(
+        QPushButton {
+            border: none;
+            background-color: rgba(176, 71, 89, 0.75);
+            border-radius:10px;
+        }
+        QPushButton:hover {
+            background-color: rgba(176, 71, 89, 1);
+        }
+    )";
+    QString changestyle = R"(
+        QPushButton {
+            border: none;
+            background-color: rgba(255, 255, 255, 0.75);
+            border-radius:10px;
+        }
+        QPushButton:hover {
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+    )";
+    ui->exitButton->setStyleSheet(exitstyle);
+    ui->confirmButton->setStyleSheet(changestyle);
     connect(Director::getInstance(), &Director::r_chatInfo, this, &ChatSettings::slot_r_chatInfo);
     connect(Director::getInstance(), &Director::r_editChatInfo, this, &ChatSettings::slot_r_editChatInfo);
     connect(Director::getInstance(), &Director::r_exitChat, this, &ChatSettings::slot_r_exitChat);

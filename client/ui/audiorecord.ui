@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(246, 245, 245)</string>
+  </property>
   <widget class="QPushButton" name="startButton">
    <property name="geometry">
     <rect>
@@ -60,6 +63,9 @@
      <width>491</width>
      <height>161</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);</string>
    </property>
   </widget>
   <widget class="QPushButton" name="listenButton">

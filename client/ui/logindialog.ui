@@ -83,8 +83,7 @@ background-color: rgb(245, 245, 245);</string>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-radius:10px;
-background-color: rgb(59, 180, 193);</string>
+     <string notr="true"/>
     </property>
     <property name="text">
      <string>登录</string>
@@ -100,9 +99,7 @@ background-color: rgb(59, 180, 193);</string>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">;
-background-color: rgb(222, 221, 218);
-border-radius: 10px;</string>
+     <string notr="true"/>
     </property>
     <property name="text">
      <string>注册</string>
