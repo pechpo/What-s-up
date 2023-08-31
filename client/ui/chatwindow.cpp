@@ -19,6 +19,7 @@ ChatWindow::ChatWindow(QWidget *parent) :
     dl = nullptr;
     ar = nullptr;
     settingsDialog = nullptr;
+    messages.clear();
     ui->fileButton->setToolTip(tr("上传文件"));
     ui->settingsButton->setToolTip(tr("群聊信息设置"));
     ui->pushButton->setToolTip(tr("下载文件"));
@@ -29,6 +30,7 @@ ChatWindow::ChatWindow(QWidget *parent) :
     connect(Director::getInstance(), &Director::a_newMessage, this, &ChatWindow::slot_a_newMessage);
     connect(Director::getInstance(), &Director::r_send, this, &ChatWindow::slot_r_send);
     connect(Director::getInstance(), &Director::r_updateFile, this, &ChatWindow::slot_r_updateFile);
+    connect(Director::getInstance(), &Director::r_talk, this, &ChatWindow::slot_r_talk);
 
     switchChat(0);
 }
@@ -47,16 +49,32 @@ qint64 ChatWindow::recvChatId(const QJsonObject &obj) {
 }
 
 void ChatWindow::clear() {
+    //qDebug() << "message size: " << messages.size();
     for (quint32 i = 0; i < messages.size(); i++) {
+        if (!messages[i]) {
+            //qDebug() << "GGGGGGGGGGGGGGGGGGGGGGGGGGGG";
+            continue ;
+        }
         messages[i]->close();
         delete messages[i];
+        //qDebug() << "success " << i;
     }
+    messages.clear();
     ui->inputEdit->setPlainText("");
     //ui->MsgEdit->setHtml("");
 }
 
+void ChatWindow::slot_r_talk(const QJsonObject &obj) {
+    qint64 id = obj.value("chatId").toInt();
+    if (id > 0) {
+        switchChat(id);
+        //Director::getInstance()->raiseChat(id);
+    }
+}
+
 //switching chat
 void ChatWindow::switchChat(qint64 id) {
+    //qDebug() << "start switch";
     if (id != chatId) {
         clear();
     }
@@ -72,6 +90,7 @@ void ChatWindow::switchChat(qint64 id) {
     msg.insert("chatId", QJsonValue(chatId));
     msg.insert("count", 64);
     Director::getInstance()->sendJson(msg);
+    //qDebug() << "end switch";
 }
 
 void ChatWindow::slot_r_chatHistory(const QJsonObject &obj) {
@@ -154,7 +173,7 @@ ChatWindow::Message ChatWindow::jsonToMessage(const QJsonObject &obj) {
         }
         else if ("audio" == format) {
             cur.type = Voice;
-            qDebug() << "recv voice";
+            //qDebug() << "recv voice";
         }
     }
     else {
@@ -237,6 +256,7 @@ QWidget* ChatWindow::messageToWidget(const Message &cur) {
                     QWidget *res = new QWidget(ui->messageArea);
                     return res;
     }
+    //qDebug() << "nullptr!!!!!!!!!!!!!!!!..";
     return nullptr;
 }
 
