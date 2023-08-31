@@ -17,7 +17,7 @@ public :
 
     ~DB();
 
-    int e_register(const User &user);
+    bool e_register(const User &user);
 
     bool q_login(const quint32 &ID, const QString &password);
 
@@ -79,13 +79,17 @@ public :
 
     bool add_tag(const int &ID, const std::vector<int> &tags);
 
-    std::vector<int> get_tags(const int &ID);
+    std::vector<int> q_list_tags(const int &ID);
 
     std::unordered_map<quint32, std::vector<int>> get_all_tags();
 
     std::vector<quint32> getFriends(const int &ID);
 
     bool e_exitChat(const int &ID, const int &chatId);
+
+    bool init_tags(const int &ID);
+
+    QList<User> q_list_recommend(const int &ID);
 
 private:
 

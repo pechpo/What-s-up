@@ -1,6 +1,7 @@
 #include "db.h"
 #include <QSqlQuery>
 #include <curl/curl.h>
+#include "recommendation.h"
 
 //user id, name, password, avatar, email
 //message id, chat_id, sender_id, content, time, sender_name, is_file, file_name, format
@@ -30,6 +31,13 @@ DB::~DB() {
     delete db;
 }
 
+DB *DB::get_instance() {
+    if (db == nullptr) {
+        db = new DB;
+    }
+    return db;
+}
+
 int DB::new_chat_id() {
     QSqlQuery query(database);
     query.prepare("SELECT MAX(id) FROM chat");
@@ -50,19 +58,15 @@ int DB::new_message_id() {
     return 1;
 }
 
-int DB::e_register(const User &user) {
+bool DB::e_register(const User &user) {
     QSqlQuery query(database);
-    query.prepare("SELECT * FROM user WHERE id = ?");
-    query.addBindValue(user.getID());
-    query.exec();
-    if (query.next())return -1;
-    query.clear();
     query.prepare("INSERT INTO user (id, name, password, avatar, email) VALUES (?, ?, ?, ?, ?)");
     query.addBindValue(user.getID());
     query.addBindValue(user.getName());
     query.addBindValue(user.getPwd());
     query.addBindValue(user.getAvatarName());
     query.addBindValue(user.getEmail());
+    init_tags(user.getID());
     return query.exec();
 }
 
@@ -152,7 +156,7 @@ bool DB::e_createChat(const quint32 &ID, const QString &name, const QString &ava
     query.prepare("INSERT INTO chat (id, name, avatar) VALUES (?, ?, ?)");
     query.addBindValue(ID);
     query.addBindValue(name);
-    query.addBindValue(ID);
+    query.addBindValue(avatarName);
     return query.exec();
 }
 
@@ -311,9 +315,8 @@ bool DB::e_send(const Message &message) {
 
 QList<Message> DB::q_chatHistory(const quint32 &chat_ID, const quint32 &time, const quint32 &count) {
     QSqlQuery query(database);
-    query.prepare("SELECT * FROM message WHERE chat_id = ? AND is_file = ?");
+    query.prepare("SELECT * FROM message WHERE chat_id = ?");
     query.addBindValue(chat_ID);
-    query.addBindValue(false);
 //    query.addBindValue(time);
 //    query.addBindValue(count);
     query.exec();
@@ -463,16 +466,16 @@ int DB::q_talk(const int &id, const int &ID) {
 bool DB::add_tag(const int &ID, const std::vector<int> &tags) {
     QSqlQuery query(database);
     query.prepare(
-            "INSERT INTO user_tags (user_id, tag_0, tag_1, tag_2, tag_3, tag_4, tag_5, tag_6, tag_7, tag_8, tag_9, tag_10, tag_11, tag_12, tag_13, tag_14, tag_15, tag_16, tag_17, tag_18, tag_19, tag_20, tag_21, tag_22, tag_23, tag_24, tag_25, tag_26, tag_27, tag_28, tag_29, tag_30, tag_31, tag_32, tag_33, tag_34, tag_35) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            "UPDATE user_tags SET tag0 = ?, tag1 = ?, tag2 = ?, tag3 = ?, tag4 = ?, tag5 = ?, tag6 = ?, tag7 = ?, tag8 = ?, tag9 = ?, tag10 = ?, tag11 = ?, tag12 = ?, tag13 = ?, tag14 = ?, tag15 = ?, tag16 = ?, tag17 = ?, tag18 = ?, tag19 = ?, tag20 = ?, tag21 = ?, tag22 = ?, tag23 = ?, tag24 = ?, tag25 = ?, tag26 = ?, tag27 = ?, tag28 = ?, tag29 = ?, tag30 = ?, tag31 = ?, tag32 = ?, tag33 = ?, tag34 = ?, tag35 = ? WHERE user_id = ?");
 
-    query.addBindValue(ID);
     for (int i = 0; i < 36; i++) {
         query.addBindValue(tags[i]);
     }
+    query.addBindValue(ID);
     return query.exec();
 }
 
-std::vector<int> DB::get_tags(const int &ID) {
+std::vector<int> DB::q_list_tags(const int &ID) {
     QSqlQuery query(database);
     query.prepare("SELECT * FROM user_tags WHERE user_id = ?");
     query.addBindValue(ID);
@@ -556,9 +559,25 @@ bool DB::e_exitChat(const int &ID, const int &chatId) {
     return query.exec();
 }
 
-DB *DB::get_instance() {
-    if (db == nullptr) {
-        db = new DB;
+bool DB::init_tags(const int &ID) {
+    QSqlQuery query(database);
+    query.prepare(
+            "INSERT INTO user_tags (user_id, tag0, tag1, tag2, tag3, tag4, tag5, tag6, tag7, tag8, tag9, tag10, tag11, tag12, tag13, tag14, tag15, tag16, tag17, tag18, tag19, tag20, tag21, tag22, tag23, tag24, tag25, tag26, tag27, tag28, tag29, tag30, tag31, tag32, tag33, tag34, tag35) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+
+    query.addBindValue(ID);
+    for (int i = 0; i < 36; i++) {
+        query.addBindValue(0);
     }
-    return db;
+    return query.exec();
+}
+
+QList<User> DB::q_list_recommend(const int &ID) {
+    Recommendation *rd = Recommendation::get_instance();
+    auto U = rd->recommendFriends(ID);
+    QList<User> users;
+    qDebug() << U;
+    for (const auto &id: U) {
+        users.append(q_userInfo(id));
+    }
+    return users;
 }

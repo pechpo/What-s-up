@@ -11,6 +11,9 @@
 Handle *Handle::hd = nullptr;
 
 Handle::Handle() {
+    for (int i = 0; i < 36; i++) {
+        tags_map[TAGS[i]] = i;
+    }
     handlemap["e_register"] = [this](auto &&PH1, auto &&PH2) {
         return this->e_register(PH1, PH2);
     };
@@ -76,6 +79,15 @@ Handle::Handle() {
     };
     handlemap["e_exitChat"] = [this](auto &&PH1, auto &&PH2) {
         return this->e_exitChat(PH1, PH2);
+    };
+    handlemap["q_list_tags"] = [this](auto &&PH1, auto &&PH2) {
+        return this->q_list_tags(PH1, PH2);
+    };
+    handlemap["e_editTags"] = [this](auto &&PH1, auto &&PH2) {
+        return this->e_editTags(PH1, PH2);
+    };
+    handlemap["q_list_recommend"] = [this](auto &&PH1, auto &&PH2) {
+        return this->q_list_recommend(PH1, PH2);
     };
 }
 

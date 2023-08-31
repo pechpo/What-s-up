@@ -21,7 +21,6 @@ QJsonObject Handle::e_register(const int &ID, const QJsonObject &obj) {
     auto flag = db->e_register(User(id, name, password, avatar, email));
     QJsonObject response;
     response["type"] = "r_register";
-    if (flag == -1)response["error"] = "Have registered!", flag = 0;
     response["success"] = flag;  // set to false if insertion fails
     if (flag) {
         writeLog("User Registration", "User with ID " + QString::number(id) + " registered successfully.", true);
@@ -45,7 +44,6 @@ QJsonObject Handle::q_login(const int &ID, const QJsonObject &obj) {
     if (flag) {
         writeLog("User Login", "User with ID " + QString::number(id) + " logged in successfully.", true);
     } else {
-        response["error"] = "ID or Password is wrong!";
         writeLog("User Login", "Failed to log in user with ID " + QString::number(id) + ".", false);
     }
     return response;
@@ -244,6 +242,76 @@ QJsonObject Handle::e_acceptFriend(const int &ID, const QJsonObject &obj) {
         writeLog("Accept Friend", "User with ID " + QString::number(ID) + " failed to accept/reject friend request from ID " + QString::number(id) + ".", false);
     }
 
+    return response;
+    // Send the response back to client
+}
+
+QJsonObject Handle::q_list_tags(const int &ID, const QJsonObject &obj) {
+    // Extract the necessary fields from obj
+    DB *db = DB::get_instance();
+    auto flag = db->q_list_tags(ID);
+
+    QJsonObject response;
+    response["type"] = "r_list_tags";
+    QJsonArray tags;
+    for (int i = 0; i < 36; i++) {
+        QJsonObject tag;
+        tag["tag"] = TAGS[i];
+        tag["value"] = flag[i] != 0;
+        tags.append(tag);
+    }
+    response["tags"] = tags;
+    writeLog("List Tags", "User with ID " + QString::number(ID) + " listed their tags.", true);
+    return response;
+    // Send the response back to client
+}
+
+QJsonObject Handle::e_editTags(const int &ID, const QJsonObject &obj) {
+    // Extract the necessary fields from obj
+    QJsonArray editList = obj["editList"].toArray();
+
+    DB *db = DB::get_instance();
+    std::vector<int> tags = db->q_list_tags(ID);
+    for (const auto &x: editList) {
+        auto y = x.toObject();
+        tags[tags_map[y["tag"].toString()]] = y["value"].toBool();
+    }
+    qDebug() << tags << tags.size();
+    auto flag = db->add_tag(ID, tags);
+
+    QJsonObject response;
+    response["type"] = "r_editTags";
+    response["success"] = flag;  // set to false if insertion fails
+    if (!flag) {
+        response["error"] = "Edit failed";
+    }
+    if (flag) {
+        writeLog("Edit Tags", "User with ID " + QString::number(ID) + " edited their tags.", true);
+    } else {
+        writeLog("Edit Tags", "User with ID " + QString::number(ID) + " failed to edit their tags.", false);
+    }
+
+    return response;
+    // Send the response back to client
+}
+
+QJsonObject Handle::q_list_recommend(const int &ID, const QJsonObject &obj) {
+    // Extract the necessary fields from obj
+    DB *db = DB::get_instance();
+    auto flag = db->q_list_recommend(ID);
+
+    QJsonObject response;
+    response["type"] = "r_list_recommend";
+    QJsonArray users;
+    for (const auto &x: flag) {
+        QJsonObject user;
+        user["id"] = (int) x.getID();
+        user["name"] = x.getName();
+        user["avatar"] = x.getAvatarName();
+        users.append(user);
+    }
+    response["users"] = users;
+    writeLog("List Recommend", "User with ID " + QString::number(ID) + " listed their recommended friends.", true);
     return response;
     // Send the response back to client
 }
