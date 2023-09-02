@@ -148,11 +148,7 @@ background-color: rgb(255, 255, 255);</string>
 border-radius:10px;</string>
     </property>
     <property name="text">
-<<<<<<< HEAD
      <string>8.130.87.52</string>
-=======
-     <string>127.0.0.1</string>
->>>>>>> refs/remotes/origin/main
     </property>
    </widget>
    <widget class="QToolButton" name="minimizeButton">
