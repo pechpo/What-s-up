@@ -12,8 +12,6 @@ public:
     Connection();
     ~Connection();
     void connectServer(const QString &IP = "", quint16 port = 0);
-
-public slots:
     void sendMessage(const QJsonObject&); // use JSON
     bool isConnected();
 

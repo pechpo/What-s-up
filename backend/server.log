@@ -1835,3 +1835,49 @@
 [2023-08-31 13:15:28] [List My Friends] [Success] User with ID 999 listed their friends.
 [2023-08-31 13:15:29] [List Friend Requests] [Success] User with ID 999 listed their friend requests.
 [2023-08-31 13:15:34] [List Tags] [Success] User with ID 999 listed their tags.
+[2023-09-02 16:28:53] [Server] [Success] Server started at 0.0.0.0:10043
+[2023-09-02 16:32:20] [Server] [Success] Server started at 0.0.0.0:10043
+[2023-09-02 16:34:20] [Server] [Success] Server started at 0.0.0.0:10043
+[2023-09-02 16:42:15] [Server] [Success] Server started at 0.0.0.0:10043
+[2023-09-02 16:47:09] [Server] [Failure] Failed to start server at 0.0.0.0:10043
+[2023-09-02 16:47:20] [Server] [Success] Server started at 0.0.0.0:10043
+[2023-09-02 16:49:05] [Server] [Success] Server started at 0.0.0.0:10043
+[2023-09-02 16:50:01] [Server] [Success] Server started at 0.0.0.0:10043
+[2023-09-02 18:00:20] [Server] [Success] Server started at 0.0.0.0:10043
+[2023-09-02 18:03:43] [Server] [Success] Server started at 0.0.0.0:10043
+[2023-09-02 18:05:18] [Server] [Success] Server started at 0.0.0.0:10043
+[2023-09-02 18:08:37] [Server] [Success] Server started at 0.0.0.0:10043
+[2023-09-02 18:30:35] [Server] [Success] Server started at 0.0.0.0:10043
+[2023-09-02 18:31:54] [Server] [Success] Server started at 0.0.0.0:10043
+[2023-09-02 18:43:01] [Server] [Success] Server started at 0.0.0.0:10043
+[2023-09-02 18:55:47] [Server] [Success] Server started at 0.0.0.0:10043
+[2023-09-02 18:56:10] [User Registration] [Failure] Failed to register user with ID 666.
+[2023-09-02 18:58:29] [Server] [Success] Server started at 0.0.0.0:10043
+[2023-09-02 18:58:35] [User Registration] [Failure] Failed to register user with ID 666.
+[2023-09-02 18:59:29] [Server] [Success] Server started at 0.0.0.0:10043
+[2023-09-02 18:59:34] [User Registration] [Failure] Failed to register user with ID 666.
+[2023-09-02 19:00:43] [Server] [Success] Server started at 0.0.0.0:10043
+[2023-09-02 19:00:55] [User Login] [Failure] Failed to log in user with ID 666.
+[2023-09-02 19:01:02] [User Registration] [Failure] Failed to register user with ID 666.
+[2023-09-02 19:02:09] [Server] [Success] Server started at 0.0.0.0:10043
+[2023-09-02 19:02:20] [User Registration] [Failure] Failed to register user with ID 666.
+[2023-09-02 19:05:16] [Server] [Success] Server started at 0.0.0.0:10043
+[2023-09-02 19:07:21] [User Registration] [Failure] Failed to register user with ID 666.
+[2023-09-02 19:08:04] [User Login] [Failure] Failed to log in user with ID 666.
+[2023-09-02 19:12:02] [Server] [Success] Server started at 0.0.0.0:10043
+[2023-09-02 19:12:12] [User Registration] [Failure] Failed to register user with ID 444.
+[2023-09-02 19:15:15] [Server] [Success] Server started at 0.0.0.0:10043
+[2023-09-02 19:15:32] [User Registration] [Failure] Failed to register user with ID 444.
+[2023-09-02 19:20:17] [Server] [Success] Server started at 0.0.0.0:10043
+[2023-09-02 19:20:22] [User Registration] [Success] User with ID 444 registered successfully.
+[2023-09-02 19:20:22] [Join Chat] [Failure] User with ID 0 failed to join chat 1.
+[2023-09-02 19:21:12] [User Registration] [Failure] Failed to register user with ID 444.
+[2023-09-02 19:24:28] [Server] [Success] Server started at 0.0.0.0:10043
+[2023-09-02 19:24:35] [User Registration] [Success] User with ID 333 registered successfully.
+[2023-09-02 19:24:35] [Join Chat] [Failure] User with ID 0 failed to join chat 1.
+[2023-09-02 19:24:42] [User Login] [Success] User with ID 333 logged in successfully.
+[2023-09-02 19:24:42] [List My Friends] [Success] User with ID 333 listed their friends.
+[2023-09-02 19:24:42] [List Friend Requests] [Success] User with ID 333 listed their friend requests.
+[2023-09-02 19:25:08] [Query Chat] [Success] User with ID 333 queried their chats.
+[2023-09-02 19:25:08] [List My Friends] [Success] User with ID 333 listed their friends.
+[2023-09-02 19:25:08] [List Friend Requests] [Success] User with ID 333 listed their friend requests.
