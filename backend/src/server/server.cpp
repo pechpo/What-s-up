@@ -9,6 +9,11 @@
 
 Server *Server::sv = nullptr;
 
+void TCP::incomingConnection ( qintptr socketDescriptor ) {
+    Connection *connection = new Connection(socketDescriptor);
+    Server::get_instance()->connections_.insert(connection);
+}
+
 Server::Server(const QString &address, quint16 port, QObject *parent)
         : QObject(parent) {
     connect(&tcpServer_, &QTcpServer::newConnection, this, &Server::acceptConnection);
@@ -47,9 +52,9 @@ void Server::stop() {
 }
 
 void Server::acceptConnection() {
-    QTcpSocket *socket = tcpServer_.nextPendingConnection();
+  /*  QTcpSocket *socket = tcpServer_.nextPendingConnection();
     Connection *connection = new Connection(socket, this);
-    connections_.insert(connection);
+    connections_.insert(connection);*/
 }
 
 

@@ -19,6 +19,7 @@ QJsonObject Handle::e_register(const int &ID, const QJsonObject &obj) {
     QString email = obj["email"].toString();
     DB *db = DB::get_instance();
     auto flag = db->e_register(User(id, name, password, avatar, email));
+    //() << id << ' ' << name;
     QJsonObject response;
     response["type"] = "r_register";
     response["success"] = flag;  // set to false if insertion fails

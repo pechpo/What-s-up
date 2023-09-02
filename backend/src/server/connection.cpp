@@ -9,10 +9,8 @@
 #include "handle.h"
 #include "server.h"
 
-Connection::Connection(QTcpSocket* socket, QObject* parent)
-        : QTcpSocket(parent) {
-    setSocketDescriptor(socket->socketDescriptor());
-    socket->setParent(this);  // 设置父对象
+Connection::Connection(qintptr ii) {
+    setSocketDescriptor(ii);
     connect(this, &QTcpSocket::readyRead, this, &Connection::receiveMessage);
     qDebug() << "Connection established with:" << this->peerAddress().toString();
     sendMessage(QJsonObject({{"type", "hello"}}));
@@ -46,12 +44,12 @@ void Connection::receiveMessage() {
         }
         QJsonObject obj = doc.object();
         qDebug() << "Received message from client:" << obj;
-        qDebug() << obj;
+        //qDebug() << obj;
         if (obj["type"] == "q_login") {
             id = obj["id"].toInt();
         }
         Handle *hd = Handle::get_instance();
-        qDebug() << obj;
+        //qDebug() << obj;
         auto x = hd->handle(id, obj);
         qDebug() << x;
         curRemainSize = 0;

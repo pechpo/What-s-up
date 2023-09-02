@@ -9,7 +9,7 @@
 #include <algorithm>
 #include <iterator>
 #include <limits>
-#include <qDebug>
+#include <QDebug>
 
 KMeans::KMeans(int k) : k_(k) {}
 

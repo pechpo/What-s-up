@@ -21,11 +21,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ef533f2d-2b4d-4d58-ad16-579cff76de6c" name="更改" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/QtSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/QtSettings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server.log" beforeDir="false" afterPath="$PROJECT_DIR$/server.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/database/data.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/data.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/handle/handle_user.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/handle/handle_user.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/recommendation/recommendation.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/recommendation/recommendation.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/include/connection.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/include/connection.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/include/server.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/include/server.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/recommendation/clustering.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/recommendation/clustering.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/connection.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/connection.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/server.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/server.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/network/connection.h" beforeDir="false" afterPath="$PROJECT_DIR$/../client/network/connection.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/ui/loginwindow.ui" beforeDir="false" afterPath="$PROJECT_DIR$/../client/ui/loginwindow.ui" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,6 +84,11 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="backend" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="backend" TARGET_NAME="backend" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="backend" RUN_TARGET_NAME="backend">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -125,6 +137,8 @@
       <workItem from="1693400723967" duration="1310000" />
       <workItem from="1693404773804" duration="5221000" />
       <workItem from="1693443578454" duration="1312000" />
+      <workItem from="1693463251465" duration="61000" />
+      <workItem from="1693632761352" duration="7652000" />
     </task>
     <servers />
   </component>
@@ -136,6 +150,17 @@
     <isAutomaticCheckingOnLaunch value="false" />
     <isAutomaticFoundErrors value="true" />
     <isAutomaticFoundErrors value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/include/connection.h</url>
+          <line>28</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
