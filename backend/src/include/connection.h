@@ -23,7 +23,7 @@ Q_OBJECT
 public:
     int id = 0;
 
-    explicit Connection(QTcpSocket* socket, QObject* parent = nullptr);
+    explicit Connection(qintptr);
     ~Connection();
 
     void receiveMessage(); // 读取消息

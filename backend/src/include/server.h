@@ -9,6 +9,11 @@
 #include <QObject>
 #include "connection.h"
 
+class TCP : public QTcpServer {
+Q_OBJECT
+    void incomingConnection ( qintptr socketDescriptor );
+};
+
 class Server : public QObject {
 Q_OBJECT
 
@@ -26,10 +31,11 @@ public:
 private slots:
     void acceptConnection(); // 异步接受连接
 
-private:
-    QTcpServer tcpServer_;
+public:
+    TCP tcpServer_;
 
     static Server * sv;
 };
+
 
 #endif // WHAT_S_UP_SERVER_H
